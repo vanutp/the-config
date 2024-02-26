@@ -1,0 +1,15 @@
+keys:
+  - &admin age1p8dqe95af3u38m4edd8vvrpgsrxywhr4kn7kk53hs4j450mv8ymslyla5w
+  - &dull_vessel age15th0378hqw9c8uddwler6edsh39wc88h0r4smv8j8x694ywk89nsswmjwf
+  - &s1 age1uwzr96dww90a25dqrq7jmpygnal6p4ksmqehkj7tt5qn6jrda4xq4gn2sf
+creation_rules:
+  - path_regex: dull-vessel/system/secrets.yml$
+    key_groups:
+    - age:
+      - *dull_vessel
+      - *admin
+  - path_regex: dull-vessel/users-common/secrets.yml$
+    key_groups:
+    - age:
+      - *admin
+        
