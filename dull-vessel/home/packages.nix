@@ -43,6 +43,7 @@
       wezterm
 
       # dev
+      gtk4
       temurin-bin-17
       nodejs
       yarn
@@ -65,6 +66,7 @@
       nil
       alejandra
       vscode
+      jetbrains.gateway
       jetbrains.idea-ultimate
       jetbrains.clion
       (with dotnetCorePackages;

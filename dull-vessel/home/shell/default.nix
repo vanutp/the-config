@@ -38,6 +38,7 @@
       open = "xdg-open";
       gst = "git status";
       glg = "git log --stat";
+      gcl = "git clone";
     };
     shellGlobalAliases = {
       "..." = "../..";

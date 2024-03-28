@@ -30,4 +30,6 @@
       ];
     };
   };
+
+  services.tailscale.enable = true;
 }

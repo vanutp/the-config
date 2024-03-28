@@ -4,6 +4,8 @@
   home.stateVersion = "23.11";
 
   home.packages = with pkgs; [
+    ventoy-full
+
     unzip
     file
     nload
@@ -18,5 +20,6 @@
     htop
     neovim
     psmisc
+    usbutils
   ];
 }

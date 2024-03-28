@@ -9,6 +9,7 @@
     ./lockscreen.nix
     ./terminal.nix
     ./shell
+    ./dev.nix
   ];
 
   home.username = "fox";
