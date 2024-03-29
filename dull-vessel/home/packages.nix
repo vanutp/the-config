@@ -90,6 +90,7 @@
       xfce.thunar
       kdePackages.qtwayland
       kdePackages.dolphin
+      libsForQt5.kamoso
       ark
       spotify
       google-chrome
