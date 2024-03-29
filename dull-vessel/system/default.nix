@@ -21,7 +21,10 @@
     memoryPercent = 100;
   };
 
-  security.pam.services.swaylock = {};
+  security.pam.services.swaylock = {
+    fprintAuth = true;
+    allowNullPassword = true;
+  };
 
   networking.hostName = "dull-vessel";
   networking.networkmanager.enable = true;
@@ -91,6 +94,8 @@
 
   services.gvfs.enable = true;
   boot.supportedFilesystems = ["ntfs"];
+
+  services.fprintd.enable = true;
 
   # Never change this
   system.stateVersion = "24.05";
