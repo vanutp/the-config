@@ -3,8 +3,6 @@
   inputs,
   ...
 }: {
-  programs.git.enable = true;
-
   home.packages =
     (with pkgs; [
       # cli
@@ -97,6 +95,23 @@
       google-chrome
       corefonts
       vistafonts
+      (pkgs.makeDesktopItem {
+        name = "telegram-1";
+        desktopName = "Telegram 1";
+        exec = "flatpak run io.github.tdesktop_x64.TDesktop -workdir /home/fox/.local/share/telegram-1";
+        icon = "io.github.tdesktop_x64.TDesktop";
+        terminal = false;
+        startupWMClass = "64Gram";
+        categories = ["Chat" "Network" "InstantMessaging" "Qt"];
+        mimeTypes = ["x-scheme-handler/tg"];
+        keywords = ["tg" "chat" "im" "messaging" "messenger" "sms" "tdesktop"];
+        extraConfig = {
+          SingleMainWindow = "true";
+          X-GNOME-UsesNotifications = "true";
+          X-GNOME-SingleWindow = "true";
+          X-Flatpak = "io.github.tdesktop_x64.TDesktop";
+        };
+      })
     ])
     ++ (with inputs.self.packages.${pkgs.system}; [
       veyon
