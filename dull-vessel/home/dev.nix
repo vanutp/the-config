@@ -6,6 +6,7 @@
 
   programs.git = {
     enable = true;
+    lfs.enable = true;
     userName = "Ivan Filipenkov";
     userEmail = "hello@vanutp.dev";
   };
