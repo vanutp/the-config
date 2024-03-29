@@ -53,7 +53,7 @@
     catppuccin.enable = true;
     settings = {
       monitor = [
-        "eDP-1,1920x1080@60,0x0,1.25"
+        "eDP-1,1920x1200@60,0x0,1.25"
         "HDMI-A-1,1920x1080@60,1536x0,1.25"
       ];
 
@@ -86,7 +86,7 @@
           natural_scroll = false;
         };
 
-        sensitivity = -0.5; # -1.0 - 1.0, 0 means no modification.
+        #sensitivity = -0.5; # -1.0 - 1.0, 0 means no modification.
       };
 
       "device:elan0504:01-04f3:3091-touchpad" = {
@@ -279,8 +279,11 @@
         ", XF86AudioPause, exec, playerctl pause"
         ", XF86AudioStop, exec, playerctl pause"
         ", XF86AudioPlayPause, exec, playerctl play-pause"
+        ", XF86Go, exec, playerctl play-pause"
         ", XF86AudioNext, exec, playerctl next"
+        ", Cancel, exec, playerctl next"
         ", XF86AudioPrev, exec, playerctl previous"
+        ", XF86Messenger, exec, playerctl previous"
       ];
 
       bindm = [
