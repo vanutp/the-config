@@ -11,6 +11,7 @@
     ./veyon
     ./steam.nix
     ./dev.nix
+    ./audio.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -48,15 +49,6 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
-
-  # breaks video playback in telegram and mpv for some reason
-  #security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   services.gpm.enable = true;
   hardware.opengl.enable = true;
