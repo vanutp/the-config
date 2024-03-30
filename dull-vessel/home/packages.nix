@@ -60,6 +60,7 @@
       python3Packages.ipython
       twine
       pgcli
+      gnumake
       clang
       nil
       alejandra
