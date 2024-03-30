@@ -114,7 +114,7 @@
           "format" = "󰍛 {}%";
         };
         "battery" = {
-          "full-at" = 95;
+          "bat" = "battery_BAT0";
           "format" = "{capacity}% {icon}";
           "format-full" = "";
           "format-icons" = {
