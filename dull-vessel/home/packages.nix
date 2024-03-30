@@ -22,6 +22,7 @@
       inputs.manix.packages.${pkgs.system}.manix
       dive
       nix-tree
+      fastfetch
 
       # de
       xorg.xhost
