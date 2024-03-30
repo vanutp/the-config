@@ -89,6 +89,8 @@
 
   services.fprintd.enable = true;
 
+  services.fwupd.enable = true;
+
   # Never change this
   system.stateVersion = "24.05";
 }
