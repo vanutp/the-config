@@ -9,8 +9,10 @@
       fprintd = super.fprintd.overrideAttrs {
         mesonCheckFlags = [
           # PAM related checks are timing out
-          "--no-suite" "fprintd:TestPamFprintd"
-          "--no-suite" "fprintd:daemon+fprintd+FPrintdVirtualDeviceStorageVerificationTests"
+          "--no-suite"
+          "fprintd:TestPamFprintd"
+          "--no-suite"
+          "fprintd:daemon+fprintd+FPrintdVirtualDeviceStorageVerificationTests"
         ];
       };
     })

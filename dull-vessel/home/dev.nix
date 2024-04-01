@@ -11,7 +11,6 @@
     userEmail = "hello@vanutp.dev";
   };
 
-  
   home.file = builtins.listToAttrs (
     map
     (vmoptionsPath: {

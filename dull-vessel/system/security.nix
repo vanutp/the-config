@@ -1,4 +1,9 @@
-{pkgs, inputs, lib, ...}: {
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}: {
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = false;
