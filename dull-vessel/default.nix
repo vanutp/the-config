@@ -8,7 +8,8 @@
       };
       fprintd = super.fprintd.overrideAttrs {
         mesonCheckFlags = [
-          # PAM related checks are timing out
+          # https://github.com/NixOS/nixpkgs/pull/298491
+          # not in nixos-unstable yet
           "--no-suite"
           "fprintd:TestPamFprintd"
           "--no-suite"
