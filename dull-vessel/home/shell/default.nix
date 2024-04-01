@@ -62,6 +62,12 @@
       function root() {
         readlink $(which $1) | cut -d/ -f1-4
       }
+      function __clear-scrollback-buffer {
+        clear
+        zle .reset-prompt
+      }
+      zle -N __clear-scrollback-buffer
+      bindkey '^L' __clear-scrollback-buffer
     '';
 
     plugins =
