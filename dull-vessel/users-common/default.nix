@@ -14,6 +14,7 @@
     ripgrep
     sd
     fd
+    jq
     bat
     duf
     ncdu
