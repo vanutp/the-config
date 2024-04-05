@@ -7,6 +7,7 @@
     ventoy-full
 
     unzip
+    zip
     file
     nload
     wget
