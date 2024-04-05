@@ -24,6 +24,7 @@
       nix-tree
       fastfetch
       imagemagick
+      whois
 
       # de
       xorg.xhost
