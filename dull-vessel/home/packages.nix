@@ -23,6 +23,7 @@
       dive
       nix-tree
       fastfetch
+      imagemagick
 
       # de
       xorg.xhost
@@ -77,6 +78,20 @@
       nuget
 
       # desktop
+      (telegram-desktop.overrideAttrs (orig: {
+        src = fetchFromGitHub {
+          owner = "TDesktop-x64";
+          repo = "tdesktop";
+          rev = "v1.1.16";
+          fetchSubmodules = true;
+          hash = "sha256-2IuNJleHtlkELcTHDwRT4pcDcDXSqM5YlLPGYiGT2TE=";
+        };
+        cmakeFlags = orig.cmakeFlags ++ [
+          # 64gram
+          "-DTDESKTOP_API_ID=611335"
+          "-DTDESKTOP_API_HASH=d524b414d21f4d37f08684c1df41ac9c"
+        ];
+      }))
       slack
       webcord
       obs-studio
@@ -101,7 +116,7 @@
       (pkgs.makeDesktopItem {
         name = "telegram-1";
         desktopName = "Telegram 1";
-        exec = "flatpak run io.github.tdesktop_x64.TDesktop -workdir /home/fox/.local/share/telegram-1";
+        exec = "telegram-desktop -workdir /home/fox/.local/share/telegram-1";
         icon = "io.github.tdesktop_x64.TDesktop";
         terminal = false;
         startupWMClass = "64Gram";
@@ -112,7 +127,6 @@
           SingleMainWindow = "true";
           X-GNOME-UsesNotifications = "true";
           X-GNOME-SingleWindow = "true";
-          X-Flatpak = "io.github.tdesktop_x64.TDesktop";
         };
       })
     ])
