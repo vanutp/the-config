@@ -16,8 +16,7 @@ wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
 end)
 
 return {
-    -- TODO: remove when wezterm is updated to >20240203-110809-5046fc22
-    enable_wayland = false,
+    font = wezterm.font '@font@',
     color_scheme = 'Catppuccin Mocha',
     hide_tab_bar_if_only_one_tab = true,
     show_tab_index_in_tab_bar = false,

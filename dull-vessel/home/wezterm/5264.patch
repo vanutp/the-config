@@ -1,0 +1,32 @@
+From d4302bdb1edab75df700adfd6035582230e98233 Mon Sep 17 00:00:00 2001
+From: fioncat <lazycat7706@gmail.com>
+Date: Mon, 8 Apr 2024 21:42:42 +0200
+Subject: [PATCH] fix(wayland): ensure repaint event is sent in show
+
+Fix: https://github.com/wez/wezterm/issues/5103
+---
+ window/src/os/wayland/window.rs | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/window/src/os/wayland/window.rs b/window/src/os/wayland/window.rs
+index 64095e7cd..b1b442174 100644
+--- a/window/src/os/wayland/window.rs
++++ b/window/src/os/wayland/window.rs
+@@ -1111,6 +1111,17 @@ impl WaylandWindowInner {
+         if self.window.is_none() {
+             return;
+         }
++
++        // If the do_paint function has been called previously, calling it again will not
++        // send the NeedRepaint event. This results in the window not being displayed
++        // correctly.
++        // Therefore, when frame_callback is set to some, we need to send the NeedRepaint
++        // event again to ensure the window is displayed.
++        // Fix: https://github.com/wez/wezterm/issues/5103
++        if self.frame_callback.is_some() {
++            self.events.dispatch(WindowEvent::NeedRepaint);
++        }
++
+         // The window won't be visible until we've done our first paint,
+         // so we unconditionally queue a NeedRepaint event
+         self.do_paint().unwrap();
