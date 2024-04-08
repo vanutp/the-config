@@ -8,11 +8,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.35.0";
+      # url = "github:hyprwm/Hyprland/v0.38.1";
+      # temporarily use main, because hyprland-plugins doesn't build with release version
+      url = "github:hyprwm/Hyprland/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces/2b1abdbf9e9de9ee660540167c8f51903fa3d959";
+      url = "github:Duckonaut/split-monitor-workspaces/c5696000777f6586aaa255bd0a9b0627d5da911f";
+      inputs.hyprland.follows = "hyprland";
+    };
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
     sops-nix = {

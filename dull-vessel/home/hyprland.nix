@@ -49,6 +49,7 @@
     systemd.variables = ["--all"];
     plugins = [
       inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
     ];
     catppuccin.enable = true;
     settings = {
@@ -86,11 +87,11 @@
         touchpad = {
           natural_scroll = false;
         };
-
-        #sensitivity = -0.5; # -1.0 - 1.0, 0 means no modification.
       };
 
-      "device:elan0504:01-04f3:3091-touchpad" = {
+      # TODO: remove/move to old laptop specific config
+      device = {
+        name = "elan0504:01-04f3:3091-touchpad";
         sensitivity = 0.3;
       };
 
@@ -177,7 +178,7 @@
 
       windowrulev2 =
         [
-          "nomaximizerequest, class:.*"
+          "suppressevent maximize, class:.*"
           "size 500 700, class:com.github.hluk.copyq"
           # Chrome screen sharing popups
           "move 67% 100%-70, title:is sharing a window.$"
@@ -224,6 +225,8 @@
           "SUPER SHIFT, A, exec, /home/fox/bin/yubikey-totp-wayland.sh"
 
           "SUPER, Escape, exec, loginctl lock-session"
+
+          "SUPER, grave, hyprexpo:expo, toggle"
 
           # Screenshots
           "SUPER, S, exec, grimblast --freeze copy area"
