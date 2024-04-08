@@ -7,7 +7,7 @@
     ./waybar.nix
     ./security.nix
     ./lockscreen.nix
-    ./terminal.nix
+    ./wezterm
     ./shell
     ./dev.nix
   ];
