@@ -84,11 +84,13 @@
         src = fetchFromGitHub {
           owner = "TDesktop-x64";
           repo = "tdesktop";
-          rev = "v1.1.16";
+          rev = "v1.1.17";
           fetchSubmodules = true;
-          hash = "sha256-2IuNJleHtlkELcTHDwRT4pcDcDXSqM5YlLPGYiGT2TE=";
+          hash = "sha256-QWHC1NAAKpH9zU7cplCW2rNYckY87bpU7MEZ1ytSi58=";
         };
-        cmakeFlags = orig.cmakeFlags ++ [
+        cmakeFlags =
+          orig.cmakeFlags
+          ++ [
             # 64gram
             "-DTDESKTOP_API_ID=611335"
             "-DTDESKTOP_API_HASH=d524b414d21f4d37f08684c1df41ac9c"
