@@ -141,6 +141,7 @@
             "default" = ["󰖀" "󰕾" ""];
           };
           "scroll-step" = 1;
+          "on-click" = lib.getExe pkgs.pavucontrol;
         };
       };
     };
