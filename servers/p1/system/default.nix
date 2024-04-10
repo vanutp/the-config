@@ -14,19 +14,22 @@
   # nixos networkd module doesn't allow to add onlink default gateway
   # and doesn't allow to add regular routes without Destination
   # plus i don't really want to commit plaintext server ips to the repo
-  sops.templates."network.conf".content = ''
-    [Match]
-    Name=ens3
+  sops.templates."network.conf" = {
+    content = ''
+      [Match]
+      Name=ens3
 
-    [Network]
-    Address=${config.sops.placeholder.host-ip}/32
-    DNS=1.1.1.1
+      [Network]
+      Address=${config.sops.placeholder.host-ip}/32
+      DNS=1.1.1.1
 
-    [Route]
-    Gateway=2a01:230:4:1ea::1
-    Gateway=10.0.0.1
-    GatewayOnLink=yes
-  '';
+      [Route]
+      Gateway=2a01:230:4:1ea::1
+      Gateway=10.0.0.1
+      GatewayOnLink=yes
+    '';
+    mode = "0644";
+  };
   environment.etc."systemd/network/main.network".source = config.sops.templates."network.conf".path;
 
   time.timeZone = "Europe/Moscow";
