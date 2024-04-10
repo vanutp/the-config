@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   home.file = builtins.listToAttrs (
     map
     (vmoptionsPath: {
@@ -11,5 +11,7 @@
       };
     })
     ["IntelliJIdea2023.3/idea64.vmoptions" "CLion2023.3/clion64.vmoptions"]
-  );
+  ) // {
+    ".local/share/jdks/temurin8".source = pkgs.temurin-bin-8;
+  };
 }
