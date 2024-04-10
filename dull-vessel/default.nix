@@ -1,6 +1,5 @@
-{hyprland, ...}: {
-  systemType = "x86_64-linux";
-  overlays = [
+{
+  overlays = {hyprland, ...}: [
     hyprland.overlays.default
     (self: super: {
       mpv-unwrapped = super.mpv-unwrapped.override {

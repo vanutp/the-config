@@ -20,11 +20,8 @@
         };
       }))
       inputs.manix.packages.${pkgs.system}.manix
-      dive
-      nix-tree
-      fastfetch
       imagemagick
-      whois
+      yubikey-manager
 
       # de
       xorg.xhost
@@ -41,7 +38,6 @@
       hyprpicker
       pavucontrol
       wofi
-      wezterm
 
       # dev
       gtk4

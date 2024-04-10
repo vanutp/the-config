@@ -1,17 +1,14 @@
 {...}: {
   imports = [
-    ../users-common
+    ../all-users
+    ../../common/fox
     ./packages.nix
     ./theme.nix
     ./hyprland.nix
     ./waybar.nix
-    ./security.nix
     ./lockscreen.nix
     ./wezterm
-    ./shell
+    ./shell.nix
     ./dev.nix
   ];
-
-  home.username = "fox";
-  home.homeDirectory = "/home/fox";
 }

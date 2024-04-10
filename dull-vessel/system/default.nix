@@ -3,6 +3,7 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {pkgs, ...}: {
   imports = [
+    ../../common/system
     ./secrets.nix
     ./hardware-configuration.nix
     ./security.nix
@@ -29,18 +30,7 @@
 
   networking.hostName = "dull-vessel";
   networking.networkmanager.enable = true;
-
-  time.timeZone = "Europe/Berlin";
-
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.supportedLocales = [
-    "C.UTF-8/UTF-8"
-    "en_US.UTF-8/UTF-8"
-    "ru_RU.UTF-8/UTF-8"
-  ];
-
-  nix.settings.experimental-features = ["nix-command" "flakes" "repl-flake"];
-  nixpkgs.config.allowUnfree = true;
+  users.extraGroups.networkmanager.members = ["fox"];
 
   services.printing.enable = true;
 
@@ -53,14 +43,6 @@
   services.gpm.enable = true;
   hardware.opengl.enable = true;
 
-  programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
-  users.users.fox = {
-    isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager"];
-    useDefaultShell = true;
-  };
-
   services.udev.packages = with pkgs; [
     via
   ];
@@ -71,8 +53,6 @@
   };
 
   programs.gamemode.enable = true;
-
-  programs.nix-ld.enable = true;
 
   services.flatpak.enable = true;
   xdg.portal = {
@@ -90,7 +70,4 @@
   services.fprintd.enable = true;
 
   services.fwupd.enable = true;
-
-  # Never change this
-  system.stateVersion = "24.05";
 }

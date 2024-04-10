@@ -15,7 +15,7 @@
       default = ./wallpapers/poly-comets.png;
     };
     preferences.font.monospace = mkOption {
-      type = with types; str;
+      type = types.str;
       description = "Default monospace font name";
       default = "JetBrainsMono Nerd Font";
     };

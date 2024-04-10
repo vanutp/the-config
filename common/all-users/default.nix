@@ -4,8 +4,6 @@
   home.stateVersion = "23.11";
 
   home.packages = with pkgs; [
-    ventoy-full
-
     unzip
     zip
     file

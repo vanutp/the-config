@@ -1,21 +1,15 @@
 {config, ...}: {
-  networking.wg-quick.interfaces = let
-    makeWg0 = allowedIPs: autostart: {
-      autostart = autostart;
-      address = ["10.1.1.2/16"];
-      privateKeyFile = config.sops.secrets."wg_keys/wg0".path;
-      peers = [
-        {
-          publicKey = "7xWhdFY5hRzcqCJCPjb4Ln1uwFqLIi0ctQ7R4Gq9owY=";
-          allowedIPs = [allowedIPs];
-          endpoint = "82.146.39.189:51820";
-          persistentKeepalive = 30;
-        }
-      ];
+  networking.wg-quick.interfaces = {
+    int = config.vanutp.makeWg0 {
+      address = "10.1.1.2";
+      isInternal = true;
+      autostart = true;
     };
-  in {
-    int = makeWg0 "10.1.0.0/16" true;
-    wg0 = makeWg0 "0.0.0.0/0" false;
+    wg0 = config.vanutp.makeWg0 {
+      address = "10.1.1.2";
+      isInternal = false;
+      autostart = false;
+    };
     wg2 = {
       autostart = false;
       address = ["10.3.1.2/16"];

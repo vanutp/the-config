@@ -1,6 +1,6 @@
-{...}: {
+{
   imports = [
-    ../all-users
+    ../../common/all-users
     ../../common/root
   ];
 }
