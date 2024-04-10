@@ -1,11 +1,12 @@
-{config, pkgs, ...}: {
+{pkgs, ...}: {
   imports = [
     ../../common/system
   ];
 
   networking.useNetworkd = true;
-  # is running under build-vm
-  networking.useDHCP = config.virtualisation.vmVariant != {};
+  networking.useDHCP = false;
+  # for `nixos-rebuild build-vm`
+  virtualisation.vmVariant.networking.useDHCP = true;
 
   security.sudo.wheelNeedsPassword = false;
 
