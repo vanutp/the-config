@@ -1,7 +1,11 @@
-{pkgs, ...}: {
+{config, pkgs, ...}: {
   imports = [
     ../../common/system
   ];
+
+  networking.useNetworkd = true;
+  # is running under build-vm
+  networking.useDHCP = config.virtualisation.vmVariant != {};
 
   security.sudo.wheelNeedsPassword = false;
 

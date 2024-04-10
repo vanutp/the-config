@@ -15,6 +15,9 @@
     inputs.vhap-compose-update.nixosModules.default
   ];
 
+  # breaks podman dns :(
+  networking.firewall.enable = false;
+
   time.timeZone = lib.mkDefault "Europe/Berlin";
 
   i18n.defaultLocale = "en_US.UTF-8";
