@@ -23,4 +23,11 @@
       }
     ];
   };
+
+  # disable nsdelegate to be able to pass cgroup dir to podman container
+  fileSystems."/sys/fs/cgroup" = {
+    fsType = "cgroup2";
+    device = "cgroup2";
+    options = ["nosuid" "nodev" "noexec" "memory_recursiveprot"];
+  };
 }
