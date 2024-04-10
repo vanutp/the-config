@@ -29,7 +29,6 @@
   '';
   environment.etc."systemd/network/main.network".source = config.sops.templates."network.conf".path;
 
-
   time.timeZone = "Europe/Moscow";
 
   services.vhap-compose-update = {
