@@ -73,6 +73,7 @@
           sdk_8_0
         ])
       nuget
+      pre-commit
 
       # desktop
       prismlauncher
