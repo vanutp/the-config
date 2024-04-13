@@ -7,7 +7,7 @@
     hostname = builtins.baseNameOf hostPath;
     hostConfig = import ./getHostConfig.nix hostPath;
     args = {inherit inputs;};
-    overlays = hostConfig.overlays inputs;
+    overlays = (hostConfig.overlays inputs) ++ (import ../common/overlays.nix);
     mkSystemHM = hostConfig: [
       home-manager.nixosModules.home-manager
       {

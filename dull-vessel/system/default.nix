@@ -13,6 +13,7 @@
     ./steam.nix
     ./dev.nix
     ./audio.nix
+    ./portals.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -55,14 +56,6 @@
   programs.gamemode.enable = true;
 
   services.flatpak.enable = true;
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal-gtk
-    ];
-    configPackages = with pkgs; [hyprland];
-  };
 
   services.gvfs.enable = true;
   boot.supportedFilesystems = ["ntfs"];

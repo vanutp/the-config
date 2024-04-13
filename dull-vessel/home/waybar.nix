@@ -7,7 +7,7 @@
   services.blueman-applet.enable = true;
 
   programs.waybar = let
-    vpns = with pkgs; (writeShellScriptBin "vpns" ''
+    vpns = with pkgs; (writeShellScript "vpns" ''
       set -e
       work_vpn_state=$(${lib.getExe' networkmanager "nmcli"} -g GENERAL.STATE connection show 'work')
       wg_vpns=$(${lib.getExe wireguard-tools} show interfaces)
@@ -22,6 +22,39 @@
       fi
       echo '{"text": "'"$active_vpns"'", "alt": "", "tooltip": "", "class": "", "percentage": 0 }'
     '');
+    plains-portal-config-path = "${config.xdg.configHome}/plains-portal/config.toml";
+    theme = pkgs.foxlib.writePythonScript "theme" ''
+      import os
+      import sys
+      import tomllib
+      import json
+      import subprocess
+      SIGRTMIN = 34
+      ICONS = {
+        'light': '\uf522 ',
+        'dark': '\uf4ee ',
+      }
+      fn = '${plains-portal-config-path}'
+      if os.path.isfile(fn):
+          with open(fn, 'rb') as f:
+              data = tomllib.load(f)
+      else:
+          data = {}
+      color_scheme = data.get('color-scheme', 'light')
+      if sys.argv[1] == 'get':
+          print(json.dumps({'text': ICONS.get(color_scheme, 'unknown theme') }))
+      elif sys.argv[1] == 'toggle':
+          if color_scheme == 'light':
+              data['color-scheme'] = 'dark'
+          else:
+              data['color-scheme'] = 'light'
+          os.makedirs(os.path.dirname(fn), exist_ok=True)
+          with open(fn, 'w') as f:
+              f.write('''.join(f'{k} = "{v}"\n' for k, v in data.items()))
+          subprocess.check_call(f'kill -{SIGRTMIN + 1} $(pgrep waybar)', shell=True)
+      else:
+          raise ValueError()
+    '';
   in {
     enable = true;
     systemd.enable = true;
@@ -36,6 +69,7 @@
         "modules-right" = [
           "tray"
           "custom/vpns"
+          "custom/theme"
           "pulseaudio"
           "memory"
           "hyprland/language"
@@ -43,8 +77,15 @@
           "clock"
         ];
         "custom/vpns" = {
-          "exec" = lib.getExe vpns;
+          "exec" = vpns;
           "interval" = 5;
+          "return-type" = "json";
+        };
+        "custom/theme" = {
+          "exec" = "${theme} get";
+          "on-click" = "${theme} toggle";
+          "interval" = "once";
+          "signal" = 1;
           "return-type" = "json";
         };
         "hyprland/workspaces" = {
@@ -198,6 +239,7 @@
       }
 
       #custom-vpns,
+      #custom-theme,
       #language,
       #memory,
       #battery,
@@ -267,6 +309,11 @@
 
       #custom-vpns {
         background-color: #89b4fa;
+      }
+
+      #custom-theme {
+        padding: 4px 7px 4px 10px;
+        background-color: #74c7ec;
       }
     '';
   };
