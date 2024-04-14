@@ -36,13 +36,6 @@
       };
     };
 
-    qt = {
-      enable = true;
-      platformTheme = "gnome";
-      style.package = pkgs.adwaita-qt6;
-      style.name = "adwaita-dark";
-    };
-
     home.pointerCursor = {
       gtk.enable = true;
       package = pkgs.gnome.adwaita-icon-theme;
@@ -55,9 +48,6 @@
     fonts.fontconfig.enable = true;
 
     home.packages = with pkgs; [
-      adwaita-qt
-      adwaita-qt6
-
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
