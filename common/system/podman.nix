@@ -8,4 +8,5 @@
   environment.systemPackages = with pkgs; [
     docker-client
   ];
+  systemd.services.podman-restart.wantedBy = ["multi-user.target"];
 }
