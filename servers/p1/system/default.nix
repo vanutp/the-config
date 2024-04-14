@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../../common/system.nix
     ./hardware-configuration.nix
@@ -54,5 +58,11 @@
     fsType = "cgroup2";
     device = "cgroup2";
     options = ["nosuid" "nodev" "noexec" "memory_recursiveprot"];
+  };
+
+  users.users.apocalypse = {
+    isNormalUser = true;
+    extraGroups = ["wheel"];
+    shell = pkgs.bash;
   };
 }
