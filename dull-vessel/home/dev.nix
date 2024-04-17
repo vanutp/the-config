@@ -11,7 +11,7 @@
           '';
         };
       })
-      ["IntelliJIdea2023.3/idea64.vmoptions" "CLion2023.3/clion64.vmoptions"]
+      ["IntelliJIdea2024.1/idea64.vmoptions" "CLion2024.1/clion64.vmoptions"]
     )
     // {
       ".local/share/jdks/temurin8".source = pkgs.temurin-bin-8;
