@@ -35,10 +35,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    plains-portal = {
-      url = "gitlab:liferooter/plains-portal";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     vhap-compose-update = {
       url = "git+https://foxlab.dev/vanutp/vhap-compose-update";
       inputs.nixpkgs.follows = "nixpkgs";

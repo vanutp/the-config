@@ -22,7 +22,7 @@
       fi
       echo '{"text": "'"$active_vpns"'", "alt": "", "tooltip": "", "class": "", "percentage": 0 }'
     '');
-    plains-portal-config-path = "${config.xdg.configHome}/plains-portal/config.toml";
+    dconf = lib.getExe pkgs.dconf;
     theme = pkgs.foxlib.writePythonScript "theme" ''
       import os
       import sys
@@ -31,26 +31,18 @@
       import subprocess
       SIGRTMIN = 34
       ICONS = {
-        'light': '\uf522 ',
-        'dark': '\uf4ee ',
+        'prefer-light': '\uf522 ',
+        'prefer-dark': '\uf4ee ',
       }
-      fn = '${plains-portal-config-path}'
-      if os.path.isfile(fn):
-          with open(fn, 'rb') as f:
-              data = tomllib.load(f)
-      else:
-          data = {}
-      color_scheme = data.get('color-scheme', 'light')
+      color_scheme = subprocess.check_output(['${dconf}', 'read', '/org/gnome/desktop/interface/color-scheme']).decode().strip("\n'")
       if sys.argv[1] == 'get':
           print(json.dumps({'text': ICONS.get(color_scheme, 'unknown theme') }))
       elif sys.argv[1] == 'toggle':
-          if color_scheme == 'light':
-              data['color-scheme'] = 'dark'
+          if color_scheme == 'prefer-light':
+              color_scheme = 'prefer-dark'
           else:
-              data['color-scheme'] = 'light'
-          os.makedirs(os.path.dirname(fn), exist_ok=True)
-          with open(fn, 'w') as f:
-              f.write('''.join(f'{k} = "{v}"\n' for k, v in data.items()))
+              color_scheme = 'prefer-light'
+          subprocess.check_call(['${dconf}', 'write', '/org/gnome/desktop/interface/color-scheme', f'"{color_scheme}"'])
           subprocess.check_call(f'kill -{SIGRTMIN + 1} $(pgrep waybar)', shell=True)
       else:
           raise ValueError()
