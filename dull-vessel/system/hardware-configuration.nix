@@ -16,7 +16,7 @@
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
-  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/e4bd5981-ab74-49e5-a225-a7a5d997be27";
+  boot.initrd.luks.devices."root".device = "/dev/nvme0n1p2";
 
   fileSystems."/" = {
     device = "/dev/mapper/root";
@@ -31,7 +31,7 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/830B-EA67";
+    device = "/dev/nvme0n1p1";
     fsType = "vfat";
   };
 
