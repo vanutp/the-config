@@ -15,9 +15,7 @@
     catppuccin.url = "github:Stonks3141/ctp-nix";
 
     hyprland = {
-      # url = "github:hyprwm/Hyprland/v0.38.1";
-      # temporarily use main, because hyprland-plugins doesn't build with release version
-      url = "github:hyprwm/Hyprland/main";
+      url = "github:hyprwm/Hyprland/v0.39.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     split-monitor-workspaces = {
