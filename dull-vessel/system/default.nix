@@ -31,6 +31,7 @@
 
   networking.hostName = "dull-vessel";
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
   users.extraGroups.networkmanager.members = ["fox"];
 
   services.printing.enable = true;
