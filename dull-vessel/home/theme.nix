@@ -43,6 +43,13 @@
       size = 24;
     };
 
+    qt = {
+      enable = true;
+      platformTheme = "kde";
+      style.name = "breeze";
+      style.package = pkgs.kdePackages.breeze;
+    };
+
     catppuccin.flavour = "mocha";
 
     fonts.fontconfig.enable = true;
