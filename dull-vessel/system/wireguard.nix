@@ -24,6 +24,4 @@
       ];
     };
   };
-
-  services.tailscale.enable = true;
 }
