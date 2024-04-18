@@ -3,6 +3,8 @@
   inputs,
   ...
 }: {
+  services.syncthing.enable = true;
+
   home.packages =
     (with pkgs; [
       # cli
