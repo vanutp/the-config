@@ -42,7 +42,6 @@
       wofi
 
       # desktop
-      obsidian
       prismlauncher
       slack
       webcord
@@ -80,6 +79,18 @@
           X-GNOME-UsesNotifications = "true";
           X-GNOME-SingleWindow = "true";
         };
+      })
+      (obsidian.overrideAttrs {
+        meta.priority = 10;
+      })
+      (pkgs.makeDesktopItem {
+        name = "obsidian";
+        desktopName = "Obsidian";
+        comment = "Knowledge base";
+        exec = "bash -c \"unset NIXOS_OZONE_WL && exec obsidian\"";
+        icon = "obsidian";
+        categories = ["Office"];
+        mimeTypes = ["x-scheme-handler/obsidian"];
       })
     ])
     ++ (with inputs.self.packages.${pkgs.system}; [
