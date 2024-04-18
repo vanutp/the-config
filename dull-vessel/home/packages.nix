@@ -42,6 +42,7 @@
       wofi
 
       # desktop
+      obsidian
       prismlauncher
       slack
       webcord
