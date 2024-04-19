@@ -19,6 +19,7 @@
     };
 
   home.packages = with pkgs; [
+    hyperfine
     gtk4
     temurin-bin-17 # default java
     nodejs
