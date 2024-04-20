@@ -4,6 +4,28 @@
   ...
 }: {
   services.syncthing.enable = true;
+  programs.spotify-player = {
+    enable = true;
+    settings = {
+      enable_notify = false;
+      cover_img_length = 13;
+      cover_img_width = 6;
+      playback_window_position = "Bottom";
+      device = {
+        volume = 100;
+      };
+    };
+    keymaps = [
+      {
+        command = "None";
+        key_sequence = "q";
+      }
+      {
+        command = "Quit";
+        key_sequence = "C-q";
+      }
+    ];
+  };
 
   home.packages =
     (with pkgs; [
