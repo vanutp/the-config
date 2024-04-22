@@ -9,6 +9,8 @@
   virtualisation.vmVariant.networking.useDHCP = true;
 
   security.sudo.wheelNeedsPassword = false;
+  # to allow remote rebuild while connecting as non-root
+  nix.settings.trusted-users = ["@wheel"];
 
   services.cron = {
     enable = true;
