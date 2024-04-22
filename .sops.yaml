@@ -6,7 +6,7 @@ keys:
   - &s1 age1uwzr96dww90a25dqrq7jmpygnal6p4ksmqehkj7tt5qn6jrda4xq4gn2sf
   - &p1 age1lx2w9ru4cn75fg9chc6sk4aqrrpg5y7nwnz43uum7fuvns4yuuvsf9w7h8
 creation_rules:
-  - path_regex: dull-vessel/system/secrets.yml$
+  - path_regex: dull-vessel/(home|system)/secrets.yml$
     key_groups:
     - age:
       - *dull_vessel

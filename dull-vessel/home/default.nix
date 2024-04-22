@@ -10,5 +10,6 @@
     ./wezterm
     ./shell.nix
     ./dev.nix
+    ./secrets.nix
   ];
 }
