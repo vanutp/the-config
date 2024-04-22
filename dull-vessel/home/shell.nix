@@ -1,4 +1,8 @@
-{...}: {
+{inputs, ...}: {
+  imports = [
+    inputs.nix-index-database.hmModules.nix-index
+  ];
+
   programs.zsh = {
     initExtraHost = ''
       POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=('newline')

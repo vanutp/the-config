@@ -450,6 +450,26 @@
         "type": "github"
       }
     },
+    "nix-index-database": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1713668931,
+        "narHash": "sha256-rVlwWQlgFGGK3aPVcKmtYqWgjYnPah5FOIsYAqrMN2w=",
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "rev": "07ece11b22217b8459df589f858e92212b74f1a1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1706173671,
@@ -577,6 +597,7 @@
         "hyprland-plugins": "hyprland-plugins",
         "lanzaboote": "lanzaboote",
         "manix": "manix",
+        "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",
         "sops-nix": "sops-nix",
         "split-monitor-workspaces": "split-monitor-workspaces",
