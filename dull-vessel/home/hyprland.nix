@@ -217,7 +217,7 @@
         resize = binding "SUPER ALT" "resizeactive";
       in
         [
-          "SUPER, Return, exec, wezterm"
+          "SUPER, Return, exec, wezterm start --always-new-process"
           "SUPER, M, exit,"
           "SUPER, E, exec, thunar"
           "SUPER, D, exec, wofi -S drun"
