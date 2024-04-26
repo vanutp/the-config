@@ -2,6 +2,7 @@
   imports = [
     ../all-users
     ../../common/fox
+    ./apps.nix
     ./packages.nix
     ./theme.nix
     ./hyprland.nix
