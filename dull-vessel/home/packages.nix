@@ -45,6 +45,7 @@
     inputs.manix.packages.${pkgs.system}.manix
     imagemagick
     yubikey-manager
+    vim.xxd
 
     # de
     xorg.xhost
