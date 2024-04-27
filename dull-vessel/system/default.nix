@@ -64,4 +64,6 @@
   services.fprintd.enable = true;
 
   services.fwupd.enable = true;
+
+  virtualisation.waydroid.enable = true;
 }
