@@ -44,6 +44,28 @@
     };
   };
 
+  programs.tofi = {
+    enable = true;
+    settings = {
+      font = config.preferences.font.monospace-path;
+      font-size = 13;
+      hint-font = false;
+      width = 640;
+      height = 360;
+      text-color = "#cdd6f4";
+      prompt-color = "#f38ba8";
+      selection-color = "#f9e2af";
+      background-color = "#1e1e2e";
+      border-width = 2;
+      border-color = "#74c7ec";
+      outline-width = 0;
+      corner-radius = 5;
+      padding-left = 16;
+      padding-right = 16;
+      prompt-text = "\"\"";
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.variables = ["--all"];
@@ -212,6 +234,11 @@
             "pavucontrol"
           ]);
 
+      layerrule = [
+        # tofi
+        "noanim, launcher"
+      ];
+
       bind = let
         binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
         resize = binding "SUPER ALT" "resizeactive";
@@ -220,7 +247,7 @@
           "SUPER, Return, exec, wezterm start --always-new-process"
           "SUPER, M, exit,"
           "SUPER, E, exec, thunar"
-          "SUPER, D, exec, wofi -S drun"
+          "SUPER, D, exec, tofi-drun --drun-launch=true"
           "CTRL SHIFT, D, exec, copyq toggle"
           "SUPER SHIFT, A, exec, /home/fox/bin/yubikey-totp-wayland.sh"
 

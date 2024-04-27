@@ -60,6 +60,5 @@
     hyprpaper
     hyprpicker
     pavucontrol
-    wofi
   ];
 }

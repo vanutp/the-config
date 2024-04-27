@@ -3,7 +3,11 @@
   lib,
   inputs,
   ...
-}: {
+}: let
+  nerdfonts' = pkgs.nerdfonts.override {
+    fonts = ["FiraCode" "JetBrainsMono"];
+  };
+in {
   imports = [
     inputs.catppuccin.homeManagerModules.catppuccin
   ];
@@ -18,6 +22,11 @@
       type = types.str;
       description = "Default monospace font name";
       default = "JetBrainsMono Nerd Font";
+    };
+    preferences.font.monospace-path = mkOption {
+      type = types.str;
+      description = "Default monospace font path";
+      default = "${nerdfonts'}/share/fonts/truetype/NerdFonts/JetBrainsMonoNerdFont-Regular.ttf";
     };
   };
 
@@ -73,9 +82,7 @@
             ]))
         ];
       }))
-      (nerdfonts.override {
-        fonts = ["FiraCode" "JetBrainsMono"];
-      })
+      nerdfonts'
     ];
   };
 }
