@@ -46,6 +46,7 @@
     imagemagick
     yubikey-manager
     vim.xxd
+    distrobox
 
     # de
     xorg.xhost
