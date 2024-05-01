@@ -41,7 +41,7 @@ in {
 
       iconTheme = {
         package = pkgs.gnome.adwaita-icon-theme;
-        name = "Adwaita-dark";
+        name = "Adwaita";
       };
     };
 
