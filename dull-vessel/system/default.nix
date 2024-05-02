@@ -37,9 +37,15 @@
   services.printing.enable = true;
 
   programs.dconf.enable = true;
-
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        FastConnectable = true;
+      };
+    };
+  };
   services.blueman.enable = true;
 
   services.gpm.enable = true;
