@@ -4,6 +4,10 @@
   lib,
   ...
 }: {
+  imports = [
+    ./unclutter.nix
+  ];
+
   options = with lib; {
     programs.zsh.initExtraHost = mkOption {
       type = types.str;
