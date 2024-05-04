@@ -22,10 +22,6 @@
       url = "github:Duckonaut/split-monitor-workspaces/c5696000777f6586aaa255bd0a9b0627d5da911f";
       inputs.hyprland.follows = "hyprland";
     };
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
     manix = {
       url = "github:nix-community/manix";
       inputs.nixpkgs.follows = "nixpkgs";

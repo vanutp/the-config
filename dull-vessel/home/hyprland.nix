@@ -71,7 +71,6 @@
     systemd.variables = ["--all"];
     plugins = [
       inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
     ];
     catppuccin.enable = true;
     settings = {
@@ -252,8 +251,6 @@
           "SUPER SHIFT, A, exec, /home/fox/bin/yubikey-totp-wayland.sh"
 
           "SUPER, Escape, exec, loginctl lock-session"
-
-          "SUPER, grave, hyprexpo:expo, toggle"
 
           # Screenshots
           "SUPER, S, exec, grimblast --freeze copy area"

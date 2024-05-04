@@ -44,7 +44,6 @@
     nil
     alejandra
     vscode
-    jetbrains.gateway
     jetbrains.idea-ultimate
     # remove when https://github.com/NixOS/nixpkgs/pull/304223 is merged
     (jetbrains.clion.overrideAttrs (orig: {

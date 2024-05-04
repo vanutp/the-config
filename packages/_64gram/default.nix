@@ -6,7 +6,7 @@ pkgs @ {
 }:
 telegram-desktop.overrideAttrs (orig: rec {
   pname = "64gram";
-  version = "1.1.18";
+  version = "1.1.21";
   src = fetchFromGitHub {
     owner = "TDesktop-x64";
     repo = "tdesktop";
@@ -123,19 +123,11 @@ telegram-desktop.overrideAttrs (orig: rec {
               hash = "sha256-m5SdnFLgXtVYjuxvSW6XohqLQGIkPKKf/ZqxTmbQ+fc=";
             })
             (fetchpatch {
-              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0026-fix-backing-store-rhi-unneeded-copy.patch";
-              hash = "sha256-KqU5LH3eAhi2qUp1vJOFy/ORsBxEFNeHeOK1y0I5NM0=";
-            })
-            (fetchpatch {
-              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0027-fix-backing-store-opengl-subimage-unneeded-copy.patch";
-              hash = "sha256-6f0Y1RaRolJz43C1L38W2VxE1VPvqjniOZi7t9nHAj8=";
-            })
-            (fetchpatch {
-              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0028-portal-proxy-resolver.patch";
+              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0026-portal-proxy-resolver.patch";
               hash = "sha256-N4jdaI2zDIbzrUT1EfpPMimsRR+XqRNPNx5P96OS1+Q=";
             })
             (fetchpatch {
-              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0029-fix-crash-opengl-drivers.patch";
+              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0027-fix-crash-opengl-drivers.patch";
               hash = "sha256-lXNsbR8ul7UizpMEr58wONUAvyuFkTrRonX6eGIxhs8=";
             })
           ];
