@@ -12,7 +12,7 @@ telegram-desktop.overrideAttrs (orig: rec {
     repo = "tdesktop";
     rev = "v${version}";
     fetchSubmodules = true;
-    hash = "sha256-sURnKOcg+pwU1Nw6yqtoPaRD1kpg93/VNh7UYi2IIwU=";
+    hash = "sha256-CeLcTa34ltX8+w+Bx+ChLaUrQ8c0Dk6bQZttNBybqGs=";
   };
 
   buildInputs =
