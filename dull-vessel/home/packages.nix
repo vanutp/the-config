@@ -47,6 +47,7 @@
     yubikey-manager
     vim.xxd
     distrobox
+    bubblewrap
 
     # de
     xorg.xhost
