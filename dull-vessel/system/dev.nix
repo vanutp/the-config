@@ -19,4 +19,10 @@
   };
 
   environment.etc."mime.types".source = "${pkgs.mime-types}/etc/mime.types";
+
+  boot.binfmt = {
+    emulatedSystems = ["aarch64-linux"];
+    registrations.aarch64-linux.fixBinary = true;
+    registrations.aarch64-linux.openBinary = true;
+  };
 }
