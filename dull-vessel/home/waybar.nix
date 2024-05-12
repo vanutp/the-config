@@ -7,6 +7,15 @@
   services.blueman-applet.enable = true;
 
   programs.waybar = let
+    fans = with pkgs; (writeShellScript "fans" ''
+      set -e
+      fan_speed=$(cat /sys/class/hwmon/hwmon5/fan1_input)
+      if [[ $fan_speed != 0 ]]; then
+        fan_speed=$(printf '%-4s' $fan_speed)
+      fi
+      text="󰈐 $fan_speed"
+      echo '{"text": "'"$text"'", "alt": "", "tooltip": "", "class": "", "percentage": 0 }'
+    '');
     vpns = with pkgs; (writeShellScript "vpns" ''
       set -e
       work_vpn_state=$(${lib.getExe' networkmanager "nmcli"} -g GENERAL.STATE connection show 'work')
@@ -63,7 +72,8 @@
           "custom/vpns"
           "custom/theme"
           "pulseaudio"
-          "memory"
+          "temperature"
+          "custom/fans"
           "hyprland/language"
           "battery"
           "clock"
@@ -78,6 +88,14 @@
           "on-click" = "${theme} toggle";
           "interval" = "once";
           "signal" = 1;
+          "return-type" = "json";
+        };
+        "temperature" = {
+          "format" = "{temperatureC}°C ";
+        };
+        "custom/fans" = {
+          "exec" = fans;
+          "interval" = 5;
           "return-type" = "json";
         };
         "hyprland/workspaces" = {
@@ -141,10 +159,6 @@
           "locale" = "ru_RU.UTF-8";
           "interval" = 1;
           "format" = "{:%H:%M:%S}";
-        };
-        "memory" = {
-          "interval" = 5;
-          "format" = "󰍛 {}%";
         };
         "battery" = {
           "bat" = "BAT0";
@@ -233,7 +247,8 @@
       #custom-vpns,
       #custom-theme,
       #language,
-      #memory,
+      #temperature,
+      #custom-fans,
       #battery,
       #pulseaudio,
       #clock,
@@ -246,11 +261,11 @@
         color: #181825;
       }
 
-      #memory {
-        background-color: #fab387;
+      #temperature {
+        background-color: #94e2d5;
       }
       #battery {
-        background-color: #f38ba8;
+        background-color: #89b4fa;
       }
       @keyframes blink {
         to {
@@ -275,16 +290,16 @@
       }
 
       #pulseaudio {
-        background-color: #f9e2af;
+        background-color: #a6e3a1;
       }
 
       #clock {
-        background-color: #cba6f7;
+        background-color: #b4befe;
         margin-right: 10px;
       }
 
       #language {
-        background-color: #a6e3a1;
+        background-color: #74c7ec;
         min-width: 16px;
       }
 
@@ -300,12 +315,16 @@
       }
 
       #custom-vpns {
-        background-color: #89b4fa;
+        background-color: #fab387;
       }
 
       #custom-theme {
         padding: 4px 7px 4px 10px;
-        background-color: #74c7ec;
+        background-color: #f9e2af;
+      }
+
+      #custom-fans {
+        background-color: #89dceb;
       }
     '';
   };
