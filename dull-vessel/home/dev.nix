@@ -15,6 +15,7 @@
     )
     // {
       ".local/share/jdks/temurin8".source = pkgs.temurin-bin-8;
+      ".local/share/jdks/temurin11".source = pkgs.temurin-bin-11;
       ".local/share/jdks/temurin17".source = pkgs.temurin-bin-17;
     };
 
