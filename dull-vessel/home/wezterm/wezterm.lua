@@ -22,6 +22,13 @@ return {
     show_tab_index_in_tab_bar = false,
     window_background_opacity = 0.8,
     enable_scroll_bar = true,
+    keys = {
+        {
+            key = 'Enter',
+            mods = 'ALT',
+            action = wezterm.action.DisableDefaultAssignment,
+        },
+    },
     mouse_bindings = {
         {
             event = { Down = { streak = 1, button = { WheelUp = 1 } } },

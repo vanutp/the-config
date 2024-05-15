@@ -19,7 +19,6 @@
     duf
     ncdu
     htop
-    neovim
     psmisc
     usbutils
   ];

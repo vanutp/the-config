@@ -12,5 +12,6 @@
     ./shell.nix
     ./dev.nix
     ./secrets.nix
+    ./nvim
   ];
 }
