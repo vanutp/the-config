@@ -6,14 +6,24 @@
         ffmpeg = super.ffmpeg-full;
       };
       fprintd = super.fprintd.overrideAttrs {
+        # https://github.com/NixOS/nixpkgs/issues/299111
+        # Disabling all tests for now2
         mesonCheckFlags = [
-          # https://github.com/NixOS/nixpkgs/pull/298491
-          # not in nixos-unstable yet
           "--no-suite"
-          "fprintd:TestPamFprintd"
-          "--no-suite"
-          "fprintd:daemon+fprintd+FPrintdVirtualDeviceStorageVerificationTests"
+          "fprintd"
         ];
+      };
+      python3 = super.python3.override {
+        packageOverrides = python-self: python-super: {
+          ufo2ft = python-super.ufo2ft.overrideAttrs rec {
+            pname = "ufo2ft";
+            version = "3.2.2";
+            src = super.fetchPypi {
+              inherit pname version;
+              hash = "sha256-5HWhRxKs4KQdC1v0LaLgndgMwtcGKLVz9tYtesdJ8Oo=";
+            };
+          };
+        };
       };
     })
   ];

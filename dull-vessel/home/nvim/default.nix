@@ -235,18 +235,6 @@
       treesitter.enable = true;
       auto-save = {
         enable = true;
-        # TODO: remove when I update nixpkgs
-        package = pkgs.vimUtils.buildVimPlugin {
-          pname = "auto-save.nvim";
-          version = "2024-04-25";
-          src = pkgs.fetchFromGitHub {
-            owner = "okuuva";
-            repo = "auto-save.nvim";
-            rev = "5fe9ab0c42f0457f2a973e814a6352b8eeb04730";
-            sha256 = "1c4xmp1cy3h7z68yh09bcazdqj8kimyrddgl0wc068sb6pmnpbbi";
-          };
-          meta.homepage = "https://github.com/okuuva/auto-save.nvim/";
-        };
         extraOptions.execution_message.enabled = false;
       };
       inc-rename.enable = true;
@@ -266,18 +254,6 @@
       direnv.enable = true;
       rustaceanvim = {
         enable = true;
-        # TODO: remove when I update nixpkgs
-        package = pkgs.neovimUtils.buildNeovimPlugin {
-          pname = "rustaceanvim";
-          version = "2024-05-04";
-          src = pkgs.fetchFromGitHub {
-            owner = "mrcjkb";
-            repo = "rustaceanvim";
-            rev = "2eb8776df1aab03f514b38ddc39af57efbd8970b";
-            sha256 = "137k9skchcqplzrm07xkwxnrnnm3k5cam28a9yn2qaw4rmwf1zkp";
-          };
-          meta.homepage = "https://github.com/mrcjkb/rustaceanvim/";
-        };
         server.onAttach = "function(client, bufnr) ${enableInlayHints} end";
         server.settings = ''
           function(project_root)

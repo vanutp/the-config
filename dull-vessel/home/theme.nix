@@ -69,19 +69,7 @@ in {
       noto-fonts-cjk-serif
       noto-fonts-emoji
       fira
-      (fira-math.overrideAttrs (_: {
-        nativeBuildInputs = [
-          (python3.withPackages (ps:
-            with ps; [
-              (fontmake.overridePythonAttrs (_: {
-                doCheck = false;
-              }))
-              fonttools
-              glyphslib
-              toml
-            ]))
-        ];
-      }))
+      fira-math
       nerdfonts'
     ];
   };

@@ -6,13 +6,13 @@ pkgs @ {
 }:
 telegram-desktop.overrideAttrs (orig: rec {
   pname = "64gram";
-  version = "1.1.21";
+  version = "1.1.22";
   src = fetchFromGitHub {
     owner = "TDesktop-x64";
     repo = "tdesktop";
     rev = "v${version}";
     fetchSubmodules = true;
-    hash = "sha256-CeLcTa34ltX8+w+Bx+ChLaUrQ8c0Dk6bQZttNBybqGs=";
+    hash = "sha256-Fhix+kCqUTr9qGMzDc2undxmhjmM6fPorZebeqXNHHE=";
   };
 
   buildInputs =
@@ -123,12 +123,28 @@ telegram-desktop.overrideAttrs (orig: rec {
               hash = "sha256-m5SdnFLgXtVYjuxvSW6XohqLQGIkPKKf/ZqxTmbQ+fc=";
             })
             (fetchpatch {
-              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0026-portal-proxy-resolver.patch";
+              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0026-fix-backing-store-rhi-unneeded-copy.patch";
+              hash = "sha256-yoB/4iqfDzdq2kA4w+gBtmP1d9RBN4Xc3TlBzXUsbBY=";
+            })
+            (fetchpatch {
+              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0027-fix-backing-store-opengl-subimage-unneeded-copy.patch";
+              hash = "sha256-6f0Y1RaRolJz43C1L38W2VxE1VPvqjniOZi7t9nHAj8=";
+            })
+            (fetchpatch {
+              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0028-portal-proxy-resolver.patch";
               hash = "sha256-N4jdaI2zDIbzrUT1EfpPMimsRR+XqRNPNx5P96OS1+Q=";
             })
             (fetchpatch {
-              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0027-fix-crash-opengl-drivers.patch";
+              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0029-fix-crash-opengl-drivers.patch";
               hash = "sha256-lXNsbR8ul7UizpMEr58wONUAvyuFkTrRonX6eGIxhs8=";
+            })
+            (fetchpatch {
+              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0030-fix-focus-in-hidden-window.patch";
+              hash = "sha256-ncUoq+/NN44tfyFTwPyw/fbbpkBAM39IWVW9PdgwEgQ=";
+            })
+            (fetchpatch {
+              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtbase_6.7.0/0031-fix-only-emoji-line.patch";
+              hash = "sha256-icwifVtnSDFl+bM/d/Q3TQvyyLAwO9p62+MTp9tXRl4=";
             })
           ];
       });
@@ -168,6 +184,10 @@ telegram-desktop.overrideAttrs (orig: rec {
             (fetchpatch {
               url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtwayland_6.7.0/0007-fix-media-viewer-on-gnome.patch";
               hash = "sha256-ARyyYeTGYW2cvIWbR080fBg7hgBVkLUVauyVZuQxa/Y=";
+            })
+            (fetchpatch {
+              url = "https://raw.githubusercontent.com/desktop-app/patches/master/qtwayland_6.7.0/0008-owning-rhi-backing-store.patch";
+              hash = "sha256-MOUE8SInnqk4kpzFdz4Qo084uaGZlqAJoZMIDEjFyzk=";
             })
           ];
         })
