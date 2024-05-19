@@ -32,12 +32,13 @@
           [
             black
             dbus-python
+            ipython
+            httpx
           ]
           ++ black.optional-dependencies.d
     ))
     (poetry.withPlugins (ps: with ps; [poetry-plugin-export]))
     pipenv
-    python3Packages.ipython
     twine
     pgcli
     gnumake
