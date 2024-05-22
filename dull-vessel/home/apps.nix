@@ -28,6 +28,7 @@
             msaClientID = "c36a9fb6-4f2a-41ff-90bd-ae7cc92031eb";
           }
       )
+      xournalpp
       slack
       webcord
       obs-studio
