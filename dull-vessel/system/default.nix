@@ -72,4 +72,6 @@
   services.fwupd.enable = true;
 
   virtualisation.waydroid.enable = true;
+
+  hardware.opentabletdriver.enable = true;
 }
