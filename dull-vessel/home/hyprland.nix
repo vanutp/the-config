@@ -262,6 +262,7 @@
           "SUPER SHIFT, Space, togglefloating,"
           "SUPER, J, togglesplit,"
           "SUPER, P, pin"
+          "SUPER, F, fullscreen, 0"
 
           # Resize window
           (resize "left" "-20 0")
