@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   inputs,
@@ -62,6 +63,10 @@ in {
     catppuccin.flavour = "mocha";
 
     fonts.fontconfig.enable = true;
+    fonts.fontconfig.defaultFonts.sansSerif = ["Noto Sans"];
+    fonts.fontconfig.defaultFonts.serif = ["Noto Serif"];
+    fonts.fontconfig.defaultFonts.monospace = [config.preferences.font.monospace];
+    fonts.fontconfig.defaultFonts.emoji = ["Noto Color Emoji"];
 
     home.packages = with pkgs; [
       noto-fonts
