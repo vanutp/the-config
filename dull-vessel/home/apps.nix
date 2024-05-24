@@ -48,6 +48,7 @@
       ark
       spotify
       google-chrome
+      firefox
       corefonts
       vistafonts
       (pkgs.makeDesktopItem {
