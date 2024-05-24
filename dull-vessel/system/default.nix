@@ -14,6 +14,7 @@
     ./dev.nix
     ./audio.nix
     ./portals.nix
+    ./login.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
