@@ -1,6 +1,7 @@
 {
   pkgs,
   common,
+  lib,
   ...
 }: {
   imports = [
@@ -10,7 +11,7 @@
   networking.useNetworkd = true;
   networking.useDHCP = false;
   # for `nixos-rebuild build-vm`
-  virtualisation.vmVariant.networking.useDHCP = true;
+  virtualisation.vmVariant.networking.useDHCP = lib.mkForce true;
 
   security.sudo.wheelNeedsPassword = false;
   # to allow remote rebuild while connecting as non-root

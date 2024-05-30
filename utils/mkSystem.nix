@@ -1,5 +1,6 @@
 ({
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     sops-nix,
     ...
@@ -10,8 +11,12 @@
       system = hostConfig.systemType;
       inherit overlays;
     };
+    pkgs-unstable = import nixpkgs-unstable {
+      system = hostConfig.systemType;
+      inherit overlays;
+    };
     args = {
-      inherit inputs;
+      inherit inputs pkgs-unstable;
       common = (import ../common) pkgs;
     };
     overlays = hostConfig.overlays inputs;

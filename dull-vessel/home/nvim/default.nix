@@ -2,13 +2,16 @@
   inputs,
   config,
   pkgs,
+  pkgs-unstable,
   ...
 }: {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
   ];
   nixpkgs.overlays = [
-    inputs.neovim-nightly-overlay.overlay
+    (self: super: {
+      neovim = pkgs-unstable.neovim;
+    })
   ];
 
   home.packages = with pkgs; [
@@ -254,16 +257,18 @@
       direnv.enable = true;
       rustaceanvim = {
         enable = true;
-        server.onAttach = "function(client, bufnr) ${enableInlayHints} end";
-        server.settings = ''
-          function(project_root)
-            return {
-              diagnostics = {
-                disabled = { 'collapsible_else_if' }
+        settings.server = {
+          on_attach = "function(client, bufnr) ${enableInlayHints} end";
+          settings = ''
+            function(project_root)
+              return {
+                diagnostics = {
+                  disabled = { 'collapsible_else_if' }
+                }
               }
-            }
-          end
-        '';
+            end
+          '';
+        };
       };
       dap.enable = true;
       telescope.enable = true;
@@ -389,7 +394,7 @@
           };
           pyright = {
             enable = true;
-            package = inputs.self.packages.${pkgs.system}.basedpyright;
+            package = pkgs-unstable.basedpyright;
             cmd = ["bash" "-c" "eval $(direnv export bash) && exec basedpyright-langserver --stdio"];
             extraOptions = {
               # https://github.com/astral-sh/ruff-lsp/issues/384

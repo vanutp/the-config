@@ -47,15 +47,7 @@
     alejandra
     vscode
     jetbrains.idea-ultimate
-    # remove when https://github.com/NixOS/nixpkgs/pull/304223 is merged
-    (jetbrains.clion.overrideAttrs (orig: {
-      buildInputs =
-        orig.buildInputs
-        ++ [
-          pkgs.fontconfig
-          pkgs.lttng-ust_2_12
-        ];
-    }))
+    jetbrains.clion
     (with dotnetCorePackages;
       combinePackages [
         sdk_7_0

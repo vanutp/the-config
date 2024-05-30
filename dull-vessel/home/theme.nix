@@ -60,7 +60,7 @@ in {
       style.package = pkgs.kdePackages.breeze;
     };
 
-    catppuccin.flavour = "mocha";
+    catppuccin.flavor = "mocha";
 
     fonts.fontconfig.enable = true;
     fonts.fontconfig.defaultFonts.sansSerif = ["Noto Sans"];

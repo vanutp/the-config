@@ -5,14 +5,6 @@
       mpv-unwrapped = super.mpv-unwrapped.override {
         ffmpeg = super.ffmpeg-full;
       };
-      fprintd = super.fprintd.overrideAttrs {
-        # https://github.com/NixOS/nixpkgs/issues/299111
-        # Disabling all tests for now2
-        mesonCheckFlags = [
-          "--no-suite"
-          "fprintd"
-        ];
-      };
       python3 = super.python3.override {
         packageOverrides = python-self: python-super: {
           ufo2ft = python-super.ufo2ft.overrideAttrs rec {
