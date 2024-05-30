@@ -12,7 +12,7 @@
     };
     args = {
       inherit inputs;
-      common = (import ../common/utils.nix) {inherit inputs pkgs;};
+      common = (import ../common) pkgs;
     };
     overlays = hostConfig.overlays inputs;
     mkSystemHM = hostConfig: [

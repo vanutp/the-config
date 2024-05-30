@@ -1,7 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  common,
+  ...
+}: {
   imports = [
-    ../../../common/all-users
-    ../../../common/fox
+    common.bundles.all-users
+    common.bundles.fox
     ./shell.nix
   ];
 

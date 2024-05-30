@@ -1,7 +1,7 @@
-{...}: {
+{common, ...}: {
   imports = [
     ../all-users
-    ../../common/fox
+    common.bundles.fox
     ./apps.nix
     ./packages.nix
     ./theme.nix

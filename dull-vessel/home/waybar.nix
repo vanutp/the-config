@@ -33,7 +33,7 @@
       echo '{"text": "'"$active_vpns"'", "alt": "", "tooltip": "", "class": "", "percentage": 0 }'
     '');
     dconf = lib.getExe pkgs.dconf;
-    theme = common.writePythonScript "theme" ''
+    theme = common.utils.writePythonScript "theme" ''
       import os
       import sys
       import tomllib

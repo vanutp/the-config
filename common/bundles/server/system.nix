@@ -1,6 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  common,
+  ...
+}: {
   imports = [
-    ../../common/system
+    common.bundles.system
   ];
 
   networking.useNetworkd = true;

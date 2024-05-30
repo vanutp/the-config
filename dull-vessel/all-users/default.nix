@@ -1,6 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  common,
+  ...
+}: {
   imports = [
-    ../../common/all-users
+    common.bundles.all-users
   ];
 
   home.packages = with pkgs; [

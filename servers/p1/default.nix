@@ -2,7 +2,7 @@
   channel = "stable";
   system = ./system;
   users = {
-    fox = ../common/fox;
-    root = ../common/root.nix;
+    fox = {common, ...}: {imports = [common.bundles.server.fox];};
+    root = {common, ...}: {imports = [common.bundles.server.root];};
   };
 }

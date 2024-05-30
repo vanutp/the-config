@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+pkgs: let
   python3 = pkgs.lib.getExe pkgs.python3;
 in {
   writePythonScript = name: text:

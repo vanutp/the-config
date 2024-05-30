@@ -1,10 +1,11 @@
 {
+  common,
   config,
   pkgs,
   ...
 }: {
   imports = [
-    ../../common/system.nix
+    common.bundles.server.system
     ./hardware-configuration.nix
     ./secrets.nix
     ./wireguard.nix
