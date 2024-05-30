@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  common,
   ...
 }: {
   services.blueman-applet.enable = true;
@@ -32,7 +33,7 @@
       echo '{"text": "'"$active_vpns"'", "alt": "", "tooltip": "", "class": "", "percentage": 0 }'
     '');
     dconf = lib.getExe pkgs.dconf;
-    theme = pkgs.foxlib.writePythonScript "theme" ''
+    theme = common.writePythonScript "theme" ''
       import os
       import sys
       import tomllib

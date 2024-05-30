@@ -6,8 +6,15 @@
   } @ inputs: hostPath: let
     hostname = builtins.baseNameOf hostPath;
     hostConfig = import ./getHostConfig.nix hostPath;
-    args = {inherit inputs;};
-    overlays = (hostConfig.overlays inputs) ++ (import ../common/overlays.nix);
+    pkgs = import nixpkgs {
+      system = hostConfig.systemType;
+      inherit overlays;
+    };
+    args = {
+      inherit inputs;
+      common = (import ../common/utils.nix) {inherit inputs pkgs;};
+    };
+    overlays = hostConfig.overlays inputs;
     mkSystemHM = hostConfig: [
       home-manager.nixosModules.home-manager
       {
@@ -21,10 +28,7 @@
     ];
     mkUserHM = hostConfig: username:
       home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = hostConfig.systemType;
-          inherit overlays;
-        };
+        inherit pkgs;
         modules = [hostConfig.users.${username}];
         extraSpecialArgs = args;
       };
