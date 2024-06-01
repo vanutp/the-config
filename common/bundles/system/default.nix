@@ -1,22 +1,19 @@
 {
-  config,
   pkgs,
   inputs,
   lib,
+  common,
   ...
 }: {
   # Never change this
   system.stateVersion = "24.05";
 
   imports = [
-    ./utils.nix
-    ./podman.nix
+    common.composter
+    ./podman-docker-compat.nix
     ./security.nix
     inputs.vhap-compose-update.nixosModules.default
   ];
-
-  # breaks podman dns :(
-  networking.firewall.enable = false;
 
   time.timeZone = lib.mkDefault "Europe/Berlin";
 
@@ -36,7 +33,7 @@
     extraGroups = ["wheel"];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
-      config.vanutp.pubkeys.main
+      common.constants.pubkeys.main
     ];
   };
 

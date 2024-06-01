@@ -1,4 +1,5 @@
 pkgs: {
+  # TODO: generate this automatically
   bundles = {
     fox = ./bundles/fox;
     root = ./bundles/root;
@@ -11,5 +12,17 @@ pkgs: {
       system = ./bundles/server/system.nix;
     };
   };
-  utils = import ./utils.nix pkgs;
+  atoms = {
+    makeWg0 = import ./atoms/makeWg0.nix;
+  };
+  blocks = {
+    docker-proxy-server = import ./blocks/docker-proxy-server.nix;
+    docker-proxy = import ./blocks/docker-proxy.nix;
+    vds-networking = import ./blocks/vds-networking.nix;
+    progtime = import ./blocks/progtime.nix;
+    traefik = import ./blocks/traefik.nix;
+  };
+  composter = import ./composter.nix;
+  utils = import ./utils/utils.nix pkgs;
+  constants = import ./constants.nix;
 }

@@ -5,6 +5,6 @@ in {
   systemType = hostConfig.systemType or "x86_64-linux";
   hmMode = hostConfig.hmMode or "monolith";
   overlays = hostConfig.overlays or (inputs: []);
-  system = hostConfig.system;
-  users = hostConfig.users;
+  inherit (hostConfig) system users;
+  vars = import hostConfig.vars;
 })

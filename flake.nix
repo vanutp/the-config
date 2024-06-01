@@ -11,6 +11,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     catppuccin.url = "github:catppuccin/nix";
 
@@ -72,7 +76,9 @@
   in
     (mkSystems [
       "dull-vessel"
+      "servers/sfer"
       "servers/p1"
+      "servers/proxyfriend"
     ])
     // flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {

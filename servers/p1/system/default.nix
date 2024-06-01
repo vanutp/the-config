@@ -6,6 +6,30 @@
 }: {
   imports = [
     common.bundles.server.system
+    common.blocks.vds-networking
+    common.blocks.traefik
+    common.blocks.docker-proxy
+    # (common.blocks.progtime {
+    #   domain = "my.progtime.net";
+    #   secretsFile = config.sops.secrets."services/my_progtime_net".path;
+    #   backendCfg = {
+    #     INSTANCE_TITLE = "Прогтайм";
+    #     INSTANCE_SUBTITLE = "";
+    #     WORKERS = "2";
+    #   };
+    #   invokerCfg.ENABLE_INTERACTIVE = "True";
+    # })
+    # (common.blocks.progtime {
+    #   domain = "demo.progtime.net";
+    #   secretsFile = config.sops.secrets."services/demo_progtime_net".path;
+    #   backendCfg = {
+    #     INSTANCE_TITLE = "Прогтайм";
+    #     INSTANCE_SUBTITLE = "";
+    #     WORKERS = "1";
+    #   };
+    #   invokerCfg.ENABLE_INTERACTIVE = "True";
+    # })
+    ./traefik.nix
     ./hardware-configuration.nix
     ./secrets.nix
     ./wireguard.nix
@@ -16,26 +40,6 @@
   boot.loader.grub.device = "/dev/vda";
 
   networking.hostName = "p1";
-  # nixos networkd module doesn't allow to add onlink default gateway
-  # and doesn't allow to add regular routes without Destination
-  # plus i don't really want to commit plaintext server ips to the repo
-  sops.templates."network.conf" = {
-    content = ''
-      [Match]
-      Name=ens3
-
-      [Network]
-      Address=${config.sops.placeholder.host-ip}/32
-      DNS=1.1.1.1
-
-      [Route]
-      Gateway=2a01:230:4:1ea::1
-      Gateway=10.0.0.1
-      GatewayOnLink=yes
-    '';
-    mode = "0644";
-  };
-  environment.etc."systemd/network/main.network".source = config.sops.templates."network.conf".path;
 
   time.timeZone = "Europe/Moscow";
 

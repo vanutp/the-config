@@ -1,11 +1,15 @@
-{config, ...}: {
+{
+  common,
+  config,
+  ...
+}: {
   networking.wg-quick.interfaces = {
-    int = config.vanutp.makeWg0 {
+    int = common.atoms.makeWg0 config {
       address = "10.1.1.2";
       isInternal = true;
       autostart = true;
     };
-    wg0 = config.vanutp.makeWg0 {
+    wg0 = common.atoms.makeWg0 config {
       address = "10.1.1.2";
       isInternal = false;
       autostart = false;

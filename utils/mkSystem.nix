@@ -18,6 +18,7 @@
     args = {
       inherit inputs pkgs-unstable;
       common = (import ../common) pkgs;
+      vars = hostConfig.vars or {};
     };
     overlays = hostConfig.overlays inputs;
     mkSystemHM = hostConfig: [
