@@ -10,6 +10,7 @@
       addr = ":5000";
       headers.X-Content-Type-Options = ["nosniff"];
     };
+    delete.enabled = true;
     proxy = {
       remoteurl = "https://registry-1.docker.io";
       ttl = "12h";
@@ -21,7 +22,7 @@
   };
 in {
   virtualisation.composter.services.docker-proxy-server.main = {
-    image = "docker.io/distribution/distribution:latest";
+    image = "docker.io/distribution/distribution:2.8.3";
     volumes = [
       "${configFile}:/etc/docker/registry/config.yml:ro"
       "${dataDir}:/var/lib/registry"

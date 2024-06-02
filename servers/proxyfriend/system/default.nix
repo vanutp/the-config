@@ -11,8 +11,6 @@
     ./wireguard.nix
   ];
 
-  vanutp.traefik.acmeChallenge = "http";
-
   networking.hostName = "proxyfriend";
 
   time.timeZone = "Europe/Moscow";

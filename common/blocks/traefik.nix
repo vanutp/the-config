@@ -17,7 +17,7 @@
         default = [];
       };
       acmeChallenge = mkOption {
-        type = types.enum ["dns" "http"];
+        type = types.enum ["dns" "tls"];
         default = "dns";
       };
       tlsDomains = mkOption {
@@ -59,7 +59,6 @@
       "2c0f:f248::/32"
     ];
     configFile = mkYaml "traefik.yml" {
-      log.level = "DEBUG";
       accessLog = {
         filePath = "/data/logs/access.json";
         format = "json";
@@ -80,7 +79,7 @@
             dnsChallenge.provider = "cloudflare";
           }
           else {
-            httpChallenge.entryPoint = "http";
+            tlsChallenge = {};
           }
         );
       entryPoints = {
@@ -156,6 +155,7 @@
         # TODO: restart if config files change
         "${configDir}:/config:ro"
         "${dataDir}:/data"
+        "/nix/store:/nix/store:ro"
       ];
       environmentFiles =
         if config.vanutp.traefik.acmeChallenge == "dns"
@@ -165,6 +165,8 @@
         "--network=host"
       ];
     };
+    networking.firewall.allowedTCPPorts = [80 443];
+    networking.firewall.allowedUDPPorts = [443];
     system.activationScripts.traefik-create-data-dir.text = "mkdir -p ${dataDir}";
   };
 }

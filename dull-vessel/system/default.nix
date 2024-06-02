@@ -16,12 +16,7 @@
     ./audio.nix
     ./portals.nix
     ./login.nix
-
-    common.blocks.traefik
-    common.blocks.docker-proxy-server
   ];
-
-  vanutp.traefik.acmeChallenge = "http";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
