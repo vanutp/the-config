@@ -103,6 +103,8 @@
               # TODO: can mkIf be used here?
               if config.vanutp.traefik.acmeChallenge == "dns"
               then {
+                # TODO: copy certificates from main server to others
+                # instead of giving every server cloudflare access
                 domains =
                   map (domain: {
                     main = domain;
