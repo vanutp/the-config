@@ -8,7 +8,6 @@
     common.bundles.server.system
     common.blocks.vds-networking
     common.blocks.traefik
-    common.blocks.docker-proxy
     # (common.blocks.progtime {
     #   domain = "my.progtime.net";
     #   secretsFile = config.sops.secrets."services/my_progtime_net".path;

@@ -3,7 +3,6 @@
     common.bundles.server.system
     common.blocks.vds-networking
     common.blocks.traefik
-    common.blocks.docker-proxy
     ./traefik.nix
     ./hardware-configuration.nix
     ./secrets.nix

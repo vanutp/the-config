@@ -16,8 +16,6 @@ pkgs: {
     makeWg0 = import ./atoms/makeWg0.nix;
   };
   blocks = {
-    docker-proxy-server = import ./blocks/docker-proxy-server.nix;
-    docker-proxy = import ./blocks/docker-proxy.nix;
     vds-networking = import ./blocks/vds-networking.nix;
     progtime = import ./blocks/progtime.nix;
     traefik = import ./blocks/traefik.nix;
