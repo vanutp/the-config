@@ -25,4 +25,6 @@
       }
     '';
   };
+  systemd.services.dante.requires = ["wg-quick-wg0.service"];
+  networking.firewall.allowedTCPPorts = [1080];
 }
