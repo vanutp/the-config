@@ -13,7 +13,7 @@
   dataDir = "${common.constants.servicesDataRoot}/${blockName}";
   login = import ../utils/vanutp-registry.nix config;
 in {
-  virtualisation.composter.services.${blockName} = {
+  virtualisation.composter.services.${blockName}.containers = {
     redis = {
       image = "docker.io/redis:alpine";
       volumes = [

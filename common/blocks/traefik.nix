@@ -20,7 +20,8 @@
         type = types.enum ["dns" "tls"];
         default = "dns";
       };
-      tlsDomains = mkOption {
+      # TODO: raise an error if requestWildcardCertsFor is set but acmeChallenge != dns
+      requestWildcardCertsFor = mkOption {
         type = types.listOf types.str;
         default = [];
       };
@@ -110,7 +111,7 @@
                     main = domain;
                     sans = ["*.${domain}"];
                   })
-                  config.vanutp.traefik.tlsDomains;
+                  config.vanutp.traefik.requestWildcardCertsFor;
               }
               else {}
             );
@@ -154,7 +155,7 @@
       ];
       volumes = [
         "/var/run/podman/podman.sock:/var/run/docker.sock:ro"
-        # TODO: restart if config files change
+        # TODO: restart if config file changes
         "${configDir}:/config:ro"
         "${dataDir}:/data"
         "/nix/store:/nix/store:ro"

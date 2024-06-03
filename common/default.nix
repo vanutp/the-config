@@ -16,6 +16,7 @@ pkgs: {
     makeWg0 = import ./atoms/makeWg0.nix;
   };
   blocks = {
+    mailcow = import ./blocks/mailcow.nix;
     vds-networking = import ./blocks/vds-networking.nix;
     progtime = import ./blocks/progtime.nix;
     traefik = import ./blocks/traefik.nix;

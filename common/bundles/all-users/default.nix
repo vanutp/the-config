@@ -21,5 +21,6 @@
     htop
     psmisc
     usbutils
+    git
   ];
 }

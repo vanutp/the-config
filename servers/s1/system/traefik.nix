@@ -10,6 +10,6 @@
         target = "http://10.1.1.2:7000";
       }
     ];
-    tlsDomains = [vars.mainDomain "upstairs.one" "tmat.me" "ilkras.ru" "foxlab.dev"];
+    requestWildcardCertsFor = [vars.mainDomain "upstairs.one" "tmat.me" "ilkras.ru" "foxlab.dev"];
   };
 }
