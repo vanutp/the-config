@@ -48,6 +48,7 @@
     vim.xxd
     distrobox
     bubblewrap
+    dig
 
     # de
     xorg.xhost
