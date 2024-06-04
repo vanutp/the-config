@@ -55,9 +55,7 @@ in {
 
     qt = {
       enable = true;
-      platformTheme.name = "kde";
-      style.name = "breeze";
-      style.package = pkgs.kdePackages.breeze;
+      platformTheme.name = "qtct";
     };
 
     catppuccin.flavor = "mocha";
@@ -69,6 +67,10 @@ in {
     fonts.fontconfig.defaultFonts.emoji = ["Noto Color Emoji"];
 
     home.packages = with pkgs; [
+      libsForQt5.qtstyleplugin-kvantum
+      qt6Packages.qtstyleplugin-kvantum
+      kdePackages.breeze
+      kdePackages.breeze-icons
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
