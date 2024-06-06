@@ -7,6 +7,8 @@
     enable = true;
   };
 
+  services.minio.enable = true;
+
   virtualisation.virtualbox = {
     host.enable = true;
     # host.enableExtensionPack = true;
