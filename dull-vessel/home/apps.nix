@@ -82,6 +82,7 @@
     ]
     ++ (with inputs.self.packages.${pkgs.system}; [
       veyon
-      _64gram
+      # TODO: disable
+      (enableDebugging _64gram)
     ]);
 }
