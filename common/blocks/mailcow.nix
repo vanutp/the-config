@@ -12,6 +12,7 @@
   dataDir = "${common.constants.servicesDataRoot}/mailcow-data";
 in {
   # mailcow 2024-04
+  # TODO: backup/restore
   networking.firewall.allowedTCPPorts = [25 465 587 143 993 110 995 4190];
   virtualisation.composter.services.mailcow = let
     IPV4_NETWORK = "172.22.1";
