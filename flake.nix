@@ -83,6 +83,7 @@
       "servers/sfer"
       "servers/p1"
       "servers/proxyfriend"
+      "servers/false-environment"
     ])
     // flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {
