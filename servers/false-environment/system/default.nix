@@ -23,6 +23,11 @@
     };
   };
 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 100;
+  };
+
   environment.systemPackages = with pkgs; [
     temurin-bin-17
   ];
