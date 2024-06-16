@@ -1,10 +1,12 @@
 {
   inputs,
   pkgs,
+  pkgs-unstable,
   ...
 }: {
   home.packages = with pkgs;
     [
+      pkgs-unstable.zed-editor
       (
         inputs.fjord.packages.${pkgs.system}.fjordlauncher.override {
           # https://github.com/PrismLauncher/PrismLauncher/blob/e777201187a6bceeb7d3b14dbf9a9369963ebcd1/CMakeLists.txt#L243
