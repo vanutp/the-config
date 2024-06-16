@@ -64,5 +64,7 @@
     hyprpaper
     hyprpicker
     pavucontrol
+    # needed for thunar and other xfce apps to be able to save settings
+    xfce.xfconf
   ];
 }
