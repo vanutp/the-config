@@ -84,7 +84,7 @@
 
       exec-once = [
         "hyprpaper"
-        "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"
+        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "copyq --start-server"
         "playerctld daemon"
       ];
