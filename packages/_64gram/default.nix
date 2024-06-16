@@ -5,13 +5,13 @@ pkgs @ {
 }:
 telegram-desktop.overrideAttrs (orig: rec {
   pname = "64gram";
-  version = "1.1.26";
+  version = "1.1.29";
   src = fetchFromGitHub {
     owner = "TDesktop-x64";
     repo = "tdesktop";
     rev = "v${version}";
     fetchSubmodules = true;
-    hash = "sha256-x6Fv4vMUdD7zxJnI+7knOr+Ab+ehzDjpzJbYFdQZ0Ok=";
+    hash = "sha256-OJiVmmDIsijK/IHGEdsCoAwvc9JlSth+76r9O1aJbd0=";
   };
 
   buildInputs = let

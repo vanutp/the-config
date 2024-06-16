@@ -6,120 +6,112 @@ pkgs: let
       orig.patches
       ++ [
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0001-spellcheck-underline-from-chrome.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0001-spellcheck-underline-from-chrome.patch";
           hash = "sha256-S5QtNyFXITfZUuke0j469dKHpW7o+Pe69ziKxYKZJKY=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0002-improve-apostrophe-processing.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0002-improve-apostrophe-processing.patch";
           hash = "sha256-ahI3EZ+X7QCQQO7poKbXiWoDTQSBeMlGMrPTE7ndNM0=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0003-allow-creating-floating-panels-macos.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0003-allow-creating-floating-panels-macos.patch";
           hash = "sha256-DrBBJrSP1BkzN0AaSXWjIGLfgsTJDLbszXIwDFor1dk=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0004-fix-file-dialog-on-windows.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0004-fix-file-dialog-on-windows.patch";
           hash = "sha256-MOEZIu55et+kmn6nryTvU6bMIGkD08/MXJ46yi/sGdY=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0005-fix-launching-mail-program-on-windows.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0005-fix-launching-mail-program-on-windows.patch";
           hash = "sha256-1lZGCYJY0FEKXdqhC4723UfgQqVfF0zJOaDnO56zScM=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0006-save-dirtyopaquechildren.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0006-save-dirtyopaquechildren.patch";
           hash = "sha256-DKqEPYA4RZfsJPDSFXuecvJgHbQg7P4yyi449dXL1NY=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0007-always-use-xft-font-conf.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0007-always-use-xft-font-conf.patch";
           hash = "sha256-YozliGvpxDtHndByBfyKrkuab9qRkANIP1sIQjIPELA=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0008-catch-cocoa-dock-menu.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0008-catch-cocoa-dock-menu.patch";
           hash = "sha256-Ji+slNFYEdfL2xDB2TemrbK4W3/CV7uHZIGrANvUxE0=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0009-fix-race-in-windows-timers.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0009-fix-race-in-windows-timers.patch";
           hash = "sha256-ON8em0CSEfwDACXSauFp1STkUyObioTYHexNdrPNbqs=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0010-nicer-platformtheme-choosing.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0010-nicer-platformtheme-choosing.patch";
           hash = "sha256-el8J81WHT2VTlrjm3nlCv6r3IT6sI3By78W1fTZw+9k=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0011-reset-current-context-on-error.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0011-reset-current-context-on-error.patch";
           hash = "sha256-PHadY1GeBORhTU+nrxqqBZf5TNLHhwsL1GkPDIQNUNE=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0012-reset-opengl-widget-on-context-loss.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0012-reset-opengl-widget-on-context-loss.patch";
           hash = "sha256-z1XeH4rWcQjn6EVvaK4xrFb4gOaCt2kWK7sezhWVs20=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0013-no-jpeg-chroma-subsampling.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0013-no-jpeg-chroma-subsampling.patch";
           hash = "sha256-DwE8jCAzLuzSymvXeMzqCMvuAGOGeu36tOuBOPvJswo=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0014-convert-qimage-to-srgb.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0014-convert-qimage-to-srgb.patch";
           hash = "sha256-n4rK4Gyddo9e5TgHtop6viMUt5CyuiY833qkOgHiIfc=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0015-lcms2.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0015-lcms2.patch";
           hash = "sha256-VMBJ+hSHolet8/4GiagiSbADKfX2xgckb3YvmNVeZzU=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0016-better-color-scheme-support.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0016-better-color-scheme-support.patch";
           hash = "sha256-UzB3GfHtzGsVxJlppopjsvDvikbalJqCjGuiKCjSqzA=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0017-translucent-captioned-window-on-windows.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0017-translucent-captioned-window-on-windows.patch";
           hash = "sha256-oJ4oRi8OAh2/ednUQCVMjFFIK0pjT+MnSfmNMG9YeIk=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0018-allow-bordered-translucent-macos.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0018-allow-bordered-translucent-macos.patch";
           hash = "sha256-zNMRGkqlybyoVXiviYKcYZ+iMMy8nNW1F+8+ly7G5aI=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0019-better-open-url-linux.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0019-better-open-url-linux.patch";
           hash = "sha256-Ar0pyWoMygtMpPruOYMRyB15H0MgarH9L9x0wTTtiLM=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0020-follow-highdpi-rounding-policy-for-platform-dpr.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0020-follow-highdpi-rounding-policy-for-platform-dpr.patch";
           hash = "sha256-ZA5AxU2aJEQQyY4ghFiuLusuEnrsjUwbfFNgMwBqVcI=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0021-highdpi-downscale-property.patch";
-          hash = "sha256-zElWEk70SE9MGHaThuSycGhMJVgHGruQjafzFaAAKO8=";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0021-fill-transparent-hidpi-backing-store.patch";
+          hash = "sha256-TxpqYohHJ9tjucmsY0I3XR5WBJt0aswmlCQjwIfrveg=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0022-highdpi-downscale-wayland.patch";
-          hash = "sha256-LAz0lrcJIOpZ2/Nszkx6ktzwaHl4n4RDgksF/lDDP4s=";
-        })
-        (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0023-fill-transparent-hidpi-backing-store.patch";
-          hash = "sha256-XfP5AkSj8OgvGCAWyO3fQG7ibumrMaY1XC8epPJMPWQ=";
-        })
-        (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0024-update-window-geometry-on-scale-change.patch";
-          hash = "sha256-K25M0dDBKfc2OPqbBJoLusfTBNRt8FnakpXl5bd5OvM=";
-        })
-        (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0025-fix-backing-store-rhi-unneeded-copy.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0022-fix-backing-store-rhi-unneeded-copy.patch";
           hash = "sha256-OcsNx+T0HPTryCug+506ud0c9OFr0TFq58j9Na0a6S4=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0026-fix-backing-store-opengl-subimage-unneeded-copy.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0023-fix-backing-store-opengl-subimage-unneeded-copy.patch";
           hash = "sha256-uIh8o5DaxcfatJR3lCL2b8eOy7fS8Ov3U10LnLK3ovM=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0027-portal-proxy-resolver.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0024-portal-proxy-resolver.patch";
           hash = "sha256-R/yQaMOJz/C0knapAf/bvax+TxrLbx/YwoCbqmKksG4=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0028-fix-focus-in-hidden-window.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0025-fix-focus-in-hidden-window.patch";
           hash = "sha256-kyGP/6OJBdnWJr6AkI1y9IKOD0ckPWB439cDbtgFIhM=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtbase_6.7.1/0029-fix-only-emoji-line.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0026-fix-only-emoji-line.patch";
           hash = "sha256-q+8q5NQ6Qhcwe5/4MMt/2HB9nZM2uqcDFFdtoh0NTHg=";
+        })
+        (pkgs.fetchpatch {
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtbase_6.7.1/0027-fix-rtl-cursor-move-up.patch";
+          hash = "sha256-PvmT5aMuDwOdR6au9/85YNCF+XZuTfns+1bz2BiO4Q4=";
         })
       ];
   });
@@ -133,35 +125,31 @@ in [
   ((pkgs.kdePackages.qtwayland.overrideAttrs {
       patches = [
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtwayland_6.7.1/0001-always-fractional-scale.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtwayland_6.7.1/0001-always-fractional-scale.patch";
           hash = "sha256-kvyAr6zF3u0OALEcu9Ar528WsjMfJlBFPclpCrHU8GQ=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtwayland_6.7.1/0002-offload-transparency-filling-to-hidpi.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtwayland_6.7.1/0002-offload-transparency-filling-to-hidpi.patch";
           hash = "sha256-G5UJqnmFsW0c1UjjWWRrO1yCMv2EbXQ5fTV3pUJzY9M=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtwayland_6.7.1/0003-popup-reposition.patch";
-          hash = "sha256-ARHJCnpSeoH02DiRJQT7P5ZAkUqRWtk0l39XAsxtklU=";
-        })
-        (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtwayland_6.7.1/0004-fix-gtk4-embedding.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtwayland_6.7.1/0003-fix-gtk4-embedding.patch";
           hash = "sha256-lHD1r2koGyd2d5FvJFYIWoJBgrSsKr3V3B4ixx/irTo=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtwayland_6.7.1/0005-QWaylandShmBackingStore-Preserve-buffer-contents-bet.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtwayland_6.7.1/0004-QWaylandShmBackingStore-Preserve-buffer-contents-bet.patch";
           hash = "sha256-T8C04XhPK34f0qrDrYbFRskmt3vXngcElPmh7XNxHy0=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtwayland_6.7.1/0006-avoid-needlessly-initiailizing-opengl.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtwayland_6.7.1/0005-avoid-needlessly-initiailizing-opengl.patch";
           hash = "sha256-+4fbO3V0WNmReNTjsDqi7u6lcG7761PpoP8kPxpXHWk=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtwayland_6.7.1/0007-fix-media-viewer-on-gnome.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtwayland_6.7.1/0006-fix-media-viewer-on-gnome.patch";
           hash = "sha256-700BJKvCNpPpOnrT24VlWdUXCnDEFIHXybvOEJaYnM8=";
         })
         (pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/desktop-app/patches/6ffe3491a75e027abe2b0f9bfce3da955926f931/qtwayland_6.7.1/0008-owning-rhi-backing-store.patch";
+          url = "https://raw.githubusercontent.com/desktop-app/patches/8639205c2095a3f015449f8995fbfe16405218b8/qtwayland_6.7.1/0007-owning-rhi-backing-store.patch";
           hash = "sha256-3+dpivcmxymE1cM/md6tIWbqt9TNgtcXpjkf1NBqQkA=";
         })
       ];
