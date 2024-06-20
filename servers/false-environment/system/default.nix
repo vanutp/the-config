@@ -30,7 +30,15 @@
 
   environment.systemPackages = with pkgs; [
     temurin-bin-17
+    rdiff-backup
   ];
   networking.firewall.allowedTCPPorts = [25565];
   networking.firewall.allowedUDPPorts = [24454];
+
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "0 * * * * fox rdiff-backup ~/server/world/ ~/backup/"
+    ];
+  };
 }
