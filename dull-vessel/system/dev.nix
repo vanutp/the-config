@@ -29,4 +29,6 @@
     registrations.aarch64-linux.fixBinary = true;
     registrations.aarch64-linux.openBinary = true;
   };
+
+  networking.firewall.interfaces.int.allowedTCPPorts = [7000 7001];
 }
