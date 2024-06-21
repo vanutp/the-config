@@ -28,7 +28,7 @@
       ];
     };
     wg2-only = {
-      autostart = true;
+      autostart = false;
       address = ["10.3.1.2/16"];
       privateKeyFile = config.sops.secrets."wg_keys/wg2".path;
       peers = [
