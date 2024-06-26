@@ -20,6 +20,15 @@
       ".local/share/jdks/temurin21".source = pkgs.temurin-bin-21;
     };
 
+  programs.zsh.completionInit = ''
+    if [[ $(stat -c '%U' /nix) = nobody ]]; then
+      # running in distrobox
+      autoload -U compinit && compinit -u
+    else
+      autoload -U compinit && compinit
+    fi
+  '';
+
   home.packages = with pkgs; [
     hyperfine
     gtk4
