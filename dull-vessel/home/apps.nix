@@ -17,7 +17,9 @@
       xournalpp
       slack
       webcord
-      obs-studio
+      (wrapOBS {
+        plugins = [obs-studio-plugins.wlrobs];
+      })
       okular
       libreoffice-fresh
       thunderbird
