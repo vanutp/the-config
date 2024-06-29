@@ -40,6 +40,7 @@
   programs.dconf.enable = true;
   services.gpm.enable = true;
   programs.gamemode.enable = true;
+  users.extraGroups.gamemode.members = ["fox"];
   services.flatpak.enable = true;
   services.gvfs.enable = true;
   boot.supportedFilesystems = ["ntfs"];
