@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  common,
   ...
 }: {
   services.blueman-applet.enable = true;
@@ -33,20 +32,18 @@
       echo '{"text": "'"$active_vpns"'", "alt": "", "tooltip": "", "class": "", "percentage": 0 }'
     '');
     dconf = lib.getExe pkgs.dconf;
-    theme = common.utils.writePythonScript "theme" ''
-      import os
+    theme = pkgs.writers.writePython3Bin "theme" {flakeIgnore = ["E501"];} ''
       import sys
-      import tomllib
       import json
       import subprocess
       SIGRTMIN = 34
       ICONS = {
-        'prefer-light': '\uf522 ',
-        'prefer-dark': '\uf4ee ',
+          'prefer-light': '\uf522 ',
+          'prefer-dark': '\uf4ee ',
       }
       color_scheme = subprocess.check_output(['${dconf}', 'read', '/org/gnome/desktop/interface/color-scheme']).decode().strip("\n'")
       if sys.argv[1] == 'get':
-          print(json.dumps({'text': ICONS.get(color_scheme, 'unknown theme') }))
+          print(json.dumps({'text': ICONS.get(color_scheme, 'unknown theme')}))
       elif sys.argv[1] == 'toggle':
           if color_scheme == 'prefer-light':
               color_scheme = 'prefer-dark'
