@@ -32,7 +32,7 @@
       echo '{"text": "'"$active_vpns"'", "alt": "", "tooltip": "", "class": "", "percentage": 0 }'
     '');
     dconf = lib.getExe pkgs.dconf;
-    theme = pkgs.writers.writePython3Bin "theme" {flakeIgnore = ["E501"];} ''
+    theme = pkgs.writers.writePython3 "theme" {flakeIgnore = ["E501"];} ''
       import sys
       import json
       import subprocess
