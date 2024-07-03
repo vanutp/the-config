@@ -19,11 +19,11 @@
     catppuccin.url = "github:catppuccin/nix";
 
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.39.1";
+      url = "git+https://github.com/hyprwm/Hyprland.git?ref=refs/tags/v0.41.2&submodules=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces/c5696000777f6586aaa255bd0a9b0627d5da911f";
+      url = "github:Duckonaut/split-monitor-workspaces/19483b0e0e3e7ee5125e54ab36bcadf180a26ad3";
       inputs.hyprland.follows = "hyprland";
     };
     manix = {

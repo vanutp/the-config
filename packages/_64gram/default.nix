@@ -5,7 +5,7 @@ pkgs @ {
 }:
 telegram-desktop.overrideAttrs (orig: rec {
   pname = "64gram";
-  version = "1.1.29";
+  version = "1.1.30";
   src = fetchFromGitHub {
     owner = "TDesktop-x64";
     repo = "tdesktop";
