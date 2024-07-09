@@ -2,6 +2,7 @@
   common,
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -79,4 +80,15 @@
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCZ1H5VPM2JfkdR2NQvqnUdcwkosNpRSbP5l9sgL0RNcJj+CiWC6iygi7Ra3o84nUtIaTg/d2nofpK1dEiXkQoliPofdkJTxorRnAOYdegaAGT54N4R0KaYzsRJsPqMO+AsCTEz4BV2D6HEuyz8/Ht8aBsCctLCL+YeEjYF+mH2Rlz7NOuAvii9RnPsnpBDGGBAk25pPNW9qN3A97S85JrWlkScIxNhLpTfKU1uKioSHJjHd70MbJRdYHrSjwRbrrzHhOyza6OCezC0y0yeObqHoIT9uhRJ/bSeG1CTidZ+5/jc+OHVMQCfhQvsVfwnJnlv1g7iK/qtEmeoa4T4pv/iv3AqaoI9DgBvX7jJBg4fb7Gsmgod70aY5xW5ioPti0tAcUySLvOad+Cn1/sxRV4bnxY4waU/tTNQKxP0e4oGlS0Ypg9APbDFgP5r+Fk8ReWYoEynATTejevLbHIVQXSbydf1+78rleY1Iu5gPoU6bLH9GAl0TPYe/Bqr0mNAauE= dva-smp@s1"
     ];
   };
+
+  virtualisation.oci-containers.backend = "docker";
+  virtualisation.podman.enable = lib.mkForce false;
+  virtualisation.docker.enable = true;
+  systemd.services.podman-restart.wantedBy = lib.mkForce [];
+  users.extraGroups.docker.members = ["fox"];
+  # portainer host module uses this
+  system.activationScripts.traefik-create-data-dir.text = ''
+    mkdir -p /usr/share/hwdata
+    cp ${pkgs.hwdata}/share/hwdata/pci.ids /usr/share/hwdata/pci.ids
+  '';
 }
