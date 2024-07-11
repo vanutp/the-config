@@ -13,6 +13,7 @@
     };
     pkgs-unstable = import nixpkgs-unstable {
       system = hostConfig.systemType;
+      config.allowUnfree = true;
       inherit overlays;
     };
     args = {

@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   home.file =
     builtins.listToAttrs (
       map
@@ -56,7 +60,7 @@
     nil
     alejandra
     vscode
-    jetbrains.idea-ultimate
+    pkgs-unstable.jetbrains.idea-ultimate
     jetbrains.clion
     (with dotnetCorePackages;
       combinePackages [
