@@ -1,4 +1,8 @@
-{common, ...}: {
+{
+  common,
+  pkgs,
+  ...
+}: {
   imports = [
     ../all-users
     common.bundles.fox
@@ -12,6 +16,9 @@
     ./shell.nix
     ./dev.nix
     ./secrets.nix
-    ./nvim
+  ];
+
+  home.packages = with pkgs; [
+    neovim
   ];
 }
