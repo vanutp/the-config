@@ -69,5 +69,8 @@
       ])
     nuget
     pre-commit
+    kubectl
+    kubelogin-oidc
+    kubernetes-helm
   ];
 }
