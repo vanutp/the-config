@@ -95,7 +95,7 @@
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         "GTK_USE_PORTAL,1" # make gtk applications use portal instead of builtin gtk file picker
         "NIXOS_OZONE_WL,1"
-        "NIX_LD_LIBRARY_PATH,${pkgs.stdenv.cc.cc.lib}/lib"
+        "NIX_LD_LIBRARY_PATH,${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libz}/lib"
       ];
 
       input = {
