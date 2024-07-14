@@ -7,12 +7,7 @@
   home.packages = with pkgs;
     [
       pkgs-unstable.zed-editor
-      (
-        inputs.fjord.packages.${pkgs.system}.fjordlauncher.override {
-          # https://github.com/PrismLauncher/PrismLauncher/blob/e777201187a6bceeb7d3b14dbf9a9369963ebcd1/CMakeLists.txt#L243
-          msaClientID = "c36a9fb6-4f2a-41ff-90bd-ae7cc92031eb";
-        }
-      )
+      inputs.fjord.packages.${pkgs.system}.fjordlauncher
       gwenview
       xournalpp
       slack
