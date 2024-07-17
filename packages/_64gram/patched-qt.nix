@@ -4,8 +4,8 @@ pkgs: let
   repository = pkgs.fetchFromGitHub {
     owner = "desktop-app";
     repo = "patches";
-    rev = "20a7c5ffd8265fc6e45203ea2536f7b1965be19a";
-    hash = "sha256-guz5+RWL1y7gNcS56xvLcydBKedj3kG+lQsAe7IuPA4=";
+    rev = "29c79892b89e0e4c49b4c31e677d31bbec398c12";
+    hash = "sha256-Jc+gPbSgtdwo++KRPVGUomoJ3Cs1wjRk/WMvseFIebE=";
   };
   qtbase = pkgs.kdePackages.qtbase.overrideAttrs (orig: {
     patches =
@@ -31,7 +31,7 @@ pkgs: let
         "${repository}/qtbase_6.7.2/0018-allow-bordered-translucent-macos.patch"
         "${repository}/qtbase_6.7.2/0019-better-open-url-linux.patch"
         "${repository}/qtbase_6.7.2/0020-follow-highdpi-rounding-policy-for-platform-dpr.patch"
-        "${repository}/qtbase_6.7.2/0021-fill-transparent-hidpi-backing-store.patch"
+        "${repository}/qtbase_6.7.2/0021-let-platform-backing-store-scale-transparency-filling.patch"
         "${repository}/qtbase_6.7.2/0022-fix-backing-store-rhi-unneeded-copy.patch"
         "${repository}/qtbase_6.7.2/0023-fix-backing-store-opengl-subimage-unneeded-copy.patch"
         "${repository}/qtbase_6.7.2/0024-portal-proxy-resolver.patch"
@@ -50,12 +50,13 @@ in [
   ((pkgs.kdePackages.qtwayland.overrideAttrs {
       patches = [
         "${repository}/qtwayland_6.7.2/0001-always-fractional-scale.patch"
-        "${repository}/qtwayland_6.7.2/0002-offload-transparency-filling-to-hidpi.patch"
+        "${repository}/qtwayland_6.7.2/0002-scale-transparency-filling.patch"
         "${repository}/qtwayland_6.7.2/0003-fix-gtk4-embedding.patch"
         "${repository}/qtwayland_6.7.2/0004-QWaylandShmBackingStore-Preserve-buffer-contents-bet.patch"
         "${repository}/qtwayland_6.7.2/0005-avoid-needlessly-initiailizing-opengl.patch"
         "${repository}/qtwayland_6.7.2/0006-fix-media-viewer-on-gnome.patch"
         "${repository}/qtwayland_6.7.2/0007-owning-rhi-backing-store.patch"
+        "${repository}/qtwayland_6.7.2/0008-fix-egl-compositor-shutdown.patch"
       ];
     })
     .override {inherit qtbase qtdeclarative;})

@@ -56,6 +56,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     flake-utils,
     ...
   } @ inputs: let
@@ -90,8 +91,12 @@
         inherit system;
         config.allowUnfree = true;
       };
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in {
       formatter = pkgs.alejandra;
-      packages = import ./packages {inherit pkgs;};
+      packages = import ./packages {inherit pkgs pkgs-unstable;};
     });
 }
