@@ -18,6 +18,10 @@
       ["IntelliJIdea2024.1/idea64.vmoptions" "CLion2024.1/clion64.vmoptions"]
     )
     // {
+      ".config/JetBrains/IntelliJIdea2024.2/idea64.vmoptions".text = ''
+        -Xmx4096m
+        -Dawt.toolkit.name=WLToolkit
+      '';
       ".local/share/jdks/temurin8".source = pkgs.temurin-bin-8;
       ".local/share/jdks/temurin11".source = pkgs.temurin-bin-11;
       ".local/share/jdks/temurin17".source = pkgs.temurin-bin-17;
@@ -60,7 +64,12 @@
     nil
     alejandra
     vscode
-    pkgs-unstable.jetbrains.idea-ultimate
+    (pkgs-unstable.jetbrains.idea-ultimate.overrideAttrs {
+      src = fetchurl {
+        url = "https://download.jetbrains.com/idea/ideaIU-242.20224.38.tar.gz";
+        hash = "sha256-JYO66EmHEhWL891pzhDNwMGhdWVt+a/hST9g1esaxn0=";
+      };
+    })
     jetbrains.clion
     (with dotnetCorePackages;
       combinePackages [

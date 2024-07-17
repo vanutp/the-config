@@ -207,22 +207,6 @@
           # VSCode confirmation popups
           "stayfocused, class:code, floating:1"
           "noborder, class:code, floating:1"
-
-          # IntelliJ fixes
-          # based on https://github.com/hyprwm/Hyprland/issues/3450#issuecomment-1816761575
-
-          # idk what exactly it fixes
-          "windowdance,class:^(jetbrains-.*)$,floating:1"
-          # Fix splash screen showing in weird places and prevent annoying focus takeovers
-          "center,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
-          "nofocus,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
-          "noborder,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
-          # Center popups/find windows
-          "center,class:^(jetbrains-.*)$,title:^( )$,floating:1"
-          "stayfocused,class:^(jetbrains-.*)$,title:^( )$,floating:1"
-          "noborder,class:^(jetbrains-.*)$,title:^( )$,floating:1"
-          # Fix tooltips and popups. The most important rule
-          "nofocus,class:^(jetbrains-.*)$,title:^(win.*)$,floating:1"
         ]
         ++ (builtins.concatMap (class: [
             "float, class:${class}"
