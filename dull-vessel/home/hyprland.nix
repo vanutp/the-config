@@ -207,6 +207,11 @@
           # VSCode confirmation popups
           "stayfocused, class:code, floating:1"
           "noborder, class:code, floating:1"
+
+          # allow idea to move windows
+          "windowdance,class:^(jetbrains-.*)$,floating:1"
+          # "stayfocused,class:^(jetbrains-.*)$,title:^$,floating:1"
+          "noborder,class:^(jetbrains-.*)$,title:^$,floating:1"
         ]
         ++ (builtins.concatMap (class: [
             "float, class:${class}"
