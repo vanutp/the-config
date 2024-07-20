@@ -25,6 +25,7 @@
       vlc
       via
       xfce.thunar
+      xfce.tumbler
       kdePackages.qtwayland
       kdePackages.dolphin
       libsForQt5.kamoso
