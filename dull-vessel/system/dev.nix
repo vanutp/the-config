@@ -31,4 +31,19 @@
   };
 
   networking.firewall.interfaces.int.allowedTCPPorts = [7000 7001];
+
+  services.nginx = {
+    enable = true;
+    validateConfigFile = false;
+    virtualHosts."minecraft.local" = {
+      locations."/" = {
+        root = "/var/www/minecraft.local";
+        extraConfig = "autoindex on;";
+      };
+      locations."/auth" = {
+        proxyPass = "http://10.1.1.2:7000";
+      };
+    };
+  };
+  networking.extraHosts = "127.0.0.1 minecraft.local";
 }
