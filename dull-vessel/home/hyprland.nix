@@ -3,7 +3,17 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  yubikey-totp = pkgs.writeShellScript "yubikey-totp" ''
+    ykman oath accounts code -s "$(ykman oath accounts list | tofi)" \
+    > >(sd '\n' ''' | wl-copy) \
+    2> >(python -c "
+    import sys, subprocess
+    while inp := sys.stdin.readline().strip():
+      subprocess.check_call(['dunstify', inp])
+    " && dunstify 'Copied!')
+  '';
+in {
   imports = [
     inputs.hyprland.homeManagerModules.default
   ];
@@ -237,7 +247,7 @@
           "SUPER, E, exec, thunar"
           "SUPER, D, exec, tofi-drun --drun-launch=true"
           "CTRL SHIFT, D, exec, copyq toggle"
-          "SUPER SHIFT, A, exec, /home/fox/bin/yubikey-totp-wayland.sh"
+          "SUPER SHIFT, A, exec, ${yubikey-totp}"
 
           "SUPER, Escape, exec, loginctl lock-session"
 
