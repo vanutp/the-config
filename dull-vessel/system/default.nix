@@ -36,6 +36,8 @@
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
   users.extraGroups.networkmanager.members = ["fox"];
+  networking.nameservers = ["1.1.1.1"];
+  services.resolved.enable = true;
 
   programs.dconf.enable = true;
   services.gpm.enable = true;
