@@ -7,7 +7,6 @@
   home.packages = with pkgs;
     [
       pkgs-unstable.zed-editor
-      inputs.fjord.packages.${pkgs.system}.fjordlauncher
       gwenview
       xournalpp
       slack

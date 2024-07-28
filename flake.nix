@@ -42,10 +42,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    fjord = {
-      url = "github:unmojang/FjordLauncher";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     vhap-compose-update = {
       url = "git+https://foxlab.dev/vanutp/vhap-compose-update";
