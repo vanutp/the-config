@@ -35,6 +35,7 @@
   networking.hostName = "dull-vessel";
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.services.NetworkManager.wantedBy = ["multi-user.target"];
   users.extraGroups.networkmanager.members = ["fox"];
   networking.nameservers = ["1.1.1.1"];
   services.resolved.enable = true;
