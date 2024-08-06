@@ -42,7 +42,7 @@
     gtk4
     temurin-bin-17 # default java
     nodejs
-    yarn
+    corepack
     rustup
     (python3.withPackages (
       ps:
