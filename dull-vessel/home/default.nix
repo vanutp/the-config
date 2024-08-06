@@ -11,6 +11,7 @@
     ./theme.nix
     ./hyprland.nix
     ./waybar.nix
+    ./ags
     ./lockscreen.nix
     ./wezterm
     ./shell.nix

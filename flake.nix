@@ -42,6 +42,10 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ags = {
+      url = "github:Aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     vhap-compose-update = {
       url = "git+https://foxlab.dev/vanutp/vhap-compose-update";

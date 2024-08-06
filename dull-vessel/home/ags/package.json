@@ -1,0 +1,17 @@
+{
+  "name": "vanutp-ags",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.4",
+    "unocss": "^0.61.6",
+    "vite": "^5.3.4"
+  }
+}
