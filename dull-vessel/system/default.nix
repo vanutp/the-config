@@ -22,6 +22,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  time.timeZone = "Europe/Moscow";
+
   zramSwap = {
     enable = true;
     memoryPercent = 100;
