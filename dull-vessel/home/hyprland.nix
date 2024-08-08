@@ -13,6 +13,9 @@
       subprocess.check_call(['dunstify', inp])
     " && dunstify 'Copied!')
   '';
+  switch-layout = pkgs.writeShellScript "switch-layout" ''
+    hyprctl switchxkblayout at-translated-set-2-keyboard next
+  '';
 in {
   imports = [
     inputs.hyprland.homeManagerModules.default
@@ -279,6 +282,8 @@ in {
           "SUPER, mouse_up, split-workspace, e+1"
 
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+
+          ", XF86WakeUp, exec, ${switch-layout}"
         ]
         ++ (builtins.concatMap (x: let
           arg = builtins.substring 0 1 x;
