@@ -39,7 +39,8 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "0 * * * * fox rdiff-backup ~/server/world/ ~/backup/"
+      "0 * * * * fox rdiff-backup ~/server/world/ ~/backup/ 
+                     && rdiff-backup --force remove increments --older-than 7D --size ~/backup/"
     ];
   };
 
