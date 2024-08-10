@@ -41,6 +41,7 @@
   users.extraGroups.networkmanager.members = ["fox"];
   networking.nameservers = ["1.1.1.1"];
   services.resolved.enable = true;
+  boot.kernel.sysctl."net.ipv4.ip_default_ttl" = 65;
 
   programs.dconf.enable = true;
   services.gpm.enable = true;
