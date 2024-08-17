@@ -43,6 +43,11 @@
           publicKey = "fupQFVCXLXt9wY5v0TPoS28FpZi+QsnZp1RdrzU5+Ec=";
           allowedIPs = ["10.3.1.4/32"];
         }
+        {
+          # filusha
+          publicKey = "ymFzfMJN7+pufjwlIE/NFX28FWavQ56LRWHytw/n1kQ=";
+          allowedIPs = ["10.3.1.5/32"];
+        }
       ];
     };
   };
