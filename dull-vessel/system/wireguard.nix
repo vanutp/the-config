@@ -3,6 +3,33 @@
   config,
   ...
 }: {
+  security.sudo.extraRules =
+    builtins.concatMap (
+      sc:
+        map
+        (int: {
+          users = ["fox"];
+          commands = let
+            sc = "/run/current-system/sw/bin/systemctl";
+          in [
+            {
+              command = "${sc} start wg-quick-${int}";
+              options = ["NOPASSWD"];
+            }
+            {
+              command = "${sc} stop wg-quick-${int}";
+              options = ["NOPASSWD"];
+            }
+            {
+              command = "${sc} restart wg-quick-${int}";
+              options = ["NOPASSWD"];
+            }
+          ];
+        })
+        ["int" "wg0" "wg2" "wg2-only"]
+    )
+    ["/run/current-system/sw/bin/systemctl" "/home/fox/.nix-profile/bin/systemctl"];
+
   networking.wg-quick.interfaces = {
     int = common.atoms.makeWg0 config {
       address = "10.1.1.2";
