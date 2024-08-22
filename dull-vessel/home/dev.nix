@@ -66,8 +66,8 @@
     vscode
     (pkgs-unstable.jetbrains.idea-ultimate.overrideAttrs {
       src = fetchurl {
-        url = "https://download.jetbrains.com/idea/ideaIU-242.20224.91.tar.gz";
-        hash = "sha256-TltiejsfR6F37pr8o2O8jT+bx0tlMmKrtxFUCq4DsUE=";
+        url = "https://download.jetbrains.com/idea/ideaIU-2024.2.0.2.tar.gz";
+        hash = "sha256-zyFZueph6pENJ60OZhzdk1dfZc20Q/mb0VYA9ZYLf0s=";
       };
     })
     jetbrains.clion
