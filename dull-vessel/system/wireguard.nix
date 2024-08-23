@@ -9,9 +9,7 @@
         map
         (int: {
           users = ["fox"];
-          commands = let
-            sc = "/run/current-system/sw/bin/systemctl";
-          in [
+          commands = [
             {
               command = "${sc} start wg-quick-${int}";
               options = ["NOPASSWD"];
