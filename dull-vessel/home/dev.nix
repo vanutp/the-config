@@ -40,7 +40,7 @@
   home.packages = with pkgs; [
     hyperfine
     gtk4
-    temurin-bin-17 # default java
+    temurin-bin-21 # default java
     nodejs
     corepack
     rustup
