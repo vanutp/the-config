@@ -1,6 +1,10 @@
 {pkgs, ...}: {
   # TODO: allow only these users to connect to proxy
   # or change clientmethod to something else
+  users.users.s1-proxy = {
+    isNormalUser = true;
+    shell = "${pkgs.util-linux}/bin/nologin";
+  };
   users.users.proxy-user = {
     isNormalUser = true;
     shell = "${pkgs.util-linux}/bin/nologin";
