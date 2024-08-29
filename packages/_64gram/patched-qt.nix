@@ -4,8 +4,8 @@ pkgs: let
   repository = pkgs.fetchFromGitHub {
     owner = "desktop-app";
     repo = "patches";
-    rev = "29c79892b89e0e4c49b4c31e677d31bbec398c12";
-    hash = "sha256-Jc+gPbSgtdwo++KRPVGUomoJ3Cs1wjRk/WMvseFIebE=";
+    rev = "85a1c4ec327ed390a27e85f2162c31525220a50d";
+    hash = "sha256-F8l7BbJ8mFyG6ZxZu6Yf41jy6Z/oj818fjmzxv3fKys=";
   };
   qtbase = pkgs.kdePackages.qtbase.overrideAttrs (orig: {
     patches =
@@ -38,6 +38,7 @@ pkgs: let
         "${repository}/qtbase_6.7.2/0025-fix-focus-in-hidden-window.patch"
         "${repository}/qtbase_6.7.2/0026-fix-only-emoji-line.patch"
         "${repository}/qtbase_6.7.2/0027-fix-rtl-cursor-move-up.patch"
+        "${repository}/qtbase_6.7.2/0028-xcb-provide-xkb-state.patch"
       ];
   });
   qtshadertools = pkgs.kdePackages.qtshadertools.override {inherit qtbase;};
@@ -57,6 +58,7 @@ in [
         "${repository}/qtwayland_6.7.2/0006-fix-media-viewer-on-gnome.patch"
         "${repository}/qtwayland_6.7.2/0007-owning-rhi-backing-store.patch"
         "${repository}/qtwayland_6.7.2/0008-fix-egl-compositor-shutdown.patch"
+        "${repository}/qtwayland_6.7.2/0009-compositor-xkb-state-from-platform.patch"
       ];
     })
     .override {inherit qtbase qtdeclarative;})
