@@ -29,11 +29,6 @@
   };
 
   config = let
-    configDir = "/etc/traefik";
-    configFilePath = "${configDir}/traefik.yml";
-    rulesDir = "${configDir}/rules";
-    dataDir = "${common.constants.servicesDataRoot}/traefik";
-
     mkYaml = (pkgs.formats.yaml {}).generate;
     cloudflareRanges = [
       "173.245.48.0/20"
@@ -59,6 +54,34 @@
       "2a06:98c0::/29"
       "2c0f:f248::/32"
     ];
+    rulesFile = mkYaml "rules.yml" {
+      http =
+        builtins.foldl'
+        (a: b: lib.recursiveUpdate a b)
+        {}
+        (map (entry: let
+            entryId = builtins.replaceStrings ["."] ["__"] entry.host;
+          in {
+            routers.${entryId} = {
+              service = entryId;
+              rule = "Host(`${entry.host}`)";
+            };
+            services.${entryId}.loadBalancer.servers = [
+              {
+                url = entry.target;
+              }
+            ];
+          })
+          config.vanutp.traefik.proxies);
+    };
+    rulesDir = pkgs.stdenv.mkDerivation {
+      name = "traefik-rules";
+      phases = ["installPhase"];
+      installPhase = ''
+        mkdir -p $out
+        cp ${rulesFile} $out/rules.yml
+      '';
+    };
     configFile = mkYaml "traefik.yml" {
       accessLog = {
         filePath = "/data/logs/access.json";
@@ -119,57 +142,30 @@
       };
       providers = {
         docker.exposedByDefault = false;
-        file.directory = "/config/rules";
+        file.directory = rulesDir;
       };
     };
-    rulesFile = mkYaml "rules.yml" {
-      http =
-        builtins.foldl'
-        (a: b: lib.recursiveUpdate a b)
-        {}
-        (map (entry: let
-            entryId = builtins.replaceStrings ["."] ["__"] entry.host;
-          in {
-            routers.${entryId} = {
-              service = entryId;
-              rule = "Host(`${entry.host}`)";
-            };
-            services.${entryId}.loadBalancer.servers = [
-              {
-                url = entry.target;
-              }
-            ];
-          })
-          config.vanutp.traefik.proxies);
-    };
   in {
-    systemd.tmpfiles.rules = [
-      "L+ ${configFilePath} - - - - ${configFile}"
-      "L+ ${rulesDir}/rules.yml - - - - ${rulesFile}"
-    ];
-    # TODO: add an option to composter to disable network creation and use it
-    virtualisation.oci-containers.containers.traefik = {
-      image = "docker.io/traefik:latest";
-      cmd = [
-        "--configFile=/config/traefik.yml"
-      ];
+    virtualisation.composter.apps.traefik.services.traefik = {
+      image = "traefik:latest";
+      command = "--configFile=${configFile}";
       volumes = [
-        "/var/run/podman/podman.sock:/var/run/docker.sock:ro"
+        "/var/run/docker.sock:/var/run/docker.sock:ro"
         # TODO: restart if config file changes
-        "${configDir}:/config:ro"
-        "${dataDir}:/data"
+        "./data:/data"
         "/nix/store:/nix/store:ro"
       ];
-      environmentFiles =
+      network_mode = "host";
+      env_file =
         if config.vanutp.traefik.acmeChallenge == "dns"
         then [config.sops.secrets."services/traefik-cloudflare-config".path]
         else [];
-      extraOptions = [
-        "--network=host"
-      ];
+      deploy.resources.limits = {
+        cpus = "2";
+        memory = "2G";
+      };
     };
     networking.firewall.allowedTCPPorts = [80 443];
     networking.firewall.allowedUDPPorts = [443];
-    system.activationScripts.traefik-create-data-dir.text = "mkdir -p ${dataDir}";
   };
 }

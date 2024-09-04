@@ -5,29 +5,44 @@
   ...
 }: {
   options = with lib; {
-    # TODO: make proper options
     virtualisation.composter = {
-      services = mkOption {
-        type = types.attrsOf (types.submodule {
+      apps = mkOption {
+        type = types.attrsOf (types.submodule ({name, ...}: {
           options = {
-            containers = mkOption {
-              type = types.attrsOf types.anything;
+            services = mkOption {
+              type = types.nullOr (types.attrsOf types.anything);
+              default = null;
+              # TODO
+              # traefik = mkOption {
+              #   type = types.nullOr (types.submodule {
+              #     options = {
+              #       host = mkOption {
+              #         type = types.str;
+              #       };
+              #       port = mkOption {
+              #         type = types.nullOr types.int;
+              #         default = null;
+              #       };
+              #     };
+              #   });
+              #   default = null;
+              # };
             };
-            network = {
-              ipv4 = {
-                subnet = mkOption {type = types.nullOr types.str;};
-              };
-              ipv6 = {
-                # TODO: add constraints
-                enable = mkOption {
-                  type = types.bool;
-                  default = false;
-                };
-                subnet = mkOption {type = types.nullOr types.str;};
-              };
+            networks = mkOption {
+              type = types.nullOr (types.attrsOf types.anything);
+              default = null;
+            };
+            volumes = mkOption {
+              type = types.nullOr (types.attrsOf types.anything);
+              default = null;
+            };
+            appDir = mkOption {
+              type = types.path;
+              readOnly = true;
+              default = "/srv/composter/${name}";
             };
           };
-        });
+        }));
         default = {};
       };
     };
@@ -35,96 +50,29 @@
 
   imports = [
     {
-      virtualisation.podman.enable = true;
-      systemd.services.podman-restart.wantedBy = ["multi-user.target"];
-      networking.firewall.interfaces."podman+".allowedUDPPorts = [53];
+      virtualisation.oci-containers.backend = "docker";
+      users.extraGroups.docker.members = ["fox"];
+      virtualisation.docker.enable = true;
     }
   ];
 
   config = let
-    podman = lib.getExe pkgs.podman;
-    serviceToContainers = serviceName: serviceConfig:
-      lib.mapAttrs'
-      (containerName: containerConfig: {
-        name = "${serviceName}-${containerName}";
-        value =
-          (builtins.removeAttrs containerConfig ["traefik" "network"])
-          // {
-            extraOptions =
-              (containerConfig.extraOptions or [])
-              ++ (
-                if (containerConfig ? network)
-                then ["--network=${containerConfig.network}"]
-                else [
-                  "--network=${serviceName}"
-                  "--network-alias=${containerName}"
-                ]
-              );
-            dependsOn = map (x: "${serviceName}-${x}") (containerConfig.dependsOn or []);
-            labels =
-              (containerConfig.labels or {})
-              // {
-                "com.docker.compose.project" = serviceName;
-                "com.docker.compose.service" = containerName;
-              }
-              // (
-                if containerConfig ? traefik
-                then let
-                  entry = containerConfig.traefik;
-                  entryId = builtins.replaceStrings ["."] ["__"] entry.host;
-                in
-                  {
-                    "traefik.enable" = "true";
-                    "traefik.http.routers.${entryId}.rule" = "Host(`${entry.host}`)";
-                  }
-                  // (
-                    if entry ? port
-                    then {
-                      "traefik.http.services.${entryId}.loadbalancer.server.port" = builtins.toString entry.port;
-                    }
-                    else {}
-                  )
-                else {}
-              );
-          };
-      })
-      serviceConfig.containers;
-    serviceToNetwork = serviceName: serviceConfig: {
-      name = "composter-${serviceName}-network";
-      value = let
-        dependents = map (containerName: "podman-${serviceName}-${containerName}.service") (builtins.attrNames serviceConfig.containers);
-        netCfg = serviceConfig.network;
-      in {
-        requiredBy = dependents;
-        before = dependents;
-        script = ''
-          ${podman} network exists ${serviceName} || ${podman} network create \
-            ${
-            if netCfg.ipv4.subnet != null
-            then "--subnet ${netCfg.ipv4.subnet} \\"
-            else ""
-          }
-            ${
-            if netCfg.ipv6.enable != null
-            then "--ipv6 \\"
-            else ""
-          }
-            ${
-            if netCfg.ipv6.subnet != null
-            then "--subnet ${netCfg.ipv6.subnet} \\"
-            else ""
-          }
-            ${serviceName}
-        '';
-        serviceConfig = {
-          Type = "oneshot";
-          RemainAfterExit = true;
-          ExecStop = "${podman} network rm ${serviceName}";
-        };
+    mkJson = (pkgs.formats.json {}).generate;
+    configFile = mkJson "config.json" config.virtualisation.composter;
+    composter = pkgs.writers.writePython3 "composter" {flakeIgnore = ["E501"];} ./composter.py;
+  in {
+    system.activationScripts.composter-activate.text = ''
+      ${composter} apply_config ${configFile}
+    '';
+    systemd.services.composter-up = {
+      script = ''
+        export PATH=${pkgs.docker}/bin:$PATH
+        ${composter} up ${configFile}
+      '';
+      wantedBy = ["multi-user.target"];
+      serviceConfig = {
+        Type = "oneshot";
       };
     };
-  in {
-    virtualisation.oci-containers.containers = lib.concatMapAttrs serviceToContainers config.virtualisation.composter.services;
-    systemd.services = lib.mapAttrs' serviceToNetwork config.virtualisation.composter.services;
   };
 }

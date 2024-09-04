@@ -82,13 +82,8 @@
     ];
   };
 
-  virtualisation.oci-containers.backend = "docker";
-  virtualisation.podman.enable = lib.mkForce false;
-  virtualisation.docker.enable = true;
-  systemd.services.podman-restart.wantedBy = lib.mkForce [];
-  users.extraGroups.docker.members = ["fox"];
   # portainer host module uses this
-  system.activationScripts.traefik-create-data-dir.text = ''
+  system.activationScripts.create-hwdata.text = ''
     mkdir -p /usr/share/hwdata
     cp ${pkgs.hwdata}/share/hwdata/pci.ids /usr/share/hwdata/pci.ids
   '';

@@ -10,7 +10,6 @@
 
   imports = [
     common.composter
-    ./podman-docker-compat.nix
     ./security.nix
     inputs.vhap-compose-update.nixosModules.default
   ];
