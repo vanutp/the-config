@@ -151,7 +151,6 @@
       command = "--configFile=${configFile}";
       volumes = [
         "/var/run/docker.sock:/var/run/docker.sock:ro"
-        # TODO: restart if config file changes
         "./data:/data"
         "/nix/store:/nix/store:ro"
       ];
