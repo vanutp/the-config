@@ -25,8 +25,3 @@ creation_rules:
     - age:
       - *dull_vessel-user
       - age1d0hhler5xewxa0je0jhtarszac0xa9nrceuq480wdtqxtcyvrgvqe3jepm
-  - path_regex: servers/false-environment/system/secrets.yml$
-    key_groups:
-    - age:
-      - *dull_vessel-user
-      - age18z7xqzh52nfwcmjet5rj305srqz34m42nnsvrrxhmn32ku6g63qqthsaxt
