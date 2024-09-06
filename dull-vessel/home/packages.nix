@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-unstable,
   inputs,
   ...
 }: {
@@ -49,6 +50,7 @@
     distrobox
     bubblewrap
     dig
+    pkgs-unstable.backblaze-b2
 
     # de
     xorg.xhost
