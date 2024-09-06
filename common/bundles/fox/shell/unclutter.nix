@@ -3,6 +3,7 @@
   lib,
   ...
 }: {
+  # thx to xdg-ninja
   home.sessionVariables = {
     WAKATIME_HOME = "${config.xdg.configHome}/wakatime";
     PYTHONSTARTUP = "${config.xdg.configHome}/python/pythonrc";
@@ -15,6 +16,7 @@
     CARGO_HOME = "${config.xdg.dataHome}/cargo";
     RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
     ANDROID_USER_HOME = "${config.xdg.dataHome}/android";
+    REDISCLI_HISTFILE = "${config.xdg.dataHome}/redis/rediscli_history";
   };
   programs.zsh.shellAliases = {
     wget = "wget --hsts-file=\"${config.xdg.dataHome}/wget-hsts\"";
