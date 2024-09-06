@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  imports = [
+    ../all-users
+  ];
+
   home.packages = with pkgs; [
     python3
     neovim

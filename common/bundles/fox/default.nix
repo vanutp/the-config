@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   imports = [
+    ../all-users
     ./shell
     ./dev.nix
   ];

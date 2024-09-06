@@ -1,4 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  common,
+  ...
+}: {
+  imports = [
+    common.blocks.nix-settings
+  ];
   programs.home-manager.enable = true;
   nixpkgs.config.allowUnfree = true;
   home.stateVersion = "23.11";

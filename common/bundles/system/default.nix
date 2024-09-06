@@ -9,6 +9,7 @@
   system.stateVersion = "24.05";
 
   imports = [
+    common.blocks.nix-settings
     common.composter
     ./security.nix
     inputs.vhap-compose-update.nixosModules.default
@@ -23,10 +24,6 @@
     "ru_RU.UTF-8/UTF-8"
   ];
 
-  nix.settings = {
-    use-xdg-base-directories = true;
-    experimental-features = ["nix-command" "flakes" "repl-flake"];
-  };
   nixpkgs.config.allowUnfree = true;
 
   programs.zsh.enable = true;

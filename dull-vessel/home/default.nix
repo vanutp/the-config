@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    ../all-users
     common.bundles.fox
     ./apps.nix
     ./packages.nix

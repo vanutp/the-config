@@ -1,6 +1,12 @@
-{common, ...}: {
+{
+  common,
+  pkgs,
+  ...
+}: {
   imports = [
-    ../all-users
     common.bundles.root
+  ];
+  home.packages = with pkgs; [
+    ventoy-full
   ];
 }

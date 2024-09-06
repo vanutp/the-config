@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    common.bundles.all-users
     common.bundles.fox
     ./shell.nix
   ];

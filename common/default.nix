@@ -3,7 +3,6 @@ pkgs: {
   bundles = {
     fox = ./bundles/fox;
     root = ./bundles/root;
-    all-users = ./bundles/all-users;
     system = ./bundles/system;
 
     server = {
@@ -17,6 +16,7 @@ pkgs: {
   };
   blocks = {
     mailcow = import ./blocks/mailcow.nix;
+    nix-settings = import ./blocks/nix-settings.nix;
     vds-networking = import ./blocks/vds-networking.nix;
     progtime = import ./blocks/progtime.nix;
     traefik = import ./blocks/traefik.nix;
