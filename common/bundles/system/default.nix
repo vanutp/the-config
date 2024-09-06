@@ -37,6 +37,4 @@
   };
 
   programs.nix-ld.enable = true;
-
-  programs.command-not-found.enable = false;
 }

@@ -3,6 +3,12 @@
     inputs.nix-index-database.hmModules.nix-index
   ];
 
+  programs.nix-index = {
+    enableBashIntegration = false;
+    enableFishIntegration = false;
+    enableZshIntegration = false;
+  };
+
   programs.zsh = {
     initExtraHost = ''
       POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=('newline')
