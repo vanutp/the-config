@@ -23,7 +23,10 @@
     "ru_RU.UTF-8/UTF-8"
   ];
 
-  nix.settings.experimental-features = ["nix-command" "flakes" "repl-flake"];
+  nix.settings = {
+    use-xdg-base-directories = true;
+    experimental-features = ["nix-command" "flakes" "repl-flake"];
+  };
   nixpkgs.config.allowUnfree = true;
 
   programs.zsh.enable = true;
