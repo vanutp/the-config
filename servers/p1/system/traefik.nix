@@ -1,4 +1,11 @@
-{vars, ...}: {
+{
+  vars,
+  common,
+  ...
+}: {
+  imports = [
+    common.blocks.traefik
+  ];
   vanutp.traefik = {
     proxies = [
       {

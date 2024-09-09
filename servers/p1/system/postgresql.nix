@@ -4,7 +4,7 @@
     enableTCPIP = true;
     authentication = ''
       # TYPE  DATABASE  USER  ADDRESS     METHOD
-      # podman + wg networks
+      # docker + wg networks
       host    all       all   10.0.0.0/8  scram-sha-256
     '';
   };
