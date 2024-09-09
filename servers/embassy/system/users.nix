@@ -30,6 +30,7 @@
           common.constants.pubkeys.embassy
           common.constants.pubkeys.main
         ];
+        linger = true;
       };
     })
     [
@@ -40,10 +41,6 @@
       {
         name = "ntonee";
         shell = pkgs.fish;
-      }
-      {
-        name = "stranik";
-        shell = pkgs.zsh;
       }
       {
         name = "tmat";

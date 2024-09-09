@@ -34,6 +34,7 @@
     openssh.authorizedKeys.keys = [
       common.constants.pubkeys.main
     ];
+    linger = true;
   };
 
   programs.nix-ld.enable = true;
