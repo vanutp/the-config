@@ -58,6 +58,7 @@
   };
 
   # disable nsdelegate to be able to pass cgroup dir to podman container
+  # TODO: is this needed for docker too?
   fileSystems."/sys/fs/cgroup" = {
     fsType = "cgroup2";
     device = "cgroup2";

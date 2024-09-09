@@ -1,40 +1,42 @@
 {vars, ...}: {
-  # TODO: use nixos networkd module
-  environment.etc."systemd/network/main.network".text = let
-    v4gateway = "Gateway=${vars.ipv4.gateway}";
-  in ''
-    [Match]
-    Name=ens3
-
-    [Network]
-    Address=${vars.ipv4.address}
-    DNS=1.1.1.1
-    ${
-      if vars ? ipv6
-      then v4gateway
-      else ""
-    }
-
-    ${
-      if vars ? ipv6
-      then ''
-        Address=${vars.ipv6.address}
-        DNS=2606:4700:4700::1111
-        Gateway=${vars.ipv6.gateway}
-      ''
-      else ""
-    }
-
-    [Route]
-    ${
-      if !(vars ? ipv6)
-      then v4gateway
-      else ""
-    }
-    GatewayOnLink=${
-      if vars.gateway-on-link
-      then "yes"
-      else "no"
-    }
-  '';
+  systemd.network = {
+    networks.main = {
+      matchConfig.Name = "ens3";
+      address =
+        [vars.ipv4.address]
+        ++ (
+          if vars ? ipv6
+          then [vars.ipv6.address]
+          else []
+        );
+      dns =
+        ["1.1.1.1"]
+        ++ (
+          if vars ? ipv6
+          then ["2606:4700:4700::1111"]
+          else []
+        );
+      routes =
+        [
+          {
+            routeConfig = {
+              Gateway = vars.ipv4.gateway;
+              GatewayOnLink = vars.ipv4.gateway-on-link;
+            };
+          }
+        ]
+        ++ (
+          if vars ? ipv6
+          then [
+            {
+              routeConfig = {
+                Gateway = vars.ipv6.gateway;
+                GatewayOnLink = vars.ipv6.gateway-on-link;
+              };
+            }
+          ]
+          else []
+        );
+    };
+  };
 }

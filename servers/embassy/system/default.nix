@@ -2,17 +2,20 @@
   imports = [
     common.bundles.server.system
     common.blocks.vds-networking
-    common.blocks.traefik
-    ./traefik.nix
+    ./containers
+    ./disko.nix
+    ./docker.nix
+    ./gitlab-ssh-shim.nix
     ./hardware-configuration.nix
+    ./mailcow.nix
     ./secrets.nix
+    ./traefik.nix
+    ./users.nix
+    ./vhap-compose-update.nix
     ./wireguard.nix
   ];
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
-
-  networking.hostName = "s1";
+  networking.hostName = "embassy";
 
   time.timeZone = "Europe/Moscow";
 }

@@ -85,16 +85,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1724895876,
-        "narHash": "sha256-GSqAwa00+vRuHbq9O/yRv7Ov7W/pcMLis3HmeHv8a+Q=",
+        "lastModified": 1716125885,
+        "narHash": "sha256-fdodsQ2AWreGj4arHk6cKcnqlWrNiLb64eRrHtMZ5cw=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "511388d837178979de66d14ca4a2ebd5f7991cd3",
+        "rev": "4444751300a88d46c82aac6baaf4f1ea9c287830",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "disko",
+        "rev": "4444751300a88d46c82aac6baaf4f1ea9c287830",
         "type": "github"
       }
     },
@@ -1098,11 +1099,11 @@
         "poetry2nix": "poetry2nix"
       },
       "locked": {
-        "lastModified": 1717083608,
-        "narHash": "sha256-4DAfyR6eQb1ptpx4i89gqAm2qpYce0KW2VMIhWrQlMY=",
+        "lastModified": 1725849562,
+        "narHash": "sha256-ZRUueW1ozUt1uwjzjiD7hHtZPZTanGtS6R6AU456YlA=",
         "ref": "refs/heads/master",
-        "rev": "e264db43b71dd08737577d7169bb146104aa292f",
-        "revCount": 5,
+        "rev": "7ded58e2f59a0b4036d425c7696c1c9e1d206c29",
+        "revCount": 6,
         "type": "git",
         "url": "https://foxlab.dev/vanutp/vhap-compose-update"
       },

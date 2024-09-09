@@ -25,6 +25,10 @@
         type = types.listOf types.str;
         default = [];
       };
+      extraDynamicConfig = mkOption {
+        type = types.attrs;
+        default = {};
+      };
     };
   };
 
@@ -74,12 +78,14 @@
           })
           config.vanutp.traefik.proxies);
     };
+    extraDynamicConfigFile = mkYaml "extra.yml" config.vanutp.traefik.extraDynamicConfig;
     rulesDir = pkgs.stdenv.mkDerivation {
       name = "traefik-rules";
       phases = ["installPhase"];
       installPhase = ''
         mkdir -p $out
         cp ${rulesFile} $out/rules.yml
+        cp ${extraDynamicConfigFile} $out/extra.yml
       '';
     };
     configFile = mkYaml "traefik.yml" {
@@ -94,7 +100,7 @@
       };
       certificatesResolvers.default.acme =
         {
-          storage = "/data/acme.json";
+          storage = "/data/tls/acme.json";
         }
         // (
           # TODO: can mkIf be used here?

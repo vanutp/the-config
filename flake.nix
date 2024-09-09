@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
-      url = "github:nix-community/disko";
+      url = "github:nix-community/disko/4444751300a88d46c82aac6baaf4f1ea9c287830";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -84,6 +84,7 @@
       "servers/sfer"
       "servers/p1"
       "servers/proxyfriend"
+      "servers/embassy"
     ])
     // flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {

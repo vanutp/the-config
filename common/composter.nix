@@ -9,6 +9,10 @@
       apps = mkOption {
         type = types.attrsOf (types.submodule ({name, ...}: {
           options = {
+            auth = mkOption {
+              type = types.listOf types.str;
+              default = [];
+            };
             services = mkOption {
               type = types.nullOr (types.attrsOf types.anything);
               default = null;
@@ -39,7 +43,7 @@
             appDir = mkOption {
               type = types.path;
               readOnly = true;
-              default = "/srv/composter/${name}";
+              default = "/srv/vhap/${name}";
             };
           };
         }));

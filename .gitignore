@@ -2,3 +2,4 @@
 *.qcow2
 *.raw
 out/
+tmp/
