@@ -1,6 +1,6 @@
 {...}: {
   virtualisation.docker.daemon.settings = {
-    bip = "10.254.1.1/24";
+    bip = "10.254.254.1/24";
     default-address-pools = [
       {
         base = "10.254.0.0/16";
