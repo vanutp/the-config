@@ -65,19 +65,22 @@ def add_composter_labels(app_config: dict):
 def add_traefik_labels(service: dict):
     # TODO: throw an error if traefik is not enabled in system
     # but .traefik is set on a service
-    traefik_cfg = service.pop('traefik', {})
-    if not traefik_cfg:
+    traefik_cfg = service.pop('traefik', None)
+    if traefik_cfg is None:
         return
-    traefik_host = traefik_cfg['host']
-    traefik_port = traefik_cfg.get('port')
-    traefik_id = traefik_host.replace('.', '__')
+    traefik_host = traefik_cfg.get('host')
     add_label(service, 'traefik.enable', 'true')
-    add_label(
-        service,
-        f'traefik.http.routers.{traefik_id}.rule',
-        f'Host(`{traefik_host}`)',
-    )
-    if traefik_port:
+    if traefik_host:
+        traefik_id = traefik_host.replace('.', '__')
+        add_label(
+            service,
+            f'traefik.http.routers.{traefik_id}.rule',
+            f'Host(`{traefik_host}`)',
+        )
+    if traefik_port := traefik_cfg.get('port'):
+        if not traefik_host:
+            print('[vhap] ERROR: you must specify traefik.host when specifying traefik.port')
+            return
         add_label(
             service,
             f'traefik.http.services.{traefik_id}.loadbalancer.server.port',
