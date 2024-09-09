@@ -26,7 +26,7 @@
         })
         ["int" "wg0" "wg2" "wg2-only"]
     )
-    ["/run/current-system/sw/bin/systemctl" "/home/fox/.nix-profile/bin/systemctl"];
+    ["/run/current-system/sw/bin/systemctl" "/home/fox/.local/state/nix/profile/bin/systemctl"];
 
   networking.wg-quick.interfaces = {
     int = common.atoms.makeWg0 config {
