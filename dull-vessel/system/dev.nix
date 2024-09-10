@@ -13,7 +13,7 @@
     host.enable = true;
     # host.enableExtensionPack = true;
   };
-  users.extraGroups.vboxusers.members = ["fox"];
+  users.groups.vboxusers.members = ["fox"];
 
   virtualisation.vmware.host.enable = true;
 
@@ -26,4 +26,7 @@
   };
 
   networking.firewall.interfaces.int.allowedTCPPorts = [7000 7001];
+
+  programs.adb.enable = true;
+  users.groups.adbusers.members = ["fox"];
 }

@@ -38,7 +38,7 @@
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
   systemd.services.NetworkManager.wantedBy = ["multi-user.target"];
-  users.extraGroups.networkmanager.members = ["fox"];
+  users.groups.networkmanager.members = ["fox"];
   networking.nameservers = ["1.1.1.1"];
   services.resolved.enable = true;
   boot.kernel.sysctl."net.ipv4.ip_default_ttl" = 65;
@@ -46,7 +46,7 @@
   programs.dconf.enable = true;
   services.gpm.enable = true;
   programs.gamemode.enable = true;
-  users.extraGroups.gamemode.members = ["fox"];
+  users.groups.gamemode.members = ["fox"];
   services.flatpak.enable = true;
   services.gvfs.enable = true;
   boot.supportedFilesystems = ["ntfs"];
