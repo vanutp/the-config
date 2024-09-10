@@ -98,19 +98,32 @@
           headers.names.User-Agent = "keep";
         };
       };
-      certificatesResolvers.default.acme =
+      certificatesResolvers =
         {
-          storage = "/data/tls/acme.json";
+          default.acme =
+            {
+              storage = "/data/tls/acme.json";
+            }
+            // (
+              # TODO: can mkIf be used here?
+              if config.vanutp.traefik.acmeChallenge == "dns"
+              then {
+                dnsChallenge.provider = "cloudflare";
+              }
+              else {
+                tlsChallenge = {};
+              }
+            );
         }
         // (
-          # TODO: can mkIf be used here?
           if config.vanutp.traefik.acmeChallenge == "dns"
           then {
-            dnsChallenge.provider = "cloudflare";
+            http.acme = {
+              tlsChallenge = {};
+              storage = "/data/tls/acme-http.json";
+            };
           }
-          else {
-            tlsChallenge = {};
-          }
+          else {}
         );
       entryPoints = {
         http = {
