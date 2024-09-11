@@ -6,6 +6,7 @@
 }: {
   home.packages = with pkgs;
     [
+      sidequest
       pkgs-unstable.zed-editor
       gwenview
       xournalpp
