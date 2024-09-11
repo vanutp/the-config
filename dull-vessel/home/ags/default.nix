@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
 }: {
   imports = [inputs.ags.homeManagerModules.default];
@@ -8,4 +9,5 @@
     enable = true;
     configDir = ./.;
   };
+  systemd.user.services.ags.Install.WantedBy = lib.mkForce [];
 }

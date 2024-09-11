@@ -12,6 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
+      # doesn't work with stable nixpkgs
       url = "github:nix-community/disko/4444751300a88d46c82aac6baaf4f1ea9c287830";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -43,7 +44,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ags = {
-      url = "github:Aylur/ags";
+      # doesn't work with stable nixpkgs
+      url = "github:Aylur/ags/99fc2f9fc9af8091a7930381c37da3da71073d80";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
