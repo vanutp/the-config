@@ -4,7 +4,6 @@
     common.blocks.vds-networking
     ./containers
     ./disko.nix
-    ./docker.nix
     ./gitlab-ssh-shim.nix
     ./hardware-configuration.nix
     ./mailcow.nix
