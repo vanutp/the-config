@@ -51,6 +51,7 @@
     bubblewrap
     dig
     pkgs-unstable.backblaze-b2
+    ltrace
 
     # de
     xorg.xhost
