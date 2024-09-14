@@ -4,7 +4,7 @@
     # TODO: fix permissions?
     user = "root";
     group = "root";
-    port = 8001;
+    port = 8010;
     baseDir = "/srv/vhap";
     logsDir = "/srv/vhap/_vhap_update_logs";
     # TODO: make it better. now i have to enter service names 3 times
