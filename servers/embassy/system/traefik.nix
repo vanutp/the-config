@@ -25,7 +25,14 @@
         target = "http://127.0.0.1:8010";
       }
     ];
-    requestWildcardCertsFor = [vars.mainDomain "upstairs.one" "tmat.me" "ilkras.ru" "foxlab.dev"];
+    requestWildcardCertsFor = [
+      vars.mainDomain
+      "upstairs.one"
+      "tmat.me"
+      "ilkras.ru"
+      "foxlab.dev"
+      "vtp.sh"
+    ];
     extraDynamicConfig = {
       tls.certificates = [
         {
