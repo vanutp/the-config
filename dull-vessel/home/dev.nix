@@ -62,6 +62,16 @@
     vscode
     pkgs-unstable.jetbrains.idea-ultimate
     pkgs-unstable.jetbrains.clion
+    (
+      pkgs-unstable.android-studio.withSdk
+      (pkgs-unstable.androidenv.composeAndroidPackages {
+        platformVersions = ["34"];
+        includeEmulator = true;
+        includeSystemImages = true;
+        includeNDK = true;
+      })
+      .androidsdk
+    )
     (with dotnetCorePackages;
       combinePackages [
         sdk_6_0

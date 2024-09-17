@@ -13,7 +13,10 @@
     };
     pkgs-unstable = import nixpkgs-unstable {
       system = hostConfig.systemType;
-      config.allowUnfree = true;
+      config = {
+        allowUnfree = true;
+        android_sdk.accept_license = true;
+      };
       inherit overlays;
     };
     args = {
