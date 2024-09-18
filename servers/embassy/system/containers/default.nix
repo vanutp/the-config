@@ -7,6 +7,7 @@
     ./bukvobot.nix
     ./comments_reminder_bot.nix
     ./csai_tmat_me.nix
+    ./cuspace_vanutp_dev.nix
     ./ej_tmat_me.nix
     ./findnewbot.nix
     ./firefly_vanutp_dev.nix

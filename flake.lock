@@ -1100,11 +1100,11 @@
         "poetry2nix": "poetry2nix"
       },
       "locked": {
-        "lastModified": 1725849562,
-        "narHash": "sha256-ZRUueW1ozUt1uwjzjiD7hHtZPZTanGtS6R6AU456YlA=",
+        "lastModified": 1726670913,
+        "narHash": "sha256-C08Pjso0fDX5pprHAiczRN2PfIfAP3pX4JqXKKC5ON4=",
         "ref": "refs/heads/master",
-        "rev": "7ded58e2f59a0b4036d425c7696c1c9e1d206c29",
-        "revCount": 6,
+        "rev": "d72100e43cc77a1bac0792928d21ec431137799d",
+        "revCount": 7,
         "type": "git",
         "url": "https://foxlab.dev/vanutp/vhap-compose-update"
       },

@@ -20,6 +20,7 @@
         "vanutp_music_bot"
         "mc_auth_vanutp_dev"
         "samat_tiktok"
+        "cuspace_vanutp_dev"
       ];
   };
 }

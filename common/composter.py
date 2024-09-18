@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 BASE_DIR = Path('/srv/vhap')
 BASE_DIR.mkdir(parents=True, exist_ok=True)
+CREDS_DIR = BASE_DIR / '_credentials'
 COMPOSTER_LABEL_KEY = 'dev.vanutp.composter.managed'
 
 
@@ -92,6 +93,10 @@ def apply_config(config_path: str):
     config = load_config(config_path)
     apps = config['apps']
     for name, app_config in apps.items():
+        creds_data = {
+            'creds_dir': str(CREDS_DIR),
+            'creds_required': app_config['auth']
+        }
         cleanup_config(app_config)
         add_composter_labels(app_config)
         for service in app_config.get('services', {}).values():
@@ -101,6 +106,7 @@ def apply_config(config_path: str):
         app_dir: Path = BASE_DIR / name
         app_dir.mkdir(exist_ok=True)
         (app_dir / 'docker-compose.yml').write_text(json.dumps(app_config))
+        (app_dir / 'creds.vhap.json').write_text(json.dumps(creds_data))
 
 
 def get_apps_on_disk():
@@ -142,7 +148,7 @@ def up_apps(config_path: str):
                     'DOCKER_CONFIG': docker_cfg_dir,
                 }
                 for creds_id in app_cfg['auth']:
-                    creds_file = BASE_DIR / '_credentials' / (creds_id + '.json')
+                    creds_file = CREDS_DIR / (creds_id + '.json')
                     creds = json.loads(creds_file.read_text())
                     subprocess.check_output(
                         [
