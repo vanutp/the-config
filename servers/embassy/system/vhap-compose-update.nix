@@ -21,6 +21,7 @@
         "mc_auth_vanutp_dev"
         "samat_tiktok"
         "cuspace_vanutp_dev"
+        "speech_cabinet_com"
       ];
   };
 }
