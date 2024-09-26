@@ -57,6 +57,7 @@
     pgcli
     gnumake
     clang
+    gdb
     nil
     alejandra
     vscode
