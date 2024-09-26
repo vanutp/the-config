@@ -58,6 +58,7 @@
     gnumake
     clang
     gdb
+    lldb
     nil
     alejandra
     vscode
