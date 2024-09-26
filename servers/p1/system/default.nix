@@ -24,15 +24,15 @@
 
   services.vhap-compose-update = {
     enable = true;
-    user = "fox";
-    group = "users";
+    user = "root";
+    group = "root";
     port = 8001;
-    baseDir = "/home/fox/containers";
-    logsDir = "/home/fox/vhap-compose-update-logs";
+    baseDir = "/srv/vhap";
+    logsDir = "/srv/vhap/_vhap_update_logs";
     entries = [
       {
         key = config.sops.placeholder."vhap-compose-update/progtime";
-        service = "progtime";
+        service = "my_progtime_net";
       }
     ];
   };

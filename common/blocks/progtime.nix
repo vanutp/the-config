@@ -27,6 +27,7 @@ in {
         volumes = [
           "./logs/invoker:/app/logs/invoker"
           "/var/run/docker.sock:/var/run/docker.sock:ro"
+          "/sys/fs/cgroup:/sys/fs/cgroup"
         ];
         environment =
           {
