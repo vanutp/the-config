@@ -32,6 +32,7 @@
       "ilkras.ru"
       "foxlab.dev"
       "vtp.sh"
+      "speech-cabinet.com"
     ];
     extraDynamicConfig = {
       tls.certificates = [
