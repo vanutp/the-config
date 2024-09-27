@@ -53,6 +53,10 @@
       url = "git+https://foxlab.dev/vanutp/vhap-compose-update";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    pyproject-nix = {
+      url = "github:nix-community/pyproject.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -60,6 +64,7 @@
     nixpkgs,
     nixpkgs-unstable,
     flake-utils,
+    pyproject-nix,
     ...
   } @ inputs: let
     mkSystem = import ./utils/mkSystem.nix inputs;
@@ -97,8 +102,10 @@
         inherit system;
         config.allowUnfree = true;
       };
+      packagesArgs = {inherit pkgs pkgs-unstable pyproject-nix;};
     in {
       formatter = pkgs.alejandra;
-      packages = import ./packages {inherit pkgs pkgs-unstable;};
+      packages = import ./packages packagesArgs;
+      devShells.vhap = (import ./packages/vhap/pyproject.nix packagesArgs).shell;
     });
 }

@@ -185,5 +185,9 @@
     };
     networking.firewall.allowedTCPPorts = [80 443];
     networking.firewall.allowedUDPPorts = [443];
+    system.activationScripts.create-traefik-dirs.text = ''
+      traefik_dir=/srv/vhap/traefik
+      mkdir -p $traefik_dir/data/logs $traefik_dir/data/tls
+    '';
   };
 }

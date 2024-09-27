@@ -50,7 +50,7 @@ def add_composter_labels(app_config: dict):
     for service in app_config.get('services', {}).values():
         curr_has_network_mode = 'network_mode' in service
         curr_has_default_network = 'default' in service.get('networks', ['default'])
-        if not curr_has_default_network and curr_has_network_mode:
+        if curr_has_default_network and not curr_has_network_mode:
             has_default_network = True
         add_composter_label_to_object(service)
     if (

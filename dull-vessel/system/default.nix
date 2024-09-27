@@ -5,6 +5,7 @@
 }: {
   imports = [
     common.bundles.system
+    ./composter-tests
     ./secrets.nix
     ./hardware-configuration.nix
     ./security.nix

@@ -79,6 +79,17 @@
   config = let
     mkJson = (pkgs.formats.json {}).generate;
     configFile = mkJson "config.json" config.virtualisation.composter;
+    # TODO: validate with vhapd
+    # configFile = pkgs.stdenv.mkDerivation {
+    #   name = "config.json";
+    #   buildInputs = [
+    #     pkgs.python3
+    #     pkgs.docker-client
+    #   ];
+    #   phases = ["buildPhase" "checkPhase"];
+    #   buildPhase = ''
+    #
+    # };
     composter = pkgs.writers.writePython3 "composter" {flakeIgnore = ["E501"];} ./composter.py;
   in {
     system.activationScripts.composter-activate.text = ''
