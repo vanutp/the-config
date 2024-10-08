@@ -22,6 +22,7 @@
         volumes = [
           "temp:/app/temp"
         ];
+        restart = "always";
       };
       worker = {
         inherit image;

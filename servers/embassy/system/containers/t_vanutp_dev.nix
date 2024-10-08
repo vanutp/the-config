@@ -23,17 +23,25 @@
           "./downloads:/downloads"
         ];
       };
-      nginx = {
-        image = "nginx";
+      filemanager = {
+        image = "filebrowser/filebrowser";
         traefik = {};
         labels = {
           "traefik.http.routers.t_vanutp_dev_streaming.middlewares" = "tardis_only@docker";
           "traefik.http.routers.t_vanutp_dev_streaming.rule" = "Host(`t.vanutp.dev`) && PathPrefix(`/dl`)";
         };
         volumes = [
-          "./downloads:/downloads"
-          "./nginx.conf:/etc/nginx/conf.d/default.conf"
+          "./downloads:/srv"
+          "./filemanager:/data"
+          # TODO: create this with nix
+          "./filemanager/config.json:/.filebrowser.json"
         ];
+        entrypoint = [
+          "/bin/sh"
+          "-c"
+          "/filebrowser config set --auth.method=noauth && /filebrowser"
+        ];
+        user = "1000:1000";
       };
     };
   };
