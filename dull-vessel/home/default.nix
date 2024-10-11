@@ -12,7 +12,6 @@
     ./waybar.nix
     ./ags
     ./lockscreen.nix
-    ./wezterm
     ./shell.nix
     ./dev.nix
     ./secrets.nix

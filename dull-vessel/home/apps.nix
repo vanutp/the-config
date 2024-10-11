@@ -1,9 +1,24 @@
 {
   inputs,
+  config,
   pkgs,
   pkgs-unstable,
   ...
 }: {
+  programs.kitty = {
+    enable = true;
+    package = pkgs-unstable.kitty;
+    font.name = config.preferences.font.monospace;
+    font.size = 12;
+    theme = "Catppuccin-Mocha";
+    settings = {
+      scrollback_lines = 10000;
+      background_opacity = "0.8";
+      enable_audio_bell = false;
+      window_padding_width = "3 5";
+    };
+  };
+
   home.packages = with pkgs;
     [
       sidequest

@@ -214,7 +214,7 @@ in {
         disable_splash_rendering = true;
         allow_session_lock_restore = true;
         enable_swallow = true;
-        swallow_regex = ".*wezterm$";
+        swallow_regex = ".*kitty$";
         swallow_exception_regex = ".*noswallow.*";
         no_direct_scanout = false;
         vrr = 2;
@@ -255,7 +255,7 @@ in {
         resize = binding "SUPER ALT" "resizeactive";
       in
         [
-          "SUPER, Return, exec, wezterm start --always-new-process"
+          "SUPER, Return, exec, kitty"
           "SUPER, M, exit,"
           "SUPER, E, exec, thunar"
           "SUPER, D, exec, tofi-drun --drun-launch=true"
