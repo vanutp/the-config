@@ -102,7 +102,7 @@ def apply_config(config_path: str):
         for service in app_config.get('services', {}).values():
             add_traefik_labels(service)
             if 'restart' not in service:
-                service['restart'] = 'on-failure:3'
+                service['restart'] = 'always'
         app_dir: Path = BASE_DIR / name
         app_dir.mkdir(exist_ok=True)
         (app_dir / 'docker-compose.yml').write_text(json.dumps(app_config))
