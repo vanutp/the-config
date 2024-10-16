@@ -70,7 +70,9 @@
 
       initExtraFirst = ''
       '';
-      initExtra = ''
+      initExtra = lib.mkAfter ''
+        # Override value set by kitty integration
+        export TERM=xterm-256color
         zstyle ':completion:*' rehash true
         function sudoedit() {
           SUDO_COMMAND="sudoedit $@" command sudoedit "$@"
