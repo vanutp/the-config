@@ -23,7 +23,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  time.timeZone = "Asia/Nicosia";
+  time.timeZone = "Europe/Berlin";
 
   zramSwap = {
     enable = true;
