@@ -12,6 +12,7 @@
           text = ''
             -Xmx4096m
             -Dawt.toolkit.name=WLToolkit
+            -Dide.browser.jcef.enabled=false
           '';
         };
       })
