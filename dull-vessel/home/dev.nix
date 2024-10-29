@@ -40,6 +40,7 @@
     temurin-bin-21 # default java
     nodejs
     corepack
+    pkgs-unstable.deno
     rustup
     (python3.withPackages (
       ps:
@@ -69,9 +70,9 @@
       pkgs-unstable.android-studio.withSdk
       (pkgs-unstable.androidenv.composeAndroidPackages {
         platformVersions = ["34"];
-        includeEmulator = true;
-        includeSystemImages = true;
-        includeNDK = true;
+        includeEmulator = false;
+        includeSystemImages = false;
+        includeNDK = false;
       })
       .androidsdk
     )
