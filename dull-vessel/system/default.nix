@@ -21,6 +21,14 @@
   ];
 
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.extraEntries = {
+    "arch.conf" = ''
+      title   Arch Linux
+      linux   /vmlinuz-linux
+      initrd  /initramfs-linux.img
+      options rd.luks.name=b2a45394-b193-4705-9a35-a7dac6ed1a59=root root=/dev/mapper/root rootflags=subvol=@arch,compress=zstd:1,discard=async rw
+    '';
+  };
   boot.loader.efi.canTouchEfiVariables = true;
 
   time.timeZone = "Europe/Berlin";
