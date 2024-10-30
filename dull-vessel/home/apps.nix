@@ -16,6 +16,7 @@
       background_opacity = "0.8";
       enable_audio_bell = false;
       window_padding_width = "3 5";
+      touch_scroll_multiplier = "5.0";
     };
   };
 
