@@ -15,11 +15,11 @@
     tpm2-tools
   ];
   # Lanzaboote currently replaces the systemd-boot module.
-  # boot.loader.systemd-boot.enable = lib.mkForce false;
-  # boot.lanzaboote = {
-  #   enable = true;
-  #   pkiBundle = "/etc/secureboot";
-  # };
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
 
   # tpm
   boot.initrd.systemd.enable = true;
