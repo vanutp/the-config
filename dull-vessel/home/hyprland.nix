@@ -265,10 +265,10 @@ in {
           "SUPER, Escape, exec, loginctl lock-session"
 
           # Screenshots
-          "SUPER, S, exec, grimblast --freeze copy area"
-          "SUPER SHIFT, S, exec, sleep 3 && grimblast --freeze copy area"
-          "SUPER CTRL, S, exec, GRIMBLAST_EDITOR=\"satty --copy-command wl-copy --filename\" grimblast --freeze edit area"
-          "SUPER, O, exec, hyprpicker --autocopy"
+          "SUPER, S, exec, foxshot"
+          "SUPER SHIFT, S, exec, sleep 3 && foxshot"
+          "SUPER CTRL, S, exec, foxshot edit"
+          "SUPER, O, exec, hyprpicker --autocopy --render-inactive"
 
           # Misc window management
           "SUPER SHIFT, Q, killactive,"

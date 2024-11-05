@@ -55,12 +55,10 @@
 
     # de
     xorg.xhost
-    grim
     kdePackages.polkit-kde-agent-1
     wev
     wl-clipboard
-    grimblast
-    satty
+    (import ./foxshot {inherit pkgs pkgs-unstable;})
     brightnessctl
     playerctl
     copyq
