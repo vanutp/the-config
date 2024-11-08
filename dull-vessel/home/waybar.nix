@@ -38,6 +38,7 @@
       import subprocess
       SIGRTMIN = 34
       ICONS = {
+          'default': '\uf522 ',
           'prefer-light': '\uf522 ',
           'prefer-dark': '\uf4ee ',
       }
@@ -45,10 +46,10 @@
       if sys.argv[1] == 'get':
           print(json.dumps({'text': ICONS.get(color_scheme, 'unknown theme')}))
       elif sys.argv[1] == 'toggle':
-          if color_scheme == 'prefer-light':
+          if color_scheme in ['default', 'prefer-light']:
               color_scheme = 'prefer-dark'
           else:
-              color_scheme = 'prefer-light'
+              color_scheme = 'default'
           subprocess.check_call(['${dconf}', 'write', '/org/gnome/desktop/interface/color-scheme', f'"{color_scheme}"'])
           subprocess.check_call(f'kill -{SIGRTMIN + 1} $(pgrep waybar)', shell=True)
       else:
