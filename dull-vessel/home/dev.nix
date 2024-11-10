@@ -87,7 +87,7 @@
     kubectl
     kubelogin-oidc
     kubernetes-helm
-    (pkgs-unstable.haskellPackages.ghcWithPackages (pkgs: with pkgs; [stack]))
-    pkgs-unstable.haskell-language-server
+    (pkgs.haskellPackages.ghcWithPackages (pkgs: with pkgs; [stack]))
+    pkgs.haskell-language-server
   ];
 }
