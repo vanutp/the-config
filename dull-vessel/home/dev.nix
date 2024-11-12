@@ -63,7 +63,7 @@
     lldb
     nil
     alejandra
-    vscode
+    pkgs-unstable.vscode
     pkgs-unstable.jetbrains.idea-ultimate
     pkgs-unstable.jetbrains.clion
     (
