@@ -33,11 +33,6 @@
     ./t_vanutp_dev.nix
     ./tgapi_echobot.nix
     ./tgpy.nix
-    ./tgpy_0.nix
-    ./tgpy_elena.nix
-    ./tgpy_kitlix.nix
-    ./tgpy_pufl.nix
-    ./tgpy_samat.nix
     ./tmat_wedding_bot.nix
     ./vanutp_dev.nix
     ./vanutp_music_bot.nix
