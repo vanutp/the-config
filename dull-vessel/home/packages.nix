@@ -52,6 +52,7 @@
     dig
     pkgs-unstable.backblaze-b2
     ltrace
+    minio-client
 
     # de
     xorg.xhost

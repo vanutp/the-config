@@ -21,6 +21,7 @@
   programs.zsh.shellAliases = {
     wget = "wget --hsts-file=\"${config.xdg.dataHome}/wget-hsts\"";
     adb = "HOME=\"${config.xdg.dataHome}\"/android adb";
+    mc = "mc --config-dir \"${config.xdg.configHome}/mc\"";
   };
   programs.gpg.homedir = "${config.xdg.dataHome}/gnupg";
   home.activation.create-wakatime-home = lib.hm.dag.entryAfter ["writeBoundary"] ''
