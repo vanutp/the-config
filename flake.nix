@@ -92,6 +92,7 @@
       "servers/p1"
       "servers/proxyfriend"
       "servers/embassy"
+      "servers/collective"
     ])
     // flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {

@@ -28,6 +28,12 @@
           persistentKeepalive = 30;
         }
         {
+          # collective
+          publicKey = "Zr5XdftmcPsaDbKrdgRC8YlmtiD7JoE1Btgx046Cbgk=";
+          allowedIPs = ["10.1.0.6/32"];
+          persistentKeepalive = 30;
+        }
+        {
           # p1
           publicKey = "rfPqapxJDPbDu/HtPG6i3QvGaFs9gT6vUJQvtbU3XwA=";
           allowedIPs = ["10.1.3.1/32"];

@@ -1,7 +1,7 @@
 {vars, ...}: {
   systemd.network = {
     networks.main = {
-      matchConfig.Name = "ens3";
+      matchConfig.Name = vars.networkInterface or "ens3";
       address =
         [vars.ipv4.address]
         ++ (
@@ -21,7 +21,7 @@
           {
             routeConfig = {
               Gateway = vars.ipv4.gateway;
-              GatewayOnLink = vars.ipv4.gateway-on-link;
+              GatewayOnLink = vars.ipv4.gateway-on-link or false;
             };
           }
         ]
@@ -31,7 +31,7 @@
             {
               routeConfig = {
                 Gateway = vars.ipv6.gateway;
-                GatewayOnLink = vars.ipv6.gateway-on-link;
+                GatewayOnLink = vars.ipv6.gateway-on-link or false;
               };
             }
           ]
