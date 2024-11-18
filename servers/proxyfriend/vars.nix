@@ -8,6 +8,6 @@
   ipv6 = {
     address = "2a14:1e00:1:122::/64";
     gateway = "fe80::1";
-    gateway-on-link = true;
+    gateway-on-link = true; # TODO: а нафига
   };
 }

@@ -1,4 +1,5 @@
 {vars, ...}: {
+  # TODO: не работает если указан только (v4 без onlink)
   systemd.network = {
     networks.main = {
       matchConfig.Name = vars.networkInterface or "ens3";
