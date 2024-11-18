@@ -39,5 +39,6 @@
     ./vtp_sh.nix
     ./waka_vanutp_dev.nix
     ./write_tmat_me.nix
+    ./zond_vanutp_dev.nix
   ];
 }
