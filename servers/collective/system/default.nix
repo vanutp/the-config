@@ -34,5 +34,5 @@
         --data-urlencode "text=mdmon alert: $@"
     '';
 
-  # programs.mosh.enable = true;
+  programs.mosh.enable = true;
 }
