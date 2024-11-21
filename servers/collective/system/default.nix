@@ -33,4 +33,6 @@
         --data-urlencode "chat_id=-1001212850694" \
         --data-urlencode "text=mdmon alert: $@"
     '';
+
+  # programs.mosh.enable = true;
 }
