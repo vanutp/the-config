@@ -20,5 +20,6 @@ in {
     tgpy_samat2 = mkTgpy {
       volumes = ["../tgpy_samat/data/modules:/data/modules"];
     };
+    tgpy_tmat = mkTgpy {};
   };
 }
