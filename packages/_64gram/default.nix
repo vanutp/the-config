@@ -1,33 +1,27 @@
-pkgs @ {
-  telegram-desktop,
-  fetchFromGitHub,
-  ...
-}:
-telegram-desktop.overrideAttrs (orig: rec {
+pkgs: let
   pname = "64gram";
-  version = "1.1.43";
-  src = fetchFromGitHub {
-    owner = "TDesktop-x64";
-    repo = "tdesktop";
-    rev = "v${version}";
-    fetchSubmodules = true;
-    hash = "sha256-vRiAIGY3CU5+hsdn8xiNbgvSM3eGRVwnvsSmSoaDN/k=";
+  version = "1.1.49";
+  binary = pkgs.stdenv.mkDerivation {
+    pname = "${pname}-bin";
+    inherit version;
+    src = pkgs.fetchzip {
+      url = "https://github.com/TDesktop-x64/tdesktop/releases/download/v${version}/64Gram_${version}_linux.zip";
+      hash = "sha256-+6ujHPz0QYmjKh6P0LpiJHKv6UvxibKsQ8NNWobReMo=";
+      stripRoot = false;
+    };
+    buildPhase = ''
+      mkdir $out
+      cp Telegram $out
+    '';
   };
-
-  buildInputs = let
-    patched-qt = import ./patched-qt.nix pkgs;
-    pnames = map (x: x.pname) patched-qt;
-  in
-    builtins.filter (p: !builtins.elem p.pname pnames) orig.buildInputs
-    ++ patched-qt;
-
-  cmakeFlags = [
-    "-Ddisable_autoupdate=ON"
-    # 64gram
-    "-DTDESKTOP_API_ID=611335"
-    "-DTDESKTOP_API_HASH=d524b414d21f4d37f08684c1df41ac9c"
-
-    "-DDESKTOP_APP_USE_PACKAGED_FONTS=OFF"
-    "-DDESKTOP_APP_DISABLE_SCUDO=ON"
-  ];
-})
+in (
+  pkgs.buildFHSEnv (
+    pkgs.appimageTools.defaultFhsEnvArgs
+    // {
+      inherit pname version;
+      runScript = pkgs.writeShellScript "64gram-wrapper" ''
+        exec ${binary}/Telegram "$@"
+      '';
+    }
+  )
+)

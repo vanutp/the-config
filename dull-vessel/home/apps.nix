@@ -54,7 +54,7 @@
       (pkgs.makeDesktopItem {
         name = "telegram-1";
         desktopName = "Telegram 1";
-        exec = "telegram-desktop -workdir /home/fox/.local/share/telegram-1";
+        exec = "64gram -workdir /home/fox/.local/share/telegram-1";
         icon = "io.github.tdesktop_x64.TDesktop";
         terminal = false;
         startupWMClass = "64Gram";
@@ -82,7 +82,6 @@
     ]
     ++ (with inputs.self.packages.${pkgs.system}; [
       veyon
-      # TODO: disable
-      (enableDebugging _64gram)
+      _64gram
     ]);
 }
