@@ -40,7 +40,7 @@
 
       src = fetchurl {
         url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs${lib.replaceStrings ["."] [""] old.version}/ghostpdl-${old.version}.tar.xz";
-        hash = "sha512-Osp4NHib8RWCORE4u66Zsu9dnx6J25+Djr7w7YYBXetcjPk9D/4lrYqhqpntqezThMvVmw0hcZzZYCYcBDBE+Q==";
+        hash = "sha512-v1STkAbnwMmBzehDSjxEPzfNMd6jxUrXLBJ6AN/GFIoHVVyu+rYHa+po4Xw/QkJ6gMR67QmRGxq0ycrgDjM83g==";
       };
     }))
     inputs.manix.packages.${pkgs.system}.manix
