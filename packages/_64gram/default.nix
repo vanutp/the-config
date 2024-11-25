@@ -19,7 +19,13 @@ in (
     pkgs.appimageTools.defaultFhsEnvArgs
     // {
       inherit pname version;
+      targetPkgs = pkgs: (with pkgs; [
+        gtk3
+        webkitgtk_4_1
+        glib-networking
+      ]);
       runScript = pkgs.writeShellScript "64gram-wrapper" ''
+        export GIO_MODULE_DIR=/usr/lib/gio/modules/
         exec ${binary}/Telegram "$@"
       '';
     }
