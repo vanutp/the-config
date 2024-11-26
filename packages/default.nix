@@ -11,7 +11,6 @@
       inherit (inputs) pyproject-nix;
     })
     .package;
-  cups-kyodialog = pkgs.callPackage ./cups-kyodialog {};
   hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
   xdg-desktop-portal-hyprland = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   split-monitor-workspaces = inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces;

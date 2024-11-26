@@ -1,8 +1,4 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   hardware = {
     bluetooth = {
       enable = true;
@@ -21,7 +17,7 @@
     printing = {
       enable = true;
       drivers = [
-        inputs.self.packages.${pkgs.system}.cups-kyodialog
+        pkgs.cups-kyodialog
       ];
     };
     blueman.enable = true;
