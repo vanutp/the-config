@@ -1,7 +1,7 @@
 {
   config,
   pkgs,
-  inputs,
+  self-pkgs,
   ...
 }: let
   yubikey-totp = pkgs.writeShellScript "yubikey-totp" ''
@@ -17,10 +17,6 @@
     hyprctl switchxkblayout at-translated-set-2-keyboard next
   '';
 in {
-  imports = [
-    inputs.hyprland.homeManagerModules.default
-  ];
-
   xdg.configFile."hypr/hyprpaper.conf".text = ''
     preload = ${config.preferences.wallpaper}
     wallpaper = ,${config.preferences.wallpaper}
@@ -81,10 +77,11 @@ in {
 
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.variables = ["--all"];
+    package = self-pkgs.hyprland;
     plugins = [
-      inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+      self-pkgs.split-monitor-workspaces
     ];
+    systemd.variables = ["--all"];
     catppuccin.enable = true;
     settings = {
       monitor = [
@@ -174,10 +171,7 @@ in {
           passes = 1;
         };
 
-        drop_shadow = false;
-        shadow_range = 4;
-        shadow_render_power = 3;
-        "col.shadow" = "rgba(1a1a1aee)";
+        shadow.enabled = false;
       };
 
       animations = {
@@ -201,10 +195,6 @@ in {
         preserve_split = true;
       };
 
-      master = {
-        new_is_master = true;
-      };
-
       gestures = {
         workspace_swipe = false;
       };
@@ -216,8 +206,11 @@ in {
         enable_swallow = true;
         swallow_regex = ".*kitty$";
         swallow_exception_regex = ".*noswallow.*";
-        no_direct_scanout = false;
         vrr = 2;
+      };
+
+      render = {
+        direct_scanout = true;
       };
 
       windowrulev2 =
@@ -231,8 +224,6 @@ in {
           "stayfocused, class:code, floating:1"
           "noborder, class:code, floating:1"
 
-          # allow idea to move windows
-          "windowdance,class:^(jetbrains-.*)$,floating:1"
           # "stayfocused,class:^(jetbrains-.*)$,title:^$,floating:1"
           "noborder,class:^(jetbrains-.*)$,title:^$,floating:1"
         ]

@@ -15,7 +15,7 @@
     ./steam.nix
     ./dev.nix
     ./audio.nix
-    ./portals.nix
+    ./hyprland.nix
     ./login.nix
     ./hardware.nix
   ];

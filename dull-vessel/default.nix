@@ -1,6 +1,5 @@
 {
-  overlays = {hyprland, ...}: [
-    hyprland.overlays.default
+  overlays = {...}: [
     (self: super: {
       mpv-unwrapped = super.mpv-unwrapped.override {
         ffmpeg = super.ffmpeg-full;

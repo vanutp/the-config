@@ -20,11 +20,11 @@
     catppuccin.url = "github:catppuccin/nix";
 
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland.git?ref=refs/tags/v0.39.1&submodules=1";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "git+https://github.com/hyprwm/Hyprland.git?ref=refs/tags/v0.45.2&submodules=1";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces/c5696000777f6586aaa255bd0a9b0627d5da911f";
+      url = "github:Duckonaut/split-monitor-workspaces/131bc5bd02d7f558a66d1a6c4d0013d8545823e0";
       inputs.hyprland.follows = "hyprland";
     };
     manix = {
@@ -65,6 +65,7 @@
     nixpkgs-unstable,
     flake-utils,
     pyproject-nix,
+    hyprland,
     ...
   } @ inputs: let
     mkSystem = import ./utils/mkSystem.nix inputs;
@@ -103,7 +104,7 @@
         inherit system;
         config.allowUnfree = true;
       };
-      packagesArgs = {inherit pkgs pkgs-unstable pyproject-nix;};
+      packagesArgs = {inherit pkgs pkgs-unstable inputs;};
     in {
       formatter = pkgs.alejandra;
       packages = import ./packages packagesArgs;

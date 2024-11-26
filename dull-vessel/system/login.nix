@@ -1,5 +1,6 @@
 {
   pkgs,
+  self-pkgs,
   lib,
   ...
 }: let
@@ -11,7 +12,7 @@ in {
     enable = true;
     settings = {
       default_session = {
-        command = "${lib.getExe pkgs.hyprland} -c ${hyprlandConfig}";
+        command = "${lib.getExe self-pkgs.hyprland} -c ${hyprlandConfig}";
       };
     };
   };

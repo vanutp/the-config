@@ -1,8 +1,8 @@
 {
-  inputs,
   config,
   pkgs,
   pkgs-unstable,
+  self-pkgs,
   ...
 }: {
   programs.kitty = {
@@ -80,7 +80,7 @@
         mimeTypes = ["x-scheme-handler/obsidian"];
       })
     ]
-    ++ (with inputs.self.packages.${pkgs.system}; [
+    ++ (with self-pkgs; [
       veyon
       _64gram
     ]);

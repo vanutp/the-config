@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  self-pkgs,
   lib,
   ...
 }: let
@@ -40,8 +41,9 @@ in {
       }
       {
         timeout = 600;
-        command = "${lib.getExe' pkgs.hyprland "hyprctl"} dispatch dpms off";
-        resumeCommand = "${lib.getExe' pkgs.hyprland "hyprctl"} dispatch dpms on";
+        # TODO: is referencing the package needed?
+        command = "${lib.getExe' self-pkgs.hyprland "hyprctl"} dispatch dpms off";
+        resumeCommand = "${lib.getExe' self-pkgs.hyprland "hyprctl"} dispatch dpms on";
       }
     ];
   };

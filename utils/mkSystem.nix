@@ -21,6 +21,7 @@
     };
     args = {
       inherit inputs pkgs-unstable;
+      self-pkgs = inputs.self.packages.${pkgs.system};
       common = (import ../common) pkgs;
       vars = hostConfig.vars or {};
     };
