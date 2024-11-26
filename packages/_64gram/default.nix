@@ -26,6 +26,7 @@ in (
       ]);
       runScript = pkgs.writeShellScript "64gram-wrapper" ''
         export GIO_MODULE_DIR=/usr/lib/gio/modules/
+        export QT_WAYLAND_DISABLED_INTERFACES=wp_fractional_scale_manager_v1
         exec ${binary}/Telegram "$@"
       '';
     }
