@@ -1,25 +1,15 @@
 {
   pkgs,
-  self-pkgs,
+  pkgs-unstable,
   lib,
   ...
-}: let
-  hyprlandConfig = pkgs.writeText "greetd-hyprland-config" ''
-    exec-once=${lib.getExe pkgs.greetd.gtkgreet} -l; hyprctl dispatch exit
-  '';
-in {
+}: {
   services.greetd = {
     enable = true;
     settings = {
-      default_session = {
-        command = "${lib.getExe self-pkgs.hyprland} -c ${hyprlandConfig}";
-      };
+      default_session.command = "${lib.getExe pkgs-unstable.greetd.tuigreet} --cmd \"zsh -l -c 'Hyprland'\"";
     };
   };
-  environment.etc."greetd/environments".text = ''
-    zsh -l -c 'Hyprland'
-    zsh
-  '';
 
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.greetd.enableGnomeKeyring = true;
