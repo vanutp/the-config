@@ -1,13 +1,12 @@
 {
   pkgs,
-  pkgs-unstable,
   lib,
   ...
 }: {
   services.greetd = {
     enable = true;
     settings = {
-      default_session.command = "${lib.getExe pkgs-unstable.greetd.tuigreet} --cmd \"zsh -l -c 'Hyprland'\"";
+      default_session.command = "${lib.getExe pkgs.greetd.tuigreet} --cmd \"zsh -l -c 'Hyprland'\"";
     };
   };
 

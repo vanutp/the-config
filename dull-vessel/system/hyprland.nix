@@ -10,10 +10,10 @@
     portalPackage = self-pkgs.xdg-desktop-portal-hyprland;
     # TODO: withUWSM
   };
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     package = pkgs-unstable.mesa.drivers;
-    driSupport32Bit = true;
+    enable32Bit = true;
     package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
   };
   xdg.portal = {

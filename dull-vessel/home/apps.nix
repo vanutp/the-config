@@ -7,10 +7,10 @@
 }: {
   programs.kitty = {
     enable = true;
-    package = pkgs-unstable.kitty;
+    package = pkgs.kitty;
     font.name = config.preferences.font.monospace;
     font.size = 12;
-    theme = "Catppuccin-Mocha";
+    themeFile = "Catppuccin-Mocha";
     settings = {
       scrollback_lines = 10000;
       background_opacity = "0.8";

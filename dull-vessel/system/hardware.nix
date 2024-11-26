@@ -9,7 +9,6 @@
         };
       };
     };
-    opengl.enable = true;
     opentabletdriver.enable = true;
   };
 

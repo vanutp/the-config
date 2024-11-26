@@ -36,19 +36,19 @@ in {
       enable = true;
 
       theme = {
-        package = pkgs.gnome.gnome-themes-extra;
+        package = pkgs.gnome-themes-extra;
         name = "Adwaita-dark";
       };
 
       iconTheme = {
-        package = pkgs.gnome.adwaita-icon-theme;
+        package = pkgs.adwaita-icon-theme;
         name = "Adwaita";
       };
     };
 
     home.pointerCursor = {
       gtk.enable = true;
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
       name = "Adwaita";
       size = 24;
     };

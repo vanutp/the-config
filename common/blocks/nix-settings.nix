@@ -1,13 +1,24 @@
-{
+isUser: {
   pkgs,
   lib,
   ...
 }: {
   nix = {
     package = lib.mkDefault pkgs.nix;
-    settings = {
-      use-xdg-base-directories = true;
-      experimental-features = ["nix-command" "flakes" "repl-flake"];
-    };
+    settings =
+      {
+        experimental-features = ["nix-command" "flakes"];
+      }
+      // (
+        if (!isUser)
+        then {
+          use-xdg-base-directories = true;
+        }
+        else {}
+      );
+  };
+  nixpkgs.config = {
+    allowUnfree = true;
+    android_sdk.accept_license = true;
   };
 }

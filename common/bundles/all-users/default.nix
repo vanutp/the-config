@@ -4,10 +4,9 @@
   ...
 }: {
   imports = [
-    common.blocks.nix-settings
+    (common.blocks.nix-settings true)
   ];
   programs.home-manager.enable = true;
-  nixpkgs.config.allowUnfree = true;
   home.stateVersion = "23.11";
   xdg.enable = true;
 

@@ -9,7 +9,7 @@
   system.stateVersion = "24.05";
 
   imports = [
-    common.blocks.nix-settings
+    (common.blocks.nix-settings false)
     common.composter
     ./security.nix
     inputs.vhap-compose-update.nixosModules.default
@@ -23,8 +23,6 @@
     "en_US.UTF-8/UTF-8"
     "ru_RU.UTF-8/UTF-8"
   ];
-
-  nixpkgs.config.allowUnfree = true;
 
   programs.zsh.enable = true;
   users.users.fox = {

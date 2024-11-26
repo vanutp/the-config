@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-unstable,
   inputs,
   ...
 }: {
@@ -50,7 +49,7 @@
     distrobox
     bubblewrap
     dig
-    pkgs-unstable.backblaze-b2
+    pkgs.backblaze-b2
     ltrace
     minio-client
 
@@ -59,7 +58,7 @@
     kdePackages.polkit-kde-agent-1
     wev
     wl-clipboard
-    (import ./foxshot {inherit pkgs pkgs-unstable;})
+    (import ./foxshot pkgs)
     brightnessctl
     playerctl
     copyq
