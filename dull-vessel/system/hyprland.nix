@@ -11,9 +11,7 @@
   };
   hardware.graphics = {
     enable = true;
-    package = pkgs-unstable.mesa.drivers;
     enable32Bit = true;
-    package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
   };
   xdg.portal = {
     enable = true;
