@@ -8,7 +8,6 @@
     enable = true;
     package = self-pkgs.hyprland;
     portalPackage = self-pkgs.xdg-desktop-portal-hyprland;
-    # TODO: withUWSM
   };
   hardware.graphics = {
     enable = true;
