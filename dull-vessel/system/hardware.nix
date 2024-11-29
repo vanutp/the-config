@@ -20,7 +20,10 @@
       ];
     };
     blueman.enable = true;
-    udev.packages = [pkgs.via];
+    udev.packages = [
+      pkgs.via
+      pkgs.qmk-udev-rules
+    ];
     upower.enable = true;
     power-profiles-daemon.enable = true;
     fprintd.enable = true;
