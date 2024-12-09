@@ -18,6 +18,7 @@
     ./hyprland.nix
     ./login.nix
     ./hardware.nix
+    ./fcitx5.nix
   ];
 
   boot.loader.systemd-boot.enable = true;

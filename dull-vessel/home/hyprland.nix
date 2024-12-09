@@ -284,7 +284,7 @@ in {
 
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
-          ", XF86WakeUp, exec, ${switch-layout}"
+          # ", XF86WakeUp, exec, ${switch-layout}"
         ]
         ++ (builtins.concatMap (x: let
           arg = builtins.substring 0 1 x;
