@@ -22,6 +22,7 @@
         "samat_tiktok"
         "cuspace_vanutp_dev"
         "speech_cabinet_com"
+        "telemap_vanutp_dev"
       ];
   };
 }

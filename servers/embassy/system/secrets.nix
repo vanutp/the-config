@@ -9,6 +9,7 @@
   sops.secrets."vhap-compose-update/samat_tiktok" = {};
   sops.secrets."vhap-compose-update/cuspace_vanutp_dev" = {};
   sops.secrets."vhap-compose-update/speech_cabinet_com" = {};
+  sops.secrets."vhap-compose-update/telemap_vanutp_dev" = {};
 
   sops.secrets."git_privkey" = {};
   sops.secrets."privkey" = {};

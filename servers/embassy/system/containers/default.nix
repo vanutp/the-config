@@ -31,6 +31,7 @@
     ./samat_vk.nix
     ./speech_cabinet_com.nix
     ./t_vanutp_dev.nix
+    ./telemap_vanutp_dev.nix
     ./tgapi_echobot.nix
     ./tgpy.nix
     ./tmat_wedding_bot.nix

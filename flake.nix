@@ -12,21 +12,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
-      # doesn't work with stable nixpkgs
-      url = "github:nix-community/disko/4444751300a88d46c82aac6baaf4f1ea9c287830";
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     catppuccin.url = "github:catppuccin/nix";
 
-    hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland.git?ref=refs/tags/v0.45.2&submodules=1";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces/131bc5bd02d7f558a66d1a6c4d0013d8545823e0";
-      inputs.hyprland.follows = "hyprland";
-    };
     manix = {
       url = "github:nix-community/manix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,7 +55,6 @@
     nixpkgs-unstable,
     flake-utils,
     pyproject-nix,
-    hyprland,
     ...
   } @ inputs: let
     mkSystem = import ./utils/mkSystem.nix inputs;

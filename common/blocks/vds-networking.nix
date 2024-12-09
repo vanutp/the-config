@@ -20,20 +20,16 @@
       routes =
         [
           {
-            routeConfig = {
-              Gateway = vars.ipv4.gateway;
-              GatewayOnLink = vars.ipv4.gateway-on-link or false;
-            };
+            Gateway = vars.ipv4.gateway;
+            GatewayOnLink = vars.ipv4.gateway-on-link or false;
           }
         ]
         ++ (
           if vars ? ipv6
           then [
             {
-              routeConfig = {
-                Gateway = vars.ipv6.gateway;
-                GatewayOnLink = vars.ipv6.gateway-on-link or false;
-              };
+              Gateway = vars.ipv6.gateway;
+              GatewayOnLink = vars.ipv6.gateway-on-link or false;
             }
           ]
           else []
