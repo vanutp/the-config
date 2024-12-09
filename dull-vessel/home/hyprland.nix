@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   self-pkgs,
   ...
 }: let
@@ -75,6 +76,16 @@ in {
     };
   };
 
+  home.activation.write-hyprland-monitors = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    run mkdir -p "${config.xdg.configHome}/hypr"
+    run cat > "${config.xdg.configHome}/hypr/monitors.conf" <<EOF
+    monitor = eDP-1,1920x1200@60,0x0,1.25
+    monitor = DP-1,1920x1080@60,1536x0,1.25
+    #monitor = HDMI-A-1,1920x1080@60,1536x0,1.25
+    monitor = ,preferred,auto,1,mirror,eDP-1
+    EOF
+  '';
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = self-pkgs.hyprland;
@@ -84,10 +95,8 @@ in {
     systemd.variables = ["--all"];
     catppuccin.enable = true;
     settings = {
-      monitor = [
-        "eDP-1,1920x1200@60,0x0,1.25"
-        "DP-1,1920x1080@60,1536x0,1.25"
-        "HDMI-A-1,1920x1080@60,1536x0,1.25"
+      source = [
+        "${config.xdg.configHome}/hypr/monitors.conf"
       ];
 
       xwayland.force_zero_scaling = true;
