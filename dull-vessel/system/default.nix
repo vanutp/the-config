@@ -34,11 +34,6 @@
 
   time.timeZone = "Europe/Berlin";
 
-  zramSwap = {
-    enable = true;
-    memoryPercent = 100;
-  };
-
   security.pam.services.swaylock = {
     fprintAuth = true;
     allowNullPassword = true;
