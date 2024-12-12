@@ -34,6 +34,4 @@
     ];
     linger = true;
   };
-
-  programs.nix-ld.enable = true;
 }
