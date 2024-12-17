@@ -25,6 +25,7 @@
         INSTANCE_TITLE = "Прогтайм";
         INSTANCE_SUBTITLE = "";
         WORKERS = "1";
+        LOGIN_TEXT = "<h5 style=\"margin-bottom: 2rem\">Демо инстанс Progtime</h5><p>Логин: admin0<br/>Пароль: admin0</p>";
       };
       invokerCfg.ENABLE_INTERACTIVE = "True";
     })
