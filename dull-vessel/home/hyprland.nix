@@ -244,6 +244,7 @@ in {
             "com.github.hluk.copyq"
             ".blueman-manager-wrapped"
             "pavucontrol"
+            "org.fcitx."
           ]);
 
       layerrule = [
