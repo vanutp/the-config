@@ -47,7 +47,9 @@
       libsForQt5.kamoso
       ark
       spotify
-      google-chrome
+      (google-chrome.override {
+        commandLineArgs = ["--enable-wayland-ime"];
+      })
       firefox
       corefonts
       vistafonts
