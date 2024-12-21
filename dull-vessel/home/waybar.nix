@@ -49,9 +49,12 @@
       elif sys.argv[1] == 'toggle':
           if color_scheme in ['default', 'prefer-light']:
               color_scheme = 'prefer-dark'
+              gtk_theme = 'Adwaita-dark'
           else:
               color_scheme = 'default'
+              gtk_theme = 'Adwaita'
           subprocess.check_call(['${dconf}', 'write', '/org/gnome/desktop/interface/color-scheme', f'"{color_scheme}"'])
+          subprocess.check_call(['${dconf}', 'write', '/org/gnome/desktop/interface/gtk-theme', f'"{gtk_theme}"'])
           subprocess.check_call(f'kill -{SIGRTMIN + 1} $(pgrep waybar)', shell=True)
       else:
           raise ValueError()
