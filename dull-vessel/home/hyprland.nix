@@ -312,14 +312,6 @@ in {
       bindl = [
         "SUPER SHIFT, Pause, exec, systemctl suspend"
         "SUPER SHIFT, F5, exec, hyprctl dispatch dpms off && hyprctl dispatch dpms on"
-      ];
-
-      bindle = [
-        ", XF86MonBrightnessUp, exec, brightnessctl s +5%"
-        ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
-
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
 
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPause, exec, playerctl pause"
@@ -330,6 +322,14 @@ in {
         ", Cancel, exec, playerctl next"
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86Messenger, exec, playerctl previous"
+      ];
+
+      bindle = [
+        ", XF86MonBrightnessUp, exec, brightnessctl s +5%"
+        ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
+
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
       ];
 
       bindm = [
