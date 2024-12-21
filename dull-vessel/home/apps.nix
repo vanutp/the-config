@@ -26,7 +26,7 @@
       gwenview
       xournalpp
       slack
-      webcord
+      vesktop
       (wrapOBS {
         plugins = [obs-studio-plugins.wlrobs];
       })
