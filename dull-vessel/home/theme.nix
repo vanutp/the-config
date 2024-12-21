@@ -35,11 +35,6 @@ in {
     gtk = {
       enable = true;
 
-      theme = {
-        package = pkgs.gnome-themes-extra;
-        name = "Adwaita-dark";
-      };
-
       iconTheme = {
         package = pkgs.adwaita-icon-theme;
         name = "Adwaita";
@@ -67,6 +62,7 @@ in {
     fonts.fontconfig.defaultFonts.emoji = ["Noto Color Emoji"];
 
     home.packages = with pkgs; [
+      pkgs.gnome-themes-extra
       libsForQt5.qtstyleplugin-kvantum
       qt6Packages.qtstyleplugin-kvantum
       kdePackages.breeze
