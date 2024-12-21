@@ -311,6 +311,7 @@ in {
 
       bindl = [
         "SUPER SHIFT, Pause, exec, systemctl suspend"
+        "SUPER SHIFT, F5, exec, hyprctl dispatch dpms off && hyprctl dispatch dpms on"
       ];
 
       bindle = [
