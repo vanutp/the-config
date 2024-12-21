@@ -17,4 +17,6 @@
   networking.hostName = "embassy";
 
   time.timeZone = "Europe/Moscow";
+
+  systemd.coredump.extraConfig = "Storage=none";
 }
