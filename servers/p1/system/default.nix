@@ -45,6 +45,9 @@
     options = ["nosuid" "nodev" "noexec" "memory_recursiveprot"];
   };
 
+  users.users.fox.openssh.authorizedKeys.keys = [
+    common.constants.pubkeys.embassy
+  ];
   users.users.apocalypse = {
     isNormalUser = true;
     extraGroups = ["wheel"];
