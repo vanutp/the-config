@@ -23,7 +23,6 @@
   home.packages = with pkgs;
     [
       sidequest
-      pkgs-unstable.zed-editor
       gwenview
       xournalpp
       slack
@@ -42,9 +41,6 @@
       via
       xfce.thunar
       xfce.tumbler
-      kdePackages.qtwayland
-      kdePackages.dolphin
-      libsForQt5.kamoso
       ark
       spotify
       (google-chrome.override {

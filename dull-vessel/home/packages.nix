@@ -34,14 +34,6 @@
     yt-dlp
     httpie
     ffmpeg-full
-    (ghostscriptX.overrideAttrs (old: {
-      pname = "ghostpdl-with-X";
-
-      src = fetchurl {
-        url = "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs${lib.replaceStrings ["."] [""] old.version}/ghostpdl-${old.version}.tar.xz";
-        hash = "sha512-v1STkAbnwMmBzehDSjxEPzfNMd6jxUrXLBJ6AN/GFIoHVVyu+rYHa+po4Xw/QkJ6gMR67QmRGxq0ycrgDjM83g==";
-      };
-    }))
     inputs.manix.packages.${pkgs.system}.manix
     imagemagick
     yubikey-manager

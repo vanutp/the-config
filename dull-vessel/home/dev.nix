@@ -63,6 +63,7 @@
     lldb
     nil
     alejandra
+    pkgs-unstable.zed-editor
     pkgs-unstable.vscode
     pkgs-unstable.jetbrains.idea-ultimate
     pkgs-unstable.jetbrains.clion
@@ -76,12 +77,6 @@
       })
       .androidsdk
     )
-    (with dotnetCorePackages;
-      combinePackages [
-        sdk_8_0
-        sdk_9_0
-      ])
-    nuget
     pre-commit
     kubectl
     kubelogin-oidc
