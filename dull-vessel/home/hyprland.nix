@@ -106,6 +106,7 @@ in {
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "copyq --start-server"
         "playerctld daemon"
+        "fcitx5 -d -r"
       ];
 
       env = [
