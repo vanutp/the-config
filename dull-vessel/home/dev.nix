@@ -12,11 +12,10 @@
           text = ''
             -Xmx4096m
             -Dawt.toolkit.name=WLToolkit
-            -Dide.browser.jcef.enabled=false
           '';
         };
       })
-      ["IntelliJIdea2024.2/idea64.vmoptions" "CLion2024.2/clion64.vmoptions"]
+      ["IntelliJIdea2024.3/idea64.vmoptions" "CLion2024.3/clion64.vmoptions"]
     )
     // {
       ".local/share/jdks/temurin8".source = pkgs.temurin-bin-8;
