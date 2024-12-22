@@ -1,5 +1,4 @@
 {
-  common,
   config,
   pkgs,
   lib,
@@ -28,6 +27,18 @@
       extraDynamicConfig = mkOption {
         type = types.attrs;
         default = {};
+      };
+      limits = mkOption {
+        type = types.submodule {
+          options = {
+            cpus = mkOption {type = types.str;};
+            memory = mkOption {type = types.str;};
+          };
+        };
+        default = {
+          cpus = "2";
+          memory = "2G";
+        };
       };
     };
   };
@@ -58,26 +69,30 @@
       "2a06:98c0::/29"
       "2c0f:f248::/32"
     ];
-    rulesFile = mkYaml "rules.yml" {
-      http =
-        builtins.foldl'
-        (a: b: lib.recursiveUpdate a b)
-        {}
-        (map (entry: let
-            entryId = builtins.replaceStrings ["."] ["__"] entry.host;
-          in {
-            routers.${entryId} = {
-              service = entryId;
-              rule = "Host(`${entry.host}`)";
-            };
-            services.${entryId}.loadBalancer.servers = [
-              {
-                url = entry.target;
-              }
-            ];
-          })
-          config.vanutp.traefik.proxies);
-    };
+    rulesFile = mkYaml "rules.yml" (
+      if (config.vanutp.traefik.proxies != [])
+      then {
+        http =
+          builtins.foldl'
+          (a: b: lib.recursiveUpdate a b)
+          {}
+          (map (entry: let
+              entryId = builtins.replaceStrings ["."] ["__"] entry.host;
+            in {
+              routers.${entryId} = {
+                service = entryId;
+                rule = "Host(`${entry.host}`)";
+              };
+              services.${entryId}.loadBalancer.servers = [
+                {
+                  url = entry.target;
+                }
+              ];
+            })
+            config.vanutp.traefik.proxies);
+      }
+      else {}
+    );
     extraDynamicConfigFile = mkYaml "extra.yml" config.vanutp.traefik.extraDynamicConfig;
     rulesDir = pkgs.stdenv.mkDerivation {
       name = "traefik-rules";
@@ -178,10 +193,7 @@
         if config.vanutp.traefik.acmeChallenge == "dns"
         then [config.sops.secrets."services/traefik-cloudflare-config".path]
         else [];
-      deploy.resources.limits = {
-        cpus = "2";
-        memory = "2G";
-      };
+      deploy.resources.limits = config.vanutp.traefik.limits;
     };
     networking.firewall.allowedTCPPorts = [80 443];
     networking.firewall.allowedUDPPorts = [443];

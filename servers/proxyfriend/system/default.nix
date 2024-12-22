@@ -3,10 +3,7 @@
     common.bundles.server.system
     common.blocks.vds-networking
     common.blocks.traefik
-    (common.blocks.mailcow {
-      hostname = "mail2.vanutp.dev";
-      lite = true;
-    })
+    ./mailcow.nix
     ./hardware-configuration.nix
     ./disko.nix
     ./secrets.nix
@@ -17,4 +14,9 @@
   networking.hostName = "proxyfriend";
 
   time.timeZone = "Europe/Moscow";
+
+  vanutp.traefik.limits = {
+    cpus = "1";
+    memory = "0.5G";
+  };
 }

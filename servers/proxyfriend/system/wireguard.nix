@@ -48,6 +48,11 @@
           publicKey = "ymFzfMJN7+pufjwlIE/NFX28FWavQ56LRWHytw/n1kQ=";
           allowedIPs = ["10.3.1.5/32"];
         }
+        {
+          # elena
+          publicKey = "dOK2UXSpa0ds/odkPDwPmYiXH2RvZORu/nmLNDdDghE=";
+          allowedIPs = ["10.3.1.6/32"];
+        }
       ];
     };
   };
