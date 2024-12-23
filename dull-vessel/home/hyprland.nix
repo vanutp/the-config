@@ -318,11 +318,11 @@ in {
         ", XF86AudioPause, exec, playerctl pause"
         ", XF86AudioStop, exec, playerctl pause"
         ", XF86AudioPlayPause, exec, playerctl play-pause"
-        ", XF86Go, exec, playerctl play-pause"
+        ", XF86PickupPhone, exec, playerctl play-pause"
         ", XF86AudioNext, exec, playerctl next"
-        ", Cancel, exec, playerctl next"
+        ", XF86HangupPhone, exec, playerctl next"
         ", XF86AudioPrev, exec, playerctl previous"
-        ", XF86Messenger, exec, playerctl previous"
+        ", XF86NotificationCenter, exec, playerctl previous"
       ];
 
       bindle = [
