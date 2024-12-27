@@ -29,6 +29,7 @@
     ./rss_vanutp_dev.nix
     ./samat_tiktok.nix
     ./samat_vk.nix
+    ./samat_yt.nix
     ./speech_cabinet_com.nix
     ./t_vanutp_dev.nix
     ./telemap_vanutp_dev.nix
