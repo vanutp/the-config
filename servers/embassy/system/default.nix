@@ -20,4 +20,6 @@
   time.timeZone = "Europe/Moscow";
 
   systemd.coredump.extraConfig = "Storage=none";
+
+  systemd.network.wait-online.enable = false;
 }
