@@ -3,6 +3,7 @@
     common.bundles.server.system
     common.blocks.vds-networking
     ./containers
+    ./dvasmp
     ./disko.nix
     ./gitlab-ssh-shim.nix
     ./hardware-configuration.nix
