@@ -30,6 +30,7 @@
     ./samat_tiktok.nix
     ./samat_vk.nix
     ./samat_yt.nix
+    ./sculptor_vanutp_dev.nix
     ./speech_cabinet_com.nix
     ./t_vanutp_dev.nix
     ./telemap_vanutp_dev.nix
