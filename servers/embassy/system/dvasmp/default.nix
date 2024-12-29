@@ -1,7 +1,6 @@
 {
   pkgs,
   common,
-  config,
   ...
 }: let
   mcDir = "/srv/dvasmp";
