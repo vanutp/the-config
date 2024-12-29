@@ -10,6 +10,7 @@
     common.blocks.vds-networking
     ./containers
     ./hardware-configuration.nix
+    ./minecraft.nix
     ./postgresql.nix
     ./secrets.nix
     ./wireguard.nix
