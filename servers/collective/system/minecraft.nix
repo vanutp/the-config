@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    temurin-bin-17
     rdiff-backup
   ];
   networking.firewall.allowedTCPPorts = [80 443 25565];
