@@ -20,7 +20,7 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "0 2 * * SUN     root     cd /home/fox/backup; xonsh backup.xsh >> /home/fox/backup/backup.log 2>&1"
+      "0 2 * * SUN     root     if [[ -f /home/fox/backup/backup.xsh ]]; then cd /home/fox/backup; xonsh backup.xsh >> /home/fox/backup/backup.log 2>&1; fi"
     ];
   };
 
