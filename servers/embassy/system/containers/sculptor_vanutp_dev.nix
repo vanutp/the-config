@@ -17,7 +17,7 @@
       }
     ];
     limitations = {
-      maxAvatarSize = 1000;
+      maxAvatarSize = 3000;
       maxAvatars = 50;
     };
     advancedUsers."76e3bc1c-02af-460f-91cf-64956b45d569" = {
