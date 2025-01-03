@@ -1,7 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  common,
+  ...
+}: {
   imports = [
     ../all-users
-    ./shell
+    common.blocks.shell
     ./dev.nix
   ];
 

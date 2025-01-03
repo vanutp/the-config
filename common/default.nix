@@ -1,6 +1,7 @@
 pkgs: {
   # TODO: generate this automatically
   bundles = {
+    all-users = ./bundles/all-users;
     fox = ./bundles/fox;
     root = ./bundles/root;
     system = ./bundles/system;
@@ -19,6 +20,8 @@ pkgs: {
     vds-networking = import ./blocks/vds-networking.nix;
     progtime = import ./blocks/progtime.nix;
     traefik = import ./blocks/traefik.nix;
+    shell = import ./blocks/shell;
+    shell-server = import ./blocks/shell-server.nix;
   };
   composter = import ./composter.nix;
   utils = import ./utils/utils.nix pkgs;

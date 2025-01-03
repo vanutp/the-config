@@ -10,6 +10,7 @@
     common.blocks.vds-networking
     ./containers
     ./hardware-configuration.nix
+    ./minecraft-gravity_m.nix
     ./minecraft.nix
     ./postgresql.nix
     ./secrets.nix
