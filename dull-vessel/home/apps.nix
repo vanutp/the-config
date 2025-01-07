@@ -22,6 +22,7 @@
 
   home.packages = with pkgs;
     [
+      pkgs-unstable.anki-bin
       sidequest
       gwenview
       xournalpp

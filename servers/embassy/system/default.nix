@@ -2,6 +2,7 @@
   imports = [
     common.bundles.server.system
     common.blocks.vds-networking
+    ./anki.nix
     ./containers
     ./dvasmp
     ./disko.nix
