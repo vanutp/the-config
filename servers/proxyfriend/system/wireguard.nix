@@ -53,6 +53,11 @@
           publicKey = "dOK2UXSpa0ds/odkPDwPmYiXH2RvZORu/nmLNDdDghE=";
           allowedIPs = ["10.3.1.6/32"];
         }
+        {
+          # gravity
+          publicKey = "P8XqFnDJOs6zzEVAy4CL5PAYuLfYencxUlDlRg3FGkg=";
+          allowedIPs = ["10.3.1.7/32"];
+        }
       ];
     };
   };
