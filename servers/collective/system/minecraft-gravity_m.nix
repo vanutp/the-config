@@ -14,6 +14,7 @@
   };
 
   networking.firewall.allowedTCPPorts = [25555];
+  networking.firewall.allowedUDPPorts = [24455];
   services.nginx = {
     enable = true;
     virtualHosts."gr.vtp.sh" = {
