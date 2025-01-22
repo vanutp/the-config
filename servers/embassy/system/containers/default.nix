@@ -39,6 +39,7 @@
     ./tmat_wedding_bot.nix
     ./vanutp_dev.nix
     ./vanutp_music_bot.nix
+    ./vosh_results_bot.nix
     ./vtp_sh.nix
     ./waka_vanutp_dev.nix
     ./write_tmat_me.nix
