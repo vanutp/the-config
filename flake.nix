@@ -53,7 +53,7 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
-    flake-utils,
+    flake-parts,
     pyproject-nix,
     ...
   } @ inputs: let
@@ -76,27 +76,32 @@
         f [] attrList;
     mkSystems = hostnames: recursiveMerge (map (hostname: mkSystem hostname) hostnames);
   in
-    (mkSystems [
-      "dull-vessel"
-      "servers/sfer"
-      "servers/p1"
-      "servers/proxyfriend"
-      "servers/embassy"
-      "servers/collective"
-    ])
-    // flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux"];
+
+      flake = mkSystems [
+        "dull-vessel"
+        "sfer"
+        "p1"
+        "proxyfriend"
+        "embassy"
+        "collective"
+      ];
+      perSystem = {system, ...}: {
+        _module.args = {
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        };
+
+        imports = [
+          ./packages
+        ];
       };
-      pkgs-unstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      packagesArgs = {inherit pkgs pkgs-unstable inputs;};
-    in {
-      formatter = pkgs.alejandra;
-      packages = import ./packages packagesArgs;
-      devShells.vhap = (import ./packages/vhap/pyproject.nix packagesArgs).shell;
-    });
+    };
 }
