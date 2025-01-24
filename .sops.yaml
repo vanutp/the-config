@@ -5,27 +5,27 @@ keys:
   - &dull_vessel-user age1wejr7c52k33sekl5x3zdaqtgayap629d42y60f8cwc6pu3lp7exsltc83d
   - &embassy age1uwzr96dww90a25dqrq7jmpygnal6p4ksmqehkj7tt5qn6jrda4xq4gn2sf
 creation_rules:
-  - path_regex: dull-vessel/(home|system)/secrets.yml$
+  - path_regex: hosts/dull-vessel/(home|system)/secrets.yml$
     key_groups:
     - age:
       - *dull_vessel
       - *dull_vessel-user
-  - path_regex: servers/p1/system/secrets.yml$
+  - path_regex: hosts/p1/system/secrets.yml$
     key_groups:
     - age:
       - *dull_vessel-user
       - age1lx2w9ru4cn75fg9chc6sk4aqrrpg5y7nwnz43uum7fuvns4yuuvsf9w7h8
-  - path_regex: servers/embassy/system/secrets.yml$
+  - path_regex: hosts/embassy/system/secrets.yml$
     key_groups:
     - age:
       - *dull_vessel-user
       - *embassy
-  - path_regex: servers/proxyfriend/system/secrets.yml$
+  - path_regex: hosts/proxyfriend/system/secrets.yml$
     key_groups:
     - age:
       - *dull_vessel-user
       - age1d0hhler5xewxa0je0jhtarszac0xa9nrceuq480wdtqxtcyvrgvqe3jepm
-  - path_regex: servers/collective/system/secrets.yml$
+  - path_regex: hosts/collective/system/secrets.yml$
     key_groups:
     - age:
       - *dull_vessel-user
