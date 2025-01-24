@@ -15,14 +15,10 @@
 
   networking.firewall.allowedTCPPorts = [25555];
   networking.firewall.allowedUDPPorts = [24455];
-  services.nginx = {
-    enable = true;
-    virtualHosts."gr.vtp.sh" = {
-      addSSL = true;
-      enableACME = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8101";
-      };
-    };
-  };
+  vanutp.traefik.proxies = [
+    {
+      host = "gr.vtp.sh";
+      target = "http://127.0.0.1:8101";
+    }
+  ];
 }

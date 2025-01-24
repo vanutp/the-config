@@ -6,12 +6,14 @@
 }: {
   imports = [
     ./containers
+    ./gitlab.nix
     ./hardware-configuration.nix
     ./minecraft-gravity_m.nix
     ./minecraft.nix
     ./network.nix
     ./postgresql.nix
     ./secrets.nix
+    ./traefik.nix
     ./wireguard.nix
   ];
 

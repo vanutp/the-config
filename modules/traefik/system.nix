@@ -196,6 +196,7 @@
         network_mode = "host";
         env_file =
           if config.vanutp.traefik.acmeChallenge == "dns"
+          # TODO: move out of services/
           then [config.sops.secrets."services/traefik-cloudflare-config".path]
           else [];
         deploy.resources.limits = config.vanutp.traefik.limits;
