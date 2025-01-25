@@ -23,9 +23,7 @@
     ./pb_ilkras_ru.nix
     ./pihole.nix
     ./portainer.nix
-    ./psychology_tests.nix
     ./pwd_vanutp_dev.nix
-    ./pyaterochka.nix
     ./rss_vanutp_dev.nix
     ./samat_tiktok.nix
     ./samat_vk.nix
