@@ -60,8 +60,10 @@
       };
     };
     extraConfig = {
-      time_zone = "Europe/Moscow";
-      ssh_host = "ssh.foxlab.dev";
+      gitlab = {
+        time_zone = "Europe/Moscow";
+        ssh_host = "ssh.foxlab.dev";
+      };
       # Needed because services.gitlab.registry.externalPort is mandatory,
       # and setting it causes problems when CI is trying to access
       # the registry using the address without the port
