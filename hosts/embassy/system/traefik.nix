@@ -1,4 +1,5 @@
 {...}: {
+  sops.secrets."services/traefik-cloudflare-config" = {};
   vanutp.traefik = {
     enable = true;
     proxies = [
@@ -14,10 +15,6 @@
         host = "pg.vanutp.dev";
         target = "http://10.1.0.4:5001";
       }
-      {
-        host = "vhap-update.vanutp.dev";
-        target = "http://127.0.0.1:8010";
-      }
     ];
     requestWildcardCertsFor = [
       "vanutp.dev"
@@ -26,7 +23,6 @@
       "ilkras.ru"
       "foxlab.dev"
       "vtp.sh"
-      "speech-cabinet.com"
     ];
     extraDynamicConfig = {
       tls.certificates = [
@@ -37,4 +33,5 @@
       ];
     };
   };
+  virtualisation.composter.vhap-update-host = "vhap-update.vanutp.dev";
 }

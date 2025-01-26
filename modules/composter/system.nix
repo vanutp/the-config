@@ -7,6 +7,10 @@
 }: {
   options = with lib; {
     virtualisation.composter = {
+      vhap-update-host = mkOption {
+        type = types.nullOr types.str;
+        default = null;
+      };
       apps = mkOption {
         type = types.attrsOf (types.submodule ({name, ...}: {
           options = {
@@ -60,7 +64,8 @@
 
   config = let
     mkJson = (pkgs.formats.json {}).generate;
-    configFile = mkJson "config.json" config.virtualisation.composter;
+    cfg = config.virtualisation.composter;
+    configFile = mkJson "config.json" cfg;
     # TODO: validate with vhapd
     # configFile = pkgs.stdenv.mkDerivation {
     #   name = "config.json";
@@ -87,5 +92,20 @@
         Type = "oneshot";
       };
     };
+    services.vhap-compose-update = {
+      enable = true;
+      # TODO: fix permissions?
+      user = "root";
+      group = "root";
+      port = 7000;
+      baseDir = "/srv/vhap";
+      logsDir = "/srv/vhap/_vhap_update_logs";
+    };
+    vanutp.traefik.proxies = lib.mkIf (cfg.vhap-update-host != null) [
+      {
+        host = cfg.vhap-update-host;
+        target = "http://127.0.0.1:7000";
+      }
+    ];
   };
 }

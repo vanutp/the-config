@@ -1,28 +1,25 @@
 {config, ...}: {
-  services.vhap-compose-update = {
-    enable = true;
-    # TODO: fix permissions?
-    user = "root";
-    group = "root";
-    port = 8010;
-    baseDir = "/srv/vhap";
-    logsDir = "/srv/vhap/_vhap_update_logs";
-    # TODO: make it better. now i have to enter service names 3 times
-    entries =
-      map (
-        service: {
-          key = config.sops.placeholder."vhap-compose-update/${service}";
-          inherit service;
-        }
-      ) [
-        "AvatarEmojiBot"
-        "csai_tmat_me"
-        "vanutp_music_bot"
-        "mc_auth_vanutp_dev"
-        "samat_tiktok"
-        "cuspace_vanutp_dev"
-        "speech_cabinet_com"
-        "telemap_vanutp_dev"
-      ];
-  };
+  sops.secrets."vhap-compose-update/AvatarEmojiBot" = {};
+  sops.secrets."vhap-compose-update/csai_tmat_me" = {};
+  sops.secrets."vhap-compose-update/vanutp_music_bot" = {};
+  sops.secrets."vhap-compose-update/mc_auth_vanutp_dev" = {};
+  sops.secrets."vhap-compose-update/samat_tiktok" = {};
+  sops.secrets."vhap-compose-update/cuspace_vanutp_dev" = {};
+  sops.secrets."vhap-compose-update/telemap_vanutp_dev" = {};
+
+  services.vhap-compose-update.entries =
+    map (
+      service: {
+        key = config.sops.placeholder."vhap-compose-update/${service}";
+        inherit service;
+      }
+    ) [
+      "AvatarEmojiBot"
+      "csai_tmat_me"
+      "vanutp_music_bot"
+      "mc_auth_vanutp_dev"
+      "samat_tiktok"
+      "cuspace_vanutp_dev"
+      "telemap_vanutp_dev"
+    ];
 }

@@ -20,20 +20,12 @@
 
   time.timeZone = "Europe/Moscow";
 
-  services.vhap-compose-update = {
-    enable = true;
-    user = "root";
-    group = "root";
-    port = 8001;
-    baseDir = "/srv/vhap";
-    logsDir = "/srv/vhap/_vhap_update_logs";
-    entries = [
-      {
-        key = config.sops.placeholder."vhap-compose-update/progtime";
-        service = "my_progtime_net";
-      }
-    ];
-  };
+  services.vhap-compose-update.entries = [
+    {
+      key = config.sops.placeholder."vhap-compose-update/progtime";
+      service = "my_progtime_net";
+    }
+  ];
 
   # disable nsdelegate to be able to pass cgroup dir to podman container
   # TODO: is this needed for docker too?
