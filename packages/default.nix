@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./_64gram
+    ./cups-kyodialog
     ./split-monitor-workspaces
     ./veyon
     ./vhap
