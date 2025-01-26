@@ -100,6 +100,7 @@
       port = 7000;
       baseDir = "/srv/vhap";
       logsDir = "/srv/vhap/_vhap_update_logs";
+      entries = [];
     };
     vanutp.traefik.proxies = lib.mkIf (cfg.vhap-update-host != null) [
       {
