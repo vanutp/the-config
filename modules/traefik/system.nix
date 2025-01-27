@@ -117,33 +117,21 @@
           headers.names.User-Agent = "keep";
         };
       };
-      certificatesResolvers =
+      certificatesResolvers = lib.mkMerge [
         {
-          default.acme =
-            {
-              storage = "/data/tls/acme.json";
-            }
-            // (
-              # TODO: can mkIf be used here?
-              if config.vanutp.traefik.acmeChallenge == "dns"
-              then {
-                dnsChallenge.provider = "cloudflare";
-              }
-              else {
-                tlsChallenge = {};
-              }
-            );
+          default.acme.storage = "/data/tls/acme.json";
         }
-        // (
-          if config.vanutp.traefik.acmeChallenge == "dns"
-          then {
-            http.acme = {
-              tlsChallenge = {};
-              storage = "/data/tls/acme-http.json";
-            };
-          }
-          else {}
-        );
+        (lib.mkIf (config.vanutp.traefik.acmeChallenge == "dns") {
+          default.acme.dnsChallenge.provider = "cloudflare";
+          http.acme = {
+            tlsChallenge = {};
+            storage = "/data/tls/acme-http.json";
+          };
+        })
+        (lib.mkIf (config.vanutp.traefik.acmeChallenge == "tls") {
+          default.acme.tlsChallenge = {};
+        })
+      ];
       entryPoints = {
         http = {
           address = ":80";
@@ -157,25 +145,21 @@
           address = ":443";
           transport.respondingTimeouts.readTimeout = 120;
           forwardedHeaders.trustedIPs = cloudflareRanges;
-          http.tls =
+          http.tls = lib.mkMerge [
             {
               certResolver = "default";
             }
-            // (
-              # TODO: can mkIf be used here?
-              if config.vanutp.traefik.acmeChallenge == "dns"
-              then {
-                # TODO: copy certificates from main server to others
-                # instead of giving every server cloudflare access
-                domains =
-                  map (domain: {
-                    main = domain;
-                    sans = ["*.${domain}"];
-                  })
-                  config.vanutp.traefik.requestWildcardCertsFor;
-              }
-              else {}
-            );
+            (lib.mkIf (config.vanutp.traefik.acmeChallenge == "dns") {
+              # TODO: copy certificates from main server to others
+              # instead of giving every server cloudflare access
+              domains =
+                map (domain: {
+                  main = domain;
+                  sans = ["*.${domain}"];
+                })
+                config.vanutp.traefik.requestWildcardCertsFor;
+            })
+          ];
         };
       };
       providers = {
@@ -196,7 +180,6 @@
         network_mode = "host";
         env_file =
           if config.vanutp.traefik.acmeChallenge == "dns"
-          # TODO: move out of services/
           then [config.sops.secrets."services/traefik-cloudflare-config".path]
           else [];
         deploy.resources.limits = config.vanutp.traefik.limits;
