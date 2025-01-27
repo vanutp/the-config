@@ -1,19 +1,18 @@
 {...}: {
   imports = [
     ./composter-tests
-    ./secrets.nix
-    ./hardware-configuration.nix
-    ./security.nix
-    ./wireguard.nix
-    ./strongswan.nix
     ./veyon
-    ./steam.nix
-    ./dev.nix
     ./audio.nix
-    ./hyprland.nix
-    ./login.nix
+    ./dev.nix
+    ./hardware-configuration.nix
     ./hardware.nix
-    ./fcitx5.nix
+    ./login.nix
+    ./portals.nix
+    ./secrets.nix
+    ./security.nix
+    ./steam.nix
+    ./strongswan.nix
+    ./wireguard.nix
   ];
 
   setup.computerType = "laptop";

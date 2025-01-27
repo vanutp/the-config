@@ -69,7 +69,7 @@
         "position" = "top";
         "height" = 30;
         "spacing" = 10;
-        "modules-left" = ["hyprland/workspaces" "hyprland/submap"];
+        "modules-left" = ["niri/workspaces"];
         "modules-center" = [];
         "modules-right" = [
           "tray"
@@ -78,7 +78,7 @@
           "pulseaudio"
           "temperature"
           "custom/fans"
-          "hyprland/language"
+          "niri/language"
           "battery"
           "clock"
         ];
@@ -102,10 +102,8 @@
           "interval" = 5;
           "return-type" = "json";
         };
-        "hyprland/workspaces" = {
+        "niri/workspaces" = {
           "format" = "{icon}";
-          "on-scroll-up" = "hyprctl dispatch workspace e-1";
-          "on-scroll-down" = "hyprctl dispatch workspace e+1";
           "format-icons" = {
             "default" = "";
             "1" = "1";
@@ -129,24 +127,11 @@
             "active" = "󱓻";
             "urgent" = "󱓻";
           };
-          "persistent-workspaces" = {
-            "eDP-1" = [1 2 3 4 5];
-            "DP-1" = [11 12 13 14 15];
-            "HDMI-A-1" = [11 12 13 14 15];
-          };
-        };
-        "hyprland/window" = {
-          "max-length" = 200;
-          "rewrite" = {
-            "(.*) - Google Chrome" = "$1";
-            "(.*) @ [^@]*$" = "$1";
-          };
-          "separate-outputs" = true;
         };
         "tray" = {
           "spacing" = 10;
         };
-        "hyprland/language" = {
+        "niri/language" = {
           "format" = "{}";
           "format-de" = "en";
           "format-ru" = "ru";

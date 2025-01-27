@@ -1,50 +1,74 @@
 {
   config,
   pkgs,
-  self-pkgs,
+  pkgs-unstable,
   lib,
   ...
-}: let
-  swaylockPkg = pkgs.swaylock-effects;
-  swaylockCmd = "${lib.getExe swaylockPkg} -f";
-in {
-  programs.swaylock = {
+}: {
+  programs.hyprlock = {
     enable = true;
-    package = swaylockPkg;
+    package = pkgs-unstable.hyprlock;
     settings = {
-      image = "${config.preferences.wallpaper}";
-      font = config.preferences.font.monospace;
-      effect-blur = "20x3";
+      general = {
+        hide_cursor = true;
+        no_fade_in = false;
+      };
+
+      background = [
+        {
+          path = "${config.preferences.wallpaper}";
+          blur_passes = 1;
+          blur_size = 5;
+        }
+      ];
+
+      input-field = [
+        {
+          font_family = config.preferences.font.monospace;
+          size = "200, 50";
+          position = "0, 0";
+          monitor = "";
+          dots_center = true;
+          fade_on_empty = false;
+          font_color = "rgb(205, 214, 244)";
+          inner_color = "rgb(30, 30, 46)";
+          outer_color = "rgb(17, 17, 27)";
+          outline_thickness = 5;
+          placeholder_text = ''<span foreground="##45475a">Password</span>'';
+          fail_text = ''$FAIL ($ATTEMPTS)'';
+        }
+      ];
     };
   };
 
-  services.swayidle = {
+  systemd.user.services.hypridle.Unit = {
+    # wait unitl required env (WAYLAND_DISPLAY) is set
+    After = ["graphical-session.target"];
+    Requisite = "graphical-session.target";
+  };
+
+  services.hypridle = let
+    lockExe = lib.getExe pkgs.hyprlock;
+    lockCmd = "${lib.getExe' pkgs.systemd "systemd-run"} --user ${lockExe}";
+  in {
     enable = true;
-    events = [
-      {
-        event = "lock";
-        command = swaylockCmd;
-      }
-      {
-        event = "unlock";
-        command = "${lib.getExe' pkgs.psmisc "killall"} -s USR1 swaylock";
-      }
-      {
-        event = "before-sleep";
-        command = swaylockCmd;
-      }
-    ];
-    timeouts = [
-      {
-        timeout = 300;
-        command = swaylockCmd;
-      }
-      {
-        timeout = 600;
-        # TODO: is referencing the package needed?
-        command = "${lib.getExe' self-pkgs.hyprland "hyprctl"} dispatch dpms off";
-        resumeCommand = "${lib.getExe' self-pkgs.hyprland "hyprctl"} dispatch dpms on";
-      }
-    ];
+    settings = {
+      general = {
+        lock_cmd = "pidof ${lockExe} || ${lockCmd}";
+        unlock_cmd = "pkill -f -USR1 ${lockExe}";
+        before_sleep_cmd = "loginctl lock-session";
+      };
+      listener = [
+        {
+          timeout = 60 * 5;
+          on-timeout = "loginctl lock-session";
+        }
+        {
+          timeout = 60 * 15;
+          # TODO: just turn off monitors
+          on-timeout = "${lib.getExe' pkgs.systemd "systemctl"} suspend";
+        }
+      ];
+    };
   };
 }

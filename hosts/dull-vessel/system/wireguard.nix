@@ -3,30 +3,12 @@
   config,
   ...
 }: {
-  security.sudo.extraRules =
-    builtins.concatMap (
-      sc:
-        map
-        (int: {
-          users = ["fox"];
-          commands = [
-            {
-              command = "${sc} start wg-quick-${int}";
-              options = ["NOPASSWD"];
-            }
-            {
-              command = "${sc} stop wg-quick-${int}";
-              options = ["NOPASSWD"];
-            }
-            {
-              command = "${sc} restart wg-quick-${int}";
-              options = ["NOPASSWD"];
-            }
-          ];
-        })
-        ["int" "wg0" "wg2" "wg2-only"]
-    )
-    ["/run/current-system/sw/bin/systemctl" "/home/fox/.local/state/nix/profile/bin/systemctl"];
+  security.polkit.serviceOwners = {
+    wg-quick-int = "fox";
+    wg-quick-wg0 = "fox";
+    wg-quick-wg2 = "fox";
+    wg-quick-wg2-only = "fox";
+  };
 
   networking.wg-quick.interfaces = let
     makeWg0 = import "${self}/utils/makeWg0.nix";

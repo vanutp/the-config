@@ -1,15 +1,19 @@
 {...}: {
   imports = [
-    ./apps.nix
-    ./packages.nix
-    ./theme.nix
-    ./hyprland.nix
-    ./waybar.nix
     ./ags
-    ./lockscreen.nix
-    ./shell.nix
+    ./apps.nix
     ./dev.nix
+    ./dunst.nix
+    ./fcitx5.nix
+    ./lockscreen.nix
+    ./niri.nix
+    ./packages.nix
     ./secrets.nix
+    ./session-services.nix
+    ./shell.nix
+    ./theme.nix
+    ./tofi.nix
+    ./waybar.nix
   ];
 
   setup.computerType = "laptop";

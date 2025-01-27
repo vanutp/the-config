@@ -1,10 +1,10 @@
+# thx to xdg-ninja
 {
   config,
   lib,
   ...
-}: {
-  # thx to xdg-ninja
-  home.sessionVariables = {
+}: let
+  variables = {
     WAKATIME_HOME = "${config.xdg.configHome}/wakatime";
     PYTHONSTARTUP = "${config.xdg.configHome}/python/pythonrc";
     NUGET_PACKAGES = "${config.xdg.cacheHome}/NuGetPackages";
@@ -18,6 +18,9 @@
     ANDROID_USER_HOME = "${config.xdg.dataHome}/android";
     REDISCLI_HISTFILE = "${config.xdg.dataHome}/redis/rediscli_history";
   };
+in {
+  home.sessionVariables = variables;
+  systemd.user.sessionVariables = variables;
   programs.zsh.shellAliases = {
     wget = "wget --hsts-file=\"${config.xdg.dataHome}/wget-hsts\"";
     adb = "HOME=\"${config.xdg.dataHome}\"/android adb";
