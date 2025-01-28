@@ -70,6 +70,9 @@ in {
           "tap"
           "natural-scroll"
         ])
+        (block "mouse" {
+          scroll-factor = 1.5;
+        })
       ])
       (section "output" "eDP-1" {
         scale = 1.25;
