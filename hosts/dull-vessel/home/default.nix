@@ -11,6 +11,7 @@
     ./secrets.nix
     ./session-services.nix
     ./shell.nix
+    ./terminal.nix
     ./theme.nix
     ./tofi.nix
     ./waybar.nix

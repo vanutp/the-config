@@ -1,25 +1,9 @@
 {
-  config,
   pkgs,
   pkgs-unstable,
   self-pkgs,
   ...
 }: {
-  programs.kitty = {
-    enable = true;
-    package = pkgs.kitty;
-    font.name = config.preferences.font.monospace;
-    font.size = 12;
-    themeFile = "Catppuccin-Mocha";
-    settings = {
-      scrollback_lines = 10000;
-      background_opacity = "0.8";
-      enable_audio_bell = false;
-      window_padding_width = "3 5";
-      touch_scroll_multiplier = "5.0";
-    };
-  };
-
   home.packages = with pkgs;
     [
       pkgs-unstable.anki-bin

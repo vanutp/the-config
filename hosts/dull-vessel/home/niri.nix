@@ -129,7 +129,7 @@ in {
         in
           lib.flatten [
             (binds {
-              "Super+Return" = spawn "kitty";
+              "Super+Return" = spawn "ghostty";
               "Super+Escape" = spawn ["loginctl" "lock-session"];
               "Super+Shift+A" = spawn yubikey-totp;
               "Super+D" = spawn ["tofi-drun" "--drun-launch=true"];
