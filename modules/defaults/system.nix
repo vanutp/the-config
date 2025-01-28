@@ -23,7 +23,10 @@
     "ru_RU.UTF-8/UTF-8"
   ];
 
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableGlobalCompInit = false;
+  };
 
   services.openssh = {
     enable = true;
