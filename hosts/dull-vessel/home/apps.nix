@@ -45,7 +45,7 @@
       ark
       spotify
       (google-chrome.override {
-        commandLineArgs = ["--enable-wayland-ime"];
+        commandLineArgs = ["--enable-wayland-ime" "--wayland-text-input-version=3"];
       })
       firefox
       corefonts
