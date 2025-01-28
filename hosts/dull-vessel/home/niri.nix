@@ -166,6 +166,17 @@ in {
               "Super+Shift+Right" = "move-column-right";
             })
 
+            (bindsWith {cooldown-ms = 150;} {
+              "Super+WheelScrollUp" = "focus-workspace-up";
+              "Super+Shift+WheelScrollUp" = "move-column-to-workspace-up";
+              "Super+WheelScrollDown" = "focus-workspace-down";
+              "Super+Shift+WheelScrollDown" = "move-column-to-workspace-down";
+              "Super+WheelScrollLeft" = "focus-column-left";
+              "Super+Shift+WheelScrollLeft" = "move-column-left";
+              "Super+WheelScrollRight" = "focus-column-right";
+              "Super+Shift+WheelScrollRight" = "move-column-right";
+            })
+
             (bindsWith {allow-when-locked = true;} {
               XF86AudioRaiseVolume =
                 spawn
