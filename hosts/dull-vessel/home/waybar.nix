@@ -74,6 +74,7 @@
         "modules-right" = [
           "tray"
           "custom/vpns"
+          "idle_inhibitor"
           "custom/theme"
           "pulseaudio"
           "temperature"
@@ -179,6 +180,13 @@
           "scroll-step" = 1;
           "on-click" = lib.getExe pkgs.pavucontrol;
         };
+        "idle_inhibitor" = {
+          "format" = "{icon}";
+          "format-icons" = {
+            "activated" = "󰅶 ";
+            "deactivated" = "󰾫 ";
+          };
+        };
       };
     };
     style = ''
@@ -241,7 +249,8 @@
       #battery,
       #pulseaudio,
       #clock,
-      #tray {
+      #tray,
+      #idle_inhibitor {
         border-radius: 4px;
         margin-top: 5px;
         margin-bottom: 0;
@@ -304,6 +313,10 @@
       }
 
       #custom-vpns {
+        background-color: #eba0ac;
+      }
+
+      #idle_inhibitor {
         background-color: #fab387;
       }
 
