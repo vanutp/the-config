@@ -57,7 +57,6 @@ in {
       (block "hotkey-overlay" "skip-at-startup")
       (node "screenshot-path" "~/Pictures/Screenshots/%Y-%m-%d_%H-%M-%S.png")
       (block "input" [
-        "focus-follows-mouse"
         (
           block "keyboard"
           (block "xkb" {
@@ -70,9 +69,6 @@ in {
           "tap"
           "natural-scroll"
         ])
-        (block "mouse" {
-          scroll-factor = 1.5;
-        })
       ])
       (section "output" "eDP-1" {
         scale = 1.25;
@@ -123,6 +119,14 @@ in {
       (block "environment" {
         DISPLAY = ":0";
         NIXOS_OZONE_WL = "1";
+        NIX_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+          pkgs.stdenv.cc.cc.lib
+          pkgs.libz
+          pkgs.openssl.out
+          pkgs.wayland
+          pkgs.libxkbcommon
+          pkgs.pkgs.libGL
+        ];
       })
       (block "binds" (
         let
@@ -143,7 +147,7 @@ in {
               "Super+Shift+Space" = "toggle-window-floating";
               "Super+Shift+Q" = "close-window";
               "Super+R" = "switch-preset-column-width";
-              "Super+Shift+R" = "switch-preset-window-height";
+              "Super+Ctrl+R" = "switch-preset-window-height";
               "Super+F" = "maximize-column";
               "Super+H" = "reset-window-height";
               "Super+Shift+F" = "fullscreen-window";
@@ -164,6 +168,19 @@ in {
               "Super+Shift+Left" = "move-column-left";
               "Super+Right" = "focus-column-right";
               "Super+Shift+Right" = "move-column-right";
+
+              "Super+Ctrl+Down" = "focus-workspace-down";
+              "Super+Ctrl+Shift+Down" = "move-workspace-down";
+              "Super+Ctrl+Shift+Alt+Down" = "move-column-to-workspace-down";
+              "Super+Ctrl+Up" = "focus-workspace-up";
+              "Super+Ctrl+Shift+Up" = "move-workspace-up";
+              "Super+Ctrl+Shift+Alt+Up" = "move-column-to-workspace-up";
+              "Super+Ctrl+Right" = "focus-monitor-right";
+              "Super+Ctrl+Shift+Right" = "move-workspace-to-monitor-right";
+              "Super+Ctrl+Shift+Alt+Right" = "move-column-to-monitor-right";
+              "Super+Ctrl+Left" = "focus-monitor-left";
+              "Super+Ctrl+Shift+Left" = "move-workspace-to-monitor-left";
+              "Super+Ctrl+Shift+Alt+Left" = "move-column-to-monitor-left";
             })
 
             (bindsWith {cooldown-ms = 150;} {
