@@ -44,6 +44,12 @@ in {
     playerctld.enable = true;
   };
 
+  systemd.user.services.network-manager-applet.Unit = {
+    # start after niri and remove tray.target
+    After = lib.mkForce ["graphical-session.target"];
+    Requires = lib.mkForce [];
+  };
+
   xdg.configFile."niri/config.kdl".source =
     mkKdl "config.kdl"
     ({
@@ -160,21 +166,17 @@ in {
               "Mod+End" = "focus-column-last";
               "Mod+Shift+End" = "move-column-to-last";
 
-              "Super+Down" = "focus-window-down";
-              "Super+Shift+Down" = "move-window-down";
-              "Super+Up" = "focus-window-up";
-              "Super+Shift+Up" = "move-window-up";
+              "Super+Down" = "focus-window-or-workspace-down";
+              "Super+Shift+Down" = "move-window-down-or-to-workspace-down";
+              "Super+Up" = "focus-window-or-workspace-up";
+              "Super+Shift+Up" = "move-window-up-or-to-workspace-up";
               "Super+Left" = "focus-column-left";
               "Super+Shift+Left" = "move-column-left";
               "Super+Right" = "focus-column-right";
               "Super+Shift+Right" = "move-column-right";
 
-              "Super+Ctrl+Down" = "focus-workspace-down";
               "Super+Ctrl+Shift+Down" = "move-workspace-down";
-              "Super+Ctrl+Shift+Alt+Down" = "move-column-to-workspace-down";
-              "Super+Ctrl+Up" = "focus-workspace-up";
               "Super+Ctrl+Shift+Up" = "move-workspace-up";
-              "Super+Ctrl+Shift+Alt+Up" = "move-column-to-workspace-up";
               "Super+Ctrl+Right" = "focus-monitor-right";
               "Super+Ctrl+Shift+Right" = "move-workspace-to-monitor-right";
               "Super+Ctrl+Shift+Alt+Right" = "move-column-to-monitor-right";
