@@ -7,6 +7,7 @@
     ./hardware-configuration.nix
     ./hardware.nix
     ./login.nix
+    ./logiops.nix
     ./portals.nix
     ./secrets.nix
     ./security.nix

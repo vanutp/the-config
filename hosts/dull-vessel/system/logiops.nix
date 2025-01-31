@@ -7,7 +7,7 @@
       // quicker when scrolling fast.
       smartshift: { on: true; threshold: 15; };
 
-      hiresscroll: { hires: false; invert: false; target: false; };
+      hiresscroll: { hires: true; invert: false; target: false; };
 
       // Higher numbers make the mouse more sensitive (cursor moves faster),
       // 4000 max for MX Master 3.
