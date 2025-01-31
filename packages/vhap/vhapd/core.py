@@ -276,6 +276,7 @@ async def run_docker_compose(
     return stdout, stderr
 
 
+# TODO: just write docker config without running login
 @asynccontextmanager
 async def with_creds(app_name: str):
     with TemporaryDirectory() as docker_cfg_dir:

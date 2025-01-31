@@ -97,6 +97,7 @@
             inherit system;
             config.allowUnfree = true;
           };
+          inherit pyproject-nix;
         };
 
         imports = [

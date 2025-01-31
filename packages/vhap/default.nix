@@ -1,10 +1,10 @@
 {
   pkgs,
-  inputs',
+  pyproject-nix,
   ...
 }: let
   python = pkgs.python3;
-  project = inputs'.pyproject-nix.lib.project.loadPyproject {
+  project = pyproject-nix.lib.project.loadPyproject {
     projectRoot = ./.;
   };
 in {

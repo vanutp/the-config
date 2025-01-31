@@ -50,6 +50,16 @@
               readOnly = true;
               default = "/srv/vhap/${name}";
             };
+            metadata = mkOption {
+              type = types.submodule ({...}: {
+                options = {
+                  owners = mkOption {
+                    type = types.listOf types.int;
+                    default = [];
+                  };
+                };
+              });
+            };
           };
         }));
         default = {};
