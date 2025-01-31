@@ -1,45 +1,12 @@
-{...}: {
-  imports = [
-    ./anti_discuss_bot.nix
-    ./authelia.nix
-    ./avataremojibot.nix
-    ./boardgames_tmat_me.nix
-    ./bukvobot.nix
-    ./comments_reminder_bot.nix
-    ./csai_tmat_me.nix
-    ./cuspace_vanutp_dev.nix
-    ./ej_tmat_me.nix
-    ./findnewbot.nix
-    ./firefly_vanutp_dev.nix
-    ./flat-manager.nix
-    ./frontend-proxy.nix
-    ./githook.nix
-    ./hacker.nix
-    ./ilkras_ru.nix
-    ./ip_vanutp_dev.nix
-    ./mc_auth_vanutp_dev.nix
-    ./n8n_vanutp_dev.nix
-    ./nocodb.nix
-    ./pb_ilkras_ru.nix
-    ./pihole.nix
-    ./portainer.nix
-    ./pwd_vanutp_dev.nix
-    ./rss_vanutp_dev.nix
-    ./samat_tiktok.nix
-    ./samat_vk.nix
-    ./samat_yt.nix
-    ./sculptor_vanutp_dev.nix
-    ./t_vanutp_dev.nix
-    ./telemap_vanutp_dev.nix
-    ./tgapi_echobot.nix
-    ./tgpy.nix
-    ./tmat_wedding_bot.nix
-    ./vanutp_dev.nix
-    ./vanutp_music_bot.nix
-    ./vosh_results_bot.nix
-    ./vtp_sh.nix
-    ./waka_vanutp_dev.nix
-    ./write_tmat_me.nix
-    ./zond_vanutp_dev.nix
+{lib, ...}: let
+  inherit (builtins) readDir filter;
+  inherit (lib) attrNames map pipe;
+  modulesDir = ./.;
+in {
+  imports = pipe modulesDir [
+    readDir
+    attrNames
+    (filter (app: app != "default.nix"))
+    (map (app: "./${app}"))
   ];
 }
