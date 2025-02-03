@@ -51,6 +51,7 @@
         };
       })
       obsidian
+      nautilus
     ]
     ++ (with self-pkgs; [
       veyon
