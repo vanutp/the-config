@@ -37,6 +37,7 @@ def cleanup_config(app_config: dict):
             del app_config[key]
     del app_config['appDir']
     del app_config['auth']
+    del app_config['metadata']
 
 
 def add_composter_label_to_object(obj: dict):
