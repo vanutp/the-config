@@ -7,6 +7,6 @@ in {
     readDir
     attrNames
     (filter (app: app != "default.nix"))
-    (map (app: "./${app}"))
+    (map (app: "${modulesDir}/${app}"))
   ];
 }
