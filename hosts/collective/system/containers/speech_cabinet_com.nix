@@ -13,7 +13,7 @@
       NEXTAUTH_URL = "https://${host}";
       limits = {
         cpus = "2.5";
-        pids = 256;
+        pids = 1024;
         memory = "1G";
       };
       env_file = config.sops.secrets."services/${builtins.replaceStrings ["." "-"] ["_" "_"] host}".path;
@@ -29,6 +29,7 @@
         };
         volumes = [
           "temp:/app/temp"
+          "./music:/app/public/music"
         ];
         restart = "always";
       };
