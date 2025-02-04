@@ -6,7 +6,7 @@
     ./dunst.nix
     ./fcitx5.nix
     ./lockscreen.nix
-    ./niri.nix
+    ./niri
     ./packages.nix
     ./secrets.nix
     ./session-services.nix

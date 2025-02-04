@@ -1,0 +1,36 @@
+From 8f1a6cefe9ac32271e87fcdb6a11a0456ebc95ae Mon Sep 17 00:00:00 2001
+From: Ivan Filipenkov <hello@vanutp.dev>
+Date: Tue, 4 Feb 2025 18:24:43 +0100
+Subject: [PATCH] Update Smithay
+
+---
+ Cargo.lock | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Cargo.lock b/Cargo.lock
+index 7d61f58d..7a02db10 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -3415,8 +3415,8 @@ checksum = "b7c388c1b5e93756d0c740965c41e8822f866621d41acbdf6336a6a168f8840c"
+ 
+ [[package]]
+ name = "smithay"
+-version = "0.3.0"
+-source = "git+https://github.com/Smithay/smithay.git#e1a863b3ffc2d560007e3b89e5bbe9500c69221e"
++version = "0.4.0"
++source = "git+https://github.com/Smithay/smithay.git#cfa0fa27530f191cd982a9433b123b9cb1979de0"
+ dependencies = [
+  "appendlist",
+  "bitflags 2.7.0",
+@@ -3487,7 +3487,7 @@ dependencies = [
+ [[package]]
+ name = "smithay-drm-extras"
+ version = "0.1.0"
+-source = "git+https://github.com/Smithay/smithay.git#e1a863b3ffc2d560007e3b89e5bbe9500c69221e"
++source = "git+https://github.com/Smithay/smithay.git#cfa0fa27530f191cd982a9433b123b9cb1979de0"
+ dependencies = [
+  "drm",
+  "libdisplay-info",
+-- 
+2.47.1
+

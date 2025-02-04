@@ -33,7 +33,17 @@ in {
     {package = pkgs.wpaperd;}
   ];
   home.packages = [
-    pkgs.niri
+    (pkgs.niri.overrideAttrs (prev: let
+      lockPatch = ./0001-Update-Smithay.patch;
+    in {
+      patches = [lockPatch] ++ prev.patches;
+      cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+        inherit (prev) src;
+        name = "${prev.pname}-${prev.version}";
+        patches = lockPatch;
+        hash = "sha256-7Urj1pqlRENrRiaTya5j8q0Qwm8jccnf/kvkyynu4E0=";
+      };
+    }))
     (pkgs.writeScriptBin "default-user-session" ''
       #!${lib.getExe pkgs.bash}
       exec ${lib.getExe pkgs.niri} --session
