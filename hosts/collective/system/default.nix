@@ -37,4 +37,17 @@
   programs.mosh.enable = true;
 
   setup.computerType = "server";
+
+  programs.fish.enable = true;
+  users.users.liferooter = {
+    isNormalUser = true;
+    extraGroups = ["wheel" "docker"];
+    shell = pkgs.fish;
+    openssh.authorizedKeys.keys = [
+      config.setup.pubkeys.main
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqqape1/IJC8PK+7lJxwM9N9Oo4SK7HZ7SnCMZjmaTR liferooter@computer"
+    ];
+  };
+  networking.firewall.allowedTCPPorts = [25556];
+  networking.firewall.allowedUDPPorts = [24456];
 }

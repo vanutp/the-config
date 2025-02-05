@@ -30,8 +30,11 @@
 
   services.openssh = {
     enable = true;
-    settings.PasswordAuthentication = false;
-    settings.PermitRootLogin = "no";
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+      AcceptEnv = "COLORTERM";
+    };
   };
 
   programs.gnupg.agent = {
