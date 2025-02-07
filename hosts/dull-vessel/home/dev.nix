@@ -66,6 +66,7 @@
     pkgs-unstable.vscode
     pkgs-unstable.jetbrains.idea-ultimate
     pkgs-unstable.jetbrains.clion
+    pkgs-unstable.jetbrains-toolbox
     (
       pkgs.android-studio.withSdk
       (pkgs.androidenv.composeAndroidPackages {
