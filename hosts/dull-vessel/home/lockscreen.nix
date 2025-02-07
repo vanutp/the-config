@@ -64,9 +64,9 @@
           on-timeout = "loginctl lock-session";
         }
         {
-          timeout = 60 * 15;
-          # TODO: just turn off monitors
-          on-timeout = "${lib.getExe' pkgs.systemd "systemctl"} suspend";
+          timeout = 60 * 10;
+          on-timeout = "niri msg action power-off-monitors";
+          on-resumt = "niri msg action power-on-monitors";
         }
       ];
     };
