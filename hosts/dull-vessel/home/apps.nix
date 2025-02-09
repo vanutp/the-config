@@ -17,15 +17,11 @@
       })
       okular
       libreoffice-fresh
-      thunderbird
       gimp
       (mpv.override {
         scripts = [mpvScripts.mpris];
       })
-      vlc
       via
-      xfce.thunar
-      xfce.tumbler
       ark
       spotify
       (google-chrome.override {

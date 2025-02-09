@@ -59,7 +59,7 @@
     gnumake
     clang
     gdb
-    lldb
+    lldb_19
     nil
     alejandra
     pkgs-unstable.zed-editor
