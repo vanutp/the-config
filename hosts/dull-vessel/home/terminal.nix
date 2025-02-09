@@ -21,6 +21,7 @@
       window-padding-y = 3;
       font-family = config.preferences.font.monospace;
       mouse-scroll-multiplier = 3;
+      gtk-single-instance = true;
     };
     onChange = "${lib.getExe pkgs.ghostty} +validate-config";
   };
