@@ -8,7 +8,7 @@
     [
       pkgs-unstable.anki-bin
       sidequest
-      gwenview
+      loupe
       xournalpp
       slack
       vesktop
