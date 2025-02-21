@@ -102,6 +102,7 @@
 
         imports = [
           ./packages
+          ./devshell.nix
         ];
       };
     };
