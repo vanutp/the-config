@@ -38,6 +38,17 @@
           fail_text = ''$FAIL ($ATTEMPTS)'';
         }
       ];
+
+      label = [
+        {
+          font_family = config.preferences.font.monospace;
+          text = "$LAYOUT[!,ru]";
+          color = "rgb(255, 0, 0)";
+          position = "0, -50";
+          halign = "center";
+          valign = "center";
+        }
+      ];
     };
   };
 
