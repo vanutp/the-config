@@ -174,6 +174,14 @@
               header.header-logged-out {
                 background-color: #a02e1c !important;
               }
+              .blob-viewer .line-numbers {
+                min-width: unset !important;
+              }
+              @media (max-width: 768px) {
+                .blob-viewer {
+                  margin: 0 -16px;
+                }
+              }
             '
           '';
         };
