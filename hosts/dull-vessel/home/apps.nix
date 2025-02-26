@@ -6,7 +6,15 @@
 }: {
   home.packages = with pkgs;
     [
-      pkgs-unstable.anki-bin
+      (pkgs-unstable.anki-bin.overrideAttrs (prev: {
+        nativeBuildInputs = (prev.nativeBuildInputs or []) ++ [pkgs.makeWrapper];
+        buildCommand =
+          (prev.buildCommand or "")
+          + ''
+            wrapProgram $out/bin/anki-bin \
+              --set ANKI_WAYLAND 1
+          '';
+      }))
       sidequest
       loupe
       xournalpp
