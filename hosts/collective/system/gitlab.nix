@@ -175,7 +175,10 @@
                 background-color: #a02e1c !important;
               }
               .blob-viewer .line-numbers {
-                min-width: unset !important;
+                min-width: 66px !important;
+              }
+              .file-content.code pre code {
+                margin-left: 66px !important;
               }
               @media (max-width: 768px) {
                 .blob-viewer {
