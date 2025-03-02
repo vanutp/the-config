@@ -1,7 +1,12 @@
-{config, ...}: {
+{
+  config,
+  pkgs-unstable,
+  ...
+}: {
   sops.secrets."services/anki" = {};
   services.anki-sync-server = {
     enable = true;
+    package = pkgs-unstable.anki-sync-server;
     address = "127.0.0.1";
     port = 27701;
     users = [
