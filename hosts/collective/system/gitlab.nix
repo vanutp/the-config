@@ -177,11 +177,8 @@
               .blob-viewer .line-numbers {
                 min-width: 66px !important;
               }
-              .file-content.code pre code {
-                margin-left: 66px !important;
-              }
               @media (max-width: 768px) {
-                .blob-viewer {
+                [data-testid="blob-viewer-file-content"] {
                   margin: 0 -16px;
                 }
               }
