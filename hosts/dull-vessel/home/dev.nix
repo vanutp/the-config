@@ -33,6 +33,11 @@
     fi
   '';
 
+  programs.zsh.sessionVariables = {
+    UV_PYTHON_PREFERENCE = "only-system";
+    UV_PYTHON = pkgs.python3;
+  };
+
   home.packages = with pkgs; [
     hyperfine
     gtk4
