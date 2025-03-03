@@ -53,6 +53,8 @@
           ++ black.optional-dependencies.d
     ))
     (poetry.withPlugins (ps: with ps; [poetry-plugin-export]))
+    pkgs-unstable.uv
+    pkgs-unstable.ruff
     pipenv
     twine
     pgcli
