@@ -68,11 +68,11 @@ in {
   services.vhap-compose-update.entries = [
     {
       key = config.sops.placeholder."vhap-compose-update/speech_cabinet_com";
-      service = "speech_cabinet_com";
+      services = ["speech_cabinet_com"];
     }
     {
       key = config.sops.placeholder."vhap-compose-update/dev_speech_cabinet_com";
-      service = "dev_speech_cabinet_com";
+      services = ["dev_speech_cabinet_com"];
     }
   ];
 }

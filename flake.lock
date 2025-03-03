@@ -181,11 +181,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1710146030,
-        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
         "type": "github"
       },
       "original": {
@@ -740,11 +740,11 @@
         "pyproject-nix": "pyproject-nix_2"
       },
       "locked": {
-        "lastModified": 1733702078,
-        "narHash": "sha256-eBCALPCQAwLHvP10e7A6q6ikx11iGXXazwgwBfs7utY=",
+        "lastModified": 1741027081,
+        "narHash": "sha256-stAfTw/UYx0giY7lHL5Q7P6u0Vw23pRn0EXi+lhN2SQ=",
         "ref": "refs/heads/master",
-        "rev": "ea6bbf81ddafdbe210743d468ca5af8120e7a276",
-        "revCount": 8,
+        "rev": "93b57c3a4bf4494df1574611afe4459ff9076645",
+        "revCount": 9,
         "type": "git",
         "url": "https://foxlab.dev/vanutp/vhap-compose-update"
       },

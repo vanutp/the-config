@@ -11,7 +11,7 @@
     map (
       service: {
         key = config.sops.placeholder."vhap-compose-update/${service}";
-        inherit service;
+        services = [service];
       }
     ) [
       "AvatarEmojiBot"

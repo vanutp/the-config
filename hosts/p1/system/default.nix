@@ -23,7 +23,7 @@
   services.vhap-compose-update.entries = [
     {
       key = config.sops.placeholder."vhap-compose-update/progtime";
-      service = "my_progtime_net";
+      services = ["my_progtime_net"];
     }
   ];
 
