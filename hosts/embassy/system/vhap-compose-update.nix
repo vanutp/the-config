@@ -14,7 +14,6 @@
         services = [service];
       }
     ) [
-      "AvatarEmojiBot"
       "csai_tmat_me"
       "vanutp_music_bot"
       "mc_auth_vanutp_dev"
