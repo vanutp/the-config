@@ -38,7 +38,10 @@
             mode = "home";
             systemConfig = config;
           };
-        users = hostConfig.users;
+        users =
+          if hostname == "dull-vessel"
+          then {root = hostConfig.users.root;}
+          else hostConfig.users;
         sharedModules = [
           "${self}/utils/modules.nix"
         ];
@@ -58,48 +61,43 @@
           mode = "home";
         };
     };
-in
-  assert builtins.elem hostConfig.hmMode ["monolith" "modular"]; {
-    nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
-      system = hostConfig.systemType;
-      modules =
-        [
-          {
-            nixpkgs.overlays = overlays;
-          }
-          ../packages/veyon/module.nix
-          sops-nix.nixosModules.sops
-          {
-            sops = {
-              defaultSopsFile = "${hostPath}/system/secrets.yml";
-              age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
-            };
-          }
-          hostConfig.system
-          ./modules.nix
-        ]
-        ++ (
-          if hostConfig.hmMode == "monolith"
-          then mkSystemHM hostConfig
-          else []
-        );
-      specialArgs =
-        args
-        // {
-          mode = "system";
-        };
-    };
-    homeConfigurations =
-      if hostConfig.hmMode == "modular"
-      then
-        builtins.listToAttrs
-        (
-          map
-          (username: {
-            name = "${username}@${hostname}";
-            value = mkUserHM hostConfig username;
-          })
-          (builtins.attrNames hostConfig.users)
-        )
-      else {};
-  }
+in {
+  nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
+    system = hostConfig.systemType;
+    modules =
+      [
+        {
+          nixpkgs.overlays = overlays;
+        }
+        ../packages/veyon/module.nix
+        sops-nix.nixosModules.sops
+        {
+          sops = {
+            defaultSopsFile = "${hostPath}/system/secrets.yml";
+            age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+          };
+        }
+        hostConfig.system
+        ./modules.nix
+      ]
+      ++ (mkSystemHM hostConfig);
+    specialArgs =
+      args
+      // {
+        mode = "system";
+      };
+  };
+  homeConfigurations =
+    if hostname == "dull-vessel"
+    then
+      builtins.listToAttrs
+      (
+        map
+        (username: {
+          name = "${username}@${hostname}";
+          value = mkUserHM hostConfig username;
+        })
+        (builtins.attrNames (builtins.removeAttrs hostConfig.users ["root"]))
+      )
+    else {};
+}

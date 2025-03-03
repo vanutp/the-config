@@ -6,10 +6,9 @@
       };
     })
   ];
-  hmMode = "modular";
   system = ./system;
   users = {
     fox = ./home;
-    root = ./root;
+    root = {...}: {};
   };
 }
