@@ -13,6 +13,7 @@
     ./security.nix
     ./steam.nix
     ./strongswan.nix
+    ./tailscale.nix
     ./wireguard.nix
   ];
 
@@ -41,6 +42,7 @@
   networking.nameservers = ["1.1.1.1"];
   services.resolved.enable = true;
   boot.kernel.sysctl."net.ipv4.ip_default_ttl" = 65;
+  services.tailscale.enable = true;
 
   programs.dconf.enable = true;
   services.gpm.enable = true;
