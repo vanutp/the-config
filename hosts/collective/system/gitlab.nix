@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
   # TODO: configure smtp
@@ -43,6 +44,15 @@
 
     registry = {
       enable = true;
+      # TODO: remove on next update
+      package = pkgs.gitlab-container-registry.overrideAttrs (prev: {
+        postPatch = "";
+        checkFlags = [
+          # TestHTTPChecker requires internet
+          # TestS3DriverPathStyle requires s3 credentials/urls
+          "-skip TestHTTPChecker|TestS3DriverPathStyle"
+        ];
+      });
       # actually a noop in the current gitlab module
       port = 5000;
       # TODO: move to registry.foxlab.dev
