@@ -81,7 +81,9 @@ def add_traefik_labels(service: dict):
         )
     if traefik_port := traefik_cfg.get('port'):
         if not traefik_host:
-            print('[vhap] ERROR: you must specify traefik.host when specifying traefik.port')
+            print(
+                '[vhap] ERROR: you must specify traefik.host when specifying traefik.port'
+            )
             return
         add_label(
             service,
@@ -94,10 +96,7 @@ def apply_config(config_path: str):
     config = load_config(config_path)
     apps = config['apps']
     for name, app_config in apps.items():
-        creds_data = {
-            'creds_dir': str(CREDS_DIR),
-            'creds_required': app_config['auth']
-        }
+        creds_data = {'creds_dir': str(CREDS_DIR), 'creds_required': app_config['auth']}
         cleanup_config(app_config)
         add_composter_labels(app_config)
         for service in app_config.get('services', {}).values():
@@ -105,7 +104,10 @@ def apply_config(config_path: str):
             if 'restart' not in service:
                 service['restart'] = 'always'
         app_dir: Path = BASE_DIR / name
+        should_update_dns = not app_dir.exists() and config['update-dns']['enable']
         app_dir.mkdir(exist_ok=True)
+        if should_update_dns:
+            (app_dir / '.vhap-update-dns').touch()
         (app_dir / 'docker-compose.yml').write_text(json.dumps(app_config))
         (app_dir / 'creds.vhap.json').write_text(json.dumps(creds_data))
 
@@ -119,9 +121,22 @@ def get_apps_on_disk():
         yield path.name
 
 
+def update_dns(cfg, domain):
+    ...
+    # zone_id = cfg['cloudflare-zone-id']
+    # with open(cfg['cloudflare-key-file'], 'r') as f:
+    #     api_key = f.read()
+    # with httpx.Client(
+    #     headers={'Authorization': f'Bearer {api_key}'},
+    #     base_url='https://api.cloudflare.com/',
+    # ) as client:
+    #     resp = httpx.get(f'/zones/{zone_id}/dns_records')
+
+
 def up_apps(config_path: str):
     config = load_config(config_path)
     ok = True
+    update_dns_cfg = config['update-dns']
     apps = config['apps']
     apps_to_remove = set(get_apps_on_disk()) - set(apps.keys())
     for name in apps_to_remove:
@@ -142,6 +157,16 @@ def up_apps(config_path: str):
             app_dir.rmdir()
     for name, app_cfg in apps.items():
         logger.info(f'Starting app {name}')
+        app_dir = BASE_DIR / name
+        update_dns_file = app_dir / '.vhap-update-dns'
+        if update_dns_file.exists() and update_dns_cfg['enable']:
+            logger.info(f'Updating DNS for app {name}')
+            update_dns_file.unlink()
+            try:
+                update_dns(update_dns_cfg, name)
+            except Exception:
+                logger.exception(f'Failed to update DNS for app {name}')
+                ok = False
         with TemporaryDirectory() as docker_cfg_dir:
             try:
                 env = {
@@ -172,7 +197,7 @@ def up_apps(config_path: str):
                         '--quiet-pull',
                         '--remove-orphans',
                     ],
-                    cwd=BASE_DIR / name,
+                    cwd=app_dir,
                     env=env,
                 )
             except subprocess.CalledProcessError:

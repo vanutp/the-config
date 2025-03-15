@@ -11,6 +11,26 @@
         type = types.nullOr types.str;
         default = null;
       };
+      update-dns = mkOption {
+        type = types.submodule {
+          options = {
+            enable = mkOption {
+              type = types.bool;
+              default = false;
+            };
+            cloudflare-zone-id = mkOption {
+              type = types.str;
+            };
+            cloudflare-key-file = mkOption {
+              type = types.str;
+            };
+            host-ip = mkOption {
+              type = types.str;
+              readOnly = true;
+            };
+          };
+        };
+      };
       apps = mkOption {
         type = types.attrsOf (types.submodule ({name, ...}: {
           options = {
@@ -75,7 +95,17 @@
 
   config = let
     mkJson = (pkgs.formats.json {}).generate;
-    cfg = config.virtualisation.composter;
+    cfg =
+      (builtins.removeAttrs config.virtualisation.composter ["update-dns"])
+      // {
+        update-dns = let
+          dnsCfg = config.virtualisation.composter.update-dns;
+        in (
+          if dnsCfg.enable
+          then dnsCfg
+          else {enable = false;}
+        );
+      };
     configFile = mkJson "config.json" cfg;
     # TODO: validate with vhapd
     # configFile = pkgs.stdenv.mkDerivation {
@@ -88,8 +118,14 @@
     #   buildPhase = ''
     #
     # };
-    composter = pkgs.writers.writePython3 "composter" {flakeIgnore = ["E501"];} ./composter.py;
+    composter =
+      pkgs.writers.writePython3 "composter" {
+        flakeIgnore = ["E501"];
+        libraries = [pkgs.python3Packages.httpx];
+      }
+      ./composter.py;
   in {
+    virtualisation.composter.update-dns.host-ip = config.setup.network.ipv4.address;
     system.activationScripts.composter-activate.text = ''
       ${composter} apply_config ${configFile}
     '';
