@@ -12,5 +12,9 @@
   services.nginx.commonHttpConfig = ''
     set_real_ip_from 127.0.0.1;
   '';
-  virtualisation.composter.vhap-update-host = "vhap-update-collective.vanutp.dev";
+  sops.secrets."vhap-cf-token" = {};
+  virtualisation.composter = {
+    vhap-update-host = "vhap-update-collective.vanutp.dev";
+    update-dns.enable = true;
+  };
 }

@@ -18,11 +18,9 @@
               type = types.bool;
               default = false;
             };
-            cloudflare-zone-id = mkOption {
-              type = types.str;
-            };
             cloudflare-key-file = mkOption {
               type = types.str;
+              readOnly = true;
             };
             host-ip = mkOption {
               type = types.str;
@@ -51,6 +49,14 @@
               #       port = mkOption {
               #         type = types.nullOr types.int;
               #         default = null;
+              #       };
+              #       proxied = mkOption {
+              #         type = types.bool;
+              #         default = true;
+              #       };
+              #       update-dns = mkOption {
+              #         type = types.bool;
+              #         default = true;
               #       };
               #     };
               #   });
@@ -125,7 +131,13 @@
       }
       ./composter.py;
   in {
-    virtualisation.composter.update-dns.host-ip = config.setup.network.ipv4.address;
+    virtualisation.composter.update-dns = {
+      host-ip =
+        builtins.elemAt
+        (lib.strings.splitString "/" config.setup.network.ipv4.address)
+        0;
+      cloudflare-key-file = config.sops.secrets."vhap-cf-token".path;
+    };
     system.activationScripts.composter-activate.text = ''
       ${composter} apply_config ${configFile}
     '';
