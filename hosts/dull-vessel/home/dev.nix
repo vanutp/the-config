@@ -39,6 +39,7 @@
   };
 
   home.packages = with pkgs; [
+    tokei
     hyperfine
     gtk4
     temurin-bin-21 # default java
