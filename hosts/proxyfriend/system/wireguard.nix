@@ -60,6 +60,11 @@
           publicKey = "P8XqFnDJOs6zzEVAy4CL5PAYuLfYencxUlDlRg3FGkg=";
           allowedIPs = ["10.3.1.7/32"];
         }
+        {
+          # lumi
+          publicKey = "q+AywhwRwZBdtd8IlEBQIzr4kVtBZa3NyAnEPJ9QPSw=";
+          allowedIPs = ["10.3.1.8/32"];
+        }
       ];
     };
   };
