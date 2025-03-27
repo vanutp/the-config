@@ -70,27 +70,32 @@
 
       initExtraFirst = ''
       '';
-      initExtra = lib.mkAfter ''
-        # Override value set by kitty integration
-        export TERM=xterm-256color
-        zstyle ':completion:*' rehash true
-        function sudoedit() {
-          SUDO_COMMAND="sudoedit $@" command sudoedit "$@"
-        }
-        function take() {
-          mkdir -p $@ && cd ''${@:$#}
-        }
-        function root() {
-          readlink $(which $1) | cut -d/ -f1-4
-        }
-        function __clear-scrollback-buffer {
-          clear
-          zle .reset-prompt
-        }
-        zle -N __clear-scrollback-buffer
-        bindkey '^L' __clear-scrollback-buffer
-        ${config.programs.zsh.initExtraHost}
-      '';
+      initExtra = lib.mkMerge [
+        (lib.mkAfter ''
+          # Override value set by kitty integration
+          export TERM=xterm-256color
+        '')
+        ''
+          zstyle ':completion:*' rehash true
+          function sudoedit() {
+            SUDO_COMMAND="sudoedit $@" command sudoedit "$@"
+          }
+          function take() {
+            mkdir -p $@ && cd ''${@:$#}
+          }
+          function root() {
+            readlink $(which $1) | cut -d/ -f1-4
+          }
+          function __clear-scrollback-buffer {
+            clear
+            zle .reset-prompt
+          }
+          zle -N __clear-scrollback-buffer
+          bindkey '^L' __clear-scrollback-buffer
+        ''
+        # TODO: remove
+        config.programs.zsh.initExtraHost
+      ];
 
       plugins =
         [
