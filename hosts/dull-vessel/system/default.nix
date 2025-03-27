@@ -13,7 +13,6 @@
     ./security.nix
     ./steam.nix
     ./strongswan.nix
-    ./tailscale.nix
     ./wireguard.nix
   ];
 
