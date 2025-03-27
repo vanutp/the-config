@@ -1,7 +1,10 @@
 {...}: let
-  mkTgpy = {volumes ? []}: {
+  mkTgpy = {
+    volumes ? [],
+    image ? "tgpy/tgpy:latest",
+  }: {
     services.tgpy = {
-      image = "tgpy/tgpy:latest";
+      inherit image;
       deploy.resources.limits = {
         cpus = "1";
         pids = 64;
@@ -11,7 +14,9 @@
   };
 in {
   virtualisation.composter.apps = {
-    tgpy = mkTgpy {};
+    tgpy = mkTgpy {
+      image = "tgpy/tgpy:dev";
+    };
     tgpy_0 = mkTgpy {};
     tgpy_elena = mkTgpy {};
     tgpy_kitlix = mkTgpy {};
