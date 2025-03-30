@@ -12,6 +12,7 @@
           text = ''
             -Xmx4096m
             -Dawt.toolkit.name=WLToolkit
+            -Didea.kotlin.plugin.use.k2=true
           '';
         };
       })
