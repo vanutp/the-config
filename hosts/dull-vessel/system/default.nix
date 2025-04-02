@@ -50,7 +50,6 @@
   services.flatpak.enable = true;
   services.gvfs.enable = true;
   boot.supportedFilesystems = ["ntfs"];
-  virtualisation.waydroid.enable = true;
 
   programs.nix-ld.enable = true;
 }
