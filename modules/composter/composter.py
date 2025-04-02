@@ -151,15 +151,14 @@ class DnsUpdater:
         data = resp.json()
         if data['result_info']['total_count'] > data['result_info']['per_page']:
             raise ValueError('Too many zones')
-        self.zone_ids = {
-            zone['name']: zone['id']
-            for zone in data['result']
-        }
+        self.zone_ids = {zone['name']: zone['id'] for zone in data['result']}
 
     def get_zone_records(self, zone_id: str) -> list[CFRecord] | None:
         if zone_id in self._domain_cache:
             return self._domain_cache[zone_id]
-        resp = self.client.get(f'/zones/{zone_id}/dns_records', params={'per_page': 1000})
+        resp = self.client.get(
+            f'/zones/{zone_id}/dns_records', params={'per_page': 1000}
+        )
         resp.raise_for_status()
         data = resp.json()
         if data['result_info']['total_count'] > data['result_info']['per_page']:
@@ -273,6 +272,7 @@ def up_apps(config_path: str):
             except Exception:
                 logger.exception(f'Failed to update DNS for app {name}')
                 ok = False
+        # TODO: check if the directory isn't world accessible
         with TemporaryDirectory() as docker_cfg_dir:
             try:
                 env = {
@@ -333,11 +333,52 @@ def down_apps(config_path: str):
     return ok
 
 
+def pull_current_app():
+    app_dir = Path(os.getcwd())
+    creds_cfg = app_dir / 'creds.vhap.json'
+    if not creds_cfg.exists():
+        print('Cd to the app directory first')
+        sys.exit(1)
+    creds_data = json.loads(creds_cfg.read_text())
+    with TemporaryDirectory() as docker_cfg_dir:
+        env = {
+            **os.environ,
+            'DOCKER_CONFIG': docker_cfg_dir,
+        }
+        for creds_id in creds_data['creds_required']:
+            creds_file = CREDS_DIR / (creds_id + '.json')
+            creds = json.loads(creds_file.read_text())
+            subprocess.check_output(
+                [
+                    'docker',
+                    'login',
+                    '--username',
+                    creds['username'],
+                    '--password-stdin',
+                    creds['server'],
+                ],
+                env=env,
+                input=creds['password'].encode(),
+            )
+        subprocess.check_call(
+            [
+                'docker',
+                'compose',
+                'pull',
+            ],
+            cwd=app_dir,
+            env=env,
+        )
+
+
 def main():
+    if os.getuid() != 0:
+        print('This script must be run as root')
+        sys.exit(1)
     if len(sys.argv) < 2:
         print('No command specified')
         sys.exit(1)
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 3 and sys.argv[1] != 'pull':
         print('Invalid number of arguments')
         sys.exit(1)
     if sys.argv[1] == 'apply_config':
@@ -345,6 +386,8 @@ def main():
     elif sys.argv[1] == 'down':
         if not down_apps(sys.argv[2]):
             sys.exit(1)
+    elif sys.argv[1] == 'pull':
+        pull_current_app()
     elif sys.argv[1] == 'up':
         if not up_apps(sys.argv[2]):
             sys.exit(1)

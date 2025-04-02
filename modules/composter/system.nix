@@ -125,12 +125,22 @@
     #
     # };
     composter =
-      pkgs.writers.writePython3 "composter" {
+      pkgs.writers.writePython3Bin "composter" {
         flakeIgnore = ["E501"];
         libraries = [pkgs.python3Packages.httpx];
+        makeWrapperArgs = [
+          "--set"
+          "PATH"
+          "${lib.makeBinPath [
+            pkgs.docker
+          ]}"
+        ];
       }
       ./composter.py;
   in {
+    environment.systemPackages = [
+      composter
+    ];
     virtualisation.composter.update-dns = {
       host-ip =
         builtins.elemAt
@@ -139,12 +149,11 @@
       cloudflare-key-file = config.sops.secrets."vhap-cf-token".path;
     };
     system.activationScripts.composter-activate.text = ''
-      ${composter} apply_config ${configFile}
+      ${lib.getExe composter} apply_config ${configFile}
     '';
     systemd.services.composter-up = {
       script = ''
-        export PATH=${pkgs.docker}/bin:$PATH
-        ${composter} up ${configFile}
+        ${lib.getExe composter} up ${configFile}
       '';
       wantedBy = ["multi-user.target"];
       serviceConfig = {
