@@ -6,6 +6,7 @@
   sops.secrets."vhap-compose-update/cuspace_vanutp_dev" = {};
   sops.secrets."vhap-compose-update/telemap_vanutp_dev" = {};
   sops.secrets."vhap-compose-update/logbox_vanutp_dev" = {};
+  sops.secrets."vhap-compose-update/lumi_vpnbot" = {};
 
   services.vhap-compose-update.entries =
     map (
@@ -21,5 +22,6 @@
       "cuspace_vanutp_dev"
       "telemap_vanutp_dev"
       "logbox_vanutp_dev"
+      "lumi_vpnbot"
     ];
 }
