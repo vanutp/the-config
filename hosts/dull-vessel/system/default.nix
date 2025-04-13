@@ -18,6 +18,8 @@
 
   setup.computerType = "laptop";
 
+  time.timeZone = "Asia/Tokyo";
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.extraEntries = {
     "arch.conf" = ''
