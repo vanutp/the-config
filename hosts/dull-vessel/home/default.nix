@@ -1,6 +1,5 @@
 {...}: {
   imports = [
-    ./ags
     ./apps.nix
     ./dev.nix
     ./dunst.nix
