@@ -44,7 +44,7 @@
     hyperfine
     gtk4
     temurin-bin-21 # default java
-    nodejs
+    pkgs-unstable.nodejs
     corepack
     pkgs.deno
     rustup
