@@ -40,6 +40,7 @@
   };
 
   home.packages = with pkgs; [
+    lorem
     tokei
     hyperfine
     gtk4
