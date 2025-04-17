@@ -75,18 +75,18 @@
     pkgs-unstable.zed-editor
     pkgs-unstable.vscode
     pkgs-unstable.jetbrains.idea-ultimate
-    pkgs-unstable.jetbrains.clion
-    pkgs-unstable.jetbrains-toolbox
-    (
-      pkgs.android-studio.withSdk
-      (pkgs.androidenv.composeAndroidPackages {
-        platformVersions = ["34"];
-        includeEmulator = false;
-        includeSystemImages = false;
-        includeNDK = false;
-      })
-      .androidsdk
-    )
+    # pkgs-unstable.jetbrains.clion
+    # pkgs-unstable.jetbrains-toolbox
+    # (
+    #   pkgs.android-studio.withSdk
+    #   (pkgs.androidenv.composeAndroidPackages {
+    #     platformVersions = ["34"];
+    #     includeEmulator = false;
+    #     includeSystemImages = false;
+    #     includeNDK = false;
+    #   })
+    #   .androidsdk
+    # )
     pre-commit
     kubectl
     kubelogin-oidc
