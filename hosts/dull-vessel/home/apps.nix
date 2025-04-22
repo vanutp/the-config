@@ -25,7 +25,7 @@
       })
       okular
       libreoffice-fresh
-      gimp
+      pkgs-unstable.gimp3
       (mpv.override {
         scripts = [mpvScripts.mpris];
       })
