@@ -50,4 +50,6 @@
   };
   networking.firewall.allowedTCPPorts = [25556];
   networking.firewall.allowedUDPPorts = [24456];
+
+  systemd.network.wait-online.enable = false;
 }
