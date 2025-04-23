@@ -7,6 +7,7 @@
       "vanutp.dev"
       "vtp.sh"
       "speech-cabinet.com"
+      "tmat.me"
     ];
   };
   services.nginx.commonHttpConfig = ''
