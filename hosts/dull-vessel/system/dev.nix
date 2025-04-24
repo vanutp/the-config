@@ -19,8 +19,6 @@
   };
   users.groups.vboxusers.members = ["fox"];
 
-  virtualisation.vmware.host.enable = true;
-
   environment.etc."mime.types".source = "${pkgs.mime-types}/etc/mime.types";
 
   boot.binfmt = {
