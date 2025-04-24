@@ -18,7 +18,7 @@
 
   setup.computerType = "laptop";
 
-  time.timeZone = "Asia/Tokyo";
+  time.timeZone = "Europe/Berlin";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.extraEntries = {
