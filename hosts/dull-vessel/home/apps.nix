@@ -6,6 +6,7 @@
 }: {
   home.packages = with pkgs;
     [
+      p7zip
       (pkgs-unstable.anki-bin.overrideAttrs (prev: {
         nativeBuildInputs = (prev.nativeBuildInputs or []) ++ [pkgs.makeWrapper];
         buildCommand =
