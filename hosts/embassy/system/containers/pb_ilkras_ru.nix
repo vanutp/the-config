@@ -1,5 +1,6 @@
 {...}: {
   virtualisation.composter.apps.pb_ilkras_ru = {
+    backup.enable = true;
     auth = ["foxlab"];
     services.main = {
       image = "registry.vanutp.dev/vanutp/haste-server:latest";

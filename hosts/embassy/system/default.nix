@@ -22,4 +22,9 @@
   systemd.coredump.extraConfig = "Storage=none";
 
   systemd.network.wait-online.enable = false;
+
+  vanutp.backup = {
+    enable = true;
+    s3-url = "https://s3.us-east-005.backblazeb2.com/backup-embassy";
+  };
 }

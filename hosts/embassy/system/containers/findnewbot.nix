@@ -1,5 +1,6 @@
 {...}: {
   virtualisation.composter.apps.findnewbot = {
+    backup.enable = true;
     auth = ["foxlab"];
     services.main = {
       image = "registry.vanutp.dev/fnb/findnewbot:latest";

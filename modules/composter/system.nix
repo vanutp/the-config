@@ -36,6 +36,17 @@
               type = types.listOf types.str;
               default = [];
             };
+            backup = mkOption {
+              type = types.submodule {
+                options = {
+                  enable = mkOption {
+                    type = types.bool;
+                    default = false;
+                  };
+                };
+              };
+              default = {};
+            };
             services = mkOption {
               type = types.nullOr (types.attrsOf types.anything);
               default = null;

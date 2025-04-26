@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{config, ...}: let
   cfg = {
     host,
     tag,

@@ -1,5 +1,6 @@
 {...}: {
   virtualisation.composter.apps.hacker = {
+    backup.enable = true;
     auth = ["foxlab"];
     services = {
       bot = {

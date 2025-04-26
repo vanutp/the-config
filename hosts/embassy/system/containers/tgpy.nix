@@ -3,6 +3,7 @@
     volumes ? [],
     image ? "tgpy/tgpy:latest",
   }: {
+    backup.enable = true;
     services.tgpy = {
       inherit image;
       deploy.resources.limits = {

@@ -1,5 +1,6 @@
 {...}: {
   virtualisation.composter.apps.authelia = {
+    backup.enable = true;
     services = {
       admin = {
         image = "registry.vanutp.dev/progtime/authelia-admin:latest";

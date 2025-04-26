@@ -27,20 +27,23 @@
     };
   };
 in {
-  virtualisation.composter.apps.sculptor_vanutp_dev.services.main = {
-    image = "ghcr.io/shiroyashik/sculptor:latest";
-    traefik = {
-      host = "sculptor.vanutp.dev";
-      proxied = false;
-    };
-    volumes = [
-      "${config}:/app/Config.toml:ro"
-      "./data:/app/data"
-      "./logs:/app/logs"
-    ];
-    environment = {
-      RUST_LOG = "info";
-      TZ = "Europe/Moscow";
+  virtualisation.composter.apps.sculptor_vanutp_dev = {
+    backup.enable = true;
+    services.main = {
+      image = "ghcr.io/shiroyashik/sculptor:latest";
+      traefik = {
+        host = "sculptor.vanutp.dev";
+        proxied = false;
+      };
+      volumes = [
+        "${config}:/app/Config.toml:ro"
+        "./data:/app/data"
+        "./logs:/app/logs"
+      ];
+      environment = {
+        RUST_LOG = "info";
+        TZ = "Europe/Moscow";
+      };
     };
   };
 }

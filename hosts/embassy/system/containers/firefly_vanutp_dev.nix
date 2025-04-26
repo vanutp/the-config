@@ -1,5 +1,6 @@
 {...}: {
   virtualisation.composter.apps.firefly_vanutp_dev = {
+    backup.enable = true;
     services = {
       app = {
         image = "fireflyiii/core:latest";
