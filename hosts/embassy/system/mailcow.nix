@@ -9,6 +9,7 @@
     target-dir = "/tmp/mailcow-backup";
     mailcow-dir = "/home/fox/mailcow";
   in {
+    # TODO: make sure backup dir doesn't exist beforehand to avoid uploading old data
     backupPrepareCommand = ''
       mkdir ${target-dir}
       chmod 700 ${target-dir}

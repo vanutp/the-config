@@ -85,7 +85,7 @@
           "--keep-last=10"
           "--tag=${cfg.tag}"
           "--host=${hostname}"
-        ];
+        ]; # TODO: forget/prune separately
         timerConfig = {
           OnCalendar = "Sun *-*-* 03:00:00";
           Persistent = true;
