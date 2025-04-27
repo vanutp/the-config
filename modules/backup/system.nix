@@ -26,20 +26,20 @@
                   type = types.listOf types.str;
                   default = [];
                 };
-                dynamicFilesFrom = lib.mkOption {
+                dynamicFilesFrom = mkOption {
                   type = types.nullOr types.str;
                   default = null;
                 };
-                extraBackupArgs = lib.mkOption {
+                extraBackupArgs = mkOption {
                   type = types.listOf types.str;
                   default = [];
                 };
-                backupPrepareCommand = lib.mkOption {
-                  type = with lib.types; nullOr str;
+                backupPrepareCommand = mkOption {
+                  type = types.nullOr types.str;
                   default = null;
                 };
-                backupCleanupCommand = lib.mkOption {
-                  type = with lib.types; nullOr str;
+                backupCleanupCommand = mkOption {
+                  type = types.nullOr types.str;
                   default = null;
                 };
               };
