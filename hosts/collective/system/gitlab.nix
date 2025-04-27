@@ -262,4 +262,13 @@
     User = "gitlab-runner";
     Group = "gitlab-runner";
   };
+
+  vanutp.backup.backups.gitlab = {
+    backupPrepareCommand = ''
+      /run/wrappers/bin/sudo -u git /run/current-system/sw/bin/gitlab-rake gitlab:backup:create BACKUP=restic
+    '';
+    paths = ["/var/gitlab/state/backup/restic_gitlab_backup.tar"];
+    extraBackupArgs = ["--compression=off"];
+    backupCleanupCommand = "rm /var/gitlab/state/backup/restic_gitlab_backup.tar";
+  };
 }
