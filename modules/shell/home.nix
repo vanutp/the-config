@@ -55,6 +55,7 @@
         glg = "git log --stat";
         gcl = "git clone";
         dco = "docker compose";
+        sdco = "docker compose";
       };
       shellGlobalAliases = {
         "..." = "../..";
