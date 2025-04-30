@@ -19,8 +19,6 @@
 
   setup.computerType = "server";
 
-  systemd.coredump.extraConfig = "Storage=none";
-
   systemd.network.wait-online.enable = false;
 
   vanutp.backup = {
