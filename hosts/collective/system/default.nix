@@ -8,6 +8,7 @@
     ./containers
     ./gitlab.nix
     ./hardware-configuration.nix
+    ./immich
     ./minecraft-gravity_m.nix
     ./minecraft.nix
     ./network.nix

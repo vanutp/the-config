@@ -42,6 +42,14 @@
                   type = types.nullOr types.str;
                   default = null;
                 };
+                schedule = mkOption {
+                  type = types.str;
+                  default = "Sun *-*-* 03:00:00";
+                };
+                randomizedDelay = mkOption {
+                  type = types.str;
+                  default = "1h";
+                };
               };
             }));
           };
@@ -87,9 +95,9 @@
           "--host=${hostname}"
         ]; # TODO: forget/prune separately
         timerConfig = {
-          OnCalendar = "Sun *-*-* 03:00:00";
+          OnCalendar = cfg.schedule;
           Persistent = true;
-          RandomizedDelaySec = "10m";
+          RandomizedDelaySec = cfg.randomizedDelay;
         };
         inherit (cfg) paths dynamicFilesFrom backupPrepareCommand backupCleanupCommand;
       })
