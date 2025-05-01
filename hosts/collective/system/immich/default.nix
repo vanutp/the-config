@@ -29,7 +29,6 @@ in {
     };
     preStart = ''
       mkdir -p ${media-dir}
-      chown -R immich:immich ${media-dir}
       ${juicefs} status ${redis-url} \
         || ${juicefs} format \
            --storage s3 \
@@ -39,7 +38,15 @@ in {
            ${redis-url} ${volume-name}
     '';
     # TODO: use systemd.mount?
-    script = "${juicefs} mount ${redis-url} ${media-dir}";
+    script = ''
+      ${juicefs} mount --cache-size 10240 ${redis-url} ${media-dir}
+      chmod 700 ${media-dir}
+      chown -R immich:immich ${media-dir}
+    '';
+    preStop = ''
+      ${lib.getExe' pkgs.util-linux "umount"} ${media-dir}
+      echo "Unmounted ${media-dir}"
+    '';
   };
 
   vanutp.backup.backups.immich-fs = {
