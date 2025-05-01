@@ -17,4 +17,9 @@ lib.mkIf config.setup.isServer {
   services.journald.extraConfig = ''
     SystemMaxUse=1G
   '';
+
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "hello@vanutp.dev";
+  };
 }
