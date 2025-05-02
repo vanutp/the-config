@@ -4,7 +4,6 @@
     ./containers
     ./dvasmp
     ./disko.nix
-    ./gitlab-ssh-shim.nix
     ./hardware-configuration.nix
     ./mailcow.nix
     ./network.nix
