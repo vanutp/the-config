@@ -32,5 +32,6 @@
     nix-tree
     fastfetch
     whois
+    rdap
   ];
 }
