@@ -75,6 +75,7 @@
     pkgs-unstable.zed-editor
     pkgs-unstable.vscode
     pkgs-unstable.jetbrains.idea-ultimate
+    pkgs-unstable.jetbrains.pycharm-professional
     # pkgs-unstable.jetbrains.clion
     # pkgs-unstable.jetbrains-toolbox
     # (
