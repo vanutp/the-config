@@ -176,7 +176,7 @@
       # TODO: fix permissions?
       user = "root";
       group = "root";
-      port = 7000;
+      port = 7002;
       baseDir = "/srv/vhap";
       logsDir = "/srv/vhap/_vhap_update_logs";
       entries = [];
@@ -184,7 +184,7 @@
     vanutp.traefik.proxies = lib.mkIf (cfg.vhap-update-host != null) [
       {
         host = cfg.vhap-update-host;
-        target = "http://127.0.0.1:7000";
+        target = "http://127.0.0.1:7002";
       }
     ];
   };
