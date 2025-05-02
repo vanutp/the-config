@@ -104,7 +104,9 @@
       config.vanutp.backup.backups
     );
 
-    sops.secrets."restic/repo-creds" = {};
-    sops.secrets."restic/password" = {};
+    sops.secrets = lib.mkIf config.vanutp.backup.enable {
+      "restic/repo-creds" = {};
+      "restic/password" = {};
+    };
   };
 }
