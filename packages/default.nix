@@ -2,7 +2,6 @@
   imports = [
     ./_64gram
     ./cups-kyodialog
-    ./oh-my-posh
     ./veyon
     ./vhap
   ];

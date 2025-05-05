@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  self-pkgs,
   lib,
   ...
 }: {
@@ -29,13 +28,6 @@
       EDITOR = "nvim";
       VISUAL = "$EDITOR";
       TERM = "xterm-256color";
-    };
-
-    programs.oh-my-posh = {
-      enable = true;
-      # TODO: remove
-      package = self-pkgs.oh-my-posh;
-      settings = lib.importJSON ./omp.json;
     };
 
     programs.zsh = {
@@ -78,8 +70,6 @@
       };
 
       initExtraFirst = ''
-        # TODO: why
-        zmodload zsh/langinfo
       '';
       initExtra = lib.mkMerge [
         (lib.mkAfter ''
@@ -122,6 +112,16 @@
           file = "share/oh-my-zsh/lib/${name}.zsh";
         }) ["clipboard" "compfix" "completion" "history" "key-bindings" "termsupport"])
         ++ [
+          {
+            name = "powerlevel10k";
+            src = pkgs.zsh-powerlevel10k;
+            file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+          }
+          {
+            name = "powerlevel10k-config";
+            src = ./p10k;
+            file = "p10k.zsh";
+          }
           {
             name = "sudo";
             src = pkgs.oh-my-zsh;
