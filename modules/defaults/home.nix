@@ -4,5 +4,8 @@
   programs.home-manager.enable = true;
   xdg.enable = true;
 
-  programs.direnv.enable = true;
+  programs.direnv = {
+    enable = true;
+    silent = true;
+  };
 }
