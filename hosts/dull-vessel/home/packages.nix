@@ -12,7 +12,7 @@
     yt-dlp
     httpie
     ffmpeg-full
-    inputs.manix.packages.${pkgs.system}.manix
+    manix
     imagemagick
     yubikey-manager
     vim.xxd

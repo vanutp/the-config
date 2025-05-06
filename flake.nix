@@ -21,10 +21,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    manix = {
-      url = "github:nix-community/manix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
