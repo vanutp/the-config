@@ -74,7 +74,17 @@
     clang
     gdb
     lldb_19
-    nil
+    nixd
+    (pkgs.stdenv.mkDerivation {
+      name = "nixd-with-semantic";
+      nativeBuildInputs = [pkgs.makeWrapper];
+      dontUnpack = true;
+      installPhase = ''
+        mkdir -p $out/bin
+        makeWrapper ${pkgs.nixd}/bin/nixd $out/bin/nixd-with-semantic \
+          --add-flags "--semantic-tokens=true"
+      '';
+    })
     alejandra
     pkgs-unstable.zed-editor
     pkgs-unstable.vscode
