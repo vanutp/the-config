@@ -16,7 +16,11 @@
           '';
         };
       })
-      ["IntelliJIdea2024.3/idea64.vmoptions" "CLion2024.3/clion64.vmoptions"]
+      [
+        "IntelliJIdea2025.1/idea64.vmoptions"
+        "CLion2025.1/clion64.vmoptions"
+        "PyCharm2025.1/pycharm64.vmoptions"
+      ]
     )
     // {
       ".local/share/jdks/temurin8".source = pkgs.temurin-bin-8;
