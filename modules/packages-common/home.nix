@@ -16,7 +16,7 @@
     jq
     bat
     duf
-    ncdu
+    dua
     htop
     psmisc
     usbutils
