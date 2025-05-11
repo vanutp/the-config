@@ -7,6 +7,7 @@ in {
     readDir
     attrNames
     (filter (app: app != "default.nix"))
+    (filter (lib.hasSuffix ".nix"))
     (map (app: "${modulesDir}/${app}"))
   ];
 }
