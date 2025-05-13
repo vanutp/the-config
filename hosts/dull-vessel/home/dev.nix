@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   pkgs-unstable,
   ...
@@ -86,7 +87,11 @@
       '';
     })
     alejandra
-    pkgs-unstable.zed-editor
+    (import inputs.nixpkgs-very-unstable {
+      inherit (pkgs) system;
+      config.allowUnfree = true;
+    })
+    .zed-editor
     pkgs-unstable.vscode
     pkgs-unstable.jetbrains.idea-ultimate
     pkgs-unstable.jetbrains.pycharm-professional

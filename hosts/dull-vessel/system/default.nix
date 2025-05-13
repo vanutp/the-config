@@ -14,6 +14,7 @@
     ./steam.nix
     ./strongswan.nix
     ./wireguard.nix
+    ./zed.nix
   ];
 
   setup.computerType = "laptop";
