@@ -75,6 +75,7 @@ in {
         (block "touchpad" [
           "tap"
           "natural-scroll"
+          "dwt"
         ])
       ])
       (section "output" "eDP-1" {
