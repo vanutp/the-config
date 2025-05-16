@@ -3,6 +3,7 @@
     image = "ghcr.io/constructor-space/memesearch:latest";
     volumes = [
       "./data:/data"
+      "./cache:/cache"
     ];
     environment = {
       EXTERNAL_URL = "https://memesearch.vanutp.dev";
