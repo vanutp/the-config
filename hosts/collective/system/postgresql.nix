@@ -10,6 +10,10 @@
       # TYPE  DATABASE  USER  ADDRESS     METHOD
       host    all       all   0.0.0.0/0  scram-sha-256
     '';
+    extensions = ps:
+      with ps; [
+        pgvector
+      ];
   };
   networking.firewall.allowedTCPPorts = [5432];
 
