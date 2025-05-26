@@ -5,6 +5,7 @@
 }: {
   services.postgresql = {
     enable = true;
+    package = pkgs.postgresql_16;
     enableTCPIP = true;
     authentication = ''
       # TYPE  DATABASE  USER  ADDRESS     METHOD

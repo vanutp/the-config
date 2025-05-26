@@ -2,17 +2,8 @@
   config,
   pkgs,
   lib,
-  inputs,
   ...
-}: let
-  nerdfonts' = pkgs.nerdfonts.override {
-    fonts = ["FiraCode" "JetBrainsMono"];
-  };
-in {
-  imports = [
-    inputs.catppuccin.homeManagerModules.catppuccin
-  ];
-
+}: {
   options = with lib; {
     preferences.wallpaper = mkOption {
       type = types.path;
@@ -27,7 +18,7 @@ in {
     preferences.font.monospace-path = mkOption {
       type = types.str;
       description = "Default monospace font path";
-      default = "${nerdfonts'}/share/fonts/truetype/NerdFonts/JetBrainsMonoNerdFont-Regular.ttf";
+      default = "${pkgs.nerd-fonts.jetbrains-mono}/share/fonts/truetype/NerdFonts/JetBrainsMono/JetBrainsMonoNerdFont-Regular.ttf";
     };
   };
 
@@ -53,8 +44,6 @@ in {
       platformTheme.name = "qtct";
     };
 
-    catppuccin.flavor = "mocha";
-
     fonts.fontconfig.enable = true;
     fonts.fontconfig.defaultFonts.sansSerif = ["Noto Sans"];
     fonts.fontconfig.defaultFonts.serif = ["Noto Serif"];
@@ -73,7 +62,8 @@ in {
       noto-fonts-emoji
       fira
       fira-math
-      nerdfonts'
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
     ];
   };
 }

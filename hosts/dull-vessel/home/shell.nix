@@ -10,7 +10,7 @@
   };
 
   programs.zsh = {
-    initExtraHost = ''
+    initContent = ''
       POWERLEVEL9K_LEFT_PROMPT_ELEMENTS+=('newline')
       POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS+=('newline')
       if [[ -z "$VANUTP_WORKDIR_CHANGED" && "$PWD" == "$HOME" && -d ~/playground ]]; then

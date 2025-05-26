@@ -22,7 +22,7 @@ lib.mkIf config.setup.isServer {
   };
 
   programs.zsh = {
-    initExtraFirst = ''
+    initContent = lib.mkBefore ''
       if [ ! "$TMUX" ]; then
         tmux attach
         exit

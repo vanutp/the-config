@@ -50,9 +50,9 @@
     hyperfine
     gtk4
     temurin-bin-21 # default java
-    pkgs-unstable.nodejs
+    nodejs
     corepack
-    pkgs.deno
+    deno
     rustup
     (python3.withPackages (
       ps:
@@ -65,7 +65,7 @@
           ]
           ++ black.optional-dependencies.d
     ))
-    (pkgs-unstable.poetry.withPlugins (ps: with ps; [poetry-plugin-export]))
+    (poetry.withPlugins (ps: with ps; [poetry-plugin-export]))
     pkgs-unstable.uv
     pkgs-unstable.ruff
     pipenv
@@ -76,7 +76,7 @@
     gdb
     lldb_19
     nixd
-    (pkgs.stdenv.mkDerivation {
+    (stdenv.mkDerivation {
       name = "nixd-with-semantic";
       nativeBuildInputs = [pkgs.makeWrapper];
       dontUnpack = true;
@@ -94,7 +94,7 @@
     .zed-editor
     pkgs-unstable.vscode
     pkgs-unstable.jetbrains.idea-ultimate
-    pkgs-unstable.jetbrains.pycharm-professional
+    # pkgs-unstable.jetbrains.pycharm-professional
     # pkgs-unstable.jetbrains.clion
     # pkgs-unstable.jetbrains-toolbox
     # (

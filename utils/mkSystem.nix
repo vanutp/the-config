@@ -35,7 +35,7 @@
         extraSpecialArgs =
           args
           // {
-            mode = "home";
+            mode = "home-bundled";
             systemConfig = config;
           };
         users =
@@ -58,7 +58,7 @@
       extraSpecialArgs =
         args
         // {
-          mode = "home";
+          mode = "home-standalone";
         };
     };
 in {

@@ -1,9 +1,6 @@
-{pkgs, ...}: let
-  nerdfonts' = pkgs.nerdfonts.override {
-    fonts = ["FiraCode" "JetBrainsMono"];
-  };
-in {
+{pkgs, ...}: {
   # zed can't see home-manager fonts
+  # TODO: replace with fonts.packages
   environment.systemPackages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
@@ -11,6 +8,7 @@ in {
     noto-fonts-emoji
     fira
     fira-math
-    nerdfonts'
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
   ];
 }

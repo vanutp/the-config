@@ -16,7 +16,7 @@
     " && dunstify 'Copied!')
   '';
 in {
-  programs.wpaperd = {
+  services.wpaperd = {
     enable = true;
     settings = {
       any.path = config.preferences.wallpaper;

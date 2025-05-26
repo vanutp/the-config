@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-unstable,
   lib,
   config,
   ...
@@ -61,7 +60,6 @@
     '';
   in {
     enable = true;
-    package = pkgs-unstable.waybar;
     systemd.enable = true;
     settings = {
       mainBar = {

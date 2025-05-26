@@ -24,14 +24,14 @@
       (wrapOBS {
         plugins = [obs-studio-plugins.wlrobs];
       })
-      okular
+      kdePackages.okular
       libreoffice-fresh
-      pkgs-unstable.gimp3
+      gimp3
       (mpv.override {
         scripts = [mpvScripts.mpris];
       })
       via
-      ark
+      kdePackages.ark
       spotify
       (google-chrome.override {
         commandLineArgs = ["--enable-wayland-ime" "--wayland-text-input-version=3"];

@@ -12,6 +12,9 @@
       "gitlab/otp"
       "gitlab/db"
       "gitlab/jws"
+      "gitlab/active_record/primary_key"
+      "gitlab/active_record/det_key"
+      "gitlab/active_record/salt"
       "gitlab/b2/key_id"
       "gitlab/b2/access_key"
       "gitlab/omniauth/github/id"
@@ -44,15 +47,6 @@
 
     registry = {
       enable = true;
-      # TODO: remove on next update
-      package = pkgs.gitlab-container-registry.overrideAttrs (prev: {
-        postPatch = "";
-        checkFlags = [
-          # TestHTTPChecker requires internet
-          # TestS3DriverPathStyle requires s3 credentials/urls
-          "-skip TestHTTPChecker|TestS3DriverPathStyle"
-        ];
-      });
       # actually a noop in the current gitlab module
       port = 5000;
       # TODO: move to registry.foxlab.dev
@@ -138,6 +132,9 @@
       otpFile = config.sops.secrets."gitlab/otp".path;
       dbFile = config.sops.secrets."gitlab/db".path;
       jwsFile = config.sops.secrets."gitlab/jws".path;
+      activeRecordPrimaryKeyFile = config.sops.secrets."gitlab/active_record/primary_key".path;
+      activeRecordDeterministicKeyFile = config.sops.secrets."gitlab/active_record/det_key".path;
+      activeRecordSaltFile = config.sops.secrets."gitlab/active_record/salt".path;
     };
   };
 

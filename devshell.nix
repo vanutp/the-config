@@ -17,7 +17,7 @@
           if [[ $# == 0 ]]; then
             prefix=(sudo)
           elif [[ "$1" == "home" ]]; then
-            home-manager switch -L --show-trace
+            home-manager switch -L --show-trace --log-format internal-json -v |& nom --json
             exit 0
           else
             args=(--target-host "$1" --use-remote-sudo)
