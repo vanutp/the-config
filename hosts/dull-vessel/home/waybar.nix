@@ -10,7 +10,7 @@
   programs.waybar = let
     fans = with pkgs; (writeShellScript "fans" ''
       set -e
-      fan_speed=$(cat /sys/class/hwmon/hwmon6/fan1_input)
+      fan_speed=$(cat /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon*/fan1_input)
       if [[ $fan_speed != 0 ]]; then
         fan_speed=$(printf '%-4s' $fan_speed)
       fi
