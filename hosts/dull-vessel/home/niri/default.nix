@@ -78,6 +78,11 @@ in {
           "dwt"
         ])
       ])
+      (block "gestures" [
+        (block "hot-corners" [
+          "off"
+        ])
+      ])
       (section "output" "eDP-1" {
         scale = 1.25;
         position = {
