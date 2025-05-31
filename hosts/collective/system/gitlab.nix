@@ -67,6 +67,7 @@
       gitlab = {
         time_zone = "Europe/Moscow";
         ssh_host = "ssh.foxlab.dev";
+        gitlab_default_theme = 10;
       };
       # Needed because services.gitlab.registry.externalPort is mandatory,
       # and setting it causes problems when CI is trying to access
