@@ -1,5 +1,17 @@
 {pkgs, ...}: {
   devShells.default = pkgs.mkShell {
+    # required for ignis dev
+    nativeBuildInputs = with pkgs; [
+      pkg-config
+    ];
+    buildInputs = with pkgs; [
+      glib
+      gobject-introspection
+      gtk4
+      gtk4-layer-shell
+      libpulseaudio
+    ];
+
     packages = with pkgs; [
       (writeShellApplication {
         name = "nixos-apply";

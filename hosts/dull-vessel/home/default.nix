@@ -4,6 +4,7 @@
     ./dev.nix
     ./dunst.nix
     ./fcitx5.nix
+    ./ignis
     ./lockscreen.nix
     ./niri
     ./packages.nix

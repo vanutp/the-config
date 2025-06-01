@@ -1,0 +1,16 @@
+[project]
+name = "ignis-shell"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ignis",
+    "jinja2>=3.1.6",
+    "materialyoucolor>=2.0.10",
+    "pillow>=11.2.1",
+]
+
+[tool.uv.sources]
+ignis = { git = "https://github.com/linkfrg/ignis.git" }
+
