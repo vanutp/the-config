@@ -47,6 +47,10 @@ in {
       search = {
         favicon_resolver = "google";
         autocomplete = "google";
+        formats = [
+          "html"
+          "json"
+        ];
       };
       general.instance_name = "Foxy Search";
       redis.url = "redis://redis:6379/0";
