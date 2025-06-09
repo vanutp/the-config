@@ -32,6 +32,7 @@ in {
       binary = "/libexec/hyprpolkitagent";
     }
     {package = pkgs.wpaperd;}
+    {package = pkgs-unstable.wl-gammarelay-rs;}
   ];
   home.packages = [
     pkgs-unstable.niri

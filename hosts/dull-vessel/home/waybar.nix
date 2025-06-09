@@ -58,6 +58,32 @@
       else:
           raise ValueError()
     '';
+    busctl = lib.getExe' pkgs.systemd "busctl";
+    gamma = pkgs.writers.writePython3 "gamma" {flakeIgnore = ["E501"];} ''
+      import sys
+      import json
+      import subprocess
+      SIGRTMIN = 34
+      ICONS = {
+          'normal': '\udb80\udf36',
+          'night': '\udb86\ude4c',
+      }
+      get_cmd = '${busctl} --user get-property rs.wl-gammarelay / rs.wl.gammarelay Temperature'
+      set_cmd = '${busctl} --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q'
+      temp = int(subprocess.check_output(get_cmd.split()).decode().strip().removeprefix('q '))
+      temp_str = 'normal' if temp == 6500 else 'night'
+      if sys.argv[1] == 'get':
+          print(json.dumps({'text': ICONS.get(temp_str, 'error')}))
+      elif sys.argv[1] == 'toggle':
+          if temp_str == 'normal':
+              temp = 5000
+          else:
+              temp = 6500
+          subprocess.check_call(set_cmd.split() + [str(temp)])
+          subprocess.check_call(f'kill -{SIGRTMIN + 2} $(pgrep waybar)', shell=True)
+      else:
+          raise ValueError()
+    '';
   in {
     enable = true;
     systemd.enable = true;
@@ -72,7 +98,7 @@
         "modules-right" = [
           "tray"
           "custom/vpns"
-          "idle_inhibitor"
+          "custom/gamma"
           "custom/theme"
           "pulseaudio"
           "temperature"
@@ -84,6 +110,13 @@
         "custom/vpns" = {
           "exec" = vpns;
           "interval" = 5;
+          "return-type" = "json";
+        };
+        "custom/gamma" = {
+          "exec" = "${gamma} get";
+          "on-click" = "${gamma} toggle";
+          "interval" = "once";
+          "signal" = 2;
           "return-type" = "json";
         };
         "custom/theme" = {
@@ -240,6 +273,7 @@
       }
 
       #custom-vpns,
+      #custom-gamma,
       #custom-theme,
       #language,
       #temperature,
@@ -247,8 +281,7 @@
       #battery,
       #pulseaudio,
       #clock,
-      #tray,
-      #idle_inhibitor {
+      #tray {
         border-radius: 4px;
         margin-top: 5px;
         margin-bottom: 0;
@@ -314,7 +347,8 @@
         background-color: #eba0ac;
       }
 
-      #idle_inhibitor {
+      #custom-gamma {
+        padding: 4px 10px 4px 10px;
         background-color: #fab387;
       }
 
