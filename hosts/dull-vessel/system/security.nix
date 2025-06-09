@@ -14,7 +14,7 @@
     sbctl
     tpm2-tools
   ];
-  # Lanzaboote currently replaces the systemd-boot module.
+  # Lanzaboote replaces the systemd-boot module.
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.lanzaboote = {
     enable = true;
@@ -25,5 +25,11 @@
   boot.initrd.systemd.enable = true;
   boot.initrd.luks.devices.root.crypttabExtraOpts = [
     "tpm2-device=auto"
+  ];
+
+  # hardening
+  systemd.enableEmergencyMode = false;
+  boot.kernelParams = [
+    "rd.systemd.gpt_auto=0"
   ];
 }
