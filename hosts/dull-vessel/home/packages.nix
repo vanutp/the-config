@@ -10,7 +10,7 @@
     openssl
     lm_sensors
     yt-dlp
-    httpie
+    hx
     ffmpeg-full
     manix
     imagemagick
