@@ -2,6 +2,7 @@
   imports = [
     ./composter-tests
     ./veyon
+    ./apps.nix
     ./audio.nix
     ./dev.nix
     ./hardware-configuration.nix
@@ -11,10 +12,8 @@
     ./portals.nix
     ./secrets.nix
     ./security.nix
-    ./steam.nix
     ./strongswan.nix
     ./wireguard.nix
-    ./zed.nix
   ];
 
   setup.computerType = "laptop";

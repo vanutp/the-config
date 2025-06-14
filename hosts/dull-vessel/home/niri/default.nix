@@ -33,6 +33,16 @@ in {
     }
     {package = pkgs.wpaperd;}
     {package = pkgs-unstable.wl-gammarelay-rs;}
+    {
+      name = "kdeconnectd";
+      package = pkgs.kdePackages.kdeconnect-kde;
+      binary = "/bin/kdeconnectd";
+    }
+    {
+      name = "kdeconnect-indicator";
+      package = pkgs.kdePackages.kdeconnect-kde;
+      binary = "/bin/kdeconnect-indicator";
+    }
   ];
   home.packages = [
     pkgs-unstable.niri
@@ -40,6 +50,7 @@ in {
       #!${lib.getExe pkgs.bash}
       exec ${lib.getExe pkgs.niri} --session
     '')
+    pkgs.kdePackages.kdeconnect-kde
   ];
   services = {
     network-manager-applet.enable = true;

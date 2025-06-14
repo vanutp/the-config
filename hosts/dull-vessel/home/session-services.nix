@@ -12,6 +12,11 @@
             description = "Package to create service for";
             type = lib.types.package;
           };
+          name = lib.mkOption {
+            description = "Name of the service";
+            type = lib.types.str;
+            default = config.package.name;
+          };
           binary = lib.mkOption {
             description = "Path to the binary to run relative to package root";
             type = lib.types.str;
@@ -34,7 +39,7 @@
       (service: let
         target = "graphical-session.target";
       in {
-        name = service.package.name;
+        name = service.name;
         value = {
           Unit = {
             Description = service.package.name;
