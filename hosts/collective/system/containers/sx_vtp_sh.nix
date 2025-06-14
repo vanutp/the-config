@@ -52,6 +52,16 @@ in {
           "json"
         ];
       };
+      hostnames = {
+        replace = {
+          "^reddit\.com$" = "redlib.catsarch.com";
+          "^twitter\.com$" = "nitter.privacyredirect.com";
+          "^x\.com$" = "nitter.privacyredirect.com";
+        };
+        high_priority = [
+          "^modrinth\.com$"
+        ];
+      };
       general.instance_name = "Foxy Search";
       redis.url = "redis://redis:6379/0";
     };
