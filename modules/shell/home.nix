@@ -20,6 +20,8 @@
     TERM = "xterm-256color";
   };
 
+  programs.zoxide.enable = true;
+
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
