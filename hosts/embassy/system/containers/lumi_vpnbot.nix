@@ -1,5 +1,4 @@
 {config, ...}: {
-  sops.secrets."services/lumi_vpnbot" = {};
   virtualisation.composter.apps.lumi_vpnbot = {
     auth = ["foxlab"];
     services.main = {

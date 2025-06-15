@@ -4,7 +4,6 @@
     ./network.nix
     ./hardware-configuration.nix
     ./disko.nix
-    ./secrets.nix
     ./danted.nix
     ./wireguard.nix
   ];

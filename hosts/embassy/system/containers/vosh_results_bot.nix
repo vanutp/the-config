@@ -1,5 +1,4 @@
 {config, ...}: {
-  sops.secrets."services/vosh_results_bot" = {};
   virtualisation.composter.apps.vosh_results_bot.services.main = {
     image = "registry.vanutp.dev/ilyakrasnovv/lksh_results_bot";
     env_file = config.sops.secrets."services/vosh_results_bot".path;

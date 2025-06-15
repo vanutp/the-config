@@ -8,7 +8,6 @@
     ./containers
     ./hardware-configuration.nix
     ./network.nix
-    ./secrets.nix
     ./wireguard.nix
     ./postgresql.nix
   ];

@@ -7,7 +7,6 @@
     ./hardware-configuration.nix
     ./mailcow.nix
     ./network.nix
-    ./secrets.nix
     ./traefik.nix
     ./users.nix
     ./vhap-compose-update.nix

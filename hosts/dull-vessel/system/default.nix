@@ -10,7 +10,6 @@
     ./login.nix
     ./logiops.nix
     ./portals.nix
-    ./secrets.nix
     ./security.nix
     ./strongswan.nix
     ./wireguard.nix

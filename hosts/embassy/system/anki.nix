@@ -3,7 +3,6 @@
   pkgs-unstable,
   ...
 }: {
-  sops.secrets."services/anki" = {};
   services.anki-sync-server = {
     enable = true;
     package = pkgs-unstable.anki-sync-server;

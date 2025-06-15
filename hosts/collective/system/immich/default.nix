@@ -10,7 +10,6 @@
   volume-name = "immich-media";
   bucket-url = "https://s3.eu-central-003.backblazeb2.com/collective-immich";
 in {
-  sops.secrets."immich/fs" = {};
   services.redis.servers.immich-fs = {
     enable = true;
     appendOnly = true;

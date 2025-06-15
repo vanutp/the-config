@@ -1,5 +1,4 @@
 {config, ...}: {
-  sops.secrets."services/auth_vanutp_dev" = {};
   virtualisation.composter.apps.auth_vanutp_dev = {
     backup.enable = true;
     services = {

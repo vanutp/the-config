@@ -1,13 +1,4 @@
 {config, ...}: {
-  sops.secrets."vhap-compose-update/csai_tmat_me" = {};
-  sops.secrets."vhap-compose-update/vanutp_music_bot" = {};
-  sops.secrets."vhap-compose-update/mc_auth_vanutp_dev" = {};
-  sops.secrets."vhap-compose-update/samat_tiktok" = {};
-  sops.secrets."vhap-compose-update/cuspace_vanutp_dev" = {};
-  sops.secrets."vhap-compose-update/telemap_vanutp_dev" = {};
-  sops.secrets."vhap-compose-update/logbox_vanutp_dev" = {};
-  sops.secrets."vhap-compose-update/lumi_vpnbot" = {};
-
   services.vhap-compose-update.entries =
     map (
       service: {

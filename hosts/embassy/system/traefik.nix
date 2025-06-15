@@ -1,5 +1,4 @@
-{config, ...}: {
-  sops.secrets."services/traefik-cloudflare-config" = {};
+{...}: {
   vanutp.traefik = {
     enable = true;
     proxies = [
@@ -33,7 +32,6 @@
       ];
     };
   };
-  sops.secrets."vhap-cf-token" = {};
   virtualisation.composter = {
     vhap-update-host = "vhap-update.vanutp.dev";
     update-dns.enable = true;

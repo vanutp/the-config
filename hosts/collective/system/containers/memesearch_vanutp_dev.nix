@@ -24,8 +24,6 @@ in {
         traefik.host = "memesearch.vanutp.dev";
       };
   };
-  sops.secrets."services/memesearch_vanutp_dev" = {};
-  sops.secrets."vhap-compose-update/memesearch_vanutp_dev" = {};
   services.vhap-compose-update.entries = [
     {
       key = config.sops.placeholder."vhap-compose-update/memesearch_vanutp_dev";

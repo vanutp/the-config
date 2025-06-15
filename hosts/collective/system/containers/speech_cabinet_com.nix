@@ -57,10 +57,6 @@ in {
     };
   };
 
-  sops.secrets."services/speech_cabinet_com" = {};
-  sops.secrets."services/dev_speech_cabinet_com" = {};
-  sops.secrets."vhap-compose-update/speech_cabinet_com" = {};
-  sops.secrets."vhap-compose-update/dev_speech_cabinet_com" = {};
   services.vhap-compose-update.entries = [
     {
       key = config.sops.placeholder."vhap-compose-update/speech_cabinet_com";

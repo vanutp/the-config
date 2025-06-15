@@ -29,7 +29,6 @@
     offload-threads = 4
   '';
 in {
-  sops.secrets."services/sx_vtp_sh/key" = {};
   sops.templates."searxng.yml" = {
     uid = 977;
     gid = 977;

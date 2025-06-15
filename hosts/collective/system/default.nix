@@ -11,7 +11,6 @@
     ./immich
     ./network.nix
     ./postgresql.nix
-    ./secrets.nix
     ./tgpy_redirect.nix
     ./traefik.nix
     ./wireguard.nix

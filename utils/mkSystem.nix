@@ -21,7 +21,7 @@
     inherit overlays;
   };
   args = {
-    inherit self inputs hostname pkgs-unstable;
+    inherit self inputs hostname pkgs-unstable hostPath;
     self-pkgs = inputs.self.packages.${pkgs.system};
     systemConfig = null;
   };
@@ -71,12 +71,6 @@ in {
         }
         ../packages/veyon/module.nix
         sops-nix.nixosModules.sops
-        {
-          sops = {
-            defaultSopsFile = "${hostPath}/system/secrets.yml";
-            age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
-          };
-        }
         hostConfig.system
         ./modules.nix
       ]
