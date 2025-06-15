@@ -1,15 +1,13 @@
 {
-  self,
   config,
   pkgs,
+  util,
   ...
 }: {
   networking.nat.enable = true;
   networking.firewall.allowedUDPPorts = [51820 45372];
-  networking.wg-quick.interfaces = let
-    makeWg0 = import "${self}/utils/makeWg0.nix";
-  in {
-    wg0 = makeWg0 config {
+  networking.wg-quick.interfaces = {
+    wg0 = util.mkWg0 {
       address = "10.1.0.5";
       isInternal = true;
       autostart = true;

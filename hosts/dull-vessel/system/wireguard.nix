@@ -1,6 +1,6 @@
 {
-  self,
   config,
+  util,
   ...
 }: {
   security.polkit.serviceOwners = {
@@ -10,15 +10,13 @@
     wg-quick-wg2-only = "fox";
   };
 
-  networking.wg-quick.interfaces = let
-    makeWg0 = import "${self}/utils/makeWg0.nix";
-  in {
-    int = makeWg0 config {
+  networking.wg-quick.interfaces = {
+    int = util.mkWg0 {
       address = "10.1.1.2";
       isInternal = true;
       autostart = true;
     };
-    wg0 = makeWg0 config {
+    wg0 = util.mkWg0 {
       address = "10.1.1.2";
       isInternal = false;
       autostart = false;

@@ -1,12 +1,10 @@
 {
-  self,
   config,
+  util,
   ...
-}: let
-  makeWg0 = import "${self}/utils/makeWg0.nix";
-in {
+}: {
   networking.wg-quick.interfaces = {
-    wg0 = makeWg0 config {
+    wg0 = util.mkWg0 {
       address = "10.1.0.6";
       isInternal = true;
       autostart = true;
