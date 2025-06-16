@@ -13,6 +13,10 @@
     isNormalUser = true;
     shell = "${pkgs.util-linux}/bin/nologin";
   };
+  users.users.s4-proxy = {
+    isNormalUser = true;
+    shell = "${pkgs.util-linux}/bin/nologin";
+  };
   services.dante = {
     enable = true;
     config = ''
