@@ -361,15 +361,20 @@ def pull_current_app():
                 env=env,
                 input=creds['password'].encode(),
             )
-        subprocess.check_call(
-            [
-                'docker',
-                'compose',
-                'pull',
-            ],
-            cwd=app_dir,
-            env=env,
-        )
+        if len(sys.argv) == 3:
+            # pull a specific image
+            image = sys.argv[2]
+            subprocess.check_call(
+                ['docker', 'pull', image],
+                cwd=app_dir,
+                env=env,
+            )
+        else:
+            subprocess.check_call(
+                ['docker', 'compose', 'pull'],
+                cwd=app_dir,
+                env=env,
+            )
 
 
 def main():
