@@ -5,6 +5,7 @@
     ./apps.nix
     ./audio.nix
     ./dev.nix
+    ./fonts.nix
     ./hardware-configuration.nix
     ./hardware.nix
     ./login.nix

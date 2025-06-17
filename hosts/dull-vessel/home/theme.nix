@@ -44,11 +44,20 @@
       platformTheme.name = "qtct";
     };
 
-    fonts.fontconfig.enable = true;
-    fonts.fontconfig.defaultFonts.sansSerif = ["Noto Sans"];
-    fonts.fontconfig.defaultFonts.serif = ["Noto Serif"];
-    fonts.fontconfig.defaultFonts.monospace = [config.preferences.font.monospace];
-    fonts.fontconfig.defaultFonts.emoji = ["Noto Color Emoji"];
+    fonts.fontconfig = {
+      enable = true;
+      defaultFonts = {
+        sansSerif = ["Noto Sans"];
+        serif = ["Noto Serif"];
+        monospace = [config.preferences.font.monospace];
+        emoji = ["Noto Color Emoji"];
+      };
+    };
+
+    # костылирование для зена во флатпаке
+    systemd.user.tmpfiles.rules = [
+      "L ${config.xdg.dataHome}/fonts - - - - ${config.xdg.stateHome}/nix/profiles/profile/share/fonts"
+    ];
 
     home.packages = with pkgs; [
       pkgs.gnome-themes-extra
