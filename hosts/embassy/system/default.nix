@@ -2,6 +2,7 @@
   imports = [
     ./anki.nix
     ./containers
+    ./copy-certs.nix
     ./dvasmp
     ./disko.nix
     ./hardware-configuration.nix
