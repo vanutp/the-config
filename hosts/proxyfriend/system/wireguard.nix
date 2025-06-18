@@ -50,6 +50,11 @@
           publicKey = "UsokN3qGp3Us30Grg/VraZsSc6KZN+1+sEJRwxYZD2Y=";
           allowedIPs = ["10.3.1.3/32"];
         }
+        {
+          # gravity 2
+          publicKey = "CK3WxeGPO2Q1xfeWV+2dwoyI2umfcz6beiB5mIcezz4=";
+          allowedIPs = ["10.3.1.4/32"];
+        }
       ];
     };
   };
