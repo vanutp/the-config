@@ -14,7 +14,7 @@
     int = util.mkWg0 {
       address = "10.1.1.2";
       isInternal = true;
-      autostart = true;
+      autostart = false;
     };
     wg0 = util.mkWg0 {
       address = "10.1.1.2";
