@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-unstable,
   lib,
   config,
   ...
@@ -16,18 +17,29 @@
       text="󰈐 $fan_speed"
       echo '{"text": "'"$text"'", "alt": "", "tooltip": "", "class": "", "percentage": 0 }'
     '');
+    # TODO: rewrite in nu
     vpns = with pkgs; (writeShellScript "vpns" ''
       set -e
       work_vpn_state=$(${lib.getExe' networkmanager "nmcli"} -g GENERAL.STATE connection show 'work')
       wg_vpns=$(${lib.getExe wireguard-tools} show interfaces)
+      tailscale_exit_node=$(${lib.getExe' pkgs-unstable.tailscale "tailscale"} status --json | ${lib.getExe pkgs.jq} -r '.ExitNodeStatus.ID as $node_id | .Peer[] | select(.ID==$node_id) | .HostName')
+      active_vpns=""
       if [[ -n $work_vpn_state ]]; then
-        if [[ -n $wg_vpns ]]; then
-          active_vpns="work $wg_vpns"
+        active_vpns="work"
+      fi
+      if [[ -n $wg_vpns ]]; then
+        if [[ -n $active_vpns ]]; then
+          active_vpns="$active_vpns $wg_vpns"
         else
-          active_vpns="work"
+          active_vpns="$wg_vpns"
         fi
-      else
-        active_vpns="$wg_vpns"
+      fi
+      if [[ -n $tailscale_exit_node ]]; then
+        if [[ -n $active_vpns ]]; then
+          active_vpns="$active_vpns $tailscale_exit_node"
+        else
+          active_vpns="$tailscale_exit_node"
+        fi
       fi
       echo '{"text": "'"$active_vpns"'", "alt": "", "tooltip": "", "class": "", "percentage": 0 }'
     '');
