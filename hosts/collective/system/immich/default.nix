@@ -39,6 +39,9 @@ in {
     # TODO: use systemd.mount?
     script = ''
       ${juicefs} mount --cache-size 10240 ${redis-url} ${media-dir}
+    '';
+    postStart = ''
+      sleep 3
       chmod 700 ${media-dir}
       chown -R immich:immich ${media-dir}
     '';
