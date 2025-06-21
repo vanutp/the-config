@@ -5,7 +5,7 @@
   ...
 }: {
   networking.nat.enable = true;
-  networking.firewall.allowedUDPPorts = [51820 45372];
+  networking.firewall.allowedUDPPorts = [51820 45372 45373];
   networking.wg-quick.interfaces = {
     wg0 = util.mkWg0 {
       address = "10.1.0.5";
@@ -54,6 +54,30 @@
           # gravity 2
           publicKey = "CK3WxeGPO2Q1xfeWV+2dwoyI2umfcz6beiB5mIcezz4=";
           allowedIPs = ["10.3.1.4/32"];
+        }
+      ];
+    };
+
+    wg2 = {
+      address = ["10.4.0.1/16"];
+      listenPort = 45373;
+      privateKeyFile = config.sops.secrets."wg_keys/wg2".path;
+
+      # TODO: do this using networking.nat
+      postUp = ''
+        ${pkgs.iptables}/bin/iptables -A FORWARD -i wg2 -j ACCEPT
+        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.4.0.0/16 -o ens3 -j MASQUERADE
+      '';
+      preDown = ''
+        ${pkgs.iptables}/bin/iptables -D FORWARD -i wg2 -j ACCEPT
+        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.4.0.0/16 -o ens3 -j MASQUERADE
+      '';
+
+      peers = [
+        {
+          # gravity
+          publicKey = "zM6LWVYyNNgWc8KJ+Bi6u/Do5zMoAyQq48yFvvvNaA4=";
+          allowedIPs = ["10.4.1.1/32"];
         }
       ];
     };
