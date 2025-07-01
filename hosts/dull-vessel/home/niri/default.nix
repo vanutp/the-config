@@ -22,6 +22,14 @@ in {
       any.path = config.preferences.wallpaper;
     };
   };
+  services.swaync = {
+    enable = true;
+    style = ./swaync-mocha.css;
+    settings = {
+      notification-window-width = 400;
+      notification-icon-size = 32;
+    };
+  };
   systemd.user.sessionServices = [
     {
       package = pkgs.xwayland-satellite;
@@ -168,6 +176,10 @@ in {
               "Super+E" = spawn ["nautilus" "-w"];
               "Ctrl+Shift+D" = spawn ["copyq" "toggle"];
               "Super+S" = "screenshot";
+              "Super+slash" = spawn [
+                "${pkgs.swaynotificationcenter}/bin/swaync-client"
+                "-t"
+              ];
 
               "Super+Shift+Space" = "toggle-window-floating";
               "Super+Shift+Q" = "close-window";
