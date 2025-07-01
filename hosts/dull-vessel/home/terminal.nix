@@ -1,20 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: {
-  home.packages = with pkgs; [
-    ghostty
-  ];
-  # from the unstable home-manager module
-  xdg.configFile."ghostty/config" = let
-    keyValue = pkgs.formats.keyValue {
-      listsAsDuplicateKeys = true;
-      mkKeyValue = lib.generators.mkKeyValueDefault {} " = ";
-    };
-  in {
-    source = keyValue.generate "ghostty-config" {
+{config, ...}: {
+  programs.ghostty = {
+    enable = true;
+    settings = {
       theme = "catppuccin-mocha";
       gtk-titlebar = false;
       window-padding-x = 5;
@@ -23,6 +10,5 @@
       mouse-scroll-multiplier = 3;
       gtk-single-instance = true;
     };
-    onChange = "${lib.getExe pkgs.ghostty} +validate-config";
   };
 }
