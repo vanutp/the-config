@@ -1,4 +1,4 @@
-config: {
+{config, ...}: {
   address,
   isInternal,
   autostart,

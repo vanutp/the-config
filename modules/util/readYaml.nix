@@ -1,4 +1,4 @@
-pkgs: yamlPath:
+{pkgs, ...}: yamlPath:
 builtins.fromJSON (
   builtins.readFile (
     pkgs.stdenv.mkDerivation {

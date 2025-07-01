@@ -1,10 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...} @ args: {
   _module.args.util = {
-    mkWg0 = import ./mkWg0.nix config;
-    readYaml = import ./readYaml.nix pkgs;
+    mkWg0 = import ./mkWg0.nix args;
+    readYaml = import ./readYaml.nix args;
   };
 }
