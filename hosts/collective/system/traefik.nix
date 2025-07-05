@@ -7,6 +7,7 @@
       "vtp.sh"
       "speech-cabinet.com"
       "tmat.me"
+      "tgpy.dev"
     ];
   };
   services.nginx.commonHttpConfig = ''
