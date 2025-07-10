@@ -3,7 +3,7 @@
     ./apps.nix
     ./dev.nix
     ./fcitx5.nix
-    ./ignis
+    # ./ignis
     ./lockscreen.nix
     ./niri
     ./packages.nix
