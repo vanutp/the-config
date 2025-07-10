@@ -67,13 +67,20 @@
       postUp = ''
         ${pkgs.iptables}/bin/iptables -A FORWARD -i wg2 -j ACCEPT
         ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.4.0.0/16 -o ens3 -j MASQUERADE
+        ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -i ens3 -p tcp --dport 6881 -j DNAT --to-destination 10.4.0.2
       '';
       preDown = ''
         ${pkgs.iptables}/bin/iptables -D FORWARD -i wg2 -j ACCEPT
         ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.4.0.0/16 -o ens3 -j MASQUERADE
+        ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -i ens3 -p tcp --dport 6881 -j DNAT --to-destination 10.4.0.2
       '';
 
       peers = [
+        {
+          # collective
+          publicKey = "Fo5aJ6F8xP+vRc+txgO3V4HgiHaMi/WixmLeUlm6EkU=";
+          allowedIPs = ["10.4.0.2/32"];
+        }
         {
           # gravity
           publicKey = "zM6LWVYyNNgWc8KJ+Bi6u/Do5zMoAyQq48yFvvvNaA4=";
