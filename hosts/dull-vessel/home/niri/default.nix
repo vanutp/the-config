@@ -39,7 +39,6 @@ in {
       package = pkgs.hyprpolkitagent;
       binary = "/libexec/hyprpolkitagent";
     }
-    {package = pkgs.wpaperd;}
     {package = pkgs-unstable.wl-gammarelay-rs;}
     {
       name = "kdeconnectd";
@@ -148,6 +147,10 @@ in {
         (node "match" {app-id = "pavucontrol";})
         (node "match" {app-id = "org.fcitx.";})
         (node "open-floating" true)
+      ])
+      (block "window-rule" [
+        (node "match" {title = "ANIMAL WELL";})
+        (node "open-fullscreen" true)
       ])
       (block "environment" {
         DISPLAY = ":0";
