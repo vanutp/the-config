@@ -19,6 +19,7 @@
     dua
     htop
     psmisc
+    pciutils
     usbutils
     git
     neovim
