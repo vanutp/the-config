@@ -31,6 +31,7 @@
       };
       worker = {
         inherit image;
+        init = true;
         command = ["worker"];
         deploy.resources.limits = limits;
         inherit env_file;
