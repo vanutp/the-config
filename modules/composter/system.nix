@@ -43,6 +43,10 @@
                     type = types.bool;
                     default = false;
                   };
+                  schedule = mkOption {
+                    type = types.nullOr types.str;
+                    default = null;
+                  };
                 };
               };
               default = {};
@@ -186,6 +190,31 @@
         host = cfg.vhap-update-host;
         target = "http://127.0.0.1:7002";
       }
+    ];
+    vanutp.backup.backups = lib.pipe config.virtualisation.composter.apps [
+      (lib.filterAttrs (name: app: app.backup.enable))
+      (lib.mapAttrs' (name: app: {
+        name = "composter-${name}";
+        value =
+          {
+            tag = "composter:${name}";
+            paths = lib.pipe app.services [
+              builtins.attrValues
+              (map (svc: svc.volumes or []))
+              lib.flatten
+              (map (vol: builtins.elemAt (lib.splitString ":" vol) 0))
+              (builtins.filter (lib.hasPrefix "./"))
+              (map (vol: app.appDir + (lib.removePrefix "." vol)))
+              lib.unique
+            ];
+          }
+          // (
+            if app.backup.schedule != null
+            then {inherit (app.backup) schedule;}
+            else {}
+          );
+      }))
+      (lib.filterAttrs (name: cfg: cfg.paths != []))
     ];
   };
 }

@@ -59,25 +59,6 @@
     };
   };
   config = {
-    vanutp.backup.backups = lib.pipe config.virtualisation.composter.apps [
-      (lib.filterAttrs (name: app: app.backup.enable))
-      (lib.mapAttrs' (name: app: {
-        name = "composter-${name}";
-        value = {
-          tag = "composter:${name}";
-          paths = lib.pipe app.services [
-            builtins.attrValues
-            (map (svc: svc.volumes or []))
-            lib.flatten
-            (map (vol: builtins.elemAt (lib.splitString ":" vol) 0))
-            (builtins.filter (lib.hasPrefix "./"))
-            (map (vol: app.appDir + (lib.removePrefix "." vol)))
-            lib.unique
-          ];
-        };
-      }))
-      (lib.filterAttrs (name: cfg: cfg.paths != []))
-    ];
     services.restic.backups = lib.mkIf config.vanutp.backup.enable (
       lib.mapAttrs (name: cfg: {
         initialize = true;
