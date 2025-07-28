@@ -22,6 +22,6 @@
 
   vanutp.backup = {
     enable = true;
-    s3-url = "https://s3.us-east-005.backblazeb2.com/backup-embassy";
+    s3-url = "https://s3.eu-central-003.backblazeb2.com/embassy-backup";
   };
 }

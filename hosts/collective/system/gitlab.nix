@@ -80,8 +80,8 @@
           provider = "AWS";
           aws_access_key_id._secret = config.sops.secrets."gitlab/b2/key_id".path;
           aws_secret_access_key._secret = config.sops.secrets."gitlab/b2/access_key".path;
-          region = "us-east-005";
-          endpoint = "https://s3.us-east-005.backblazeb2.com";
+          region = "eu-central-003";
+          endpoint = "https://s3.eu-central-003.backblazeb2.com";
         };
         storage_options.server_side_encryption = "AES256";
         objects = {
