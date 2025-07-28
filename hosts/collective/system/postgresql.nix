@@ -26,5 +26,6 @@
     paths = ["/tmp/postgres.sql.zst"];
     extraBackupArgs = ["--compression=off"];
     backupCleanupCommand = "rm /tmp/postgres.sql.zst";
+    schedule = "*-*-* 03:00:00";
   };
 }
