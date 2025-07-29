@@ -12,17 +12,38 @@
             type = types.bool;
             default = false;
           };
-          s3-url = mkOption {
-            type = types.str;
+          remotes = mkOption {
+            type = types.attrsOf (types.submodule {
+              options = {
+                path = mkOption {
+                  type = types.str;
+                };
+                rcloneConfig = mkOption {
+                  type = types.nullOr (types.attrsOf (types.oneOf [
+                    types.str
+                    types.bool
+                  ]));
+                  default = null;
+                };
+              };
+            });
           };
           backups = mkOption {
             type = types.attrsOf (types.submodule ({name, ...}: {
               options = {
+                remote = mkOption {
+                  type = types.str;
+                  default = "default";
+                };
                 tag = mkOption {
                   type = types.str;
                   default = name;
                 };
                 paths = mkOption {
+                  type = types.listOf types.str;
+                  default = [];
+                };
+                exclude = mkOption {
                   type = types.listOf types.str;
                   default = [];
                 };
@@ -62,9 +83,10 @@
     services.restic.backups = lib.mkIf config.vanutp.backup.enable (
       lib.mapAttrs (name: cfg: {
         initialize = true;
-        repository = "s3:${config.vanutp.backup.s3-url}";
-        environmentFile = config.sops.secrets."restic/repo-creds".path;
-        passwordFile = config.sops.secrets."restic/password".path;
+        repository = config.vanutp.backup.remotes.${cfg.remote}.path;
+        rcloneConfig = config.vanutp.backup.remotes.${cfg.remote}.rcloneConfig;
+        environmentFile = config.sops.secrets."restic/${cfg.remote}/repo-creds".path;
+        passwordFile = config.sops.secrets."restic/${cfg.remote}/password".path;
         extraBackupArgs =
           [
             "--tag=${cfg.tag}"
@@ -80,7 +102,7 @@
           Persistent = true;
           RandomizedDelaySec = cfg.randomizedDelay;
         };
-        inherit (cfg) paths dynamicFilesFrom backupPrepareCommand backupCleanupCommand;
+        inherit (cfg) paths exclude dynamicFilesFrom backupPrepareCommand backupCleanupCommand;
       })
       config.vanutp.backup.backups
     );

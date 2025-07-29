@@ -51,14 +51,27 @@ in {
     '';
   };
 
-  vanutp.backup.backups.immich-fs = {
-    backupPrepareCommand = ''
-      ${lib.getExe' pkgs.redis "redis-cli"} \
-        -p ${builtins.toString redis-port} \
-        SAVE
-    '';
-    paths = ["/var/lib/redis-immich-fs/dump.rdb"];
-    schedule = "*-*-* 03:00:00";
+  vanutp.backup.backups = {
+    immich-fs = {
+      backupPrepareCommand = ''
+        ${lib.getExe' pkgs.redis "redis-cli"} \
+          -p ${builtins.toString redis-port} \
+          SAVE
+      '';
+      paths = ["/var/lib/redis-immich-fs/dump.rdb"];
+      schedule = "*-*-* 03:00:00";
+    };
+    immich = {
+      remote = "hetzner";
+      paths = [media-dir];
+      exclude = [
+        "${media-dir}/.accesslog" # see https://github.com/restic/restic/issues/4257
+        "${media-dir}/backups"
+        "${media-dir}/encoded-video"
+        "${media-dir}/thumbs"
+      ];
+      schedule = "*-*-* 03:00:00";
+    };
   };
 
   systemd.services.immich-server = {
