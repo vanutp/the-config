@@ -24,15 +24,18 @@
     git
     neovim
     pgcli
-
-    age
-    ssh-to-age
-    sops
-
     dive
     nix-tree
     fastfetch
     whois
     rdap
+    rsync
+    rclone
+    restic
+    juicefs
+
+    age
+    ssh-to-age
+    sops
   ];
 }
