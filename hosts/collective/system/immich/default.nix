@@ -8,7 +8,7 @@
   redis-port = 6380;
   media-dir = "/srv/immich";
   volume-name = "immich-media";
-  bucket-url = "https://s3.eu-central-003.backblazeb2.com/collective-immich";
+  bucket-url = "https://hel1.your-objectstorage.com/collective-immich";
 in {
   services.redis.servers.immich-fs = {
     enable = true;
@@ -62,7 +62,6 @@ in {
       schedule = "*-*-* 03:00:00";
     };
     immich = {
-      remote = "hetzner";
       paths = [media-dir];
       exclude = [
         "${media-dir}/.accesslog" # see https://github.com/restic/restic/issues/4257
