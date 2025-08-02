@@ -37,5 +37,5 @@
   users.groups.adbusers.members = ["fox"];
 
   documentation.dev.enable = true;
-  environment.systemPackages = with pkgs; [linux-manual man-pages man-pages-posix];
+  environment.systemPackages = with pkgs; [man-pages man-pages-posix];
 }
