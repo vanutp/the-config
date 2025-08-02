@@ -41,6 +41,7 @@ in {
       locations."/" = {
         root = mcDir;
         index = "index.html";
+        extraConfig = "autoindex on;";
       };
       locations."= /" = {
         root = ./.;
