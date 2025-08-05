@@ -11,6 +11,7 @@
     lfs.enable = true;
     userName = "Ivan Filipenkov";
     userEmail = "hello@vanutp.dev";
+    delta.enable = true;
     extraConfig = {
       core.attributesfile = builtins.toString (pkgs.runCommand "gitattributes" {} ''
         ${lib.getExe pkgs-unstable.mergiraf} languages --gitattributes > $out
