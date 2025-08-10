@@ -86,6 +86,11 @@
           publicKey = "zM6LWVYyNNgWc8KJ+Bi6u/Do5zMoAyQq48yFvvvNaA4=";
           allowedIPs = ["10.4.1.1/32"];
         }
+        {
+          # dull-vessel
+          publicKey = "0HcEd9CrX9+MgCfx51KvYVL/C6aHGHIzcwGk2k4iX04=";
+          allowedIPs = ["10.4.1.2/32"];
+        }
       ];
     };
   };
