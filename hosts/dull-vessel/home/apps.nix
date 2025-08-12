@@ -57,6 +57,7 @@
       })
       obsidian
       nautilus
+      thunderbird
     ]
     ++ (with self-pkgs; [
       veyon

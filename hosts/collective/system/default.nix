@@ -30,7 +30,7 @@
       token=$(${lib.getExe' pkgs.coreutils "cat"} ${config.sops.secrets."bot_token".path})
       ${lib.getExe pkgs.curl} -s https://api.telegram.org/bot$token/sendMessage \
         --data-urlencode "chat_id=-1001212850694" \
-        --data-urlencode "text=mdmon alert: $@"
+        --data-urlencode "text=collective mdmon alert: $@"
     '';
 
   programs.mosh.enable = true;

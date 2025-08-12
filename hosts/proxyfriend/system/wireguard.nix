@@ -67,12 +67,12 @@
       postUp = ''
         ${pkgs.iptables}/bin/iptables -A FORWARD -i wg2 -j ACCEPT
         ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.4.0.0/16 -o ens3 -j MASQUERADE
-        ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -i ens3 -p tcp --dport 6881 -j DNAT --to-destination 10.4.0.2
+        ${pkgs.iptables}/bin/iptables -t nat -A PREROUTING -i ens3 -p tcp --dport 6881 -j DNAT --to-destination 10.4.0.3
       '';
       preDown = ''
         ${pkgs.iptables}/bin/iptables -D FORWARD -i wg2 -j ACCEPT
         ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.4.0.0/16 -o ens3 -j MASQUERADE
-        ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -i ens3 -p tcp --dport 6881 -j DNAT --to-destination 10.4.0.2
+        ${pkgs.iptables}/bin/iptables -t nat -D PREROUTING -i ens3 -p tcp --dport 6881 -j DNAT --to-destination 10.4.0.3
       '';
 
       peers = [
@@ -80,6 +80,11 @@
           # collective
           publicKey = "Fo5aJ6F8xP+vRc+txgO3V4HgiHaMi/WixmLeUlm6EkU=";
           allowedIPs = ["10.4.0.2/32"];
+        }
+        {
+          # memory-hole
+          publicKey = "m0z7UzyFwBt9t/5UcCQk8bt1K/b3mpG+H2kjcG6Fxig=";
+          allowedIPs = ["10.4.0.3/32"];
         }
         {
           # gravity

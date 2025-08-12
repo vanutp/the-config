@@ -71,6 +71,7 @@ in {
         }
         ../packages/veyon/module.nix
         sops-nix.nixosModules.sops
+        inputs.disko.nixosModules.default
         hostConfig.system
         ./modules.nix
       ]

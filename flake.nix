@@ -77,6 +77,7 @@
         "proxyfriend"
         "embassy"
         "collective"
+        "memory-hole"
       ];
       perSystem = {system, ...}: {
         _module.args = {
