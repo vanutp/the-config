@@ -55,6 +55,11 @@
           publicKey = "CK3WxeGPO2Q1xfeWV+2dwoyI2umfcz6beiB5mIcezz4=";
           allowedIPs = ["10.3.1.4/32"];
         }
+        {
+          # elena
+          publicKey = "0wcdB/PHS8YNbBG6DAHY9pQ7dZY6q6+kzjzyOD2HZQw=";
+          allowedIPs = ["10.3.1.5/32"];
+        }
       ];
     };
 
