@@ -38,4 +38,6 @@
     ssh-to-age
     sops
   ];
+
+  programs.tealdeer.enable = true;
 }
