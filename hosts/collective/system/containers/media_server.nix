@@ -1,17 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
-  redisFsPort = 6381;
-  jfsVolumeName = "media-server";
-  bucketUrl = "https://hel1.your-objectstorage.com/collective-media";
+{config, ...}: let
   dataDir = "/srv/media";
 in {
   # TODO: как-нибудь поставить деп контейнера от фс?
-  fileSystems."/srv/media" = {
-    device = "memory-hole:/srv/media";
+  fileSystems."${dataDir}" = {
+    device = "memory-hole:${dataDir}";
     fsType = "nfs";
   };
 
@@ -58,8 +50,7 @@ in {
           };
         volumes = [
           "./configs/jellyfin:/config"
-          "${dataDir}/movies:/media/movies"
-          "${dataDir}/series:/media/series"
+          "${dataDir}:/media"
         ];
       };
       flaresolverr = {
