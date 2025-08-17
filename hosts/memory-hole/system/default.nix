@@ -6,6 +6,7 @@
     ./network.nix
     ./traefik.nix
     ./ukurboot.nix
+    ./users.nix
   ];
 
   boot.loader.grub.enable = true;
