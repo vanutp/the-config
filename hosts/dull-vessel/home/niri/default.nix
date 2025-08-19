@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   pkgs-unstable,
   config,
@@ -32,7 +33,7 @@ in {
   };
   systemd.user.sessionServices = [
     {
-      package = pkgs.xwayland-satellite;
+      package = inputs.xwayland-satellite.packages.${pkgs.system}.default;
       args = [":0"];
     }
     {

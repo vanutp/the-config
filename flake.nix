@@ -29,6 +29,10 @@
       url = "github:linkfrg/ignis";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    xwayland-satellite = {
+      url = "github:Supreeeme/xwayland-satellite";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     vhap-compose-update = {
       url = "git+https://foxlab.dev/vanutp/vhap-compose-update";
