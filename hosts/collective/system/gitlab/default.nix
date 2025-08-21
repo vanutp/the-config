@@ -35,6 +35,14 @@
   services.gitlab = {
     enable = true;
 
+    packages.gitlab = pkgs.gitlab.overrideAttrs (old: {
+      patches =
+        old.patches or []
+        ++ [
+          ./0001-Sane-CI-logs-live-tail-behavior.patch
+        ];
+    });
+
     host = "foxlab.dev";
     port = 443;
     https = true;

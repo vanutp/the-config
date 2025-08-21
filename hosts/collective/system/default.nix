@@ -6,7 +6,7 @@
 }: {
   imports = [
     ./containers
-    ./gitlab.nix
+    ./gitlab
     ./hardware-configuration.nix
     ./immich
     ./network.nix

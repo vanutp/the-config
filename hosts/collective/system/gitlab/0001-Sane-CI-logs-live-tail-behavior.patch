@@ -1,0 +1,25 @@
+From 929dd543e92891b4f86f0c1eb6944960483713d8 Mon Sep 17 00:00:00 2001
+From: Ivan Filipenkov <hello@vanutp.dev>
+Date: Thu, 21 Aug 2025 23:53:27 +0200
+Subject: [PATCH] Sane CI logs live tail behavior
+
+---
+ lib/gitlab/ci/trace.rb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/gitlab/ci/trace.rb b/lib/gitlab/ci/trace.rb
+index c2bdd14..28b9d24 100644
+--- a/lib/gitlab/ci/trace.rb
++++ b/lib/gitlab/ci/trace.rb
+@@ -12,7 +12,7 @@ module Gitlab
+       LOCK_SLEEP = 0.001.seconds
+       WATCH_FLAG_TTL = 10.seconds
+ 
+-      UPDATE_FREQUENCY_DEFAULT = 60.seconds
++      UPDATE_FREQUENCY_DEFAULT = 3.seconds
+       UPDATE_FREQUENCY_WHEN_BEING_WATCHED = 3.seconds
+ 
+       LOAD_BALANCING_STICKING_NAMESPACE = 'ci/build/trace'
+-- 
+2.49.0
+
