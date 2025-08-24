@@ -7,9 +7,6 @@
   imports = [
     ./server.nix
   ];
-  home.packages = with pkgs; [
-    peco
-  ];
 
   home.sessionPath = [
     "$HOME/.local/bin"
@@ -21,6 +18,15 @@
   };
 
   programs.zoxide.enable = true;
+  programs.atuin = {
+    enable = true;
+    daemon.enable = true;
+    flags = ["--disable-up-arrow"];
+    settings = {
+      enter_accept = false;
+      daemon.sync_frequency = 60 * 60 * 5;
+    };
+  };
 
   programs.zsh = {
     enable = true;
@@ -114,15 +120,6 @@
           name = "sudo";
           src = pkgs.oh-my-zsh;
           file = "share/oh-my-zsh/plugins/sudo/sudo.plugin.zsh";
-        }
-        {
-          name = "zsh-peco-history";
-          src = pkgs.fetchFromGitHub {
-            owner = "jimeh";
-            repo = "zsh-peco-history";
-            rev = "73615968d46cf172931946b00f89a59da0c124a5";
-            hash = "sha256-lEgisjuLrnetIUG0fXl9vH3/ZHgpyQviy7rJazCkMTs=";
-          };
         }
       ];
   };
