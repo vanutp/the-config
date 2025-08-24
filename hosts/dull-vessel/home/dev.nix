@@ -87,11 +87,7 @@
       '';
     })
     alejandra
-    (import inputs.nixpkgs-very-unstable {
-      inherit (pkgs) system;
-      config.allowUnfree = true;
-    })
-    .zed-editor
+    pkgs-unstable.zed-editor
     pkgs-unstable.vscode
     pkgs-unstable.jetbrains.idea-ultimate
     pkgs-unstable.jetbrains.idea-community-bin

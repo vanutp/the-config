@@ -2,7 +2,6 @@
   inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixos-25.05/nixexprs.tar.xz";
     nixpkgs-unstable.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
-    nixpkgs-very-unstable.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -27,10 +26,6 @@
     };
     ignis = {
       url = "github:linkfrg/ignis";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    xwayland-satellite = {
-      url = "github:Supreeeme/xwayland-satellite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

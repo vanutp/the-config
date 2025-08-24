@@ -33,7 +33,7 @@ in {
   };
   systemd.user.sessionServices = [
     {
-      package = inputs.xwayland-satellite.packages.${pkgs.system}.default;
+      package = pkgs.xwayland-satellite;
       args = [":0"];
     }
     {
