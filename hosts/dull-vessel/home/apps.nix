@@ -16,7 +16,6 @@
               --set ANKI_WAYLAND 1
           '';
       }))
-      sidequest
       loupe
       xournalpp
       slack
