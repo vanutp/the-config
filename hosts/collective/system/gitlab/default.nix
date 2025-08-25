@@ -194,7 +194,7 @@
                 min-width: 66px !important;
               }
               @media (max-width: 768px) {
-                [data-testid="blob-viewer-file-content"] {
+                .blob-viewer {
                   margin: 0 -16px;
                 }
               }
