@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
     ./composter-tests
     ./veyon
@@ -37,6 +37,9 @@
   };
 
   networking.networkmanager.enable = true;
+  environment.systemPackages = with pkgs; [
+    networkmanagerapplet
+  ];
   systemd.services.NetworkManager-wait-online.enable = false;
   systemd.services.NetworkManager.wantedBy = ["multi-user.target"];
   users.groups.networkmanager.members = ["fox"];
