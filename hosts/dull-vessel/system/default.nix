@@ -37,6 +37,7 @@
   };
 
   networking.networkmanager.enable = true;
+  networking.networkmanager.logLevel = "INFO";
   environment.systemPackages = with pkgs; [
     networkmanagerapplet
   ];
@@ -56,4 +57,6 @@
   boot.supportedFilesystems = ["ntfs"];
 
   programs.nix-ld.enable = true;
+
+  services.neard.enable = true;
 }
