@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./server.nix
+    ./tmux.nix
   ];
 
   home.sessionPath = [
