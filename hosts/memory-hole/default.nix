@@ -4,5 +4,6 @@
   users = {
     fox = {...}: {};
     root = {...}: {};
+    lumi = ./lumi.nix;
   };
 }
