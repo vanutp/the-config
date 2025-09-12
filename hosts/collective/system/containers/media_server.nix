@@ -1,5 +1,7 @@
 {config, ...}: let
   dataDir = "/srv/media";
+  uid = 1000;
+  gid = 2000;
 in {
   # TODO: как-нибудь поставить деп контейнера от фс?
   fileSystems."${dataDir}" = {
@@ -7,10 +9,15 @@ in {
     fsType = "nfs";
   };
 
+  users.groups.media-server = {
+    members = ["fox"];
+    inherit gid;
+  };
+
   virtualisation.composter.apps.media_server = let
     linuxserverEnv = {
-      PGID = "1000";
-      PUID = "1000";
+      PUID = builtins.toString uid;
+      PGID = builtins.toString gid;
       TZ = "Europe/Berlin";
     };
     gluetunDep = {
@@ -62,6 +69,7 @@ in {
       requester_backend = {
         image = "registry.vanutp.dev/vanutp/media-server/backend";
         env_file = config.sops.secrets."media_server/requester_env".path;
+        user = "${builtins.toString uid}:${builtins.toString gid}";
         environment = {
           QBITTORRENT_URL = "http://memory-hole:8080";
           FLARESOLVERR_URL = "http://flaresolverr:8191";

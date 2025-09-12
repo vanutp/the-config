@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{config, ...}: {
   virtualisation.composter.apps.media_server_lumi = {
     backup.enable = true;
     auth = ["foxlab"];
@@ -17,6 +12,7 @@
       requester_backend = {
         image = "registry.vanutp.dev/vanutp/media-server/backend";
         env_file = config.sops.secrets."media_server_lumi".path;
+        user = "1000:2000";
         environment = {
           QBITTORRENT_URL = "http://memory-hole:8080";
           FLARESOLVERR_URL = "http://flaresolverr:8191";

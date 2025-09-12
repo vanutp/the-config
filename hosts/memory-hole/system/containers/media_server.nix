@@ -1,29 +1,10 @@
 {config, ...}: let
-  dataDir = "/srv/media";
+  cfg = config.vanutp.volumes.media-server;
 in {
-  systemd.tmpfiles.settings.media-server."/srv/media".d = {
-    user = "fox";
-    group = "1000";
-    mode = "0770";
-  };
-  services.nfs.server = {
-    enable = true;
-    lockdPort = 4001;
-    mountdPort = 4002;
-    statdPort = 4000;
-    exports = ''
-      /srv/media 100.111.249.84(rw,nohide,insecure,no_subtree_check,no_root_squash)
-    '';
-  };
-  networking.firewall = {
-    allowedTCPPorts = [2049 4000 4001 4002];
-    allowedUDPPorts = [2049 4000 4001 4002];
-  };
-
   virtualisation.composter.apps.media_server = let
     linuxserverEnv = {
-      PGID = "1000";
-      PUID = "1000";
+      PUID = builtins.toString cfg.uid;
+      PGID = builtins.toString cfg.gid;
       TZ = "Europe/Berlin";
     };
     gluetunDep = {
@@ -61,7 +42,7 @@ in {
         environment = linuxserverEnv;
         volumes = [
           "./configs/qbittorrent:/config"
-          "${dataDir}:/media"
+          "${cfg.path}:/media"
         ];
       };
     };
