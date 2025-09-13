@@ -11,23 +11,9 @@
         type = types.nullOr types.str;
         default = null;
       };
-      update-dns = mkOption {
-        type = types.submodule {
-          options = {
-            enable = mkOption {
-              type = types.bool;
-              default = false;
-            };
-            cloudflare-key-file = mkOption {
-              type = types.str;
-              readOnly = true;
-            };
-            host-ip = mkOption {
-              type = types.str;
-              readOnly = true;
-            };
-          };
-        };
+      update-dns.enable = mkOption {
+        type = types.bool;
+        default = false;
       };
       apps = mkOption {
         type = types.attrsOf (types.submodule ({name, ...}: {
@@ -116,17 +102,7 @@
 
   config = let
     mkJson = (pkgs.formats.json {}).generate;
-    cfg =
-      (builtins.removeAttrs config.virtualisation.composter ["update-dns"])
-      // {
-        update-dns = let
-          dnsCfg = config.virtualisation.composter.update-dns;
-        in (
-          if dnsCfg.enable
-          then dnsCfg
-          else {enable = false;}
-        );
-      };
+    cfg = config.virtualisation.composter;
     configFile = mkJson "config.json" cfg;
     # TODO: validate with vhapd
     # configFile = pkgs.stdenv.mkDerivation {
@@ -142,7 +118,6 @@
     composter =
       pkgs.writers.writePython3Bin "composter" {
         flakeIgnore = ["E501"];
-        libraries = [pkgs.python3Packages.httpx];
         makeWrapperArgs = [
           "--set"
           "PATH"
@@ -156,13 +131,6 @@
     environment.systemPackages = [
       composter
     ];
-    virtualisation.composter.update-dns = {
-      host-ip =
-        builtins.elemAt
-        (lib.strings.splitString "/" config.setup.network.ipv4.address)
-        0;
-      cloudflare-key-file = config.sops.secrets."vhap-cf-token".path;
-    };
     system.activationScripts.composter-activate.text = ''
       ${lib.getExe composter} apply_config ${configFile}
     '';
@@ -217,5 +185,18 @@
       }))
       (lib.filterAttrs (name: cfg: cfg.paths != []))
     ];
+    vanutp.maskman = {
+      enable = true;
+      entries = lib.pipe config.virtualisation.composter.apps [
+        builtins.attrValues
+        (map (app: builtins.attrValues app.services))
+        lib.flatten
+        (builtins.filter (svc: svc ? traefik && svc.traefik ? host && (svc.traefik.update-dns or true)))
+        (map (svc: {
+          name = svc.traefik.host;
+          proxied = svc.traefik.proxied or true;
+        }))
+      ];
+    };
   };
 }

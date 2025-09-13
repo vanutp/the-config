@@ -125,4 +125,11 @@ in {
       services = ["media_server"];
     }
   ];
+  vanutp.maskman.entries = [
+    {
+      name = "bitmagnet.vanutp.dev";
+      target-interface = "tailscale0";
+      proxied = false;
+    }
+  ];
 }

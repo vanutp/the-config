@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 import json
 import logging
 import os
@@ -6,7 +5,6 @@ from pathlib import Path
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
-import httpx
 
 logging.basicConfig(
     format='%(asctime)s %(levelname)s: %(message)s',
@@ -107,10 +105,7 @@ def apply_config(config_path: str):
             if 'restart' not in service:
                 service['restart'] = 'always'
         app_dir: Path = BASE_DIR / name
-        should_update_dns = config['update-dns']['enable']  # and not app_dir.exists()
         app_dir.mkdir(exist_ok=True)
-        if should_update_dns:
-            (app_dir / '.vhap-update-dns').touch()
         (app_dir / 'docker-compose.yml').write_text(json.dumps(app_config))
         (app_dir / 'creds.vhap.json').write_text(json.dumps(creds_data))
 
@@ -124,125 +119,9 @@ def get_apps_on_disk():
         yield path.name
 
 
-@dataclass
-class CFRecord:
-    id: str
-    name: str
-    content: str
-    proxied: bool
-
-
-class DnsUpdater:
-    zone_ids: dict[str, str]
-    host_ip: str
-    client: httpx.Client
-    # Only A records for now
-    _domain_cache: dict[str, list[CFRecord]] = {}
-
-    def __init__(self, dns_cfg: dict):
-        with open(dns_cfg['cloudflare-key-file'], 'r') as f:
-            api_key = f.read()
-        self.host_ip = dns_cfg['host-ip']
-        self.client = httpx.Client(
-            headers={'Authorization': f'Bearer {api_key}'},
-            base_url='https://api.cloudflare.com/client/v4',
-        )
-        resp = self.client.get('/zones', params={'per_page': 1000})
-        resp.raise_for_status()
-        data = resp.json()
-        if data['result_info']['total_count'] > data['result_info']['per_page']:
-            raise ValueError('Too many zones')
-        self.zone_ids = {zone['name']: zone['id'] for zone in data['result']}
-
-    def get_zone_records(self, zone_id: str) -> list[CFRecord] | None:
-        if zone_id in self._domain_cache:
-            return self._domain_cache[zone_id]
-        resp = self.client.get(
-            f'/zones/{zone_id}/dns_records', params={'per_page': 1000}
-        )
-        resp.raise_for_status()
-        data = resp.json()
-        if data['result_info']['total_count'] > data['result_info']['per_page']:
-            raise ValueError(f'Too many DNS records for zone {zone_id}')
-        records = [
-            CFRecord(
-                id=record['id'],
-                name=record['name'],
-                content=record['content'],
-                proxied=record['proxied'],
-            )
-            for record in data['result']
-            if record['type'] == 'A'
-        ]
-        self._domain_cache[zone_id] = records
-        return records
-
-    def get_zone_id(self, domain: str) -> str | None:
-        root_domain = '.'.join(domain.split('.')[-2:])
-        zone_id = self.zone_ids.get(root_domain)
-        if not zone_id:
-            logger.info(f'Zone ID not set for root domain {domain}, skipping')
-        return zone_id
-
-    def update_domain_dns(self, domain: str, proxied: bool) -> None:
-        if not (zone_id := self.get_zone_id(domain)):
-            return
-        if not (records := self.get_zone_records(zone_id)):
-            return
-        found_record = False
-        to_remove = []
-        for record in records:
-            if record.name != domain:
-                continue
-            if record.content == self.host_ip and record.proxied == proxied:
-                found_record = True
-                continue
-            resp = self.client.delete(f'/zones/{zone_id}/dns_records/{record.id}')
-            resp.raise_for_status()
-            logger.info(f'Removed DNS record {record}')
-            to_remove.append(record)
-        for record in to_remove:
-            records.remove(record)
-        if not found_record:
-            resp = self.client.post(
-                f'/zones/{zone_id}/dns_records',
-                json={
-                    'type': 'A',
-                    'name': domain,
-                    'content': self.host_ip,
-                    'proxied': proxied,
-                },
-            )
-            if resp.status_code != 200:
-                logger.error(f'Failed to create DNS record for {domain}: {resp.json()}')
-                resp.raise_for_status()
-            record = CFRecord(
-                id=resp.json()['result']['id'],
-                name=domain,
-                content=self.host_ip,
-                proxied=proxied,
-            )
-            logger.info(f'Created DNS record {record}')
-            records.append(record)
-
-    def update_app_dns(self, app_cfg: dict) -> None:
-        for service in app_cfg.get('services', {}).values():
-            if not (traefik := service.get('traefik')):
-                continue
-            if not (host := traefik.get('host')):
-                continue
-            if traefik.get('update-dns', True):
-                self.update_domain_dns(host, traefik.get('proxied', True))
-
-
 def up_apps(config_path: str):
     config = load_config(config_path)
     ok = True
-    update_dns_cfg = config['update-dns']
-    if update_dns_cfg['enable']:
-        dns_updater = DnsUpdater(update_dns_cfg)
-    else:
-        dns_updater = None
     apps = config['apps']
     apps_to_remove = set(get_apps_on_disk()) - set(apps.keys())
     for name in apps_to_remove:
@@ -264,15 +143,6 @@ def up_apps(config_path: str):
     for name, app_cfg in apps.items():
         logger.info(f'Starting app {name}')
         app_dir = BASE_DIR / name
-        update_dns_file = app_dir / '.vhap-update-dns'
-        if update_dns_file.exists() and dns_updater:
-            logger.info(f'Updating DNS for app {name}')
-            update_dns_file.unlink()
-            try:
-                dns_updater.update_app_dns(app_cfg)
-            except Exception:
-                logger.exception(f'Failed to update DNS for app {name}')
-                ok = False
         # TODO: check if the directory isn't world accessible
         with TemporaryDirectory() as docker_cfg_dir:
             try:
