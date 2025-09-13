@@ -32,7 +32,6 @@
     rsync
     rclone
     restic
-    juicefs
 
     age
     ssh-to-age

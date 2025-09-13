@@ -31,6 +31,11 @@
         uid = 1000;
         gid = 2000;
       };
+      immich = {
+        path = "/srv/immich";
+        uid = 992;
+        gid = 991;
+      };
     };
     users.groups.media-server = {
       members = ["fox" "lumi"];

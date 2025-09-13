@@ -8,7 +8,7 @@
     ./containers
     ./gitlab
     ./hardware-configuration.nix
-    ./immich
+    ./immich.nix
     ./network.nix
     ./postgresql.nix
     ./tgpy_redirect.nix
