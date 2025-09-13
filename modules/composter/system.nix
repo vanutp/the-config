@@ -180,6 +180,7 @@
       # TODO: fix permissions?
       user = "root";
       group = "root";
+      host = "127.0.0.1";
       port = 7002;
       baseDir = "/srv/vhap";
       logsDir = "/srv/vhap/_vhap_update_logs";
