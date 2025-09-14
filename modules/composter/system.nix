@@ -185,18 +185,15 @@
       }))
       (lib.filterAttrs (name: cfg: cfg.paths != []))
     ];
-    vanutp.maskman = {
-      enable = true;
-      entries = lib.pipe config.virtualisation.composter.apps [
-        builtins.attrValues
-        (map (app: builtins.attrValues app.services))
-        lib.flatten
-        (builtins.filter (svc: svc ? traefik && svc.traefik ? host && (svc.traefik.update-dns or true)))
-        (map (svc: {
-          name = svc.traefik.host;
-          proxied = svc.traefik.proxied or true;
-        }))
-      ];
-    };
+    vanutp.maskman.entries = lib.pipe config.virtualisation.composter.apps [
+      builtins.attrValues
+      (map (app: builtins.attrValues app.services))
+      lib.flatten
+      (builtins.filter (svc: svc ? traefik && svc.traefik ? host && (svc.traefik.update-dns or true)))
+      (map (svc: {
+        name = svc.traefik.host;
+        proxied = svc.traefik.proxied or true;
+      }))
+    ];
   };
 }

@@ -32,8 +32,6 @@
       ];
     };
   };
-  virtualisation.composter = {
-    vhap-update-host = "vhap-update.vanutp.dev";
-    update-dns.enable = true;
-  };
+  virtualisation.composter.vhap-update-host = "vhap-update.vanutp.dev";
+  vanutp.maskman.enable = true;
 }
