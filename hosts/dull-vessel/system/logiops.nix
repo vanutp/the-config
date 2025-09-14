@@ -33,6 +33,7 @@ in {
     wantedBy = ["default.target"];
     restartTriggers = [cfgFile];
   };
+  security.polkit.serviceOwners.logid = "fox";
 
   environment.etc."logid.cfg".source = cfgFile;
 }
