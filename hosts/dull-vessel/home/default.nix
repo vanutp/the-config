@@ -13,6 +13,7 @@
     ./terminal.nix
     ./theme.nix
     ./tofi.nix
+    ./vicinae.nix
     ./waybar.nix
   ];
 

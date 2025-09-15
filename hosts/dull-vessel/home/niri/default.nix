@@ -165,7 +165,7 @@ in {
               "Super+Return" = spawn "ghostty";
               "Super+Escape" = spawn ["loginctl" "lock-session"];
               "Super+Shift+A" = spawn yubikey-totp;
-              "Super+D" = spawn ["tofi-drun" "--drun-launch=true"];
+              "Super+D" = spawn ["vicinae"];
               "Super+E" = spawn ["nautilus" "-w"];
               "Ctrl+Shift+D" = spawn ["copyq" "toggle"];
               "Super+S" = "screenshot";

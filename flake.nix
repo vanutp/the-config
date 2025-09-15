@@ -28,6 +28,10 @@
       url = "github:linkfrg/ignis";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    vicinae = {
+      url = "github:vanutp/vicinae";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     vhap-compose-update = {
       url = "git+https://foxlab.dev/vanutp/vhap-compose-update";
