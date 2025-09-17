@@ -60,6 +60,11 @@
           publicKey = "0wcdB/PHS8YNbBG6DAHY9pQ7dZY6q6+kzjzyOD2HZQw=";
           allowedIPs = ["10.3.1.5/32"];
         }
+        {
+          # phone
+          publicKey = "f4OEmahvV6SVmNUih4nlpGmzsDZ2Uy+ykFSc3En2kTc=";
+          allowedIPs = ["10.3.1.6/32"];
+        }
       ];
     };
 
