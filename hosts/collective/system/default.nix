@@ -13,6 +13,7 @@
     ./postgresql.nix
     ./tgpy_redirect.nix
     ./traefik.nix
+    ./users.nix
     ./wireguard.nix
   ];
 
