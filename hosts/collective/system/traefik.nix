@@ -1,4 +1,4 @@
-{...}: {
+{lib, ...}: {
   vanutp.traefik = {
     enable = true;
     requestWildcardCertsFor = [
@@ -15,4 +15,5 @@
   '';
   virtualisation.composter.vhap-update-host = "vhap-update-collective.vanutp.dev";
   vanutp.maskman.enable = true;
+  vanutp.traefik.config.entryPoints.https.transport.respondingTimeouts.readTimeout = lib.mkForce 180;
 }

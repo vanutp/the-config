@@ -10,6 +10,9 @@
         type = types.bool;
         default = false;
       };
+      config = mkOption {
+        type = types.anything;
+      };
       proxies = mkOption {
         type = types.listOf (types.submodule {
           options = {
@@ -107,84 +110,85 @@
         cp ${extraDynamicConfigFile} $out/extra.yml
       '';
     };
-    configFile = mkYaml "traefik.yml" {
-      accessLog = {
-        filePath = "/data/logs/access.json";
-        format = "json";
-        fields = {
-          defaultMode = "keep";
-          names.RequestAddr = "keep";
-          headers.names.User-Agent = "keep";
-        };
-      };
-      certificatesResolvers =
-        {
-          default.acme =
-            {
-              storage = "/data/tls/acme.json";
-            }
-            // (
-              # TODO: can mkIf be used here?
-              if config.vanutp.traefik.acmeChallenge == "dns"
-              then {
-                dnsChallenge.provider = "cloudflare";
-              }
-              else {
-                tlsChallenge = {};
-              }
-            );
-        }
-        // (
-          if config.vanutp.traefik.acmeChallenge == "dns"
-          then {
-            http.acme = {
-              tlsChallenge = {};
-              storage = "/data/tls/acme-http.json";
-            };
-          }
-          else {}
-        );
-      entryPoints = {
-        http = {
-          address = ":80";
-          http.redirections.entrypoint = {
-            to = "https";
-            scheme = "https";
-            permanent = true;
-          };
-        };
-        https = {
-          address = ":443";
-          transport.respondingTimeouts.readTimeout = 120;
-          forwardedHeaders.trustedIPs = cloudflareRanges;
-          http.tls =
-            {
-              certResolver = "default";
-            }
-            // (
-              # TODO: can mkIf be used here?
-              if config.vanutp.traefik.acmeChallenge == "dns"
-              then {
-                # TODO: copy certificates from main server to others
-                # instead of giving every server cloudflare access
-                domains =
-                  map (domain: {
-                    main = domain;
-                    sans = ["*.${domain}"];
-                  })
-                  config.vanutp.traefik.requestWildcardCertsFor;
-              }
-              else {}
-            );
-        };
-      };
-      providers = {
-        docker.exposedByDefault = false;
-        file.directory = rulesDir;
-      };
-    };
+    configFile = mkYaml "traefik.yml" config.vanutp.traefik.config;
   in
     lib.mkIf config.vanutp.traefik.enable {
+      vanutp.traefik.config = {
+        accessLog = {
+          filePath = "/data/logs/access.json";
+          format = "json";
+          fields = {
+            defaultMode = "keep";
+            names.RequestAddr = "keep";
+            headers.names.User-Agent = "keep";
+          };
+        };
+        certificatesResolvers =
+          {
+            default.acme =
+              {
+                storage = "/data/tls/acme.json";
+              }
+              // (
+                # TODO: can mkIf be used here?
+                if config.vanutp.traefik.acmeChallenge == "dns"
+                then {
+                  dnsChallenge.provider = "cloudflare";
+                }
+                else {
+                  tlsChallenge = {};
+                }
+              );
+          }
+          // (
+            if config.vanutp.traefik.acmeChallenge == "dns"
+            then {
+              http.acme = {
+                tlsChallenge = {};
+                storage = "/data/tls/acme-http.json";
+              };
+            }
+            else {}
+          );
+        entryPoints = {
+          http = {
+            address = ":80";
+            http.redirections.entrypoint = {
+              to = "https";
+              scheme = "https";
+              permanent = true;
+            };
+          };
+          https = {
+            address = ":443";
+            transport.respondingTimeouts.readTimeout = 120;
+            forwardedHeaders.trustedIPs = cloudflareRanges;
+            http.tls =
+              {
+                certResolver = "default";
+              }
+              // (
+                # TODO: can mkIf be used here?
+                if config.vanutp.traefik.acmeChallenge == "dns"
+                then {
+                  # TODO: copy certificates from main server to others
+                  # instead of giving every server cloudflare access
+                  domains =
+                    map (domain: {
+                      main = domain;
+                      sans = ["*.${domain}"];
+                    })
+                    config.vanutp.traefik.requestWildcardCertsFor;
+                }
+                else {}
+              );
+          };
+        };
+        providers = {
+          docker.exposedByDefault = false;
+          file.directory = rulesDir;
+        };
+      };
       virtualisation.composter.apps.traefik.services.traefik = {
         image = "traefik:latest";
         command = "--configFile=${configFile}";
