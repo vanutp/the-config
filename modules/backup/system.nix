@@ -2,6 +2,7 @@
   config,
   lib,
   hostname,
+  mode,
   ...
 }: {
   options = with lib; {
@@ -79,32 +80,40 @@
       default = {};
     };
   };
-  config = {
-    services.restic.backups = lib.mkIf config.vanutp.backup.enable (
-      lib.mapAttrs (name: cfg: {
-        initialize = true;
-        repository = config.vanutp.backup.remotes.${cfg.remote}.path;
-        rcloneConfig = config.vanutp.backup.remotes.${cfg.remote}.rcloneConfig;
-        environmentFile = config.sops.secrets."restic/${cfg.remote}/repo-creds".path;
-        passwordFile = config.sops.secrets."restic/${cfg.remote}/password".path;
-        extraBackupArgs =
-          [
+  config = let
+    globalCfg = config.vanutp.backup;
+  in
+    lib.mkIf globalCfg.enable {
+      assertions = [
+        {
+          assertion = (mode == "home") -> (builtins.all (x: x.rcloneConfig == null) (builtins.attrValues globalCfg.remotes));
+          message = "vanutp.backup.remotes.<name>.rcloneConfig cannot be used in home mode";
+        }
+      ];
+      services.restic.backups =
+        lib.mapAttrs (name: cfg: {
+          initialize = true;
+          repository = globalCfg.remotes.${cfg.remote}.path;
+          rcloneConfig = lib.mkIf (mode == "system") globalCfg.remotes.${cfg.remote}.rcloneConfig;
+          environmentFile = config.sops.secrets."restic/${cfg.remote}/repo-creds".path;
+          passwordFile = config.sops.secrets."restic/${cfg.remote}/password".path;
+          extraBackupArgs =
+            [
+              "--tag=${cfg.tag}"
+            ]
+            ++ cfg.extraBackupArgs;
+          pruneOpts = [
+            "--keep-last=10"
             "--tag=${cfg.tag}"
-          ]
-          ++ cfg.extraBackupArgs;
-        pruneOpts = [
-          "--keep-last=10"
-          "--tag=${cfg.tag}"
-          "--host=${hostname}"
-        ]; # TODO: forget/prune separately
-        timerConfig = {
-          OnCalendar = cfg.schedule;
-          Persistent = true;
-          RandomizedDelaySec = cfg.randomizedDelay;
-        };
-        inherit (cfg) paths exclude dynamicFilesFrom backupPrepareCommand backupCleanupCommand;
-      })
-      config.vanutp.backup.backups
-    );
-  };
+            "--host=${hostname}"
+          ]; # TODO: forget/prune separately
+          timerConfig = {
+            OnCalendar = cfg.schedule;
+            Persistent = true;
+            RandomizedDelaySec = cfg.randomizedDelay;
+          };
+          inherit (cfg) paths exclude dynamicFilesFrom backupPrepareCommand backupCleanupCommand;
+        })
+        globalCfg.backups;
+    };
 }
