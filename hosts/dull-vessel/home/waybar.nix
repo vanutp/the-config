@@ -48,6 +48,8 @@
       import sys
       import json
       import subprocess
+      from configparser import ConfigParser
+      QTCT_CONFIG_PATH = '${config.xdg.configHome}/qt6ct/qt6ct.conf'
       SIGRTMIN = 34
       ICONS = {
           'default': '\uf522 ',
@@ -61,12 +63,30 @@
           if color_scheme in ['default', 'prefer-light']:
               color_scheme = 'prefer-dark'
               gtk_theme = 'Adwaita-dark'
+              qt_color_scheme_path = '${pkgs.qt6ct}/share/qt6ct/colors/darker.conf'
+              qt_icon_theme = 'breeze-dark'
           else:
               color_scheme = 'default'
               gtk_theme = 'Adwaita'
+              qt_color_scheme_path = None
+              qt_icon_theme = 'breeze'
           subprocess.check_call(['${dconf}', 'write', '/org/gnome/desktop/interface/color-scheme', f'"{color_scheme}"'])
           subprocess.check_call(['${dconf}', 'write', '/org/gnome/desktop/interface/gtk-theme', f'"{gtk_theme}"'])
           subprocess.check_call(f'kill -{SIGRTMIN + 1} $(pgrep waybar)', shell=True)
+          qt_cfg = ConfigParser()
+          qt_cfg.read(QTCT_CONFIG_PATH)
+          if not qt_cfg.has_section('Appearance'):
+              qt_cfg.add_section('Appearance')
+          qt_cfg.set('Appearance', 'style', 'Breeze')
+          if qt_color_scheme_path:
+              qt_cfg.set('Appearance', 'custom_palette', 'true')
+              qt_cfg.set('Appearance', 'color_scheme_path', qt_color_scheme_path)
+          else:
+              qt_cfg.set('Appearance', 'custom_palette', 'false')
+              qt_cfg.remove_option('Appearance', 'color_scheme_path')
+          qt_cfg.set('Appearance', 'icon_theme', qt_icon_theme)
+          with open(QTCT_CONFIG_PATH, 'w') as f:
+              qt_cfg.write(f, space_around_delimiters=False)
       else:
           raise ValueError()
     '';

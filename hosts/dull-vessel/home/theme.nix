@@ -41,8 +41,7 @@
 
     qt = {
       enable = true;
-      platformTheme.name = "kde6";
-      style.name = "breeze";
+      platformTheme.name = "qtct";
     };
 
     fonts.fontconfig = {
@@ -61,6 +60,7 @@
     ];
 
     home.packages = with pkgs; [
+      kdePackages.breeze
       pkgs.gnome-themes-extra
       kdePackages.breeze-icons
       noto-fonts
