@@ -18,9 +18,9 @@
         };
       })
       [
-        "IntelliJIdea2025.1/idea64.vmoptions"
-        "CLion2025.1/clion64.vmoptions"
-        "PyCharm2025.1/pycharm64.vmoptions"
+        "IntelliJIdea2025.2/idea64.vmoptions"
+        "CLion2025.2/clion64.vmoptions"
+        "PyCharm2025.2/pycharm64.vmoptions"
       ]
     )
     // {
