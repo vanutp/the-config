@@ -112,20 +112,20 @@
         providers = [
           {
             name = "github";
-            app_id = config.sops.secrets."gitlab/omniauth/github/id".path;
-            app_secret = config.sops.secrets."gitlab/omniauth/github/secret".path;
+            app_id._secret = config.sops.secrets."gitlab/omniauth/github/id".path;
+            app_secret._secret = config.sops.secrets."gitlab/omniauth/github/secret".path;
             args.scope = ["user:email"];
           }
           {
             name = "gitlab";
-            app_id = config.sops.secrets."gitlab/omniauth/gitlab/id".path;
-            app_secret = config.sops.secrets."gitlab/omniauth/gitlab/secret".path;
+            app_id._secret = config.sops.secrets."gitlab/omniauth/gitlab/id".path;
+            app_secret._secret = config.sops.secrets."gitlab/omniauth/gitlab/secret".path;
             args.scope = ["read_user"];
           }
           {
             name = "google_oauth2";
-            app_id = config.sops.secrets."gitlab/omniauth/google/id".path;
-            app_secret = config.sops.secrets."gitlab/omniauth/google/secret".path;
+            app_id._secret = config.sops.secrets."gitlab/omniauth/google/id".path;
+            app_secret._secret = config.sops.secrets."gitlab/omniauth/google/secret".path;
             args = {
               access_type = "offline";
               approval_prompt = "";
@@ -148,6 +148,7 @@
   };
 
   services.nginx = {
+    # TODO: auto enable in a shared module if there are virtualHosts
     enable = true;
     recommendedProxySettings = true;
     virtualHosts = let
