@@ -16,6 +16,7 @@
       ipv6 = true;
       fixed-cidr-v6 = "fd00:dead:beef:c0::/80";
       experimental = true;
+      live-restore = true;
     };
   };
 }
