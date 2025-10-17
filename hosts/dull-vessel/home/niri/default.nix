@@ -106,6 +106,13 @@ in {
           y = 0;
         };
       })
+      (section "output" "DP-2" {
+        scale = 1.25;
+        position = {
+          x = 1536;
+          y = 0;
+        };
+      })
       (block "layout" [
         (node "gaps" 8)
         (node "center-focused-column" "never")
