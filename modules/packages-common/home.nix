@@ -21,6 +21,7 @@
     psmisc
     pciutils
     usbutils
+    smartmontools
     git
     neovim
     pgcli
