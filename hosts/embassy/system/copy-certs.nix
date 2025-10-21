@@ -19,7 +19,6 @@
               key=$(echo $data | jq -r '.key')
               command="sudo bash -c \"echo $certificate | base64 -d > /etc/nginx/certs/vanutp.dev/fullchain3.pem && echo $key | base64 -d > /etc/nginx/certs/vanutp.dev/privkey3.pem && systemctl reload nginx\""
               ssh fox@s4 -oStrictHostKeyChecking=no -i /home/fox/.ssh/id_rsa "$command"
-              ssh fox@s2 -oStrictHostKeyChecking=no -i /home/fox/.ssh/id_rsa "$command"
               echo "Updated certificates"
           done
     '';
