@@ -23,6 +23,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
   security.pam.services.swaylock = {
     fprintAuth = true;
     allowNullPassword = true;
