@@ -1,12 +1,12 @@
 pkgs: let
   pname = "64gram";
-  version = "1.1.79";
+  version = "1.1.82";
   binary = pkgs.stdenv.mkDerivation {
     pname = "${pname}-bin";
     inherit version;
     src = pkgs.fetchzip {
       url = "https://github.com/TDesktop-x64/tdesktop/releases/download/v${version}/64Gram_${version}_linux.zip";
-      hash = "sha256-OIY6IB5eOxnRXfHrVI61qD1Wyz0NzXkJJaHC2Ama1jk=";
+      hash = "sha256-L6x67g2d85BEJF+/cpvYOFNUWA1HDhn8CCzpf8Wf4rE=";
       stripRoot = false;
     };
     buildPhase = ''
