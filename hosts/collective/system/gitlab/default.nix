@@ -195,7 +195,7 @@
                 min-width: 66px !important;
               }
               @media (max-width: 768px) {
-                .blob-viewer {
+                .file-holder > .blob-viewer {
                   margin: 0 -16px;
                 }
               }
