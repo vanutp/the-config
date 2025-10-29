@@ -141,6 +141,51 @@
       wantedBy = ["multi-user.target"];
       serviceConfig = {
         Type = "oneshot";
+        RemainAfterExit = "yes";
+      };
+    };
+    # дикий костыль
+    # TODO: мб мержнуть в composter-up?
+    systemd.services.composter-restart-on-upgrade = let
+      container-names = lib.pipe config.virtualisation.composter.apps [
+        (
+          lib.mapAttrsToList (
+            app-name: app:
+              lib.pipe app.services [
+                (lib.filterAttrs (
+                  _: svc:
+                    lib.any (lib.hasPrefix "/var/run/docker.sock:") (svc.volumes or [])
+                ))
+                (lib.mapAttrsToList (svc-name: svc: "${app-name}-${svc-name}-1"))
+              ]
+          )
+        )
+        lib.flatten
+        lib.escapeShellArgs
+      ];
+    in {
+      script = ''
+        if [[ -z "${container-names}" ]]; then
+          exit 0
+        fi
+        if ! systemctl is-active --quiet docker.service; then
+          echo "Skipping restart-on-upgrade: docker is not running"
+          exit 0
+        fi
+        if [[ "$(cut -d. -f1 /proc/uptime)" -lt 120 ]]; then
+          echo "Skipping restart-on-upgrade: we just booted"
+          exit 0
+        fi
+        ${lib.getExe pkgs.docker} restart ${container-names}
+      '';
+      restartTriggers = [
+        pkgs.docker
+      ];
+      after = ["composter-up.service"];
+      wantedBy = ["multi-user.target"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = "yes";
       };
     };
     services.vhap-compose-update = {

@@ -33,8 +33,10 @@ def add_label(obj: dict, key: str, value: str):
 
 def cleanup_config(app_config: dict):
     for key in ('services', 'networks', 'volumes'):
-        if app_config.get(key) is None:
+        if app_config[key] is None:
             del app_config[key]
+    for service in app_config['services'].values():
+        service.pop('restart-on-upgrade', None)
     del app_config['appDir']
     del app_config['auth']
     del app_config['metadata']
