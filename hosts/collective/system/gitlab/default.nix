@@ -17,12 +17,8 @@
       "gitlab/active_record/salt"
       "gitlab/b2/key_id"
       "gitlab/b2/access_key"
-      "gitlab/omniauth/github/id"
-      "gitlab/omniauth/github/secret"
-      "gitlab/omniauth/gitlab/id"
-      "gitlab/omniauth/gitlab/secret"
-      "gitlab/omniauth/google/id"
-      "gitlab/omniauth/google/secret"
+      "gitlab/omniauth/authentik/id"
+      "gitlab/omniauth/authentik/secret"
     ] (name: {owner = "git";}))
     {
       "gitlab/registry/cert".owner = "docker-registry";
@@ -105,30 +101,31 @@
       };
       omniauth = {
         enabled = true;
-        allow_single_sign_on = ["github" "gitlab" "google_oauth2"];
+        allow_single_sign_on = ["openid_connect"];
         block_auto_created_users = false;
-        auto_link_user = ["github" "gitlab" "google_oauth2"];
-        external_providers = ["github" "gitlab" "google_oauth2"];
+        auto_link_user = ["openid_connect"];
+        sync_profile_from_provider = ["openid_connect"];
+        auto_sign_in_with_provider = "openid_connect";
+        # sync_email_from_provider = "openid_connect";
+        # sync_profile_from_provider = ["openid_connect"];
+        # sync_profile_attributes = ["email"];
         providers = [
           {
-            name = "github";
-            app_id._secret = config.sops.secrets."gitlab/omniauth/github/id".path;
-            app_secret._secret = config.sops.secrets."gitlab/omniauth/github/secret".path;
-            args.scope = ["user:email"];
-          }
-          {
-            name = "gitlab";
-            app_id._secret = config.sops.secrets."gitlab/omniauth/gitlab/id".path;
-            app_secret._secret = config.sops.secrets."gitlab/omniauth/gitlab/secret".path;
-            args.scope = ["read_user"];
-          }
-          {
-            name = "google_oauth2";
-            app_id._secret = config.sops.secrets."gitlab/omniauth/google/id".path;
-            app_secret._secret = config.sops.secrets."gitlab/omniauth/google/secret".path;
+            name = "openid_connect";
+            label = "vanutp one";
             args = {
-              access_type = "offline";
-              approval_prompt = "";
+              name = "openid_connect";
+              scope = ["openid" "profile" "email"];
+              response_type = "code";
+              issuer = "https://auth.vanutp.dev/application/o/foxlab/";
+              discovery = true;
+              client_auth_method = "query";
+              pkce = true;
+              client_options = {
+                identifier._secret = config.sops.secrets."gitlab/omniauth/authentik/id".path;
+                secret._secret = config.sops.secrets."gitlab/omniauth/authentik/secret".path;
+                redirect_uri = "https://foxlab.dev/users/auth/openid_connect/callback";
+              };
             };
           }
         ];
