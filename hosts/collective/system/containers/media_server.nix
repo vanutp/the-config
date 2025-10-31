@@ -90,6 +90,9 @@ in {
           host = "watch.vanutp.dev";
           proxied = false;
         };
+        labels = {
+          "traefik.http.routers.watch__vanutp__dev.middlewares" = "authentik@docker";
+        };
       };
       bitmagnet = {
         image = "ghcr.io/bitmagnet-io/bitmagnet:latest";

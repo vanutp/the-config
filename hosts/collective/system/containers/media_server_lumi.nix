@@ -31,6 +31,7 @@
         restart = "always";
         labels = {
           "traefik.http.routers.watch__rightarion__ru.tls.certresolver" = "http";
+          "traefik.http.routers.watch__rightarion__ru.middlewares" = "authentik@docker";
         };
         traefik = {
           host = "watch.rightarion.ru";

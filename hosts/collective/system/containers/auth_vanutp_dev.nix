@@ -2,51 +2,37 @@
   virtualisation.composter.apps.auth_vanutp_dev = {
     backup.enable = true;
     services = {
-      admin = {
-        image = "registry.vanutp.dev/progtime/authelia-admin:latest";
-        traefik = {};
-        labels = {
-          "traefik.http.routers.authelia-admin.middlewares" = "authelia@docker";
-          "traefik.http.routers.authelia-admin.rule" = "Host(`auth.vanutp.dev`) && PathPrefix(`/admin`)";
-        };
-        environment = {
-          APP_NAME = "vanutp SSO Admin";
-          FILE_PATH = "/data/users_database.yml";
-          PATH_PREFIX = "/admin";
-        };
+      server = {
+        # TODO: update asap
+        image = "registry.vanutp.dev/vanutp/authentik";
+        command = "server";
+        env_file = config.sops.secrets."auth_vanutp_dev".path;
         volumes = [
-          "./authelia/users_database.yml:/data/users_database.yml"
+          "./media:/media"
+          "./custom-templates:/templates"
         ];
-      };
-      authelia = {
-        image = "authelia/authelia";
-        environment = {
-          TZ = "Europe/Moscow";
+        traefik = {
+          host = "auth.vanutp.dev";
+          port = 9000;
         };
-        env_file = config.sops.secrets."services/auth_vanutp_dev".path;
-        expose = [9091];
-        healthcheck.disable = true;
         labels = {
-          "traefik.enable" = "true";
-          "traefik.http.routers.authelia.rule" = "Host(`auth.vanutp.dev`) || Host(`auth.vtp.sh`)";
-          "traefik.http.middlewares.authelia.forwardauth.address" = "http://127.0.0.1:9091/api/authz/forward-auth";
-          "traefik.http.middlewares.authelia.forwardauth.authResponseHeaders" = "Remote-User,Remote-Groups,Remote-Name,Remote-Email";
-          "traefik.http.middlewares.authelia.forwardauth.trustForwardHeader" = "true";
+          "traefik.http.middlewares.authentik.forwardauth.address" = "http://127.0.0.1:9000/outpost.goauthentik.io/auth/traefik";
+          "traefik.http.middlewares.authentik.forwardauth.trustForwardHeader" = "true";
+          "traefik.http.middlewares.authentik.forwardauth.authResponseHeaders" = "X-authentik-username,X-authentik-groups,X-authentik-entitlements,X-authentik-email,X-authentik-name,X-authentik-uid,X-authentik-jwt,X-authentik-meta-jwks,X-authentik-meta-outpost,X-authentik-meta-provider,X-authentik-meta-app,X-authentik-meta-version,X-telegram-id";
         };
-        ports = ["127.0.0.1:9091:9091"];
-        volumes = [
-          "./authelia/users_database.yml:/config/users_database.yml"
-          "${./authelia.yml}:/config/configuration.yml"
-        ];
+        ports = ["127.0.0.1:9000:9000"];
       };
-      redis = {
-        image = "redis:alpine";
-        environment = {
-          TZ = "Europe/Moscow";
-        };
-        expose = [6379];
+      worker = {
+        # TODO: update asap
+        image = "ghcr.io/goauthentik/server:2025.10.0";
+        user = "root";
+        command = "worker";
+        env_file = config.sops.secrets."auth_vanutp_dev".path;
         volumes = [
-          "./redis:/data"
+          "/var/run/docker.sock:/var/run/docker.sock:ro"
+          "./media:/media"
+          "./certs:/certs"
+          "./custom-templates:/templates"
         ];
       };
     };

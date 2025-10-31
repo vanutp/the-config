@@ -64,7 +64,7 @@
       statdPort = 4000;
       exports = lib.concatLines (
         lib.mapAttrsToList
-        (_: cfg: "${cfg.path} 100.111.249.84(rw,nohide,insecure,no_subtree_check,no_root_squash)")
+        (_: cfg: "${cfg.path} 100.64.0.6(rw,nohide,insecure,no_subtree_check,no_root_squash)")
         config.vanutp.volumes
       );
     };
