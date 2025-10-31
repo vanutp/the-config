@@ -6,7 +6,7 @@
         # TODO: update asap
         image = "registry.vanutp.dev/vanutp/authentik";
         command = "server";
-        env_file = config.sops.secrets."auth_vanutp_dev".path;
+        env_file = config.sops.secrets."auth_vanutp_dev/server".path;
         volumes = [
           "./media:/media"
           "./custom-templates:/templates"
@@ -27,12 +27,23 @@
         image = "ghcr.io/goauthentik/server:2025.10.0";
         user = "root";
         command = "worker";
-        env_file = config.sops.secrets."auth_vanutp_dev".path;
+        env_file = config.sops.secrets."auth_vanutp_dev/server".path;
         volumes = [
-          "/var/run/docker.sock:/var/run/docker.sock:ro"
           "./media:/media"
           "./certs:/certs"
           "./custom-templates:/templates"
+        ];
+      };
+      ldap = {
+        image = "ghcr.io/goauthentik/ldap:2025.10.0";
+        environment = {
+          AUTHENTIK_HOST = "https://auth.vanutp.dev";
+          AUTHENTIK_INSECURE = "false";
+        };
+        env_file = config.sops.secrets."auth_vanutp_dev/ldap".path;
+        ports = [
+          "100.64.0.6:389:3389"
+          "100.64.0.6:636:6636"
         ];
       };
     };

@@ -47,8 +47,7 @@ in {
       };
       jellyfin = {
         image = "lscr.io/linuxserver/jellyfin:latest";
-        depends_on = gluetunDep;
-        network_mode = "service:gluetun";
+        hostname = "media-server";
         traefik = {
           host = "jellyfin.vanutp.dev";
           port = 8096;
