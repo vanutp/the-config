@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   virtualisation.composter.apps.media_server_lumi = {
     backup.enable = true;
     auth = ["foxlab"];
@@ -11,6 +15,11 @@
       };
       requester_backend = {
         image = "registry.vanutp.dev/vanutp/media-server/backend";
+        # TODO: move to a constant?
+        environment.FORWARDED_ALLOW_IPS = lib.pipe config.virtualisation.docker.daemon.settings.default-address-pools [
+          (map (pool: pool.base))
+          (builtins.concatStringsSep ",")
+        ];
         env_file = config.sops.secrets."media_server_lumi".path;
         user = "1000:2000";
         environment = {

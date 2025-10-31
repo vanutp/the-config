@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
   dataDir = "/srv/media";
   uid = 1000;
   gid = 2000;
@@ -68,6 +72,11 @@ in {
       };
       requester_backend = {
         image = "registry.vanutp.dev/vanutp/media-server/backend";
+        # TODO: move to a constant?
+        environment.FORWARDED_ALLOW_IPS = lib.pipe config.virtualisation.docker.daemon.settings.default-address-pools [
+          (map (pool: pool.base))
+          (builtins.concatStringsSep ",")
+        ];
         env_file = config.sops.secrets."media_server/requester_env".path;
         user = "${builtins.toString uid}:${builtins.toString gid}";
         environment = {
