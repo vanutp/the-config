@@ -108,6 +108,11 @@
           publicKey = "Nbov3GZwbh7BIAJw3zB/Vpq5gSnOPiY6ZRRxCFt1ozw=";
           allowedIPs = ["10.1.1.22/32"];
         }
+        {
+          # lumi
+          publicKey = "K8JnO+aVf5Z0hMBrLpz2qXZcpfskgGaeCeX1nMnhNG8=";
+          allowedIPs = ["10.1.1.23/32"];
+        }
         # Aclass
         {
           publicKey = "AR54/1HJi5PWvjqCzTeKoE9si9/wRYzMsQRnDBMG9DU=";
