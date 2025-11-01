@@ -16,7 +16,9 @@
     services = {
       server = {
         # TODO: update asap
+        # image = "ghcr.io/goauthentik/server:2025.10";
         image = "registry.vanutp.dev/vanutp/authentik";
+        depends_on = ["pgbouncer"];
         command = "server";
         environment = {
           AUTHENTIK_POSTGRESQL__HOST = "pgbouncer";
@@ -40,9 +42,15 @@
       };
       worker = {
         # TODO: update asap
-        image = "ghcr.io/goauthentik/server:2025.10.0";
+        # image = "ghcr.io/goauthentik/server:2025.10";
+        image = "registry.vanutp.dev/vanutp/authentik";
+        depends_on = ["pgbouncer"];
         user = "root";
         command = "worker";
+        environment = {
+          AUTHENTIK_POSTGRESQL__HOST = "pgbouncer";
+          AUTHENTIK_POSTGRESQL__DISABLE_SERVER_SIDE_CURSORS = "true";
+        };
         env_file = config.sops.secrets."one_vanutp_dev/server".path;
         volumes = [
           "./media:/media"
@@ -52,6 +60,7 @@
       };
       ldap = {
         image = "ghcr.io/goauthentik/ldap:2025.10.0";
+        depends_on = ["server"];
         environment = {
           AUTHENTIK_HOST = "https://one.vanutp.dev";
           AUTHENTIK_INSECURE = "false";
@@ -64,7 +73,10 @@
       };
       pgbouncer = {
         image = "edoburu/pgbouncer:v1.24.1-p1@sha256:3db3d7223e93af52b4116f642951a1a5fa44702a88c2a59cf7562cac19320c9e";
-        environment.AUTH_TYPE = "scram-sha-256";
+        environment = {
+          AUTH_TYPE = "scram-sha-256";
+          IGNORE_STARTUP_PARAMETERS = "search_path";
+        };
         env_file = config.sops.secrets."one_vanutp_dev/pgbouncer".path;
       };
     };
