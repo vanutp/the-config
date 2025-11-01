@@ -117,7 +117,7 @@
               name = "openid_connect";
               scope = ["openid" "profile" "email"];
               response_type = "code";
-              issuer = "https://auth.vanutp.dev/application/o/foxlab/";
+              issuer = "https://one.vanutp.dev/application/o/foxlab/";
               discovery = true;
               client_auth_method = "query";
               pkce = true;
