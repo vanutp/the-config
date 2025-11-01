@@ -18,6 +18,10 @@
         # TODO: update asap
         image = "registry.vanutp.dev/vanutp/authentik";
         command = "server";
+        environment = {
+          AUTHENTIK_POSTGRESQL__HOST = "pgbouncer";
+          AUTHENTIK_POSTGRESQL__DISABLE_SERVER_SIDE_CURSORS = "true";
+        };
         env_file = config.sops.secrets."one_vanutp_dev/server".path;
         volumes = [
           "./media:/media"
@@ -57,6 +61,11 @@
           "100.64.0.6:389:3389"
           "100.64.0.6:636:6636"
         ];
+      };
+      pgbouncer = {
+        image = "edoburu/pgbouncer:v1.24.1-p1@sha256:3db3d7223e93af52b4116f642951a1a5fa44702a88c2a59cf7562cac19320c9e";
+        environment.AUTH_TYPE = "scram-sha-256";
+        env_file = config.sops.secrets."one_vanutp_dev/pgbouncer".path;
       };
     };
   };
