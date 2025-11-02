@@ -67,31 +67,51 @@ def add_composter_labels(app_config: dict):
         add_composter_label_to_object(volume)
 
 
-def add_traefik_labels(service: dict):
+def add_traefik_labels(service: dict, service_name: str):
     # TODO: throw an error if traefik is not enabled in system
     # but .traefik is set on a service
     traefik_cfg = service.pop('traefik', None)
     if traefik_cfg is None:
         return
-    traefik_host = traefik_cfg.get('host')
     add_label(service, 'traefik.enable', 'true')
+    traefik_host = traefik_cfg.pop('host', None)
+    for maskman_key in ('update-dns', 'proxied'):
+        traefik_cfg.pop(maskman_key, None)
+    if not traefik_host and traefik_cfg:
+        print(
+            f'[vhap] ERROR: you must specify traefik.host when specifying any other traefik options for {service_name}'
+        )
+        return
     if traefik_host:
         traefik_id = traefik_host.replace('.', '__')
-        add_label(
-            service,
-            f'traefik.http.routers.{traefik_id}.rule',
-            f'Host(`{traefik_host}`)',
-        )
-    if traefik_port := traefik_cfg.get('port'):
-        if not traefik_host:
-            print(
-                '[vhap] ERROR: you must specify traefik.host when specifying traefik.port'
-            )
-            return
+        val = f'Host(`{traefik_host}`)'
+        if paths := traefik_cfg.pop('paths', None):
+            traefik_id += '__' + '_'.join(x.replace('/', '_').replace('.', '_').strip('_') for x in paths)
+            path_rules = ' || '.join(f'PathPrefix(`{path}`)' for path in paths)
+            val += f' && ({path_rules})'
+        add_label(service, f'traefik.http.routers.{traefik_id}.rule', val)
+    if traefik_port := traefik_cfg.pop('port', None):
         add_label(
             service,
             f'traefik.http.services.{traefik_id}.loadbalancer.server.port',
             str(traefik_port),
+        )
+    if middlewares := traefik_cfg.pop('middlewares', None):
+        add_label(
+            service,
+            f'traefik.http.routers.{traefik_id}.middlewares',
+            ','.join(middlewares),
+        )
+    if certresolver := traefik_cfg.pop('certresolver', None):
+        add_label(
+            service,
+            f'traefik.http.routers.{traefik_id}.tls.certresolver',
+            certresolver,
+        )
+    if traefik_cfg:
+        print(
+            f'[vhap] WARNING: unknown traefik options for {service_name}: '
+            + ', '.join(traefik_cfg.keys())
         )
 
 
@@ -102,8 +122,8 @@ def apply_config(config_path: str):
         creds_data = {'creds_dir': str(CREDS_DIR), 'creds_required': app_config['auth']}
         cleanup_config(app_config)
         add_composter_labels(app_config)
-        for service in app_config.get('services', {}).values():
-            add_traefik_labels(service)
+        for svc_name, service in app_config.get('services', {}).items():
+            add_traefik_labels(service, svc_name)
             if 'restart' not in service:
                 service['restart'] = 'always'
         app_dir: Path = BASE_DIR / name

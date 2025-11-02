@@ -117,7 +117,7 @@
     # };
     composter =
       pkgs.writers.writePython3Bin "composter" {
-        flakeIgnore = ["E501"];
+        flakeIgnore = ["E501" "W503"];
         makeWrapperArgs = [
           "--set"
           "PATH"

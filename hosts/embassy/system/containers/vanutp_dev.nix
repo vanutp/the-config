@@ -3,9 +3,9 @@
     services = {
       backend = {
         image = "registry.vanutp.dev/vanutpdev/backend";
-        traefik = {};
-        labels = {
-          "traefik.http.routers.vanutp_dev_backend.rule" = "Host(`vanutp.dev`) && PathPrefix(`/api`)";
+        traefik = {
+          host = "vanutp.dev";
+          paths = ["/api"];
         };
         env_file = "secrets.env";
       };

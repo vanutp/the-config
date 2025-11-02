@@ -17,6 +17,7 @@
       traefik = {
         host = "pi.fox";
         port = 80;
+        middlewares = ["pi__fox@docker"];
       };
       volumes = [
         "./etc/pihole:/etc/pihole"

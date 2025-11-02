@@ -13,10 +13,13 @@
       env_file = "secrets.env";
       image = "registry.vanutp.dev/progtime/nocodb:latest";
       labels = {
-        "traefik.http.routers.work__adventures-lab__ru.middlewares" = "authelia-al@docker";
         "traefik.http.routers.work__adventures-lab__ru.tls.certresolver" = "http";
       };
-      traefik.host = "work.adventures-lab.ru";
+      traefik = {
+        host = "work.adventures-lab.ru";
+        middlewares = ["authelia-al@docker"];
+        certresolver = "http";
+      };
       volumes = ["./data:/usr/app/data"];
     };
   };

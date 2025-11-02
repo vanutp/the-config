@@ -8,11 +8,11 @@
         PATH_PREFIX = "/admin";
       };
       image = "registry.vanutp.dev/progtime/authelia-admin:latest";
-      labels = {
-        "traefik.http.routers.authelia-al-admin.middlewares" = "authelia-al@docker";
-        "traefik.http.routers.authelia-al-admin.rule" = "Host(`sso.adventures-lab.ru`) && PathPrefix(`/admin`)";
+      traefik = {
+        host = "sso.adventures-lab.ru";
+        paths = ["/admin"];
+        middlewares = ["authelia-al@docker"];
       };
-      traefik = {};
       volumes = [
         "./authelia/users_database.yml:/data/users_database.yml"
       ];
