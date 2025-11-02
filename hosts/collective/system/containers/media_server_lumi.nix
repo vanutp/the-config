@@ -33,17 +33,19 @@
           "./configs/requester:/data"
           "/srv/media:/media"
         ];
-        restart = "always";
+        traefik = {
+          host = "watch.rightarion.ru";
+          paths = ["/api" "/docs" "/openapi.json"];
+          middlewares = ["authentik@docker"];
+          certresolver = "http";
+          update-dns = false;
+        };
       };
       requester_nginx = {
         image = "registry.vanutp.dev/vanutp/media-server/nginx";
-        restart = "always";
-        labels = {
-          "traefik.http.routers.watch__rightarion__ru.tls.certresolver" = "http";
-          "traefik.http.routers.watch__rightarion__ru.middlewares" = "authentik@docker";
-        };
         traefik = {
           host = "watch.rightarion.ru";
+          certresolver = "http";
           update-dns = false;
         };
       };

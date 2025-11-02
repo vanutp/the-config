@@ -89,17 +89,21 @@ in {
           "./configs/requester:/data"
           "${dataDir}:/media"
         ];
-        restart = "always";
+        traefik = {
+          host = "watch.vanutp.dev";
+          paths = ["/api" "/docs" "/openapi.json"];
+          middlewares = ["authentik@docker"];
+          certresolver = "http";
+          proxied = false;
+        };
       };
       requester_nginx = {
         image = "registry.vanutp.dev/vanutp/media-server/nginx";
         restart = "always";
         traefik = {
           host = "watch.vanutp.dev";
+          certresolver = "http";
           proxied = false;
-        };
-        labels = {
-          "traefik.http.routers.watch__vanutp__dev.middlewares" = "authentik@docker";
         };
       };
       bitmagnet = {
@@ -109,11 +113,11 @@ in {
         traefik = {
           host = "bitmagnet.vanutp.dev";
           port = 3333;
+          middlewares = ["tardis_only@docker"];
           update-dns = false;
         };
         labels = {
           "traefik.http.middlewares.tardis_only.ipwhitelist.sourcerange" = "100.91.142.4/32";
-          "traefik.http.routers.bitmagnet__vanutp__dev.middlewares" = "tardis_only@docker";
         };
         env_file = config.sops.secrets."media_server/bitmagnet_env".path;
         volumes = [
