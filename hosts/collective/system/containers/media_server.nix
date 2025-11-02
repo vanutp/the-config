@@ -102,6 +102,7 @@ in {
         restart = "always";
         traefik = {
           host = "watch.vanutp.dev";
+          middlewares = ["authentik@docker"];
           certresolver = "http";
           proxied = false;
         };

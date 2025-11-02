@@ -45,6 +45,7 @@
         image = "registry.vanutp.dev/vanutp/media-server/nginx";
         traefik = {
           host = "watch.rightarion.ru";
+          middlewares = ["authentik@docker"];
           certresolver = "http";
           update-dns = false;
         };
