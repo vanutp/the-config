@@ -15,6 +15,10 @@
       with ps; [
         pgvector
       ];
+    settings = {
+      shared_buffers = "256MB";
+      max_connections = 300;
+    };
   };
   networking.firewall.allowedTCPPorts = [5432];
 
