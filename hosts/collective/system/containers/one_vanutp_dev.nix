@@ -21,7 +21,6 @@
         depends_on = ["pgbouncer"];
         command = "server";
         environment = {
-          AUTHENTIK_POSTGRESQL__HOST = "pgbouncer";
           AUTHENTIK_POSTGRESQL__DISABLE_SERVER_SIDE_CURSORS = "true";
         };
         env_file = config.sops.secrets."one_vanutp_dev/server".path;
@@ -48,7 +47,6 @@
         user = "root";
         command = "worker";
         environment = {
-          AUTHENTIK_POSTGRESQL__HOST = "pgbouncer";
           AUTHENTIK_POSTGRESQL__DISABLE_SERVER_SIDE_CURSORS = "true";
         };
         env_file = config.sops.secrets."one_vanutp_dev/server".path;
@@ -71,6 +69,7 @@
           "100.64.0.6:636:6636"
         ];
       };
+      # TODO: remove
       pgbouncer = {
         image = "edoburu/pgbouncer:v1.24.1-p1@sha256:3db3d7223e93af52b4116f642951a1a5fa44702a88c2a59cf7562cac19320c9e";
         environment = {
