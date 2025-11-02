@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  pkgs-unstable,
   ...
 }: {
   # TODO: configure smtp
@@ -72,6 +73,10 @@
         time_zone = "Europe/Moscow";
         ssh_host = "ssh.foxlab.dev";
         default_theme = 10;
+        custom_html_header_tags = ''
+          <link rel="stylesheet" href="/custom.css">
+          <script defer src="https://zond.vanutp.dev/script.js" data-website-id="9dcd6da5-3225-4f17-86a3-699f82b95e38"></script>
+        '';
       };
       # Needed because services.gitlab.registry.externalPort is mandatory,
       # and setting it causes problems when CI is trying to access
@@ -144,30 +149,31 @@
     };
   };
 
+  # services.anubis = {
+  #   package = pkgs-unstable.anubis;
+  #   instances.foxlab.settings.TARGET = "unix:/run/gitlab/gitlab-workhorse.socket";
+  # };
+
   services.nginx = {
     # TODO: auto enable in a shared module if there are virtualHosts
     enable = true;
     recommendedProxySettings = true;
-    virtualHosts = let
-      listen = [
-        {
-          addr = "127.0.0.1";
-          port = 8000;
-        }
-      ];
-    in {
+    virtualHosts = {
       "foxlab.dev" = {
-        inherit listen;
+        listen = [
+          {
+            addr = "127.0.0.1";
+            port = 8000;
+          }
+        ];
         locations."/" = {
+          # proxyPass = "http://unix:${config.services.anubis.instances.foxlab.settings.BIND}";
           proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
           extraConfig = ''
             proxy_set_header X-Forwarded-Ssl on;
-            client_max_body_size 1g;
-            sub_filter '</head>' '
-              <link rel="stylesheet" href="/custom.css">
-              <script defer src="https://zond.vanutp.dev/script.js" data-website-id="9dcd6da5-3225-4f17-86a3-699f82b95e38"></script>
-              </head>
-            ';
+            client_max_body_size 0;
+            proxy_buffering off;
+            proxy_request_buffering off;
           '';
         };
         locations."= /custom.css" = {
@@ -200,27 +206,32 @@
           '';
         };
       };
-      "git.vanutp.dev" = {
-        inherit listen;
-        locations."/".return = "302 https://foxlab.dev$request_uri";
-      };
     };
   };
 
-  vanutp.traefik.proxies = [
-    {
-      host = "git.vanutp.dev";
-      target = "http://127.0.0.1:8000";
-    }
-    {
-      host = "registry.vanutp.dev";
-      target = "http://127.0.0.1:5000";
-    }
-    {
-      host = "foxlab.dev";
-      target = "http://127.0.0.1:8000";
-    }
-  ];
+  vanutp.traefik = {
+    proxies = [
+      {
+        host = "registry.vanutp.dev";
+        target = "http://127.0.0.1:5000";
+      }
+      {
+        host = "foxlab.dev";
+        target = "http://127.0.0.1:8000";
+      }
+    ];
+    extraDynamicConfig = {
+      http.routers.git_vanutp_dev = {
+        rule = "Host(`git.vanutp.dev`)";
+        middlewares = ["git_vanutp_dev"];
+        service = "noop@internal";
+      };
+      http.middlewares.git_vanutp_dev.redirectregex = {
+        regex = "^https://git\\.vanutp\\.dev/(.*)";
+        replacement = "https://foxlab.dev/\${1}";
+      };
+    };
+  };
 
   services.gitlab-runner = {
     enable = true;
