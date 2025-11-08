@@ -31,7 +31,7 @@ in {
         ];
       };
       qbittorrent = {
-        image = "lscr.io/linuxserver/qbittorrent:latest";
+        image = "lscr.io/linuxserver/qbittorrent:libtorrentv1";
         depends_on = gluetunDep;
         network_mode = "service:gluetun";
         traefik = {
