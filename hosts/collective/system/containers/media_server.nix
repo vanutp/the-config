@@ -93,7 +93,6 @@ in {
           host = "watch.vanutp.dev";
           paths = ["/api" "/docs" "/openapi.json"];
           middlewares = ["authentik@docker"];
-          certresolver = "http";
           proxied = false;
         };
       };
@@ -103,7 +102,6 @@ in {
         traefik = {
           host = "watch.vanutp.dev";
           middlewares = ["authentik@docker"];
-          certresolver = "http";
           proxied = false;
         };
       };
