@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./anyrun.nix
     ./apps.nix
     ./dev.nix
     ./fcitx5.nix
@@ -12,7 +13,6 @@
     ./shell.nix
     ./terminal.nix
     ./theme.nix
-    ./tofi.nix
     ./waybar.nix
   ];
 

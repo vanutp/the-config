@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   pkgs-unstable,
   config,
@@ -8,7 +7,7 @@
 }: let
   mkKdl = import ./mkKdl.nix pkgs;
   yubikey-totp = pkgs.writeShellScript "yubikey-totp" ''
-    ykman oath accounts code -s "$(ykman oath accounts list | tofi)" \
+    ykman oath accounts code -s "$(ykman oath accounts list | anyrun --plugins ${pkgs.anyrun}/lib/libstdin.so)" \
     > >(sd '\n' ''' | wl-copy) \
     2> >(python -c "
     import sys, subprocess
@@ -172,7 +171,7 @@ in {
               "Super+Return" = spawn "ghostty";
               "Super+Escape" = spawn ["loginctl" "lock-session"];
               "Super+Shift+A" = spawn yubikey-totp;
-              "Super+D" = spawn ["tofi-drun" "--drun-launch=true"];
+              "Super+D" = spawn ["anyrun"];
               "Super+E" = spawn ["nautilus" "-w"];
               "Ctrl+Shift+D" = spawn ["copyq" "toggle"];
               "Super+S" = "screenshot";
