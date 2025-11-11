@@ -17,6 +17,11 @@
     RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
     ANDROID_USER_HOME = "${config.xdg.dataHome}/android";
     REDISCLI_HISTFILE = "${config.xdg.dataHome}/redis/rediscli_history";
+    PSQL_HISTORY = "${config.xdg.dataHome}/psql_history";
+    DVDCSS_CACHE = "${config.xdg.dataHome}/dvdcss";
+    GOPATH = "${config.xdg.dataHome}/go";
+    GNUPGHOME = "${config.xdg.dataHome}/gnupg";
+    HISTFILE = "${config.xdg.stateHome}/bash/history";
   };
 in {
   home.sessionVariables = variables;
