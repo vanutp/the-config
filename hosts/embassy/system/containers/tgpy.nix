@@ -20,7 +20,6 @@ in {
     };
     tgpy_0 = mkTgpy {};
     tgpy_elena = mkTgpy {};
-    tgpy_kitlix = mkTgpy {};
     tgpy_pufl = mkTgpy {};
     tgpy_samat = mkTgpy {};
     tgpy_samat2 = mkTgpy {
