@@ -25,7 +25,6 @@
       })
       kdePackages.okular
       libreoffice-fresh
-      gimp3
       (mpv.override {
         scripts = [mpvScripts.mpris];
       })
