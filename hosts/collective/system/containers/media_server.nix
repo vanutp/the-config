@@ -79,7 +79,7 @@ in {
         env_file = config.sops.secrets."media_server/requester_env".path;
         user = "${builtins.toString uid}:${builtins.toString gid}";
         environment = {
-          QBITTORRENT_URL = "http://memory-hole:8080";
+          QBITTORRENT_URL = "http://100.105.161.120:8080";
           FLARESOLVERR_URL = "http://flaresolverr:8191";
           DOWNLOAD_DIR = "/media/downloads";
           TV_DIR = "/media/series";
