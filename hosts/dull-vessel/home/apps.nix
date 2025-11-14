@@ -4,6 +4,19 @@
   self-pkgs,
   ...
 }: {
+  programs.mpv = {
+    enable = true;
+    package = pkgs.mpv.override {
+      mpv = pkgs.mpv-unwrapped.override {
+        ffmpeg = pkgs.ffmpeg-full;
+      };
+      scripts = [pkgs.mpvScripts.mpris];
+    };
+    config = {
+      audio-file-auto = "fuzzy";
+      sub-auto = "fuzzy";
+    };
+  };
   home.packages = with pkgs;
     [
       p7zip
@@ -25,9 +38,6 @@
       })
       kdePackages.okular
       libreoffice-fresh
-      (mpv.override {
-        scripts = [mpvScripts.mpris];
-      })
       via
       kdePackages.ark
       spotify
