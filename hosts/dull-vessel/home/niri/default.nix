@@ -248,6 +248,8 @@ in {
               XF86HangupPhone = spawn ["playerctl" "next"];
               XF86AudioPrev = spawn ["playerctl" "previous"];
               XF86NotificationCenter = spawn ["playerctl" "previous"];
+              XF86Sleep = spawn ["systemctl" "suspend"];
+              "Super+Shift+Pause" = spawn ["systemctl" "suspend"];
 
               "Super+Shift+F5" = spawn ["bash" "-c" "niri msg action power-off-monitors && niri msg action power-on-monitors"];
             })
