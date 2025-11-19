@@ -1,7 +1,10 @@
 {pkgs, ...}: {
-  services.redis.servers.main = {
-    enable = true;
-    port = 6379;
+  services.redis = {
+    package = pkgs.valkey;
+    servers.main = {
+      enable = true;
+      port = 6379;
+    };
   };
   services.postgresql = {
     enable = true;
