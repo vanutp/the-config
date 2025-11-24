@@ -69,6 +69,11 @@ in {
           LOG_LEVEL = "info";
         };
       };
+      valkey = {
+        image = "valkey/valkey:9-alpine";
+        command = ["valkey-server" "--save" "60" "1" "--loglevel" "warning"];
+        volumes = ["./configs/valkey:/data"];
+      };
       requester_backend = {
         image = "registry.vanutp.dev/vanutp/media-server/backend";
         # TODO: move to a constant?
@@ -79,6 +84,7 @@ in {
         env_file = config.sops.secrets."media_server/requester_env".path;
         user = "${builtins.toString uid}:${builtins.toString gid}";
         environment = {
+          VALKEY_URL = "valkey://valkey:6379/0";
           QBITTORRENT_URL = "http://100.105.161.120:8080";
           FLARESOLVERR_URL = "http://flaresolverr:8191";
           DOWNLOAD_DIR = "/media/downloads";
@@ -103,6 +109,44 @@ in {
           host = "watch.vanutp.dev";
           middlewares = ["authentik@docker"];
           proxied = false;
+        };
+      };
+      requester_backend_lumi = {
+        image = "registry.vanutp.dev/vanutp/media-server/backend";
+        # TODO: move to a constant?
+        environment.FORWARDED_ALLOW_IPS = lib.pipe config.virtualisation.docker.daemon.settings.default-address-pools [
+          (map (pool: pool.base))
+          (builtins.concatStringsSep ",")
+        ];
+        env_file = config.sops.secrets."media_server_lumi".path;
+        user = "1000:2000";
+        environment = {
+          VALKEY_URL = "valkey://valkey:6379/0";
+          QBITTORRENT_URL = "http://100.105.161.120:8080";
+          FLARESOLVERR_URL = "http://flaresolverr:8191";
+          DOWNLOAD_DIR = "/media/downloads";
+          TV_DIR = "/media/lumi/series";
+          MOVIES_DIR = "/media/lumi/movies";
+        };
+        volumes = [
+          "./configs/requester_lumi:/data"
+          "/srv/media:/media"
+        ];
+        traefik = {
+          host = "watch.rightarion.ru";
+          paths = ["/api" "/docs" "/openapi.json"];
+          middlewares = ["authentik@docker"];
+          certresolver = "http";
+          update-dns = false;
+        };
+      };
+      requester_nginx_lumi = {
+        image = "registry.vanutp.dev/vanutp/media-server/nginx";
+        traefik = {
+          host = "watch.rightarion.ru";
+          middlewares = ["authentik@docker"];
+          certresolver = "http";
+          update-dns = false;
         };
       };
       bitmagnet = {
