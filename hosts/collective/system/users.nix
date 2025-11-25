@@ -15,6 +15,18 @@
     linger = true;
   };
 
+  users.groups.gravity_m = {};
+  users.users.gravity_m = {
+    isNormalUser = true;
+    group = "gravity_m";
+    shell = pkgs.zsh;
+    openssh.authorizedKeys.keys = [
+      config.setup.pubkeys.main
+      ""
+    ];
+    linger = true;
+  };
+
   virtualisation.docker.rootless = {
     enable = true;
     daemon.settings.dns = "1.1.1.1";

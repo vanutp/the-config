@@ -25,10 +25,9 @@
     xorg.xhost
     wev
     wl-clipboard
-    (import ./foxshot pkgs)
     brightnessctl
     playerctl
     copyq
-    pavucontrol
+    pwvucontrol
   ];
 }

@@ -5,9 +5,6 @@
 		},
 		{
 			"path": "packages/vhap"
-		},
-		{
-			"path": "hosts/dull-vessel/home/ignis"
 		}
 	],
 	"settings": {}

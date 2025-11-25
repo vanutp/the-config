@@ -4,8 +4,8 @@
     ./apps.nix
     ./dev.nix
     ./fcitx5.nix
-    # ./ignis
     ./lockscreen.nix
+    ./noctalia.nix
     ./niri
     ./packages.nix
     ./secrets.nix
@@ -13,7 +13,6 @@
     ./shell.nix
     ./terminal.nix
     ./theme.nix
-    ./waybar.nix
   ];
 
   setup.computerType = "laptop";

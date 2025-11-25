@@ -1,7 +1,6 @@
 {
   pkgs,
   pkgs-unstable,
-  config,
   lib,
   ...
 }: let
@@ -16,20 +15,6 @@
     " && dunstify 'Copied!')
   '';
 in {
-  services.wpaperd = {
-    enable = true;
-    settings = {
-      any.path = config.preferences.wallpaper;
-    };
-  };
-  services.swaync = {
-    enable = true;
-    style = ./swaync-mocha.css;
-    settings = {
-      notification-window-width = 400;
-      notification-icon-size = 32;
-    };
-  };
   systemd.user.sessionServices = [
     {
       package = pkgs.xwayland-satellite;
@@ -39,7 +24,6 @@ in {
       package = pkgs.hyprpolkitagent;
       binary = "/libexec/hyprpolkitagent";
     }
-    {package = pkgs-unstable.wl-gammarelay-rs;}
   ];
   home.packages = [
     pkgs-unstable.niri
@@ -140,7 +124,7 @@ in {
       (block "window-rule" [
         (node "match" {app-id = "com.github.hluk.copyq";})
         (node "match" {app-id = ".blueman-manager-wrapped";})
-        (node "match" {app-id = "pavucontrol";})
+        (node "match" {app-id = "com.saivert.pwvucontrol";})
         (node "match" {app-id = "org.fcitx.";})
         (node "open-floating" true)
       ])
@@ -175,10 +159,11 @@ in {
               "Super+E" = spawn ["nautilus" "-w"];
               "Ctrl+Shift+D" = spawn ["copyq" "toggle"];
               "Super+S" = "screenshot";
-              "Super+slash" = spawn [
-                "${pkgs.swaynotificationcenter}/bin/swaync-client"
-                "-t"
-              ];
+              # TODO: noctalia
+              # "Super+slash" = spawn [
+              #   "${pkgs.swaynotificationcenter}/bin/swaync-client"
+              #   "-t"
+              # ];
 
               "Super+Shift+Space" = "toggle-window-floating";
               "Super+Shift+Q" = "close-window";
