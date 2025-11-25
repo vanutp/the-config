@@ -156,11 +156,8 @@ in {
         traefik = {
           host = "bitmagnet.vanutp.dev";
           port = 3333;
-          middlewares = ["tardis_only@docker"];
+          middlewares = ["authentik@docker"];
           update-dns = false;
-        };
-        labels = {
-          "traefik.http.middlewares.tardis_only.ipwhitelist.sourcerange" = "100.91.142.4/32";
         };
         env_file = config.sops.secrets."media_server/bitmagnet_env".path;
         volumes = [
