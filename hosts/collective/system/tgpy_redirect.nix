@@ -1,4 +1,10 @@
 {...}: {
+  vanutp.maskman.entries = [
+    {
+      name = "tgpy.dev";
+      proxied = false;
+    }
+  ];
   vanutp.traefik.extraDynamicConfig = {
     http.routers.tgpy_tmat_me = {
       rule = "Host(`tgpy.tmat.me`)";
