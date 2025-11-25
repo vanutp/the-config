@@ -157,7 +157,7 @@ in {
           host = "bitmagnet.vanutp.dev";
           port = 3333;
           middlewares = ["authentik@docker"];
-          update-dns = false;
+          proxied = false;
         };
         env_file = config.sops.secrets."media_server/bitmagnet_env".path;
         volumes = [
@@ -178,13 +178,6 @@ in {
     {
       key = config.sops.placeholder."vhap-compose-update/media_server";
       services = ["media_server"];
-    }
-  ];
-  vanutp.maskman.entries = [
-    {
-      name = "bitmagnet.vanutp.dev";
-      target-interface = "tailscale0";
-      proxied = false;
     }
   ];
 }
