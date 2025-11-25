@@ -76,6 +76,8 @@ in {
               showMemoryAsPercent = true;
               showNetworkStats = false;
             }
+            {id = "NightLight";}
+            {id = "DarkMode";}
             {id = "ScreenRecorder";}
             {
               id = "MediaMini";
@@ -90,10 +92,13 @@ in {
               id = "Tray";
               drawerEnabled = false;
             }
-            {id = "NightLight";}
-            {id = "DarkMode";}
+            {id = "WiFi";}
+            {
+              id = "VPN";
+              displayMode = "alwaysShow";
+            }
+            {id = "Bluetooth";}
             {id = "Volume";}
-            {id = "Brightness";}
             {
               id = "KeyboardLayout";
               displayMode = "forceOpen";
@@ -115,30 +120,6 @@ in {
       };
       brightness.brightnessStep = 2;
       colorSchemes.predefinedScheme = "Rosepine"; # TODO
-      controlCenter = {
-        cards = [
-          {
-            enabled = true;
-            id = "profile-card";
-          }
-          {
-            enabled = true;
-            id = "shortcuts-card";
-          }
-          {
-            enabled = false;
-            id = "audio-card";
-          }
-          {
-            enabled = true;
-            id = "weather-card";
-          }
-          {
-            enabled = true;
-            id = "media-sysmon-card";
-          }
-        ];
-      };
       dock.enabled = false;
       general = {
         animationDisabled = true;
