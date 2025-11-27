@@ -13,6 +13,7 @@
         REDLIB_DEFAULT_BLUR_NSFW = "on";
         REDLIB_DEFAULT_USE_HLS = "on";
         REDLIB_DEFAULT_BLUR_SPOILER = "on";
+        REDLIB_DEFAULT_REMOVE_DEFAULT_FEEDS = "on";
         REDLIB_ROBOTS_DISABLE_INDEXING = "on";
       };
     };
