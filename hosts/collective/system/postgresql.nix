@@ -14,6 +14,7 @@
     extensions = ps:
       with ps; [
         pgvector
+        postgis
       ];
     settings = {
       shared_buffers = "256MB";
