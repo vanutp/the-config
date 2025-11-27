@@ -22,4 +22,10 @@
       replacement = "https://maven.vanutp.dev/\${1}";
     };
   };
+  vanutp.maskman.entries = [
+    {
+      name = "mvn.vtp.sh";
+      proxied = false;
+    }
+  ];
 }
