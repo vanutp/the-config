@@ -209,6 +209,7 @@
     };
   };
 
+  vanutp.maskman.entries = [{name = "foxlab.dev";}];
   vanutp.traefik = {
     proxies = [
       {
