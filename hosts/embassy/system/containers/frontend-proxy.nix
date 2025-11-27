@@ -6,6 +6,7 @@
       traefik = {
         host = "proxy.vanutp.dev";
         port = 1874;
+        proxied = false;
       };
       volumes = [
         "./config.yml:/app/config.yml:ro"

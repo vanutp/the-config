@@ -3,7 +3,10 @@
     backup.enable = true;
     services.main = {
       image = "registry.vanutp.dev/minecraft/tgauth-backend:latest";
-      traefik.host = "mc-auth.vanutp.dev";
+      traefik = {
+        host = "mc-auth.vanutp.dev";
+        proxied = false;
+      };
       environment = {
         SERVER_BASE = "https://mc-auth.vanutp.dev/";
         YGG_KEY_PATH = "/config/key.der";

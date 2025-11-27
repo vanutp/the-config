@@ -9,4 +9,14 @@
       "./default.conf:/etc/nginx/conf.d/default.conf:ro"
     ];
   };
+  vanutp.maskman.entries = [
+    {
+      name = "ip.vanutp.dev";
+      proxied = false;
+    }
+    {
+      name = "ip.vtp.sh";
+      proxied = false;
+    }
+  ];
 }
