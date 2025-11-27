@@ -19,14 +19,6 @@ in {
       ];
     };
   });
-  sops.secrets = lib.genAttrs (
-    [
-      "services/folds/update"
-      "services/folds/api_id"
-      "services/folds/api_hash"
-    ]
-    ++ (map (name: "services/folds/${name}") services)
-  ) (name: {});
   services.vhap-compose-update.entries = [
     {
       key = config.sops.placeholder."services/folds/update";
