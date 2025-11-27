@@ -2,9 +2,10 @@
   config,
   lib,
   pkgs,
-  pkgs-unstable,
   ...
-}: {
+}: let
+  final-gl-port = 8000;
+in {
   # TODO: configure smtp
   sops.secrets = lib.mkMerge [
     (lib.genAttrs [
@@ -163,7 +164,7 @@
         listen = [
           {
             addr = "127.0.0.1";
-            port = 8000;
+            port = final-gl-port;
           }
         ];
         locations."/" = {
@@ -218,7 +219,7 @@
       }
       {
         host = "foxlab.dev";
-        target = "http://127.0.0.1:8000";
+        target = "http://127.0.0.1:${builtins.toString final-gl-port}";
       }
     ];
     extraDynamicConfig = {
@@ -287,4 +288,16 @@
     extraBackupArgs = ["--compression=off"];
     backupCleanupCommand = "rm /var/gitlab/state/backup/restic_gitlab_backup.tar";
   };
+
+  services.gatus.settings.endpoints = [
+    {
+      name = "foxlab";
+      url = "http://localhost:${builtins.toString final-gl-port}/health_check";
+      interval = "5m";
+      conditions = [
+        "[STATUS] == 200"
+        "[BODY] == success"
+      ];
+    }
+  ];
 }

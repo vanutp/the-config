@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./containers
+    ./gatus.nix
     ./gitlab
     ./hardware-configuration.nix
     ./immich.nix
