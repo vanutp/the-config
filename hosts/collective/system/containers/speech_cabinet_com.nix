@@ -68,4 +68,6 @@ in {
       services = ["dev_speech_cabinet_com"];
     }
   ];
+
+  # TODO: healthcheck
 }

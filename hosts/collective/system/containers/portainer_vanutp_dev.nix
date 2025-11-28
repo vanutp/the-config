@@ -10,4 +10,17 @@
       "./data:/data"
     ];
   };
+  vanutp.gatus.secrets.PORTAINER_KEY = "portainer/gatus_token";
+  services.gatus.settings.endpoints = [
+    {
+      name = "portainer";
+      url = "https://portainer.vanutp.dev/api/endpoints";
+      headers."X-API-Key" = "$PORTAINER_KEY";
+      interval = "30s";
+      conditions = [
+        "[STATUS] == 200"
+        "[BODY][0].Status == 1"
+      ];
+    }
+  ];
 }

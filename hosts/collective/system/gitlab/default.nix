@@ -79,6 +79,10 @@ in {
           <script defer src="https://zond.vanutp.dev/script.js" data-website-id="9dcd6da5-3225-4f17-86a3-699f82b95e38"></script>
         '';
       };
+      monitoring.ip_whitelist = [
+        config.setup.network.ipv4.address
+        config.setup.network.ipv6.address
+      ];
       # Needed because services.gitlab.registry.externalPort is mandatory,
       # and setting it causes problems when CI is trying to access
       # the registry using the address without the port
@@ -292,8 +296,8 @@ in {
   services.gatus.settings.endpoints = [
     {
       name = "foxlab";
-      url = "http://localhost:${builtins.toString final-gl-port}/health_check";
-      interval = "5m";
+      url = "https://foxlab.dev/health_check";
+      interval = "2m";
       conditions = [
         "[STATUS] == 200"
         "[BODY] == success"

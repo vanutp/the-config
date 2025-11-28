@@ -80,4 +80,19 @@
       };
     };
   };
+  services.gatus.settings.endpoints = [
+    {
+      name = "authentik";
+      url = "https://one.vanutp.dev/-/health/ready/";
+      interval = "30s";
+      conditions = ["[STATUS] == 200"];
+    }
+    {
+      name = "authentik-outpost";
+      url = "https://one.vanutp.dev/outpost.goauthentik.io/ping";
+      interval = "30s";
+      conditions = ["[STATUS] == 204"];
+    }
+    # TODO: ldap
+  ];
 }

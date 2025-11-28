@@ -32,4 +32,16 @@ in {
       target = "http://localhost:${builtins.toString immich-port}";
     }
   ];
+
+  services.gatus.settings.endpoints = [
+    {
+      name = "immich";
+      url = "https://photos.vanutp.dev/api/server/ping";
+      interval = "30s";
+      conditions = [
+        "[STATUS] == 200"
+        "[BODY].res == pong"
+      ];
+    }
+  ];
 }

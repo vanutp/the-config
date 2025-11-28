@@ -19,4 +19,5 @@
       valkey.image = "valkey/valkey:9-alpine";
     };
   };
+  # TODO: healthcheck
 }
