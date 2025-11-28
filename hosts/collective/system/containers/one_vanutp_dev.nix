@@ -31,6 +31,7 @@
         traefik = {
           host = "one.vanutp.dev";
           port = 9000;
+          proxied = false;
         };
         labels = {
           "traefik.http.middlewares.authentik.forwardauth.address" = "http://127.0.0.1:9000/outpost.goauthentik.io/auth/traefik";
