@@ -4,7 +4,9 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  baseDir = "/srv/vhap";
+in {
   options = with lib; {
     virtualisation.composter = {
       vhap-update-host = mkOption {
@@ -75,7 +77,7 @@
             appDir = mkOption {
               type = types.path;
               readOnly = true;
-              default = "/srv/vhap/${name}";
+              default = "${baseDir}/${name}";
             };
             metadata = mkOption {
               type = types.submodule ({...}: {
@@ -195,9 +197,15 @@
       group = "root";
       host = "127.0.0.1";
       port = 7002;
-      baseDir = "/srv/vhap";
-      logsDir = "/srv/vhap/_vhap_update_logs";
+      baseDir = baseDir;
+      logsDir = "${baseDir}/_vhap_update_logs";
       entries = [];
+    };
+    users.groups.composter = {};
+    systemd.tmpfiles.settings.composter.${baseDir}.d = {
+      user = "root";
+      group = "composter";
+      mode = "2750";
     };
     vanutp.traefik.proxies = lib.mkIf (cfg.vhap-update-host != null) [
       {

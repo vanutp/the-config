@@ -50,7 +50,7 @@
 
   users.users.fox = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = ["wheel" "composter"];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       config.setup.pubkeys.main
