@@ -293,15 +293,12 @@ in {
     backupCleanupCommand = "rm /var/gitlab/state/backup/restic_gitlab_backup.tar";
   };
 
-  services.gatus.settings.endpoints = [
-    {
-      name = "foxlab";
-      url = "https://foxlab.dev/health_check";
-      interval = "2m";
-      conditions = [
-        "[STATUS] == 200"
-        "[BODY] == success"
-      ];
-    }
-  ];
+  vanutp.gatus.checks.foxlab = {
+    url = "https://foxlab.dev/health_check";
+    interval = "2m";
+    conditions = [
+      "[STATUS] == 200"
+      "[BODY] == success"
+    ];
+  };
 }

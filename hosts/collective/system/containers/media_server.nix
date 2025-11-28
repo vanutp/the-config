@@ -174,6 +174,8 @@ in {
     };
   };
 
+  # TODO: healthchecks
+
   services.vhap-compose-update.entries = [
     {
       key = config.sops.placeholder."vhap-compose-update/media_server";

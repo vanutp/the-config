@@ -70,15 +70,11 @@
       };
     };
   };
-  services.gatus.settings.endpoints = [
-    {
-      name = "dawarich";
-      url = "https://journey.vanutp.dev/api/v1/health";
-      interval = "30s";
-      conditions = [
-        "[STATUS] == 200"
-        "[BODY].status == ok"
-      ];
-    }
-  ];
+  vanutp.gatus.checks.dawarich = {
+    url = "https://journey.vanutp.dev/api/v1/health";
+    conditions = [
+      "[STATUS] == 200"
+      "[BODY].status == ok"
+    ];
+  };
 }

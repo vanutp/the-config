@@ -33,15 +33,11 @@ in {
     }
   ];
 
-  services.gatus.settings.endpoints = [
-    {
-      name = "immich";
-      url = "https://photos.vanutp.dev/api/server/ping";
-      interval = "30s";
-      conditions = [
-        "[STATUS] == 200"
-        "[BODY].res == pong"
-      ];
-    }
-  ];
+  vanutp.gatus.checks.immich = {
+    url = "https://photos.vanutp.dev/api/server/ping";
+    conditions = [
+      "[STATUS] == 200"
+      "[BODY].res == pong"
+    ];
+  };
 }

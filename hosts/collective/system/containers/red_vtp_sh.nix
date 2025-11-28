@@ -18,12 +18,8 @@
       };
     };
   };
-  services.gatus.settings.endpoints = [
-    {
-      name = "redlib";
-      url = "https://red.vtp.sh/settings";
-      interval = "30s";
-      conditions = ["[STATUS] == 200"];
-    }
-  ];
+  vanutp.gatus.checks.redlib = {
+    url = "https://red.vtp.sh/settings";
+    conditions = ["[STATUS] == 200"];
+  };
 }
