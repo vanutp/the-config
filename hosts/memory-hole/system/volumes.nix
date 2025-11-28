@@ -25,6 +25,7 @@
     };
   };
   config = {
+    # TODO: rename this to smth like `nfs-exports`
     vanutp.volumes = {
       media-server = {
         path = "/srv/media";
