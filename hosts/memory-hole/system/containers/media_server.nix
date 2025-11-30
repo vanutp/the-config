@@ -35,9 +35,13 @@ in {
         depends_on = gluetunDep;
         network_mode = "service:gluetun";
         traefik = {
-          host = "qbittorrent.vanutp.dev";
+          host = "qbt-int.vanutp.dev";
           port = 8080;
-          proxied = false;
+          update-dns = false;
+          middlewares = ["qbt_int__vanutp__dev@docker"];
+        };
+        labels = {
+          "traefik.http.middlewares.qbt_int__vanutp__dev.ipwhitelist.sourcerange" = "100.91.142.4/32,100.70.145.60/32";
         };
         environment = linuxserverEnv;
         volumes = [
@@ -45,6 +49,34 @@ in {
           "${cfg.path}:/media"
         ];
       };
+      qui = {
+        image = "ghcr.io/autobrr/qui:latest";
+        depends_on = gluetunDep;
+        network_mode = "service:gluetun";
+        traefik = {
+          host = "qbt.vanutp.dev";
+          port = 7476;
+          proxied = false;
+        };
+        env_file = config.sops.secrets."media_server/qui".path;
+        environment = {
+          QUI__OIDC_ENABLED = "true";
+          QUI__OIDC_ISSUER = "https://one.vanutp.dev/application/o/qui/";
+          QUI__OIDC_REDIRECT_URL = "https://qbt.vanutp.dev/api/auth/oidc/callback";
+          QUI__OIDC_DISABLE_BUILT_IN_LOGIN = "true";
+        };
+        volumes = [
+          "./configs/qui:/config"
+        ];
+      };
     };
   };
+
+  vanutp.maskman.entries = [
+    {
+      name = "qbt-int.vanutp.dev";
+      target-interface = "tailscale0";
+      proxied = false;
+    }
+  ];
 }

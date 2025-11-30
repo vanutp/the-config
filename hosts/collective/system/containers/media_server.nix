@@ -85,7 +85,6 @@ in {
         user = "${builtins.toString uid}:${builtins.toString gid}";
         environment = {
           VALKEY_URL = "valkey://valkey:6379/0";
-          QBITTORRENT_URL = "http://100.105.161.120:8080";
           FLARESOLVERR_URL = "http://flaresolverr:8191";
           DOWNLOAD_DIR = "/media/downloads";
           TV_DIR = "/media/series";
@@ -122,7 +121,6 @@ in {
         user = "1000:2000";
         environment = {
           VALKEY_URL = "valkey://valkey:6379/0";
-          QBITTORRENT_URL = "http://100.105.161.120:8080";
           FLARESOLVERR_URL = "http://flaresolverr:8191";
           DOWNLOAD_DIR = "/media/downloads";
           TV_DIR = "/media/lumi/series";
