@@ -18,8 +18,4 @@
       };
     };
   };
-  vanutp.gatus.checks.redlib = {
-    url = "https://red.vtp.sh/settings";
-    conditions = ["[STATUS] == 200"];
-  };
 }
