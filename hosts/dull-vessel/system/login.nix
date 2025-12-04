@@ -21,7 +21,7 @@
   in {
     enable = true;
     settings = {
-      default_session.command = "${lib.getExe pkgs.greetd.tuigreet} --cmd \"${uwsm} start default\"";
+      default_session.command = "${lib.getExe pkgs.tuigreet} --cmd \"${uwsm} start default\"";
     };
   };
 

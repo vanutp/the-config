@@ -1,9 +1,12 @@
-{...}: {
+{pkgs, ...}: {
   virtualisation.composter.apps.portainer_vanutp_dev.services.main = {
     image = "portainer/portainer-ce:lts";
     traefik = {
       host = "portainer.vanutp.dev";
       port = 9000;
+    };
+    labels = {
+      "dev.vanutp.portainer-restarter" = pkgs.docker;
     };
     volumes = [
       "/var/run/docker.sock:/var/run/docker.sock"

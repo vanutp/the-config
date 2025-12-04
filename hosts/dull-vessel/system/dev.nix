@@ -26,7 +26,7 @@
   };
   users.groups.vboxusers.members = ["fox"];
 
-  environment.etc."mime.types".source = "${pkgs.mime-types}/etc/mime.types";
+  environment.etc."mime.types".source = "${pkgs.mailcap}/etc/mime.types";
 
   boot.binfmt = {
     emulatedSystems = ["aarch64-linux"];

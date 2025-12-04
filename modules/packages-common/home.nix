@@ -4,6 +4,8 @@
   ];
 
   home.packages = with pkgs; [
+    vim.xxd
+    dig
     unzip
     zip
     file

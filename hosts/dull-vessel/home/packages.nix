@@ -15,8 +15,6 @@
     manix
     imagemagick
     yubikey-manager
-    vim.xxd
-    dig
     backblaze-b2
     ltrace
     minio-client
@@ -28,6 +26,6 @@
     brightnessctl
     playerctl
     copyq
-    pwvucontrol
+    pavucontrol
   ];
 }

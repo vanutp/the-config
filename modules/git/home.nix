@@ -9,10 +9,11 @@
   programs.git = lib.mkIf (config.home.username == "fox") {
     enable = true;
     lfs.enable = true;
-    userName = "Ivan Filipenkov";
-    userEmail = "hello@vanutp.dev";
-    delta.enable = true;
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Ivan Filipenkov";
+        email = "hello@vanutp.dev";
+      };
       core.attributesfile = builtins.toString (pkgs.runCommand "gitattributes" {} ''
         ${lib.getExe pkgs-unstable.mergiraf} languages --gitattributes > $out
       '');
@@ -21,5 +22,9 @@
         driver = "mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L";
       };
     };
+  };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
   };
 }

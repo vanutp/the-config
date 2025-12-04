@@ -22,7 +22,7 @@
   };
   args = {
     inherit self inputs hostname pkgs-unstable hostPath;
-    self-pkgs = inputs.self.packages.${pkgs.system};
+    self-pkgs = inputs.self.packages.${pkgs.stdenv.hostPlatform.system};
     systemConfig = null;
   };
   overlays = hostConfig.overlays inputs;

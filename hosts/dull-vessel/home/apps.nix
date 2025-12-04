@@ -45,8 +45,6 @@
         commandLineArgs = ["--enable-wayland-ime" "--wayland-text-input-version=3"];
       })
       firefox
-      corefonts
-      vistafonts
       (pkgs.makeDesktopItem {
         name = "telegram-1";
         desktopName = "Telegram 1";

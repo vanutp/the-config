@@ -15,7 +15,7 @@
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     fira
     fira-math
     nerd-fonts.fira-code

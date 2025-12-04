@@ -124,7 +124,7 @@ in {
       (block "window-rule" [
         (node "match" {app-id = "com.github.hluk.copyq";})
         (node "match" {app-id = ".blueman-manager-wrapped";})
-        (node "match" {app-id = "com.saivert.pwvucontrol";})
+        (node "match" {app-id = "org.pulseaudio.pavucontrol";})
         (node "match" {app-id = "org.fcitx.";})
         (node "open-floating" true)
       ])
@@ -233,7 +233,6 @@ in {
               XF86HangupPhone = spawn ["playerctl" "next"];
               XF86AudioPrev = spawn ["playerctl" "previous"];
               XF86NotificationCenter = spawn ["playerctl" "previous"];
-              XF86Sleep = spawn ["systemctl" "suspend"];
               "Super+Shift+Pause" = spawn ["systemctl" "suspend"];
 
               "Super+Shift+F5" = spawn ["bash" "-c" "niri msg action power-off-monitors && niri msg action power-on-monitors"];

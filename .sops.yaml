@@ -3,6 +3,11 @@ keys:
   - &dull_vessel-user age1wejr7c52k33sekl5x3zdaqtgayap629d42y60f8cwc6pu3lp7exsltc83d
   - &embassy age1uwzr96dww90a25dqrq7jmpygnal6p4ksmqehkj7tt5qn6jrda4xq4gn2sf
 creation_rules:
+  - path_regex: secret-secrets.yml$
+    key_groups:
+    - age:
+      - *dull_vessel
+      - *dull_vessel-user
   - path_regex: hosts/dull-vessel/(home|system)/secrets.yml$
     key_groups:
     - age:

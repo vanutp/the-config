@@ -25,7 +25,7 @@
         if color_scheme in ['default', 'prefer-light']:
             color_scheme = 'prefer-dark'
             gtk_theme = 'Adwaita-dark'
-            qt_color_scheme_path = '${pkgs.qt6ct}/share/qt6ct/colors/darker.conf'
+            qt_color_scheme_path = '${pkgs.qt6Packages.qt6ct}/share/qt6ct/colors/darker.conf'
             qt_icon_theme = 'breeze-dark'
         else:
             color_scheme = 'default'

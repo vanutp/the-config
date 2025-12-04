@@ -36,7 +36,5 @@
     power-profiles-daemon.enable = true;
     fprintd.enable = true;
     fwupd.enable = true;
-    # fn+4 is the suspend key for some reason
-    logind.suspendKey = "ignore";
   };
 }
