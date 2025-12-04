@@ -1,7 +1,7 @@
 {...}: {
   virtualisation.composter.apps.red_vtp_sh.services = {
     main = {
-      image = "quay.io/redlib/redlib:latest";
+      image = "registry.vanutp.dev/vanutp/redlib:latest";
       traefik.host = "red.vtp.sh";
       user = "nobody";
       read_only = true;
