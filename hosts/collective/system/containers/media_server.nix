@@ -94,6 +94,7 @@ in {
           "./configs/requester:/data"
           "${dataDir}:/media"
         ];
+        dns = "8.8.8.8";
         traefik = {
           host = "watch.vanutp.dev";
           paths = ["/api" "/docs" "/openapi.json"];
@@ -130,6 +131,7 @@ in {
           "./configs/requester_lumi:/data"
           "/srv/media:/media"
         ];
+        dns = "8.8.8.8";
         traefik = {
           host = "watch.rightarion.ru";
           paths = ["/api" "/docs" "/openapi.json"];
