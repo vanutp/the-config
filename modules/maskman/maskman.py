@@ -81,7 +81,7 @@ class DnsUpdater:
                 proxied=record['proxied'],
             )
             for record in data['result']
-            if record['type'] == 'A'
+            if record['type'] == 'A' or record['type'] == 'CNAME'
         ]
         self._domain_cache[zone_id] = records
         return records
