@@ -29,7 +29,7 @@
 
   virtualisation.docker.rootless = {
     enable = true;
-    daemon.settings.dns = "1.1.1.1";
+    daemon.settings.dns = ["1.1.1.1"];
   };
 
   networking.firewall.allowedTCPPorts = [25565 25575 25585];
