@@ -32,6 +32,6 @@
     daemon.settings.dns = ["1.1.1.1"];
   };
 
-  networking.firewall.allowedTCPPorts = [25565 25575 25585];
-  networking.firewall.allowedUDPPorts = [25566 25576];
+  networking.firewall.allowedTCPPorts = [25565 25575 25576 25585];
+  networking.firewall.allowedUDPPorts = [25566];
 }
