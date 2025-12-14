@@ -13,5 +13,6 @@
       "telemap_vanutp_dev"
       "logbox_vanutp_dev"
       "lumi_vpnbot"
+      "tgbridge_vanutp_dev"
     ];
 }
