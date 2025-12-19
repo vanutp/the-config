@@ -12,7 +12,6 @@
     ./logiops.nix
     ./portals.nix
     ./security.nix
-    ./strongswan.nix
     ./wireguard.nix
   ];
 
