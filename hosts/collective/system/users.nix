@@ -11,6 +11,7 @@
     openssh.authorizedKeys.keys = [
       config.setup.pubkeys.main
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH0pwg112MrUb6KAt+cfN+jqYw9jEBfhcmRnXpBOJMYq user@NewPC"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJh9HC1OjynYLLTGYYGsOkTR5NJjivq05ySxuUt3iGu/ onmyd@onmydy"
     ];
     linger = true;
   };
