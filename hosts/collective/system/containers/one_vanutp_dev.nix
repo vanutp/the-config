@@ -15,9 +15,7 @@
     backup.enable = true;
     services = {
       server = {
-        # TODO: update asap
-        # image = "ghcr.io/goauthentik/server:2025.10";
-        image = "registry.vanutp.dev/vanutp/authentik";
+        image = "ghcr.io/goauthentik/server:2025.10";
         depends_on = ["pgbouncer"];
         command = "server";
         environment = {
