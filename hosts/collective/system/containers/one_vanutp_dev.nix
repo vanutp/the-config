@@ -39,9 +39,7 @@
         ports = ["127.0.0.1:9000:9000"];
       };
       worker = {
-        # TODO: update asap
-        # image = "ghcr.io/goauthentik/server:2025.10";
-        image = "registry.vanutp.dev/vanutp/authentik";
+        image = "ghcr.io/goauthentik/server:2025.10";
         depends_on = ["pgbouncer"];
         user = "root";
         command = "worker";
@@ -56,7 +54,7 @@
         ];
       };
       ldap = {
-        image = "ghcr.io/goauthentik/ldap:2025.10.0";
+        image = "ghcr.io/goauthentik/ldap:2025.10";
         depends_on = ["server"];
         environment = {
           AUTHENTIK_HOST = "https://one.vanutp.dev";
