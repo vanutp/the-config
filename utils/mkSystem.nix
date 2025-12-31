@@ -83,7 +83,7 @@ in {
       };
   };
   homeConfigurations =
-    if hostname == "dull-vessel"
+    if hostname == "dull-vessel" || hostname == "prime"
     then
       builtins.listToAttrs
       (

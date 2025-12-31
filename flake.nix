@@ -77,6 +77,7 @@
         "embassy"
         "collective"
         "memory-hole"
+        "prime"
       ];
       perSystem = {system, ...}: {
         _module.args = {
