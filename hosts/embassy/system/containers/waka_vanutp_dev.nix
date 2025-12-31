@@ -9,7 +9,7 @@
     env_file = config.sops.secrets.wakapi.path;
     environment = {
       WAKAPI_DB_TYPE = "postgres";
-      WAKAPI_DB_HOST = "10.1.0.4";
+      WAKAPI_DB_HOST = "100.64.0.1";
       WAKAPI_DB_PORT = "5432";
       WAKAPI_DB_USER = "wakapi";
       WAKAPI_DB_NAME = "wakapi";

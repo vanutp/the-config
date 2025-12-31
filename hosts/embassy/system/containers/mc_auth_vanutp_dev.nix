@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   virtualisation.composter.apps.mc_auth_vanutp_dev = {
     backup.enable = true;
     services.main = {
@@ -11,7 +11,7 @@
         SERVER_BASE = "https://mc-auth.vanutp.dev/";
         YGG_KEY_PATH = "/config/key.der";
       };
-      env_file = "secrets.env";
+      env_file = config.sops.secrets.mc_auth_vanutp_dev.path;
       volumes = [
         "./data:/data"
         "./key.der:/config/key.der"

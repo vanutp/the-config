@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ./mailcow.nix
     ./network.nix
+    ./postgresql.nix
     ./traefik.nix
     ./users.nix
     ./vhap-compose-update.nix

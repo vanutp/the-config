@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./containers
+    ./elasticsearch.nix
     ./gatus.nix
     ./gitlab
     ./hardware-configuration.nix

@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   virtualisation.composter.apps.pwd_vanutp_dev = {
     backup.enable = true;
     services.vaultwarden = {
@@ -10,7 +10,7 @@
       environment = {
         DATABASE_MAX_CONNS = "2";
       };
-      env_file = "secrets.env";
+      env_file = config.sops.secrets.pwd_vanutp_dev.path;
       volumes = ["./data:/data"];
     };
   };
