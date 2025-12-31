@@ -15,7 +15,9 @@
           REDIS_PORT = "6379";
           FRONT_END_DOMAIN = "rkp.vanutp.dev";
           SUB_PUBLIC_DOMAIN = "sub.rkp.vanutp.dev/meow";
-          IS_DOCS_ENABLED = "false";
+          SWAGGER_PATH = "/docs";
+          SCALAR_PATH = "/scalar";
+          IS_DOCS_ENABLED = "true";
           IS_TELEGRAM_NOTIFICATIONS_ENABLED = "true";
         };
         env_file = config.sops.secrets."remnawave/panel".path;
