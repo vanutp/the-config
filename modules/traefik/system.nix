@@ -17,6 +17,14 @@
         type = types.listOf (types.submodule {
           options = {
             host = mkOption {type = types.str;};
+            rule = mkOption {
+              type = types.str;
+              default = "Host(`${host}`)";
+            };
+            certresolver = mkOption {
+              type = types.nullOr types.str;
+              default = null;
+            };
             target = mkOption {type = types.str;};
           };
         });
@@ -84,12 +92,20 @@
           (a: b: lib.recursiveUpdate a b)
           {}
           (map (entry: let
-              entryId = builtins.replaceStrings ["."] ["__"] entry.host;
+              entryId = builtins.replaceStrings ["." "(" ")" "`" "&&" "||" " "] ["__" "" "" "" "" "" ""] entry.rule;
             in {
-              routers.${entryId} = {
-                service = entryId;
-                rule = "Host(`${entry.host}`)";
-              };
+              routers.${entryId} =
+                {
+                  service = entryId;
+                  rule = entry.rule;
+                }
+                // (
+                  if entry.certresolver != null
+                  then {
+                    tls.certResolver = entry.certresolver;
+                  }
+                  else {}
+                );
               services.${entryId}.loadBalancer.servers = [
                 {
                   url = entry.target;

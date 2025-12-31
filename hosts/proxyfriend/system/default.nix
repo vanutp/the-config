@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./containers
     ./mailcow.nix
     ./network.nix
     ./hardware-configuration.nix
@@ -14,9 +15,13 @@
 
   vanutp.traefik = {
     enable = true;
+    requestWildcardCertsFor = [
+      "vanutp.dev"
+    ];
     limits = {
       cpus = "1";
       memory = "0.5G";
     };
   };
+  vanutp.maskman.enable = true;
 }

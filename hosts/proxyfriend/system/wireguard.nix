@@ -111,6 +111,11 @@
           publicKey = "DBddB8/6smrFYln7a6qdPSGJJQfG2eLi+FJApuLdOXs=";
           allowedIPs = ["10.4.1.3/32"];
         }
+        {
+          # gravity-friend
+          publicKey = "ZwV/1uar9NFOUQleekJDWrX2vci74xJO08T8Nfi1mC0=";
+          allowedIPs = ["10.4.1.4/32"];
+        }
       ];
     };
   };
