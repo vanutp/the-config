@@ -10,6 +10,7 @@
       };
       traefik = {
         host = "pb.ilkras.ru";
+        update-dns = false;
         port = 7777;
       };
       volumes = ["./data:/data"];

@@ -11,7 +11,6 @@
       "vanutp.dev"
       "upstairs.one"
       "tmat.me"
-      "ilkras.ru"
       "foxlab.dev"
       "vtp.sh"
     ];
