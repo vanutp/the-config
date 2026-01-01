@@ -14,12 +14,12 @@
         type = types.anything;
       };
       proxies = mkOption {
-        type = types.listOf (types.submodule {
+        type = types.listOf (types.submodule ({config, ...}: {
           options = {
             host = mkOption {type = types.str;};
             rule = mkOption {
               type = types.str;
-              default = "Host(`${host}`)";
+              default = "Host(`${config.host}`)";
             };
             certresolver = mkOption {
               type = types.nullOr types.str;
@@ -27,7 +27,7 @@
             };
             target = mkOption {type = types.str;};
           };
-        });
+        }));
         default = [];
       };
       acmeChallenge = mkOption {
